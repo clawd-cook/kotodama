@@ -255,9 +255,7 @@ function StudioHouse({
                 <Link
                   to={item.path}
                   aria-current={
-                    roomKey(location.pathname) === item.key
-                      ? 'page'
-                      : undefined
+                    roomKey(location.pathname) === item.key ? 'page' : undefined
                   }
                 >
                   {item.label}

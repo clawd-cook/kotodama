@@ -312,7 +312,8 @@ describe('W write gate', () => {
       result.snapshot.components.find((item) => item.id === 'title')?.component,
     ).toBe('Text');
     expect(
-      result.snapshot.components.find((item) => item.id === 'submit')?.component,
+      result.snapshot.components.find((item) => item.id === 'submit')
+        ?.component,
     ).toBe('Button');
   });
 
