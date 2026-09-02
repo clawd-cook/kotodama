@@ -2,3 +2,7 @@
 	path = submodules/a2ui-project/composer
 	url = https://github.com/a2ui-project/composer.git
 	depth = 1
+[submodule "submodules/a2ui-project/a2ui"]
+	path = submodules/a2ui-project/a2ui
+	url = https://github.com/a2ui-project/a2ui.git
+	depth = 1
