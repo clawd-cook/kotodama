@@ -1,0 +1,95 @@
+[
+  {
+    "version": "v0.9",
+    "createSurface": {
+      "surfaceId": "main",
+      "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+      "sendDataModel": true
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateComponents": {
+      "surfaceId": "main",
+      "components": [
+        {
+          "id": "root",
+          "component": "Column",
+          "children": ["title", "profile_card", "notify_card"],
+          "justify": "start",
+          "align": "stretch"
+        },
+        {
+          "id": "title",
+          "component": "Text",
+          "text": { "path": "/title" },
+          "variant": "h3"
+        },
+        {
+          "id": "profile_card",
+          "component": "Card",
+          "child": "profile_body"
+        },
+        {
+          "id": "profile_body",
+          "component": "Column",
+          "children": ["display_name", "email_field"],
+          "justify": "start",
+          "align": "stretch"
+        },
+        {
+          "id": "display_name",
+          "component": "TextField",
+          "label": "显示名",
+          "value": { "path": "/displayName" },
+          "variant": "shortText"
+        },
+        {
+          "id": "email_field",
+          "component": "TextField",
+          "label": "邮箱",
+          "value": { "path": "/email" },
+          "variant": "shortText"
+        },
+        {
+          "id": "notify_card",
+          "component": "Card",
+          "child": "notify_body"
+        },
+        {
+          "id": "notify_body",
+          "component": "Column",
+          "children": ["notify_mail", "notify_push"],
+          "justify": "start",
+          "align": "stretch"
+        },
+        {
+          "id": "notify_mail",
+          "component": "CheckBox",
+          "label": "邮件通知",
+          "value": { "path": "/notifyMail" }
+        },
+        {
+          "id": "notify_push",
+          "component": "CheckBox",
+          "label": "推送通知",
+          "value": { "path": "/notifyPush" }
+        }
+      ]
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateDataModel": {
+      "surfaceId": "main",
+      "path": "/",
+      "value": {
+        "title": "设置",
+        "displayName": "",
+        "email": "",
+        "notifyMail": true,
+        "notifyPush": false
+      }
+    }
+  }
+]

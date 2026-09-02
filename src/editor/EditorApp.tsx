@@ -7,8 +7,6 @@ import { EditorShell } from './EditorShell';
 import { EditorProvider } from './EditorState';
 import { loadTheme, saveTheme } from './storage';
 import './editor.css';
-import '@ant-design/x-markdown/themes/light.css';
-import '@ant-design/x-markdown/themes/dark.css';
 
 export function EditorApp() {
   const [theme, setTheme] = useState<'light' | 'dark'>(loadTheme);
@@ -21,6 +19,10 @@ export function EditorApp() {
           theme === 'dark'
             ? antdTheme.darkAlgorithm
             : antdTheme.defaultAlgorithm,
+        token: {
+          colorPrimary: '#1677FF',
+          colorBgLayout: theme === 'dark' ? '#141414' : '#F0F2F5',
+        },
       }}
     >
       <EditorProvider>

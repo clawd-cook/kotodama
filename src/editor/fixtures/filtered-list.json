@@ -1,0 +1,73 @@
+[
+  {
+    "version": "v0.9",
+    "createSurface": {
+      "surfaceId": "main",
+      "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+      "sendDataModel": true
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateComponents": {
+      "surfaceId": "main",
+      "components": [
+        {
+          "id": "root",
+          "component": "Column",
+          "children": ["title", "filter", "item_list"],
+          "justify": "start",
+          "align": "stretch"
+        },
+        {
+          "id": "title",
+          "component": "Text",
+          "text": { "path": "/title" },
+          "variant": "h3"
+        },
+        {
+          "id": "filter",
+          "component": "ChoicePicker",
+          "label": "状态",
+          "variant": "mutuallyExclusive",
+          "options": [
+            { "label": "全部", "value": "all" },
+            { "label": "进行中", "value": "open" }
+          ],
+          "value": { "path": "/filter" }
+        },
+        {
+          "id": "item_list",
+          "component": "List",
+          "children": ["item_one", "item_two"],
+          "direction": "vertical"
+        },
+        {
+          "id": "item_one",
+          "component": "Text",
+          "text": { "path": "/itemOne" },
+          "variant": "body"
+        },
+        {
+          "id": "item_two",
+          "component": "Text",
+          "text": { "path": "/itemTwo" },
+          "variant": "body"
+        }
+      ]
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateDataModel": {
+      "surfaceId": "main",
+      "path": "/",
+      "value": {
+        "title": "任务",
+        "filter": ["all"],
+        "itemOne": "整理登录页",
+        "itemTwo": "核对设置项"
+      }
+    }
+  }
+]

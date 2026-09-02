@@ -1,0 +1,70 @@
+[
+  {
+    "version": "v0.9",
+    "createSurface": {
+      "surfaceId": "main",
+      "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+      "sendDataModel": true
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateComponents": {
+      "surfaceId": "main",
+      "components": [
+        {
+          "id": "root",
+          "component": "Column",
+          "children": ["title", "user_field", "password_field", "submit"],
+          "justify": "start",
+          "align": "stretch"
+        },
+        {
+          "id": "title",
+          "component": "Text",
+          "text": { "path": "/title" },
+          "variant": "h3"
+        },
+        {
+          "id": "user_field",
+          "component": "TextField",
+          "label": "账号",
+          "value": { "path": "/username" },
+          "variant": "shortText"
+        },
+        {
+          "id": "password_field",
+          "component": "TextField",
+          "label": "密码",
+          "value": { "path": "/password" },
+          "variant": "obscured"
+        },
+        {
+          "id": "submit",
+          "component": "Button",
+          "child": "submit_label",
+          "variant": "primary",
+          "action": { "event": { "name": "login" } }
+        },
+        {
+          "id": "submit_label",
+          "component": "Text",
+          "text": { "path": "/submitLabel" }
+        }
+      ]
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateDataModel": {
+      "surfaceId": "main",
+      "path": "/",
+      "value": {
+        "title": "登录",
+        "username": "",
+        "password": "",
+        "submitLabel": "登录"
+      }
+    }
+  }
+]

@@ -1,39 +1,24 @@
-import { BASIC_CATALOG_ID } from '@kotodama/antd-catalog';
 import { SURFACE_ID } from '../snapshot';
+import { BASIC_CATALOG_ID } from '../types';
+import { ALLOWED_COMPONENTS } from '../validate';
 
-const COMPONENTS = [
-  'Column',
-  'Row',
-  'List',
-  'Card',
-  'Tabs',
-  'Modal',
-  'Divider',
-  'Text',
-  'Image',
-  'Icon',
-  'Video',
-  'AudioPlayer',
-  'Button',
-  'TextField',
-  'CheckBox',
-  'ChoicePicker',
-  'Slider',
-  'DateTimeInput',
-].join(', ');
+const COMPONENTS = ALLOWED_COMPONENTS.join(', ');
 
 export function buildSystemPrompt(currentJson: string): string {
-  return `你是 A2UI v0.9 界面生成助手，为「言灵」编辑器输出可直接渲染的协议 JSON。预览用 Ant Design 渲染同一套 basic catalog，不要按 HTML 或 antd 组件名/属性来写。
+  return `你是 A2UI v0.9 界面生成助手，为「言灵」编辑器输出可校验的协议 JSON。预览用 Ant Design 渲染同一套 basic catalog，不要按 HTML 或 antd 组件名/属性来写。
 
 规则：
 1. 只能使用这些组件：${COMPONENTS}。不要编造其它组件名。
 2. 根组件 id 必须是 "root"。children / child 只引用其它组件的 id，不要内联定义。
-3. Button 的可见文字放在独立 Text 子组件里，用 child 指向它。variant 只能是 default | primary | borderless。
-4. TextField 属性只能用 label、value、variant、validationRegexp、checks。variant 只能是 shortText | longText | number | obscured。密码框用 variant: "obscured"，禁止写 type、placeholder、className、style。
-5. 文案尽量用数据绑定 { "path": "/xxx" }，并在 updateDataModel 里给出对应值。
-6. surfaceId 用 "${SURFACE_ID}"，catalogId 用 "${BASIC_CATALOG_ID}"。
-7. 输出必须是一个 JSON 数组，元素为 v0.9 消息：createSurface、updateComponents、updateDataModel。
-8. 不要输出 Markdown、解释或代码围栏，只输出 JSON。
+3. Column、Row、List 用 children（id 数组）。Card 只用 child（单个 id），不要写 children。Button 的可见文字放在独立 Text 子组件里，用 child 指向它。variant 只能是 default | primary | borderless。
+4. TextField 属性只能用 label、value、variant、validationRegexp、checks。variant 只能是 shortText | longText | number | obscured。密码框用 variant: "obscured"，禁止写 type、placeholder、className、style。不要写 checks，除非 condition 是布尔值或 { "path": "/..." }。
+5. Image 用 url，不要写 src。验证码用 TextField，不要用 Image 冒充输入框。
+6. 文案尽量用数据绑定 { "path": "/xxx" }，并在 updateDataModel 里给出对应值。
+7. surfaceId 用 "${SURFACE_ID}"，catalogId 用 "${BASIC_CATALOG_ID}"。
+8. 输出一个 JSON 对象，不要 Markdown、解释或代码围栏。形状：
+{"summary":"一句短中文，说明这一页改成了什么。","messages":[...]}
+9. summary 必须是一句短中文，不含 JSON 数组或代码围栏。
+10. messages 必须是完整的 v0.9 消息数组：createSurface、updateComponents、updateDataModel，不是补丁。每次输出整份页面。
 
 当前界面（请在此基础上按用户要求修改；若用户要全新界面则整体替换）：
 ${currentJson}`;

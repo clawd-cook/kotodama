@@ -1,13 +1,13 @@
 import { A2uiSurface } from '@a2ui/react/v0_9';
 import type { ReactComponentImplementation } from '@a2ui/react/v0_9';
 import { MessageProcessor, type SurfaceModel } from '@a2ui/web_core/v0_9';
-import { Empty } from 'antd';
+import { ConfigProvider, Empty, theme as antdTheme } from 'antd';
 import { useEffect, useState } from 'react';
 import { useEditor } from './EditorState';
 import { toMessages } from './snapshot';
 import { SelectionProvider, editorCatalog } from './wrapCatalog';
 
-export function PreviewPane() {
+export function PreviewPane({ theme }: { theme: 'light' | 'dark' }) {
   const {
     snapshot,
     selectedId,
@@ -21,32 +21,32 @@ export function PreviewPane() {
   } = useEditor();
   const [surface, setSurface] =
     useState<SurfaceModel<ReactComponentImplementation> | null>(null);
+  const [dropClass, setDropClass] = useState('preview-sheet-drop');
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: data model is synced in the following effect
   useEffect(() => {
     clearErrors('preview');
     clearErrors('protocol');
+    setDropClass('preview-sheet-drop');
+    const timer = window.setTimeout(() => setDropClass(''), 200);
     try {
       const processor = new MessageProcessor([editorCatalog], (action) => {
         logEvent(action);
       });
       processor.processMessages(toMessages(snapshot) as never);
-      const surfaces = Array.from(processor.model.surfacesMap.values());
-      if (surfaces.length > 1) {
-        logError('只渲染第一个 surface，其余已忽略', 'protocol');
-      }
-      const next = surfaces[0];
+      const next = Array.from(processor.model.surfacesMap.values())[0];
       if (!next) {
         setSurface(null);
-        logError('没有可渲染的 surface', 'protocol');
+        logError('没有可预览的页面', 'protocol');
         processor.model.dispose();
-        return;
+        return () => window.clearTimeout(timer);
       }
       const sub = next.dataModel.subscribe('/', (value) => {
         syncDataModelFromPreview(value ?? {});
       });
       setSurface(next);
       return () => {
+        window.clearTimeout(timer);
         sub.unsubscribe();
         processor.model.dispose();
       };
@@ -56,7 +56,7 @@ export function PreviewPane() {
         error instanceof Error ? error.message : String(error),
         'preview',
       );
-      return undefined;
+      return () => window.clearTimeout(timer);
     }
   }, [snapshot.components, snapshot.surfaceId, snapshot.catalogId]);
 
@@ -89,11 +89,23 @@ export function PreviewPane() {
           }
         }}
       >
-        {surface ? (
-          <A2uiSurface surface={surface} />
-        ) : (
-          <Empty description="无法预览" />
-        )}
+        <ConfigProvider
+          theme={{
+            algorithm:
+              theme === 'dark'
+                ? antdTheme.darkAlgorithm
+                : antdTheme.defaultAlgorithm,
+            token: { ...antdTheme.defaultSeed },
+          }}
+        >
+          <div className={`preview-sheet ${dropClass}`.trim()}>
+            {surface ? (
+              <A2uiSurface surface={surface} />
+            ) : (
+              <Empty description="没有可预览的页面" />
+            )}
+          </div>
+        </ConfigProvider>
       </div>
     </SelectionProvider>
   );

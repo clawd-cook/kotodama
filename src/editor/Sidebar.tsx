@@ -20,7 +20,7 @@ export function Sidebar({
         items={[
           {
             key: 'chat',
-            label: '对话',
+            label: '说话',
             children: <ChatPanel resetCount={resetCount} theme={theme} />,
           },
           {

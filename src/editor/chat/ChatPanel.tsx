@@ -1,12 +1,15 @@
 import { RobotOutlined, UserOutlined } from '@ant-design/icons';
 import { Bubble, Prompts, Sender, Welcome } from '@ant-design/x';
-import { XMarkdown } from '@ant-design/x-markdown';
 import { useXChat, XRequest } from '@ant-design/x-sdk';
 import { Avatar, Flex } from 'antd';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import type { ApplyResult } from '../applyDocument';
+import { applyDocument } from '../applyDocument';
+import { STREAMING_PLACEHOLDER } from '../copy';
 import { useEditor } from '../EditorState';
 import { toMessages } from '../snapshot';
-import { extractA2uiMessages } from './parseA2ui';
+import { parseChatOutput } from './parseA2ui';
+import { presentAssistant } from './presentAssistant';
 import { EditorChatProvider, textOf } from './provider';
 import { buildSystemPrompt } from './prompt';
 
@@ -18,7 +21,6 @@ const PROMPT_ITEMS = [
 
 export function ChatPanel({
   resetCount,
-  theme,
 }: {
   resetCount: number;
   theme: 'light' | 'dark';
@@ -32,6 +34,7 @@ export function ChatPanel({
   logErrorRef.current = logError;
   const appliedIds = useRef(new Set<string>());
   const [model, setModel] = useState('');
+  const [presented, setPresented] = useState<Record<string, string>>({});
 
   useEffect(() => {
     void fetch('/api/chat/health')
@@ -51,16 +54,8 @@ export function ChatPanel({
       assistant: {
         placement: 'start' as const,
         avatar: <Avatar size={28} icon={<RobotOutlined />} />,
-        contentRender: (content: string, info: { status?: string }) => (
-          <XMarkdown
-            className={`x-markdown-${theme}`}
-            content={content}
-            escapeRawHtml
-            streaming={{
-              hasNextChunk: info.status === 'updating' || info.status === 'loading',
-              enableAnimation: false,
-            }}
-          />
+        contentRender: (content: string) => (
+          <div aria-live="polite">{content}</div>
         ),
       },
       user: {
@@ -68,7 +63,7 @@ export function ChatPanel({
         avatar: <Avatar size={28} icon={<UserOutlined />} />,
       },
     }),
-    [theme],
+    [],
   );
 
   const provider = useMemo(
@@ -83,7 +78,10 @@ export function ChatPanel({
             },
           }),
         },
-        () => buildSystemPrompt(JSON.stringify(toMessages(snapshotRef.current), null, 2)),
+        () =>
+          buildSystemPrompt(
+            JSON.stringify(toMessages(snapshotRef.current), null, 2),
+          ),
       ),
     [model, resetCount],
   );
@@ -92,7 +90,7 @@ export function ChatPanel({
     provider,
     conversationKey: `editor-${resetCount}`,
     requestPlaceholder: () => ({
-      content: '正在生成界面…',
+      content: STREAMING_PLACEHOLDER,
       role: 'assistant',
     }),
     requestFallback: (_, { error, messageInfo }) => {
@@ -110,6 +108,7 @@ export function ChatPanel({
 
   useEffect(() => {
     appliedIds.current.clear();
+    setPresented({});
     setMessages([]);
   }, [resetCount, setMessages]);
 
@@ -127,15 +126,28 @@ export function ChatPanel({
     if (!content) {
       return;
     }
+    let result: ApplyResult;
     try {
       clearErrors('chat');
-      const blocks = extractA2uiMessages(content);
-      if (!applyJsonRef.current(JSON.stringify(blocks, null, 2))) {
-        throw new Error('生成的 JSON 无法应用到画布');
+      const parsed = parseChatOutput(content);
+      result = applyDocument(
+        JSON.stringify(parsed.messages),
+        snapshotRef.current,
+      );
+      if (result.ok) {
+        applyJsonRef.current(JSON.stringify(parsed.messages, null, 2));
       }
     } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      logErrorRef.current(message, 'chat');
+      result = {
+        ok: false,
+        code: 'PARSE',
+        message: error instanceof Error ? error.message : String(error),
+      };
+    }
+    const display = presentAssistant(content, result);
+    setPresented((current) => ({ ...current, [id]: display }));
+    if (!result.ok) {
+      logErrorRef.current(display, 'chat');
     }
   }, [clearErrors, messages]);
 
@@ -155,8 +167,8 @@ export function ChatPanel({
         <Flex vertical flex={1} justify="center" gap={12} className="chat-welcome">
           <Welcome
             variant="borderless"
-            title="用自然语言生成界面"
-            description="描述你想要的布局，模型会输出 A2UI JSON 并应用到画布。"
+            title="说你想要的那一页"
+            description="说完后，中间会换成一页。这一页可以留下、再打开。"
           />
           <Prompts
             items={PROMPT_ITEMS}
@@ -170,18 +182,34 @@ export function ChatPanel({
           autoScroll
           role={roles}
           items={messages
-            .filter(({ message }) => message.role === 'user' || message.role === 'assistant')
-            .map(({ id, message, status }) => ({
-              key: id,
-              role: message.role,
-              content: textOf(message.content),
-              loading: status === 'loading',
-              streaming: status === 'updating',
-              status,
-            }))}
+            .filter(
+              ({ message }) =>
+                message.role === 'user' || message.role === 'assistant',
+            )
+            .map(({ id, message, status }) => {
+              const key = String(id);
+              const raw = textOf(message.content);
+              let content = raw;
+              if (message.role === 'assistant') {
+                if (status === 'success') {
+                  content = presented[key] ?? STREAMING_PLACEHOLDER;
+                } else if (status === 'loading' || status === 'updating') {
+                  content = STREAMING_PLACEHOLDER;
+                }
+              }
+              return {
+                key,
+                role: message.role,
+                content,
+                loading: status === 'loading',
+                streaming: status === 'updating',
+                status,
+              };
+            })}
         />
       )}
       <Sender
+        key={resetCount}
         className="chat-input"
         placeholder="描述你想要的界面"
         loading={isRequesting}

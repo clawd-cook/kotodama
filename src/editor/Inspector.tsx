@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   Empty,
   Form,
@@ -10,7 +11,7 @@ import {
   Switch,
   Typography,
 } from 'antd';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useEditor } from './EditorState';
 import { editorCatalog } from './wrapCatalog';
 
@@ -104,6 +105,7 @@ function unionHasKind(schema: ZodLike, target: string): boolean {
 
 export function Inspector() {
   const { snapshot, selectedId, updateSelectedProps } = useEditor();
+  const [propError, setPropError] = useState<string | null>(null);
   const component = snapshot.components.find((item) => item.id === selectedId);
   const impl = component
     ? editorCatalog.components.get(component.component)
@@ -115,21 +117,39 @@ export function Inspector() {
     return objectShape(impl.schema as ZodLike);
   }, [impl]);
 
+  useEffect(() => {
+    setPropError(null);
+  }, [selectedId]);
+
   if (!component) {
-    return <Empty description="选中预览或树中的组件" />;
+    return (
+      <div className="inspector">
+        <Typography.Text strong>属性</Typography.Text>
+        <Empty description="点纸页上的一块，或在组件树里选中。" />
+      </div>
+    );
   }
   if (!shape) {
-    return <Empty description="没有 schema" />;
+    return (
+      <div className="inspector">
+        <Typography.Text strong>属性</Typography.Text>
+        <Empty description="没有 schema" />
+      </div>
+    );
   }
 
   const { id, component: type, ...props } = component;
 
   const setField = (key: string, value: unknown) => {
-    updateSelectedProps({ ...props, [key]: value });
+    setPropError(updateSelectedProps({ ...props, [key]: value }));
   };
 
   return (
     <div className="inspector">
+      <Typography.Text strong>属性</Typography.Text>
+      {propError ? (
+        <Alert type="error" showIcon message={propError} style={{ marginTop: 12 }} />
+      ) : null}
       <Typography.Text type="secondary">
         {type} · {id}
       </Typography.Text>

@@ -65,7 +65,7 @@ export function BottomDock({ theme }: { theme: 'light' | 'dark' }) {
         },
         {
           key: 'data',
-          label: 'Data Model',
+          label: '数据',
           children: (
             <div className="dock-pane">
               <Editor
@@ -91,24 +91,33 @@ export function BottomDock({ theme }: { theme: 'light' | 'dark' }) {
         },
         {
           key: 'events',
-          label: `Events${events.length ? ` (${events.length})` : ''}`,
+          label: `事件${events.length ? ` (${events.length})` : ''}`,
           children: (
             <pre className="dock-log">
               {events.length === 0
-                ? '暂无事件'
+                ? '还没有事件。在纸页上点一下就会出现。'
                 : JSON.stringify(events, null, 2)}
             </pre>
           ),
         },
         {
           key: 'errors',
-          label: `Errors${errors.length ? ` (${errors.length})` : ''}`,
+          label: `错误${errors.length ? ` (${errors.length})` : ''}`,
           children: (
-            <pre className="dock-log">
-              {errors.length === 0
-                ? '没有错误'
-                : JSON.stringify(errors, null, 2)}
-            </pre>
+            <div className="dock-pane">
+              {errors.length === 0 ? (
+                <pre className="dock-log">没有错误。</pre>
+              ) : (
+                errors.map((item) => (
+                  <Alert
+                    key={item.id}
+                    type="error"
+                    showIcon
+                    message={item.message}
+                  />
+                ))
+              )}
+            </div>
           ),
         },
       ]}

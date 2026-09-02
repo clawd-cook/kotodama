@@ -1,3 +1,5 @@
+import { FALLBACK_SUMMARY } from '../copy';
+
 function stripFences(raw: string): string {
   return raw
     .trim()
@@ -12,6 +14,33 @@ function tryParse(text: string): unknown | undefined {
   } catch {
     return undefined;
   }
+}
+
+function isEnvelope(
+  value: unknown,
+): value is { summary: string; messages: unknown[] } {
+  return (
+    Boolean(value) &&
+    typeof value === 'object' &&
+    !Array.isArray(value) &&
+    typeof (value as { summary?: unknown }).summary === 'string' &&
+    Array.isArray((value as { messages?: unknown }).messages)
+  );
+}
+
+export function parseChatOutput(raw: string): {
+  summary: string;
+  messages: unknown[];
+} {
+  const text = stripFences(raw);
+  const parsed = tryParse(text);
+  if (isEnvelope(parsed)) {
+    return { summary: parsed.summary, messages: parsed.messages };
+  }
+  return {
+    summary: FALLBACK_SUMMARY,
+    messages: extractA2uiMessages(raw),
+  };
 }
 
 function healLine(line: string): unknown | undefined {
@@ -34,6 +63,9 @@ export function extractA2uiMessages(raw: string): unknown[] {
   const parsed = tryParse(text);
   if (Array.isArray(parsed)) {
     return parsed;
+  }
+  if (isEnvelope(parsed)) {
+    return parsed.messages;
   }
   if (parsed && typeof parsed === 'object') {
     return [parsed];

@@ -53,7 +53,12 @@ function wrapImpl(
         data-a2ui-id={id}
         className={`a2ui-selectable${selected ? ' is-selected' : ''}${hovered ? ' is-hovered' : ''}`}
         onClick={(event: MouseEvent<HTMLDivElement>) => {
-          event.stopPropagation();
+          const closest = (event.target as HTMLElement).closest(
+            '.a2ui-selectable',
+          );
+          if (closest !== event.currentTarget) {
+            return;
+          }
           onSelect(id);
         }}
         onMouseOver={(event: MouseEvent<HTMLDivElement>) => {

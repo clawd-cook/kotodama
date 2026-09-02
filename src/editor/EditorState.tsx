@@ -7,6 +7,8 @@ import {
   useMemo,
   useState,
 } from 'react';
+import { applyDocument } from './applyDocument';
+import { openFailed, pageUnchanged } from './copy';
 import { createDemoSnapshot } from './demo';
 import {
   deleteComponent,
@@ -14,10 +16,10 @@ import {
   insertComponent,
   updateComponentProps,
 } from './ops';
-import { applyDocument } from './applyDocument';
 import { toMessages } from './snapshot';
 import { loadDraft, saveDraft } from './storage';
 import type { EditorError, EditorEvent, Snapshot } from './types';
+import { validateSnapshot } from './validate';
 
 type EditorContextValue = {
   snapshot: Snapshot;
@@ -34,9 +36,10 @@ type EditorContextValue = {
   insert: (type: string) => void;
   removeSelected: () => void;
   duplicateSelected: () => void;
-  updateSelectedProps: (props: Record<string, unknown>) => void;
+  updateSelectedProps: (props: Record<string, unknown>) => string | null;
   setDataModel: (value: unknown) => void;
   applyJson: (text: string) => boolean;
+  openJson: (text: string) => string | null;
   setJsonText: (text: string) => void;
   undo: () => void;
   redo: () => void;
@@ -82,40 +85,79 @@ export function EditorProvider({ children }: { children: ReactNode }) {
     [snapshot],
   );
 
+  const rejectIfInvalid = useCallback(
+    (next: Snapshot): string | null => {
+      const error = validateSnapshot(next, toMessages(next));
+      if (error) {
+        return pageUnchanged(error.message);
+      }
+      commit(next);
+      return null;
+    },
+    [commit],
+  );
+
   const insert = useCallback(
     (type: string) => {
       const result = insertComponent(snapshot, type, selectedId);
-      commit(result.snapshot);
+      const message = rejectIfInvalid(result.snapshot);
+      if (message) {
+        setErrors((current) => [
+          {
+            id: crypto.randomUUID(),
+            message,
+            source: 'json',
+          },
+          ...current,
+        ]);
+        return;
+      }
       setSelectedId(result.selectedId);
     },
-    [commit, selectedId, snapshot],
+    [rejectIfInvalid, selectedId, snapshot],
   );
 
   const removeSelected = useCallback(() => {
     if (!selectedId || selectedId === 'root') {
       return;
     }
-    commit(deleteComponent(snapshot, selectedId));
+    const message = rejectIfInvalid(deleteComponent(snapshot, selectedId));
+    if (message) {
+      setErrors((current) => [
+        { id: crypto.randomUUID(), message, source: 'json' },
+        ...current,
+      ]);
+      return;
+    }
     setSelectedId('root');
-  }, [commit, selectedId, snapshot]);
+  }, [rejectIfInvalid, selectedId, snapshot]);
 
   const duplicateSelected = useCallback(() => {
     if (!selectedId) {
       return;
     }
     const result = duplicateComponent(snapshot, selectedId);
-    commit(result.snapshot);
+    const message = rejectIfInvalid(result.snapshot);
+    if (message) {
+      setErrors((current) => [
+        { id: crypto.randomUUID(), message, source: 'json' },
+        ...current,
+      ]);
+      return;
+    }
     setSelectedId(result.selectedId);
-  }, [commit, selectedId, snapshot]);
+  }, [rejectIfInvalid, selectedId, snapshot]);
 
   const updateSelectedProps = useCallback(
     (props: Record<string, unknown>) => {
       if (!selectedId) {
-        return;
+        return null;
       }
-      commit(updateComponentProps(snapshot, selectedId, props));
+      return rejectIfInvalid(
+        updateComponentProps(snapshot, selectedId, props),
+      );
     },
-    [commit, selectedId, snapshot],
+    [rejectIfInvalid, selectedId, snapshot],
   );
 
   const setDataModel = useCallback(
@@ -148,6 +190,25 @@ export function EditorProvider({ children }: { children: ReactNode }) {
       setJsonError(null);
       setErrors((current) => current.filter((item) => item.source !== 'json'));
       return true;
+    },
+    [commit, snapshot],
+  );
+
+  const openJson = useCallback(
+    (text: string): string | null => {
+      const result = applyDocument(text, snapshot);
+      if (!result.ok) {
+        const message = openFailed(result.message);
+        setErrors((current) => [
+          ...current.filter((item) => item.source !== 'json'),
+          { id: crypto.randomUUID(), message, source: 'json' },
+        ]);
+        return message;
+      }
+      commit(result.snapshot);
+      setJsonError(null);
+      setErrors((current) => current.filter((item) => item.source !== 'json'));
+      return null;
     },
     [commit, snapshot],
   );
@@ -222,6 +283,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
       updateSelectedProps,
       setDataModel,
       applyJson,
+      openJson,
       setJsonText,
       undo,
       redo,
@@ -233,6 +295,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
     }),
     [
       applyJson,
+      openJson,
       clearErrors,
       duplicateSelected,
       errors,
