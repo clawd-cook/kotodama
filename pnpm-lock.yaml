@@ -69,6 +69,9 @@ importers:
       '@types/react-dom':
         specifier: 19.2.5
         version: 19.2.5(@types/react@19.2.18)
+      '@vitest/browser-preview':
+        specifier: ^4.1.11
+        version: 4.1.11(bufferutil@4.1.0)(msw@2.15.0(@types/node@26.4.0)(typescript@7.0.2))(utf-8-validate@6.0.6)(vite@8.2.2)(vitest@4.1.11)
       typescript:
         specifier: 7.0.2
         version: 7.0.2
