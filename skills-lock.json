@@ -37,6 +37,12 @@
       "skillPath": "skills/chart-visualization/SKILL.md",
       "computedHash": "537be883849c5357f74188b13cff05fbac46a084f74034f7821bd17dac31f7d5"
     },
+    "create-prd": {
+      "source": "phuryn/pm-skills",
+      "sourceType": "github",
+      "skillPath": "pm-execution/skills/create-prd/SKILL.md",
+      "computedHash": "5c242d3abb9508f59021ed22936230e555971feab690cbf2a90142e06d10e7ae"
+    },
     "find-skills": {
       "source": "vercel-labs/skills",
       "sourceType": "github",
