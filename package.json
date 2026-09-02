@@ -8,7 +8,8 @@
     "check": "biome check --write",
     "dev": "rsbuild dev --open",
     "format": "biome format --write",
-    "preview": "rsbuild preview"
+    "preview": "rsbuild preview",
+    "test": "vitest run"
   },
   "dependencies": {
     "@a2ui/react": "0.10.0",
@@ -32,6 +33,7 @@
     "@rsbuild/plugin-react": "1.4.6",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.5",
-    "typescript": "7.0.2"
+    "typescript": "7.0.2",
+    "vitest": "^4.1.11"
   }
 }

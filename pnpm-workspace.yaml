@@ -3,4 +3,13 @@ packages:
 
 allowBuilds:
   '@biomejs/biome': true
+  '@parcel/watcher': true
+  bufferutil: true
+  canvas: true
   core-js: true
+  edgedriver: true
+  esbuild: true
+  geckodriver: true
+  kerberos: true
+  msw: true
+  utf-8-validate: true

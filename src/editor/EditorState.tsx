@@ -14,7 +14,8 @@ import {
   insertComponent,
   updateComponentProps,
 } from './ops';
-import { foldMessages, toMessages } from './snapshot';
+import { applyDocument } from './applyDocument';
+import { toMessages } from './snapshot';
 import { loadDraft, saveDraft } from './storage';
 import type { EditorError, EditorEvent, Snapshot } from './types';
 
@@ -130,29 +131,25 @@ export function EditorProvider({ children }: { children: ReactNode }) {
 
   const applyJson = useCallback(
     (text: string): boolean => {
-      try {
-        const parsed = JSON.parse(text) as unknown;
-        const next = foldMessages(parsed);
-        if (next.components.length === 0) {
-          throw new Error('没有组件');
-        }
-        commit(next);
-        setJsonError(null);
-        setErrors((current) =>
-          current.filter((item) => item.source !== 'json'),
-        );
-        return true;
-      } catch (error) {
-        const message = error instanceof Error ? error.message : String(error);
-        setJsonError(message);
+      const result = applyDocument(text, snapshot);
+      if (!result.ok) {
+        setJsonError(result.message);
         setErrors((current) => [
           ...current.filter((item) => item.source !== 'json'),
-          { id: crypto.randomUUID(), message, source: 'json' },
+          {
+            id: crypto.randomUUID(),
+            message: result.message,
+            source: 'json',
+          },
         ]);
         return false;
       }
+      commit(result.snapshot);
+      setJsonError(null);
+      setErrors((current) => current.filter((item) => item.source !== 'json'));
+      return true;
     },
-    [commit],
+    [commit, snapshot],
   );
 
   const undo = useCallback(() => {

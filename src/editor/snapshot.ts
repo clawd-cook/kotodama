@@ -148,7 +148,6 @@ export function foldMessages(input: unknown): Snapshot {
     } as const);
 
   const components = [...first.components.values()];
-  ensureRootId(components);
 
   return {
     surfaceId: bySurface.has(activeId) ? activeId : SURFACE_ID,
@@ -192,17 +191,6 @@ function childIdsOf(component: A2uiComponent): string[] {
     }
   }
   return ids;
-}
-
-function ensureRootId(components: A2uiComponent[]) {
-  if (components.some((item) => item.id === 'root')) {
-    return;
-  }
-  const referenced = new Set(components.flatMap(childIdsOf));
-  const root = components.find((item) => !referenced.has(item.id));
-  if (root) {
-    root.id = 'root';
-  }
 }
 
 export { childIdsOf };

@@ -1,6 +1,5 @@
-import { BASIC_CATALOG_ID } from '@kotodama/antd-catalog';
 import { SURFACE_ID } from './snapshot';
-import type { Snapshot } from './types';
+import { BASIC_CATALOG_ID, type Snapshot } from './types';
 
 export function createDemoSnapshot(): Snapshot {
   return {
