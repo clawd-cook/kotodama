@@ -211,7 +211,7 @@ function StudioHouse({
               </Button>
             </Space>
           ) : null}
-          <label className="editor-theme">
+          <span className="editor-theme">
             深色
             <Switch
               size="small"
@@ -223,7 +223,7 @@ function StudioHouse({
                 onThemeChange(next);
               }}
             />
-          </label>
+          </span>
         </Space>
         <input
           ref={fileRef}
@@ -269,7 +269,9 @@ function StudioHouse({
             <div
               className="studio-workshop"
               hidden={!showWorkshop}
-              aria-hidden={!showWorkshop}
+              {...(!showWorkshop
+                ? { inert: true, 'aria-hidden': true }
+                : {})}
             >
               <EditorShell
                 theme={theme}

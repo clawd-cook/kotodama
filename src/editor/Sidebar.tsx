@@ -21,7 +21,7 @@ export function Sidebar({
           {
             key: 'chat',
             label: '说话',
-            children: <ChatPanel resetCount={resetCount} theme={theme} />,
+            children: <ChatPanel key={resetCount} theme={theme} />,
           },
           {
             key: 'tree',

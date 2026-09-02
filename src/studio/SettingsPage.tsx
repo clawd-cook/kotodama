@@ -36,7 +36,7 @@ export function SettingsPage() {
             label="Base URL"
             extra={
               <span className="settings-source">
-                {sourceLabel(fields.baseUrl)}
+                {sourceLabel(ui.baseUrl)}
               </span>
             }
           >
@@ -50,7 +50,7 @@ export function SettingsPage() {
             label="API Key"
             extra={
               <span className="settings-source">
-                {sourceLabel(fields.apiKey)}
+                {sourceLabel(ui.apiKey)}
               </span>
             }
           >
@@ -65,7 +65,7 @@ export function SettingsPage() {
             label="模型名"
             extra={
               <span className="settings-source">
-                {sourceLabel(fields.model)}
+                {sourceLabel(ui.model)}
               </span>
             }
           >

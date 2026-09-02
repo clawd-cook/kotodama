@@ -89,6 +89,7 @@ export function PaperPreview({
   }, [snapshot.dataModel, surface]);
 
   return (
+    // biome-ignore lint/a11y/noStaticElementInteractions: click and Escape clear the editor selection
     <div
       id={sheetId}
       className={['preview-canvas', className].filter(Boolean).join(' ')}

@@ -15,9 +15,9 @@
   overscroll-behavior: contain;
 }
 
-.studio-rail .ant-menu {
+.studio-rail .ant-menu.ant-menu-root.ant-menu-inline {
   height: 100%;
-  border-inline-end: 0 !important;
+  border-inline-end: 0;
 }
 
 .studio-rail .ant-menu-item {
@@ -45,7 +45,7 @@
 }
 
 .studio-workshop[hidden] {
-  display: none !important;
+  display: none;
 }
 
 .studio-workshop .editor-body {
@@ -97,8 +97,8 @@
   text-align: center;
 }
 
-.landing-desc {
-  margin-bottom: 16px !important;
+.landing-copy .ant-typography.landing-desc {
+  margin-bottom: 16px;
   text-align: center;
 }
 
@@ -125,8 +125,8 @@
   overscroll-behavior: contain;
 }
 
-.catalog-index .ant-menu {
-  border-inline-end: 0 !important;
+.catalog-index .ant-menu.ant-menu-root.ant-menu-inline {
+  border-inline-end: 0;
 }
 
 .catalog-index .ant-menu-item-group-title {

@@ -49,7 +49,8 @@ function wrapImpl(
     return (
       // biome-ignore lint/a11y/useKeyWithClickEvents: selection is also driven from the component tree
       // biome-ignore lint/a11y/useKeyWithMouseEvents: hover is visual-only
-      <div
+      // biome-ignore lint/a11y/noStaticElementInteractions: overlay for selection; nested widgets stay the controls
+      <div>
         data-a2ui-id={id}
         className={`a2ui-selectable${selected ? ' is-selected' : ''}${hovered ? ' is-hovered' : ''}`}
         onClick={(event: MouseEvent<HTMLDivElement>) => {

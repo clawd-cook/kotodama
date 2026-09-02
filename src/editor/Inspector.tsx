@@ -11,7 +11,7 @@ import {
   Switch,
   Typography,
 } from 'antd';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useEditor } from './EditorState';
 import { editorCatalog } from './wrapCatalog';
 
@@ -105,7 +105,10 @@ function unionHasKind(schema: ZodLike, target: string): boolean {
 
 export function Inspector() {
   const { snapshot, selectedId, updateSelectedProps } = useEditor();
-  const [propError, setPropError] = useState<string | null>(null);
+  const [errorState, setErrorState] = useState<{
+    id: string | null;
+    message: string | null;
+  }>({ id: selectedId, message: null });
   const component = snapshot.components.find((item) => item.id === selectedId);
   const impl = component
     ? editorCatalog.components.get(component.component)
@@ -116,10 +119,8 @@ export function Inspector() {
     }
     return objectShape(impl.schema as ZodLike);
   }, [impl]);
-
-  useEffect(() => {
-    setPropError(null);
-  }, [selectedId]);
+  const propError =
+    errorState.id === selectedId ? errorState.message : null;
 
   if (!component) {
     return (
@@ -139,7 +140,10 @@ export function Inspector() {
   const { id, component: type, ...props } = component;
 
   const setField = (key: string, value: unknown) => {
-    setPropError(updateSelectedProps({ ...props, [key]: value }));
+    setErrorState({
+      id: selectedId,
+      message: updateSelectedProps({ ...props, [key]: value }),
+    });
   };
 
   return (

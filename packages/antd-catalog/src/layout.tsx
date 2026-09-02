@@ -138,7 +138,7 @@ export const ModalView = createComponentImplementation(
     const [open, setOpen] = useState(false);
     return (
       <>
-        {/* biome-ignore lint/a11y/useKeyWithClickEvents: trigger child already handles activation */}
+        {/* biome-ignore lint/a11y/useKeyWithClickEvents lint/a11y/noStaticElementInteractions: trigger child already handles activation */}
         <span
           onClick={(event) => {
             event.stopPropagation();

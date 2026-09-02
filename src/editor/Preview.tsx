@@ -23,6 +23,7 @@ export function PreviewPane({
   } = useEditor();
   const empty = snapshot.components.length === 0;
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: clear stale errors when the surface snapshot changes
   useEffect(() => {
     clearErrors('preview');
     clearErrors('protocol');

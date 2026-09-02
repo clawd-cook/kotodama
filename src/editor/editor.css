@@ -9,7 +9,6 @@ body,
   display: flex;
   flex-direction: column;
   height: 100dvh;
-  height: 100vh;
   padding: env(safe-area-inset-top) env(safe-area-inset-right)
     env(safe-area-inset-bottom) env(safe-area-inset-left);
   background: var(--ant-color-bg-layout);
@@ -41,16 +40,16 @@ body,
   transform: translateY(0);
 }
 
-.editor-header {
+.editor-root > .editor-header.ant-layout-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-shrink: 0;
   z-index: 20;
-  height: 48px !important;
-  line-height: 48px !important;
+  height: 48px;
+  line-height: 48px;
   padding-inline: 16px;
-  background: var(--ant-color-bg-container) !important;
+  background: var(--ant-color-bg-container);
   border-bottom: 1px solid var(--ant-color-split);
 }
 

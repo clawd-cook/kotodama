@@ -19,12 +19,7 @@ const consumedLandingKeys = new Set<string>();
 
 type LandingState = { autoSend?: string; prefill?: string };
 
-export function ChatPanel({
-  resetCount,
-}: {
-  resetCount: number;
-  theme: 'light' | 'dark';
-}) {
+export function ChatPanel(_props: { theme: 'light' | 'dark' }) {
   const { snapshot, applyJson, logError, clearErrors } = useEditor();
   const { resolved, override } = useChannel();
   const location = useLocation();
@@ -80,12 +75,12 @@ export function ChatPanel({
           ),
         () => overrideRef.current,
       ),
-    [resetCount, resolved.model],
+    [resolved.model],
   );
 
-  const { messages, onRequest, isRequesting, abort, setMessages } = useXChat({
+  const { messages, onRequest, isRequesting, abort } = useXChat({
     provider,
-    conversationKey: `editor-${resetCount}`,
+    conversationKey: 'editor',
     requestPlaceholder: () => ({
       content: STREAMING_PLACEHOLDER,
       role: 'assistant',
@@ -135,12 +130,6 @@ export function ChatPanel({
       }
     }
   }, [location.key, location.state, navigate]);
-
-  useEffect(() => {
-    appliedIds.current.clear();
-    setPresented({});
-    setMessages([]);
-  }, [resetCount, setMessages]);
 
   useEffect(() => {
     const last = messages[messages.length - 1];
@@ -243,7 +232,6 @@ export function ChatPanel({
         <Alert type="warning" showIcon message={CHANNEL_UNREADY} />
       )}
       <Sender
-        key={resetCount}
         className="chat-input"
         placeholder="描述你想要的界面…"
         value={input}
