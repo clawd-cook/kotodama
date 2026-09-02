@@ -2,7 +2,8 @@
 
 **产品：** 言灵（kotodama） v1.0.0  
 **对应需求：** [PRD](./PRD.md) · [TRD](./TRD.md)  
-**画布规范：** [Ant Design v6 默认主题](./ant-design/design.md)
+**画布规范：** [Ant Design v6 默认主题](./ant-design/design.md)  
+**验收用例：** [TEST v1.0.0](./TEST.md)
 
 这份文档决定编辑器长什么样、字怎么写、主次怎么分。实现时改 chrome，不要改生成页的 Ant Design 语义。
 
