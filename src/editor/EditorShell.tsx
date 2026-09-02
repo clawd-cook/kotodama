@@ -164,7 +164,10 @@ export function EditorShell({
             }
             setChrome((current) => ({
               ...current,
-              speech: Math.min(SPEECH_MAX, Math.max(SPEECH_MIN, Math.round(next))),
+              speech: Math.min(
+                SPEECH_MAX,
+                Math.max(SPEECH_MIN, Math.round(next)),
+              ),
             }));
           }}
         >
