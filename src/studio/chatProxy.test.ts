@@ -7,6 +7,9 @@ const ENV = {
   OPENAI_MODEL: 'env-model',
 };
 
+const CHANNEL_UNREADY =
+  '通道没配好。去设置里填 Base URL、API Key 和模型名。';
+
 function postCompletions(body: unknown) {
   const listeners: Record<string, Array<(chunk?: Uint8Array) => void>> = {
     data: [],
@@ -33,6 +36,24 @@ function postCompletions(body: unknown) {
   return req;
 }
 
+function invoke(
+  handle: ReturnType<typeof createChatProxy>,
+  req: object,
+): Promise<{ status: number; body: string }> {
+  return new Promise((resolve) => {
+    const res = {
+      statusCode: 0,
+      setHeader() {},
+      end(chunk?: string) {
+        resolve({ status: res.statusCode, body: chunk ?? '' });
+      },
+    };
+    handle(req, res, () => {
+      resolve({ status: res.statusCode, body: '' });
+    });
+  });
+}
+
 describe('X chat proxy', () => {
   it('X-01 proxy fetches upstream with the resolved channel', async () => {
     const fetches: { url: string; init?: RequestInit }[] = [];
@@ -53,21 +74,7 @@ describe('X chat proxy', () => {
         model: 'ui-model',
       },
     });
-    await new Promise<void>((resolve) => {
-      handle(
-        req,
-        {
-          statusCode: 0,
-          setHeader() {},
-          end() {
-            resolve();
-          },
-        },
-        () => {
-          resolve();
-        },
-      );
-    });
+    await invoke(handle, req);
     expect(fetches).toHaveLength(1);
     expect(fetches[0]?.url).toBe('https://ui.example/v1/chat/completions');
     const headers = new Headers(fetches[0]?.init?.headers);
@@ -75,5 +82,23 @@ describe('X chat proxy', () => {
     const upstream = JSON.parse(String(fetches[0]?.init?.body));
     expect(upstream.model).toBe('ui-model');
     expect(upstream).not.toHaveProperty('kotodamaChannel');
+  });
+
+  it('X-02 unready channel is 503 and does not fetch', async () => {
+    const fetches: unknown[] = [];
+    const fetchImpl: typeof fetch = async (url, init) => {
+      fetches.push({ url, init });
+      return new Response('{}');
+    };
+    const handle = createChatProxy(
+      { OPENAI_BASE_URL: '', OPENAI_API_KEY: '', OPENAI_MODEL: '' },
+      fetchImpl,
+    );
+    const result = await invoke(handle, postCompletions({ messages: [] }));
+    expect(result.status).toBe(503);
+    expect(JSON.parse(result.body)).toEqual({
+      error: { message: CHANNEL_UNREADY },
+    });
+    expect(fetches).toHaveLength(0);
   });
 });

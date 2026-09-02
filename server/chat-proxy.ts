@@ -111,6 +111,18 @@ export function createChatProxy(
           channelFromBody(payload.kotodamaChannel),
           envFields(env),
         );
+        if (!resolved.ready) {
+          nodeRes.statusCode = 503;
+          nodeRes.setHeader('Content-Type', 'application/json');
+          nodeRes.end(
+            JSON.stringify({
+              error: {
+                message: '通道没配好。去设置里填 Base URL、API Key 和模型名。',
+              },
+            }),
+          );
+          return;
+        }
         delete payload.kotodamaChannel;
         payload.model = resolved.model;
         payload.stream = payload.stream !== false;
