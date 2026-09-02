@@ -77,11 +77,6 @@ export function createChatProxy(
   env: Record<string, string>,
   fetchImpl: typeof fetch = fetch,
 ) {
-  const model = env.OPENAI_MODEL ?? '';
-  const configured = Boolean(
-    env.OPENAI_BASE_URL && env.OPENAI_API_KEY && env.OPENAI_MODEL,
-  );
-
   return (req: object, res: object, next: () => void) => {
     const nodeReq = req as NodeReq;
     const path = pathnameOf(req);
@@ -91,7 +86,16 @@ export function createChatProxy(
       const nodeRes = res as NodeRes;
       nodeRes.statusCode = 200;
       nodeRes.setHeader('Content-Type', 'application/json');
-      nodeRes.end(JSON.stringify({ ok: true, configured, model }));
+      nodeRes.end(
+        JSON.stringify({
+          ok: true,
+          env: {
+            baseUrl: env.OPENAI_BASE_URL ?? '',
+            model: env.OPENAI_MODEL ?? '',
+            hasApiKey: Boolean(env.OPENAI_API_KEY),
+          },
+        }),
+      );
       return;
     }
 

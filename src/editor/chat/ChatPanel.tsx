@@ -33,9 +33,9 @@ export function ChatPanel({
   useEffect(() => {
     void fetch('/api/chat/health')
       .then((response) => response.json())
-      .then((data: { model?: string }) => {
-        if (data.model) {
-          setModel(data.model);
+      .then((data: { env?: { model?: string } }) => {
+        if (data.env?.model) {
+          setModel(data.env.model);
         }
       })
       .catch(() => {
