@@ -11,9 +11,20 @@ import {
   Typography,
 } from 'antd';
 import { useMemo } from 'react';
-import { z } from 'zod';
 import { useEditor } from './EditorState';
 import { editorCatalog } from './wrapCatalog';
+
+type ZodLike = {
+  _def?: {
+    typeName?: string;
+    type?: string;
+    innerType?: ZodLike;
+    shape?: Record<string, ZodLike> | (() => Record<string, ZodLike>);
+    options?: ZodLike[];
+    values?: string[];
+  };
+  options?: ZodLike[] | string[];
+};
 
 const HIDDEN = new Set([
   'children',
@@ -25,16 +36,34 @@ const HIDDEN = new Set([
   'accessibility',
 ]);
 
-function unwrap(schema: z.ZodTypeAny): z.ZodTypeAny {
+function kind(schema: ZodLike): string {
+  const def = schema._def;
+  const name = def?.typeName ?? def?.type ?? '';
+  return name.replace(/^Zod/, '').toLowerCase();
+}
+
+function unwrap(schema: ZodLike): ZodLike {
   let current = schema;
-  while (
-    current instanceof z.ZodOptional ||
-    current instanceof z.ZodDefault ||
-    current instanceof z.ZodNullable
-  ) {
-    current = current._def.innerType as z.ZodTypeAny;
+  while (['optional', 'default', 'nullable'].includes(kind(current))) {
+    current = current._def?.innerType as ZodLike;
   }
   return current;
+}
+
+function objectShape(schema: ZodLike): Record<string, ZodLike> | null {
+  const inner = unwrap(schema);
+  if (kind(inner) !== 'object') {
+    return null;
+  }
+  const raw = inner._def?.shape;
+  if (typeof raw === 'function') {
+    return raw();
+  }
+  return raw ?? null;
+}
+
+function unionOptions(schema: ZodLike): ZodLike[] {
+  return (schema._def?.options ?? schema.options ?? []) as ZodLike[];
 }
 
 function isPathObject(value: unknown): value is { path: string } {
@@ -43,23 +72,34 @@ function isPathObject(value: unknown): value is { path: string } {
   );
 }
 
-function isDynamicUnion(schema: z.ZodTypeAny): boolean {
+function isDynamicUnion(schema: ZodLike): boolean {
   const inner = unwrap(schema);
-  if (!(inner instanceof z.ZodUnion)) {
+  if (kind(inner) !== 'union') {
     return false;
   }
-  return inner.options.some((option: z.ZodTypeAny) => {
-    const unwrapped = unwrap(option);
-    return unwrapped instanceof z.ZodObject && 'path' in unwrapped.shape;
+  return unionOptions(inner).some((option) => {
+    const shape = objectShape(option);
+    return Boolean(shape && 'path' in shape);
   });
 }
 
-function enumValues(schema: z.ZodTypeAny): string[] | null {
+function enumValues(schema: ZodLike): string[] | null {
   const inner = unwrap(schema);
-  if (inner instanceof z.ZodEnum) {
-    return inner.options as string[];
+  if (kind(inner) !== 'enum') {
+    return null;
   }
-  return null;
+  const values = inner._def?.values ?? inner.options;
+  return Array.isArray(values) &&
+    values.every((item) => typeof item === 'string')
+    ? values
+    : null;
+}
+
+function unionHasKind(schema: ZodLike, target: string): boolean {
+  return (
+    kind(schema) === 'union' &&
+    unionOptions(schema).some((option) => kind(unwrap(option)) === target)
+  );
 }
 
 export function Inspector() {
@@ -72,11 +112,7 @@ export function Inspector() {
     if (!impl) {
       return null;
     }
-    const inner = unwrap(impl.schema);
-    if (inner instanceof z.ZodObject) {
-      return inner.shape as Record<string, z.ZodTypeAny>;
-    }
-    return null;
+    return objectShape(impl.schema as ZodLike);
   }, [impl]);
 
   if (!component) {
@@ -141,11 +177,7 @@ export function Inspector() {
                         setField(key, { path: event.target.value })
                       }
                     />
-                  ) : inner instanceof z.ZodUnion &&
-                    inner.options.some(
-                      (option: z.ZodTypeAny) =>
-                        unwrap(option) instanceof z.ZodNumber,
-                    ) ? (
+                  ) : unionHasKind(inner, 'number') ? (
                     <InputNumber
                       style={{ marginTop: 8, width: '100%' }}
                       value={
@@ -155,11 +187,7 @@ export function Inspector() {
                       }
                       onChange={(next) => setField(key, next ?? 0)}
                     />
-                  ) : inner instanceof z.ZodUnion &&
-                    inner.options.some(
-                      (option: z.ZodTypeAny) =>
-                        unwrap(option) instanceof z.ZodBoolean,
-                    ) ? (
+                  ) : unionHasKind(inner, 'boolean') ? (
                     <div style={{ marginTop: 8 }}>
                       <Switch
                         checked={Boolean(value)}
@@ -193,7 +221,7 @@ export function Inspector() {
               );
             }
 
-            if (inner instanceof z.ZodNumber) {
+            if (kind(inner) === 'number') {
               return (
                 <Form.Item key={key} label={key}>
                   <InputNumber
@@ -205,7 +233,7 @@ export function Inspector() {
               );
             }
 
-            if (inner instanceof z.ZodBoolean) {
+            if (kind(inner) === 'boolean') {
               return (
                 <Form.Item key={key} label={key}>
                   <Switch
@@ -216,7 +244,7 @@ export function Inspector() {
               );
             }
 
-            if (inner instanceof z.ZodString) {
+            if (kind(inner) === 'string') {
               return (
                 <Form.Item key={key} label={key}>
                   <Input
