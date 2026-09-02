@@ -61,12 +61,12 @@ describe('W write gate', () => {
     expect(result.ok).toBe(true);
     if (result.ok) {
       expect(result.snapshot.surfaceId).toBe('main');
-      expect(result.snapshot.components.some((item) => item.id === 'root')).toBe(
-        true,
-      );
       expect(
-        (result.snapshot.dataModel as { title?: string }).title,
-      ).toBe(TITLE);
+        result.snapshot.components.some((item) => item.id === 'root'),
+      ).toBe(true);
+      expect((result.snapshot.dataModel as { title?: string }).title).toBe(
+        TITLE,
+      );
     }
   });
 
@@ -177,9 +177,7 @@ describe('W write gate', () => {
       .find((item) => item.updateComponents)
       ?.updateComponents?.components.find((item) => item.id === 'root');
     if (root) {
-      root.children = [
-        { id: 'inline', component: 'Text', text: '内联' },
-      ];
+      root.children = [{ id: 'inline', component: 'Text', text: '内联' }];
     }
     const result = applyDocument(JSON.stringify(messages), current);
     expect(result.ok).toBe(false);

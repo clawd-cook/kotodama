@@ -15,7 +15,13 @@
         {
           "id": "root",
           "component": "Column",
-          "children": ["title", "user_field", "password_field", "otp_field", "submit"],
+          "children": [
+            "title",
+            "user_field",
+            "password_field",
+            "otp_field",
+            "submit"
+          ],
           "justify": "start",
           "align": "stretch"
         },

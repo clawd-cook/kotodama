@@ -91,34 +91,37 @@ const ICON_MAP: Record<string, ReactNode> = {
   warning: <WarningOutlined />,
 };
 
-export const Text = createComponentImplementation(antdApi(TextApi), ({ props }) => {
-  const text =
-    typeof props.text === 'string' ? props.text : String(props.text ?? '');
-  const style = weightStyle(props.weight);
-  switch (props.variant) {
-    case 'h1':
-    case 'h2':
-    case 'h3':
-    case 'h4':
-    case 'h5':
-      return (
-        <Typography.Title
-          level={Number(props.variant.slice(1)) as 1 | 2 | 3 | 4 | 5}
-          style={style}
-        >
-          {text}
-        </Typography.Title>
-      );
-    case 'caption':
-      return (
-        <Typography.Text type="secondary" style={style}>
-          {text}
-        </Typography.Text>
-      );
-    default:
-      return <Typography.Text style={style}>{text}</Typography.Text>;
-  }
-});
+export const Text = createComponentImplementation(
+  antdApi(TextApi),
+  ({ props }) => {
+    const text =
+      typeof props.text === 'string' ? props.text : String(props.text ?? '');
+    const style = weightStyle(props.weight);
+    switch (props.variant) {
+      case 'h1':
+      case 'h2':
+      case 'h3':
+      case 'h4':
+      case 'h5':
+        return (
+          <Typography.Title
+            level={Number(props.variant.slice(1)) as 1 | 2 | 3 | 4 | 5}
+            style={style}
+          >
+            {text}
+          </Typography.Title>
+        );
+      case 'caption':
+        return (
+          <Typography.Text type="secondary" style={style}>
+            {text}
+          </Typography.Text>
+        );
+      default:
+        return <Typography.Text style={style}>{text}</Typography.Text>;
+    }
+  },
+);
 
 export const ImageView = createComponentImplementation(
   antdApi(ImageApi),
@@ -155,48 +158,58 @@ export const ImageView = createComponentImplementation(
   },
 );
 
-export const Icon = createComponentImplementation(antdApi(IconApi), ({ props }) => {
-  if (
-    typeof props.name === 'object' &&
-    props.name !== null &&
-    'svgPath' in props.name
-  ) {
+export const Icon = createComponentImplementation(
+  antdApi(IconApi),
+  ({ props }) => {
+    if (
+      typeof props.name === 'object' &&
+      props.name !== null &&
+      'svgPath' in props.name
+    ) {
+      return (
+        <Typography.Text style={weightStyle(props.weight)}>
+          <svg
+            viewBox="0 0 24 24"
+            width={20}
+            height={20}
+            role="img"
+            aria-label="icon"
+          >
+            <title>icon</title>
+            <path
+              d={(props.name as { svgPath: string }).svgPath}
+              fill="currentColor"
+            />
+          </svg>
+        </Typography.Text>
+      );
+    }
+    const name = typeof props.name === 'string' ? props.name : '';
     return (
       <Typography.Text style={weightStyle(props.weight)}>
-        <svg
-          viewBox="0 0 24 24"
-          width={20}
-          height={20}
-          role="img"
-          aria-label="icon"
-        >
-          <title>icon</title>
-          <path
-            d={(props.name as { svgPath: string }).svgPath}
-            fill="currentColor"
-          />
-        </svg>
+        {ICON_MAP[name] ?? <ExclamationCircleOutlined />}
       </Typography.Text>
     );
-  }
-  const name = typeof props.name === 'string' ? props.name : '';
-  return (
-    <Typography.Text style={weightStyle(props.weight)}>
-      {ICON_MAP[name] ?? <ExclamationCircleOutlined />}
-    </Typography.Text>
-  );
-});
+  },
+);
 
-export const Video = createComponentImplementation(antdApi(VideoApi), ({ props }) => (
-  <Card
-    size="small"
-    styles={{ body: { padding: 0 } }}
-    style={weightStyle(props.weight)}
-  >
-    {/* biome-ignore lint/a11y/useMediaCaption: A2UI schema has no caption track */}
-    <video src={props.url} controls style={{ width: '100%', display: 'block' }} />
-  </Card>
-));
+export const Video = createComponentImplementation(
+  antdApi(VideoApi),
+  ({ props }) => (
+    <Card
+      size="small"
+      styles={{ body: { padding: 0 } }}
+      style={weightStyle(props.weight)}
+    >
+      {/* biome-ignore lint/a11y/useMediaCaption: A2UI schema has no caption track */}
+      <video
+        src={props.url}
+        controls
+        style={{ width: '100%', display: 'block' }}
+      />
+    </Card>
+  ),
+);
 
 export const AudioPlayer = createComponentImplementation(
   antdApi(AudioPlayerApi),

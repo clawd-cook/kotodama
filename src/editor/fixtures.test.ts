@@ -28,7 +28,9 @@ function roundTrip(doc: unknown) {
   if (!result.ok) {
     return result;
   }
-  const folded = foldMessages(JSON.parse(JSON.stringify(toMessages(result.snapshot))));
+  const folded = foldMessages(
+    JSON.parse(JSON.stringify(toMessages(result.snapshot))),
+  );
   const again = applyDocument(
     JSON.stringify(toMessages(folded)),
     createDemoSnapshot(),
@@ -70,7 +72,9 @@ describe('F golden fixtures', () => {
       return;
     }
     expect(dataText(result.snapshot)).toContain('设置');
-    const types = new Set(componentsOf(result.snapshot).map((item) => item.component));
+    const types = new Set(
+      componentsOf(result.snapshot).map((item) => item.component),
+    );
     expect(types.has('Column') && types.has('Card')).toBe(true);
     const inputs = componentsOf(result.snapshot).filter(
       (item) => item.component === 'TextField' || item.component === 'CheckBox',
@@ -118,10 +122,12 @@ describe('C fixture round-trip', () => {
     if (!result.ok) {
       return;
     }
-    expect((result.snapshot.dataModel as { title?: string }).title).toBe('登录');
-    expect(
-      (result.snapshot.dataModel as { password?: string }).password,
-    ).toBe('');
+    expect((result.snapshot.dataModel as { title?: string }).title).toBe(
+      '登录',
+    );
+    expect((result.snapshot.dataModel as { password?: string }).password).toBe(
+      '',
+    );
     expect(
       componentsOf(result.snapshot).some(
         (item) => item.component === 'TextField' && item.variant === 'obscured',
@@ -139,8 +145,12 @@ describe('C fixture round-trip', () => {
     if (!result.ok) {
       return;
     }
-    expect((result.snapshot.dataModel as { title?: string }).title).toBe('设置');
-    const types = new Set(componentsOf(result.snapshot).map((item) => item.component));
+    expect((result.snapshot.dataModel as { title?: string }).title).toBe(
+      '设置',
+    );
+    const types = new Set(
+      componentsOf(result.snapshot).map((item) => item.component),
+    );
     expect(types.has('Column') && types.has('Card')).toBe(true);
   });
 
@@ -150,14 +160,16 @@ describe('C fixture round-trip', () => {
       return;
     }
     expect(
-      componentsOf(result.snapshot).some((item) => item.component === 'ChoicePicker'),
+      componentsOf(result.snapshot).some(
+        (item) => item.component === 'ChoicePicker',
+      ),
     ).toBe(true);
     expect(
       componentsOf(result.snapshot).some((item) => item.component === 'List'),
     ).toBe(true);
-    expect((result.snapshot.dataModel as { filter?: string[] }).filter).toEqual([
-      'all',
-    ]);
+    expect((result.snapshot.dataModel as { filter?: string[] }).filter).toEqual(
+      ['all'],
+    );
     expect((result.snapshot.dataModel as { itemOne?: string }).itemOne).toBe(
       '整理登录页',
     );

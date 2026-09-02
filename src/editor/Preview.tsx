@@ -26,7 +26,12 @@ export function PreviewPane({
   useEffect(() => {
     clearErrors('preview');
     clearErrors('protocol');
-  }, [clearErrors, snapshot.catalogId, snapshot.components, snapshot.surfaceId]);
+  }, [
+    clearErrors,
+    snapshot.catalogId,
+    snapshot.components,
+    snapshot.surfaceId,
+  ]);
 
   return (
     <SelectionProvider

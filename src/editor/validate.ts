@@ -43,9 +43,10 @@ type CatalogSchema = {
 };
 
 const SCHEMA_BY_NAME = new Map<string, CatalogSchema>(
-  (BASIC_COMPONENTS as { name: string; schema: CatalogSchema }[]).map(
-    (api) => [api.name, api.schema],
-  ),
+  (BASIC_COMPONENTS as { name: string; schema: CatalogSchema }[]).map((api) => [
+    api.name,
+    api.schema,
+  ]),
 );
 
 const ALLOWED_SET = new Set<string>(ALLOWED_COMPONENTS);

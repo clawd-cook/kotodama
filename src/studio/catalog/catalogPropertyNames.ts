@@ -6,12 +6,16 @@ type CatalogApi = {
   name: string;
   schema: {
     shape?: Record<string, unknown>;
-    _def?: { shape?: Record<string, unknown> | (() => Record<string, unknown>) };
+    _def?: {
+      shape?: Record<string, unknown> | (() => Record<string, unknown>);
+    };
   };
 };
 
 function schemaShape(name: string): Record<string, unknown> {
-  const api = (BASIC_COMPONENTS as CatalogApi[]).find((item) => item.name === name);
+  const api = (BASIC_COMPONENTS as CatalogApi[]).find(
+    (item) => item.name === name,
+  );
   const raw = api?.schema.shape ?? api?.schema._def?.shape;
   return typeof raw === 'function' ? raw() : (raw ?? {});
 }

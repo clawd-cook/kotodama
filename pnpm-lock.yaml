@@ -57,6 +57,9 @@ importers:
       '@biomejs/biome':
         specifier: 2.5.11
         version: 2.5.11
+      '@biomejs/cli-darwin-x64':
+        specifier: ^2.4.12
+        version: 2.4.12
       '@rsbuild/core':
         specifier: 1.7.6
         version: 1.7.6
@@ -610,6 +613,10 @@ packages:
     resolution: {integrity: sha1-IyWp9UplHQQgvh8VFzgPVgE/e6E=, tarball: http://registry.m.jd.com/@biomejs/biome/download/@biomejs/biome-2.5.11.tgz}
     engines: {node: '>=14.21.3'}
     hasBin: true
+
+  '@biomejs/cli-darwin-x64@2.4.12':
+    resolution: {integrity: sha1-eDY6yDr9AmzDdDOS/5zvpCE9VyQ=, tarball: http://registry.m.jd.com/@biomejs/cli-darwin-x64/download/@biomejs/cli-darwin-x64-2.4.12.tgz}
+    engines: {node: '>=14.21.3'}
 
   '@biomejs/cli-win32-x64@2.5.11':
     resolution: {integrity: sha1-AEAAOVjzul1qJVgBHKAr22CIIfU=, tarball: http://registry.m.jd.com/@biomejs/cli-win32-x64/download/@biomejs/cli-win32-x64-2.5.11.tgz}
@@ -6747,6 +6754,8 @@ snapshots:
   '@biomejs/biome@2.5.11':
     optionalDependencies:
       '@biomejs/cli-win32-x64': 2.5.11
+
+  '@biomejs/cli-darwin-x64@2.4.12': {}
 
   '@biomejs/cli-win32-x64@2.5.11':
     optional: true

@@ -8,7 +8,14 @@ import {
   RowApi,
   TabsApi,
 } from '@a2ui/web_core/v0_9/basic_catalog';
-import { Card as AntCard, Divider, Flex, List as AntList, Modal, Tabs } from 'antd';
+import {
+  Card as AntCard,
+  Divider,
+  Flex,
+  List as AntList,
+  Modal,
+  Tabs,
+} from 'antd';
 import { useState } from 'react';
 import { antdApi } from './api';
 import { ChildList, type ChildRef } from './ChildList';

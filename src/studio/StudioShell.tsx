@@ -4,9 +4,25 @@ import {
   FileTextOutlined,
   SettingOutlined,
 } from '@ant-design/icons';
-import { Button, Divider, Layout, Menu, Modal, Space, Switch, message } from 'antd';
+import {
+  Button,
+  Divider,
+  Layout,
+  Menu,
+  Modal,
+  Space,
+  Switch,
+  message,
+} from 'antd';
 import { useRef } from 'react';
-import { Link, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router';
+import {
+  Link,
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from 'react-router';
 import { EditorShell } from '../editor/EditorShell';
 import { useEditor } from '../editor/EditorState';
 import { isCurrentPage, saveTheme } from '../editor/storage';
@@ -21,7 +37,12 @@ import { createScreen } from './createScreen';
 import './studio.css';
 
 const RAIL = [
-  { key: 'create', path: '/', label: '开始创建', icon: <EditOutlined aria-hidden /> },
+  {
+    key: 'create',
+    path: '/',
+    label: '开始创建',
+    icon: <EditOutlined aria-hidden />,
+  },
   {
     key: 'catalog',
     path: '/catalog',
@@ -55,7 +76,10 @@ function roomKey(pathname: string): string {
   return 'create';
 }
 
-function skipLink(pathname: string, workshop: boolean): { href: string; label: string } {
+function skipLink(
+  pathname: string,
+  workshop: boolean,
+): { href: string; label: string } {
   if (pathname === '/' && !workshop) {
     return { href: '#prompt', label: '跳到输入' };
   }
@@ -166,10 +190,20 @@ function StudioHouse({
           ) : null}
           {showWorkshop ? (
             <Space size={0}>
-              <Button type="text" size="small" onClick={undo} disabled={!canUndo}>
+              <Button
+                type="text"
+                size="small"
+                onClick={undo}
+                disabled={!canUndo}
+              >
                 撤销
               </Button>
-              <Button type="text" size="small" onClick={redo} disabled={!canRedo}>
+              <Button
+                type="text"
+                size="small"
+                onClick={redo}
+                disabled={!canRedo}
+              >
                 重做
               </Button>
               <Button type="text" size="small" onClick={confirmReset}>
@@ -253,10 +287,7 @@ function StudioHouse({
               path="/catalog/:component"
               element={<CatalogPage theme={theme} />}
             />
-            <Route
-              path="/examples"
-              element={<ExamplesPage theme={theme} />}
-            />
+            <Route path="/examples" element={<ExamplesPage theme={theme} />} />
             <Route
               path="/examples/:id"
               element={<ExampleDetailPage theme={theme} />}

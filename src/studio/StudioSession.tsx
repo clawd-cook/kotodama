@@ -44,7 +44,9 @@ export function StudioSessionProvider({ children }: { children: ReactNode }) {
 export function useStudioSession() {
   const value = useContext(StudioSessionContext);
   if (!value) {
-    throw new Error('useStudioSession must be used within StudioSessionProvider');
+    throw new Error(
+      'useStudioSession must be used within StudioSessionProvider',
+    );
   }
   return value;
 }

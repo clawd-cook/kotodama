@@ -1,8 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "organizeImports": {
-    "enabled": true
-  },
+  "$schema": "https://biomejs.dev/schemas/2.4.12/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -28,6 +25,21 @@
     }
   },
   "files": {
-    "ignore": ["**/.agents/**", "**/node_modules/**", "**/submodules/**", "coverage/**"]
+    "includes": [
+      "**",
+      "!**/.agents/**",
+      "!**/dist/**",
+      "!**/node_modules/**",
+      "!**/build/**",
+      "!**/coverage/**",
+      "!**/dist/**",
+      "!**/node_modules/**",
+      "!**/submodules/**",
+      "!**/test/**",
+      "!**/tests/**",
+      "!**/tmp/**",
+      "!**/vendor/**",
+      "!**/tmp/**"
+    ]
   }
 }

@@ -257,7 +257,7 @@
   overscroll-behavior: contain;
 }
 
-.editor-root[data-theme='dark'] .example-card {
+.editor-root[data-theme="dark"] .example-card {
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.04),
     0 16px 40px rgba(0, 0, 0, 0.4);

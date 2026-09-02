@@ -9,14 +9,14 @@ const ENV = {
 
 describe('H channel resolve', () => {
   it('H-01 empty ui uses env and is ready', () => {
-    expect(
-      resolveChannel({ baseUrl: '', apiKey: '', model: '' }, ENV),
-    ).toEqual({
-      baseUrl: 'https://env.example',
-      apiKey: 'env-key',
-      model: 'env-model',
-      ready: true,
-    });
+    expect(resolveChannel({ baseUrl: '', apiKey: '', model: '' }, ENV)).toEqual(
+      {
+        baseUrl: 'https://env.example',
+        apiKey: 'env-key',
+        model: 'env-model',
+        ready: true,
+      },
+    );
   });
 
   it('H-02 ui model overrides env model', () => {

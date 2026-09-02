@@ -7,8 +7,7 @@ const ENV = {
   OPENAI_MODEL: 'env-model',
 };
 
-const CHANNEL_UNREADY =
-  '通道没配好。去设置里填 Base URL、API Key 和模型名。';
+const CHANNEL_UNREADY = '通道没配好。去设置里填 Base URL、API Key 和模型名。';
 
 function postCompletions(body: unknown) {
   const listeners: Record<string, Array<(chunk?: Uint8Array) => void>> = {

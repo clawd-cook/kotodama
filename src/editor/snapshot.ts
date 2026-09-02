@@ -69,7 +69,10 @@ type SurfaceAcc = {
   dataModel: unknown;
 };
 
-function ensureSurface(bySurface: Map<string, SurfaceAcc>, surfaceId: string): SurfaceAcc {
+function ensureSurface(
+  bySurface: Map<string, SurfaceAcc>,
+  surfaceId: string,
+): SurfaceAcc {
   const existing = bySurface.get(surfaceId);
   if (existing) {
     return existing;

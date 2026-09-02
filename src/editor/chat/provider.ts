@@ -16,11 +16,16 @@ export class EditorChatProvider extends OpenAIChatProvider {
     options: XRequestOptions<XModelParams>,
   ): XModelParams {
     const params = super.transformParams(requestParams, options);
-    const history = (params.messages ?? []).filter((item) => item.role !== 'system');
+    const history = (params.messages ?? []).filter(
+      (item) => item.role !== 'system',
+    );
     const channel = this.getChannel();
     return {
       ...params,
-      messages: [{ role: 'system', content: this.getSystemPrompt() }, ...history],
+      messages: [
+        { role: 'system', content: this.getSystemPrompt() },
+        ...history,
+      ],
       ...(channel ? { kotodamaChannel: channel } : {}),
     } as XModelParams;
   }

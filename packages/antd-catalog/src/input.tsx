@@ -23,10 +23,7 @@ import { antdApi } from './api';
 import { Field } from './Field';
 import { weightStyle } from './style';
 
-function extraString(
-  props: object,
-  key: string,
-): string | undefined {
+function extraString(props: object, key: string): string | undefined {
   const value = (props as Record<string, unknown>)[key];
   return typeof value === 'string' ? value : undefined;
 }
@@ -138,7 +135,11 @@ export const ChoicePicker = createComponentImplementation(
     }));
 
     return (
-      <Field label={props.label} error={props.validationErrors?.[0]} weight={props.weight}>
+      <Field
+        label={props.label}
+        error={props.validationErrors?.[0]}
+        weight={props.weight}
+      >
         {props.variant === 'mutuallyExclusive' ? (
           <Select
             style={{ width: '100%' }}
@@ -161,7 +162,11 @@ export const ChoicePicker = createComponentImplementation(
 export const SliderView = createComponentImplementation(
   antdApi(SliderApi),
   ({ props }) => (
-    <Field label={props.label} error={props.validationErrors?.[0]} weight={props.weight}>
+    <Field
+      label={props.label}
+      error={props.validationErrors?.[0]}
+      weight={props.weight}
+    >
       <Slider
         min={props.min ?? 0}
         max={props.max}
@@ -213,7 +218,11 @@ export const DateTimeInput = createComponentImplementation(
     }
 
     return (
-      <Field label={props.label} error={props.validationErrors?.[0]} weight={props.weight}>
+      <Field
+        label={props.label}
+        error={props.validationErrors?.[0]}
+        weight={props.weight}
+      >
         {picker}
       </Field>
     );

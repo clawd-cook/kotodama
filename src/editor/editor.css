@@ -16,11 +16,11 @@ body,
   touch-action: manipulation;
 }
 
-.editor-root[data-theme='light'] {
+.editor-root[data-theme="light"] {
   color-scheme: light;
 }
 
-.editor-root[data-theme='dark'] {
+.editor-root[data-theme="dark"] {
   color-scheme: dark;
 }
 
@@ -83,7 +83,7 @@ body,
   background: #cf1322;
 }
 
-.editor-root[data-theme='dark'] .editor-seal {
+.editor-root[data-theme="dark"] .editor-seal {
   background: #ff4d4f;
 }
 
@@ -318,7 +318,7 @@ body,
     0 16px 40px rgba(31, 31, 31, 0.08);
 }
 
-.editor-root[data-theme='dark'] .preview-sheet {
+.editor-root[data-theme="dark"] .preview-sheet {
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.04),
     0 16px 40px rgba(0, 0, 0, 0.4);

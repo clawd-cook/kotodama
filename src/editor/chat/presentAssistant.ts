@@ -4,7 +4,10 @@ import { parseChatOutput } from './parseA2ui';
 
 export { STREAMING_PLACEHOLDER } from '../copy';
 
-export function presentAssistant(raw: string, applyResult: ApplyResult): string {
+export function presentAssistant(
+  raw: string,
+  applyResult: ApplyResult,
+): string {
   if (!applyResult.ok) {
     return pageUnchanged(applyResult.message);
   }

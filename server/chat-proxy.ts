@@ -1,7 +1,4 @@
-import {
-  resolveChannel,
-  type ChannelFields,
-} from '../src/studio/channel';
+import { resolveChannel, type ChannelFields } from '../src/studio/channel';
 
 type NodeReq = {
   method?: string;
@@ -28,27 +25,21 @@ function pathnameOf(req: object): string {
 function readBody(req: NodeReq): Promise<Uint8Array> {
   return new Promise((resolve, reject) => {
     const chunks: Uint8Array[] = [];
-    req.on(
-      'data',
-      ((chunk: Uint8Array | string) => {
-        chunks.push(
-          typeof chunk === 'string' ? new TextEncoder().encode(chunk) : chunk,
-        );
-      }) as (...args: never[]) => void,
-    );
-    req.on(
-      'end',
-      (() => {
-        const total = chunks.reduce((sum, item) => sum + item.byteLength, 0);
-        const merged = new Uint8Array(total);
-        let offset = 0;
-        for (const item of chunks) {
-          merged.set(item, offset);
-          offset += item.byteLength;
-        }
-        resolve(merged);
-      }) as (...args: never[]) => void,
-    );
+    req.on('data', ((chunk: Uint8Array | string) => {
+      chunks.push(
+        typeof chunk === 'string' ? new TextEncoder().encode(chunk) : chunk,
+      );
+    }) as (...args: never[]) => void);
+    req.on('end', (() => {
+      const total = chunks.reduce((sum, item) => sum + item.byteLength, 0);
+      const merged = new Uint8Array(total);
+      let offset = 0;
+      for (const item of chunks) {
+        merged.set(item, offset);
+        offset += item.byteLength;
+      }
+      resolve(merged);
+    }) as (...args: never[]) => void);
     req.on('error', reject as (...args: never[]) => void);
   });
 }

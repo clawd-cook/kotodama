@@ -37,9 +37,9 @@ export function ChatPanel({
   logErrorRef.current = logError;
   const overrideRef = useRef(override);
   overrideRef.current = override;
-  const onRequestRef = useRef<(payload: { messages: { role: string; content: string }[] }) => void>(
-    () => undefined,
-  );
+  const onRequestRef = useRef<
+    (payload: { messages: { role: string; content: string }[] }) => void
+  >(() => undefined);
   const appliedIds = useRef(new Set<string>());
   const [presented, setPresented] = useState<Record<string, string>>({});
   const landing = location.state as LandingState | null;
@@ -144,7 +144,11 @@ export function ChatPanel({
 
   useEffect(() => {
     const last = messages[messages.length - 1];
-    if (!last || last.message.role !== 'assistant' || last.status !== 'success') {
+    if (
+      !last ||
+      last.message.role !== 'assistant' ||
+      last.status !== 'success'
+    ) {
       return;
     }
     const id = String(last.id);

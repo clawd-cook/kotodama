@@ -4,9 +4,7 @@ export const PROMPT_ITEMS = [
   { key: 'list', label: '做一个带筛选的列表' },
 ];
 
-export type LandingSubmit =
-  | { autoSend: string }
-  | { prefill: string };
+export type LandingSubmit = { autoSend: string } | { prefill: string };
 
 export function landingSubmit(text: string, ready: boolean): LandingSubmit {
   return ready ? { autoSend: text } : { prefill: text };

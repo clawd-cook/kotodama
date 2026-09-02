@@ -31,7 +31,11 @@ export function applyDocument(text: string, current: Snapshot): ApplyResult {
 
   const messages = unwrapMessages(parsed);
   if (!messages) {
-    return { ok: false, code: 'PARSE', message: '源文件必须是 A2UI 消息数组。' };
+    return {
+      ok: false,
+      code: 'PARSE',
+      message: '源文件必须是 A2UI 消息数组。',
+    };
   }
 
   const snapshot = foldMessages(messages);

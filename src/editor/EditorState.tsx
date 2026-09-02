@@ -153,9 +153,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
       if (!selectedId) {
         return null;
       }
-      return rejectIfInvalid(
-        updateComponentProps(snapshot, selectedId, props),
-      );
+      return rejectIfInvalid(updateComponentProps(snapshot, selectedId, props));
     },
     [rejectIfInvalid, selectedId, snapshot],
   );

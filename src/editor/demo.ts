@@ -67,10 +67,14 @@ function rowCells(
       align: 'center',
     },
     ...paths.map((path, index) =>
-      text(cellIds[index], { path }, {
-        weight: 1,
-        variant: prefix.endsWith('_head') ? 'caption' : 'body',
-      }),
+      text(
+        cellIds[index],
+        { path },
+        {
+          weight: 1,
+          variant: prefix.endsWith('_head') ? 'caption' : 'body',
+        },
+      ),
     ),
     ...(actions
       ? [
@@ -88,7 +92,11 @@ function rowCells(
   ];
 }
 
-function logModal(modalId: string, triggerId: string, labelId: string): A2uiComponent[] {
+function logModal(
+  modalId: string,
+  triggerId: string,
+  labelId: string,
+): A2uiComponent[] {
   return [
     {
       id: modalId,
@@ -96,25 +104,79 @@ function logModal(modalId: string, triggerId: string, labelId: string): A2uiComp
       trigger: triggerId,
       content: 'log_body',
     },
-    ...button(triggerId, labelId, { path: '/logLabel' }, 'borderless', 'openLog'),
+    ...button(
+      triggerId,
+      labelId,
+      { path: '/logLabel' },
+      'borderless',
+      'openLog',
+    ),
   ];
 }
 
 export function createDemoSnapshot(): Snapshot {
   const queryButtons = [
-    ...button('reset', 'reset_label', { path: '/resetLabel' }, 'default', 'reset'),
-    ...button('query', 'query_label', { path: '/queryLabel' }, 'primary', 'query'),
-    ...button('export', 'export_label', { path: '/exportLabel' }, 'default', 'export'),
-    ...button('create', 'create_label', { path: '/createLabel' }, 'primary', 'create'),
+    ...button(
+      'reset',
+      'reset_label',
+      { path: '/resetLabel' },
+      'default',
+      'reset',
+    ),
+    ...button(
+      'query',
+      'query_label',
+      { path: '/queryLabel' },
+      'primary',
+      'query',
+    ),
+    ...button(
+      'export',
+      'export_label',
+      { path: '/exportLabel' },
+      'default',
+      'export',
+    ),
+    ...button(
+      'create',
+      'create_label',
+      { path: '/createLabel' },
+      'primary',
+      'create',
+    ),
   ];
   const row1Ops = [
-    ...button('r1_view', 'r1_view_label', { path: '/viewLabel' }, 'borderless', 'view'),
-    ...button('r1_copy', 'r1_copy_label', { path: '/copyLabel' }, 'borderless', 'copy'),
+    ...button(
+      'r1_view',
+      'r1_view_label',
+      { path: '/viewLabel' },
+      'borderless',
+      'view',
+    ),
+    ...button(
+      'r1_copy',
+      'r1_copy_label',
+      { path: '/copyLabel' },
+      'borderless',
+      'copy',
+    ),
     ...logModal('r1_log_modal', 'r1_log', 'r1_log_label'),
   ];
   const row2Ops = [
-    ...button('r2_view', 'r2_view_label', { path: '/viewLabel' }, 'borderless', 'view'),
-    ...button('r2_copy', 'r2_copy_label', { path: '/copyLabel' }, 'borderless', 'copy'),
+    ...button(
+      'r2_view',
+      'r2_view_label',
+      { path: '/viewLabel' },
+      'borderless',
+      'view',
+    ),
+    ...button(
+      'r2_copy',
+      'r2_copy_label',
+      { path: '/copyLabel' },
+      'borderless',
+      'copy',
+    ),
     ...logModal('r2_log_modal', 'r2_log', 'r2_log_label'),
   ];
 
@@ -364,7 +426,8 @@ export function createDemoSnapshot(): Snapshot {
       log1Ip: '10.253.30.28',
       log2Id: '7024613',
       log2Account: 'heyongqi10',
-      log2Content: '编辑（字段: 任务有效时间, 原值: 空, 新值: 2026-03-01 ~ 2026-06-30）',
+      log2Content:
+        '编辑（字段: 任务有效时间, 原值: 空, 新值: 2026-03-01 ~ 2026-06-30）',
       log2Time: '2026-09-02 16:08:11',
       log2Ip: '10.253.42.247',
       emptyPending: '暂无待生效任务。',

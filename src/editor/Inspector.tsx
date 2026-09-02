@@ -145,7 +145,12 @@ export function Inspector() {
   return (
     <div className="inspector">
       {propError ? (
-        <Alert type="error" showIcon message={propError} style={{ marginTop: 12 }} />
+        <Alert
+          type="error"
+          showIcon
+          message={propError}
+          style={{ marginTop: 12 }}
+        />
       ) : null}
       <Typography.Text type="secondary">
         {type} · {id}

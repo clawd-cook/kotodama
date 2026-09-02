@@ -43,7 +43,10 @@ describe('E featured examples', () => {
       }
       const folded = foldMessages(FIXTURES[id]);
       const byId = new Map(
-        result.snapshot.components.map((component) => [component.id, component]),
+        result.snapshot.components.map((component) => [
+          component.id,
+          component,
+        ]),
       );
       for (const component of folded.components) {
         expect(byId.get(component.id), `${id}.${component.id}`).toEqual(
@@ -58,9 +61,9 @@ describe('E featured examples', () => {
     );
     expect(loginResult.ok).toBe(true);
     if (loginResult.ok) {
-      expect(
-        (loginResult.snapshot.dataModel as { title?: string }).title,
-      ).toBe('登录');
+      expect((loginResult.snapshot.dataModel as { title?: string }).title).toBe(
+        '登录',
+      );
     }
   });
 
