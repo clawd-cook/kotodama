@@ -8,18 +8,16 @@ import { useStudioSession } from './StudioSession';
 export function LandingPage() {
   const navigate = useNavigate();
   const { resolved } = useChannel();
-  const { markVisitedWorkshop } = useStudioSession();
+  const { setLanding } = useStudioSession();
 
   const submit = (text: string) => {
     const content = text.trim();
     if (!content) {
       return;
     }
-    markVisitedWorkshop();
-    navigate('/', {
-      replace: true,
-      state: landingSubmit(content, resolved.ready),
-    });
+    const payload = landingSubmit(content, resolved.ready);
+    setLanding(payload);
+    navigate('/', { replace: true, state: payload });
   };
 
   return (

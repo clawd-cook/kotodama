@@ -4,7 +4,9 @@ import { Alert, Flex, Typography } from 'antd';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { useChannel } from '../../studio/ChannelContext';
+import type { LandingSubmit } from '../../studio/landingSubmit';
 import { PROMPT_ITEMS } from '../../studio/landingSubmit';
+import { useStudioSession } from '../../studio/StudioSession';
 import type { ApplyResult } from '../applyDocument';
 import { applyDocument } from '../applyDocument';
 import { CHANNEL_UNREADY, STREAMING_PLACEHOLDER } from '../copy';
@@ -17,11 +19,20 @@ import { EditorChatProvider, textOf } from './provider';
 
 const consumedLandingKeys = new Set<string>();
 
-type LandingState = { autoSend?: string; prefill?: string };
+function landingOf(
+  nav: unknown,
+  session: LandingSubmit | null,
+): LandingSubmit | null {
+  if (nav && typeof nav === 'object' && ('autoSend' in nav || 'prefill' in nav)) {
+    return nav as LandingSubmit;
+  }
+  return session;
+}
 
 export function ChatPanel(_props: { theme: 'light' | 'dark' }) {
   const { snapshot, applyJson, logError, clearErrors } = useEditor();
   const { resolved, override } = useChannel();
+  const { landing, clearLanding, resetCount } = useStudioSession();
   const location = useLocation();
   const navigate = useNavigate();
   const snapshotRef = useRef(snapshot);
@@ -37,8 +48,10 @@ export function ChatPanel(_props: { theme: 'light' | 'dark' }) {
   >(() => undefined);
   const appliedIds = useRef(new Set<string>());
   const [presented, setPresented] = useState<Record<string, string>>({});
-  const landing = location.state as LandingState | null;
-  const [input, setInput] = useState(landing?.prefill ?? '');
+  const handoff = landingOf(location.state, landing);
+  const [input, setInput] = useState(
+    () => (handoff && 'prefill' in handoff ? handoff.prefill : '') ?? '',
+  );
 
   const roles = useMemo(
     () => ({
@@ -75,12 +88,12 @@ export function ChatPanel(_props: { theme: 'light' | 'dark' }) {
           ),
         () => overrideRef.current,
       ),
-    [resolved.model],
+    [resetCount, resolved.model],
   );
 
   const { messages, onRequest, isRequesting, abort } = useXChat({
     provider,
-    conversationKey: 'editor',
+    conversationKey: `editor-${resetCount}`,
     requestPlaceholder: () => ({
       content: STREAMING_PLACEHOLDER,
       role: 'assistant',
@@ -111,25 +124,29 @@ export function ChatPanel(_props: { theme: 'light' | 'dark' }) {
   };
 
   useEffect(() => {
-    const state = location.state as LandingState | null;
-    if (!state?.autoSend && !state?.prefill) {
+    const state = landingOf(location.state, landing);
+    if (!state || (!('autoSend' in state) && !('prefill' in state))) {
       return;
     }
-    if (consumedLandingKeys.has(location.key)) {
+    const token = `${location.key}:${'autoSend' in state ? state.autoSend : state.prefill}`;
+    if (consumedLandingKeys.has(token)) {
       return;
     }
-    consumedLandingKeys.add(location.key);
-    const autoSend = state.autoSend;
+    consumedLandingKeys.add(token);
+    if ('prefill' in state && state.prefill) {
+      setInput(state.prefill);
+    }
+    clearLanding();
     navigate('.', { replace: true, state: null });
-    if (autoSend) {
-      const content = autoSend.trim();
+    if ('autoSend' in state) {
+      const content = state.autoSend.trim();
       if (content) {
         onRequestRef.current({
           messages: [{ role: 'user', content }],
         });
       }
     }
-  }, [location.key, location.state, navigate]);
+  }, [clearLanding, landing, location.key, location.state, navigate]);
 
   useEffect(() => {
     const last = messages[messages.length - 1];
