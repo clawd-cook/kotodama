@@ -1,0 +1,75 @@
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+}
+
+.editor-root {
+  height: 100vh;
+}
+
+.editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px !important;
+  line-height: 48px !important;
+  padding-inline: 16px;
+}
+
+.editor-body {
+  height: calc(100vh - 48px);
+}
+
+.sidebar,
+.inspector {
+  height: 100%;
+  overflow: auto;
+  padding: 12px;
+}
+
+.palette {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.preview-canvas {
+  height: 100%;
+  overflow: auto;
+  padding: 24px;
+}
+
+.a2ui-selectable {
+  position: relative;
+  outline: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.a2ui-selectable.is-hovered {
+  outline: 1px dashed var(--ant-color-primary, #1677ff);
+}
+
+.a2ui-selectable.is-selected {
+  outline: 2px solid var(--ant-color-primary, #1677ff);
+}
+
+.bottom-dock {
+  height: 100%;
+  padding: 0 12px;
+}
+
+.dock-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dock-log {
+  height: 220px;
+  overflow: auto;
+  margin: 0;
+  font-size: 12px;
+}
