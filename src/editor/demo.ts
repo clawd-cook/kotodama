@@ -1,5 +1,5 @@
 import { SURFACE_ID } from './snapshot';
-import { BASIC_CATALOG_ID, type A2uiComponent, type Snapshot } from './types';
+import { type A2uiComponent, BASIC_CATALOG_ID, type Snapshot } from './types';
 
 function text(
   id: string,

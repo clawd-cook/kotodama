@@ -1,8 +1,8 @@
 import { Prompts, Sender } from '@ant-design/x';
 import { Typography } from 'antd';
 import { useNavigate } from 'react-router';
-import { PROMPT_ITEMS, landingSubmit } from './landingSubmit';
 import { useChannel } from './ChannelContext';
+import { landingSubmit, PROMPT_ITEMS } from './landingSubmit';
 import { useStudioSession } from './StudioSession';
 
 export function LandingPage() {

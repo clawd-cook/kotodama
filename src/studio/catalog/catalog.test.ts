@@ -1,7 +1,7 @@
-import { BASIC_COMPONENTS } from '@a2ui/web_core/v0_9/basic_catalog';
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { BASIC_COMPONENTS } from '@a2ui/web_core/v0_9/basic_catalog';
 import { describe, expect, it } from 'vitest';
 import { applyDocument } from '../../editor/applyDocument';
 import { emptySnapshot } from '../../editor/storage';

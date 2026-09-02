@@ -1,4 +1,4 @@
-import { resolveChannel, type ChannelFields } from '../src/studio/channel';
+import { type ChannelFields, resolveChannel } from '../src/studio/channel';
 
 type NodeReq = {
   method?: string;

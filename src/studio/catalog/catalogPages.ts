@@ -103,5 +103,5 @@ export const CATALOG_PAGES: Record<CatalogName, A2uiMessage[]> = {
 };
 
 export function isCatalogName(name: string): name is CatalogName {
-  return Object.prototype.hasOwnProperty.call(CATALOG_PAGES, name);
+  return Object.hasOwn(CATALOG_PAGES, name);
 }

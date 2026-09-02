@@ -1,13 +1,13 @@
-import { Button, Modal, Typography, message } from 'antd';
+import { antdCatalog } from '@kotodama/antd-catalog';
+import { Button, Modal, message, Typography } from 'antd';
 import { Link, Navigate, useNavigate, useParams } from 'react-router';
-import { PaperPreview } from '../editor/PaperPreview';
 import { useEditor } from '../editor/EditorState';
+import { PaperPreview } from '../editor/PaperPreview';
 import { foldMessages } from '../editor/snapshot';
 import type { ExampleId } from './examples';
 import { EXAMPLE_PAGES, shouldConfirmReplace } from './examples';
 import { JsonWell } from './JsonWell';
 import { useStudioSession } from './StudioSession';
-import { antdCatalog } from '@kotodama/antd-catalog';
 
 const EXAMPLE_CARDS: {
   id: ExampleId;

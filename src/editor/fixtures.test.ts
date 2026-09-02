@@ -1,14 +1,14 @@
 import { describe, expect, it } from 'vitest';
+import { resolveChannel } from '../studio/channel';
 import { applyDocument } from './applyDocument';
 import { createDemoSnapshot } from './demo';
 import filteredList from './fixtures/filtered-list.json';
-import loginOtp from './fixtures/login-otp.json';
 import login from './fixtures/login.json';
+import loginOtp from './fixtures/login-otp.json';
 import settings from './fixtures/settings.json';
 import { foldMessages, toMessages } from './snapshot';
 import { emptySnapshot } from './storage';
 import type { A2uiComponent, Snapshot } from './types';
-import { resolveChannel } from '../studio/channel';
 
 function applyFixture(doc: unknown) {
   return applyDocument(JSON.stringify(doc), createDemoSnapshot());

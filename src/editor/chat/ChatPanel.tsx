@@ -12,8 +12,8 @@ import { useEditor } from '../EditorState';
 import { toMessages } from '../snapshot';
 import { parseChatOutput } from './parseA2ui';
 import { presentAssistant } from './presentAssistant';
-import { EditorChatProvider, textOf } from './provider';
 import { buildSystemPrompt } from './prompt';
+import { EditorChatProvider, textOf } from './provider';
 
 const consumedLandingKeys = new Set<string>();
 

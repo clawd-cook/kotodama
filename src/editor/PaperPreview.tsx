@@ -1,11 +1,11 @@
-import { A2uiSurface } from '@a2ui/react/v0_9';
 import type { ReactComponentImplementation } from '@a2ui/react/v0_9';
+import { A2uiSurface } from '@a2ui/react/v0_9';
 import {
-  MessageProcessor,
   type Catalog,
+  MessageProcessor,
   type SurfaceModel,
 } from '@a2ui/web_core/v0_9';
-import { ConfigProvider, Empty, theme as antdTheme } from 'antd';
+import { theme as antdTheme, ConfigProvider, Empty } from 'antd';
 import { useEffect, useState } from 'react';
 import { toMessages } from './snapshot';
 import type { Snapshot } from './types';

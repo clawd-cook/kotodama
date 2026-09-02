@@ -1,4 +1,4 @@
-import { SURFACE_ID, foldMessages, toMessages } from './snapshot';
+import { foldMessages, SURFACE_ID, toMessages } from './snapshot';
 import { BASIC_CATALOG_ID, type Snapshot } from './types';
 import { validateSnapshot } from './validate';
 

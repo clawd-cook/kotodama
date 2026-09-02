@@ -3,9 +3,9 @@ import xZhCN from '@ant-design/x/locale/zh_CN';
 import { theme as antdTheme } from 'antd';
 import antdZhCN from 'antd/locale/zh_CN';
 import { useEffect, useState } from 'react';
+import { StudioShell } from '../studio/StudioShell';
 import { EditorProvider } from './EditorState';
 import { loadTheme } from './storage';
-import { StudioShell } from '../studio/StudioShell';
 import './editor.css';
 
 export function EditorApp() {

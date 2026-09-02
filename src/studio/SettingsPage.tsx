@@ -1,4 +1,4 @@
-import { Button, Form, Input, Typography, message } from 'antd';
+import { Button, Form, Input, message, Typography } from 'antd';
 import { useState } from 'react';
 import { useChannel } from './ChannelContext';
 import type { ChannelFields } from './channel';

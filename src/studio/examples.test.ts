@@ -8,8 +8,8 @@ import { emptySnapshot } from '../editor/storage';
 import type { A2uiMessage } from '../editor/types';
 import {
   EXAMPLE_PAGES,
-  shouldConfirmReplace,
   type ExampleId,
+  shouldConfirmReplace,
 } from './examples';
 
 const FIXTURES: Record<ExampleId, A2uiMessage[]> = {

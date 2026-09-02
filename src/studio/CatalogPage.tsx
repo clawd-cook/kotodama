@@ -1,16 +1,16 @@
+import { antdCatalog } from '@kotodama/antd-catalog';
 import { Menu, Table, Typography } from 'antd';
 import { Navigate, useNavigate, useParams } from 'react-router';
 import { PaperPreview } from '../editor/PaperPreview';
 import { foldMessages } from '../editor/snapshot';
-import { catalogPropertyNames } from './catalog/catalogPropertyNames';
 import {
   CATALOG_BLURBS,
   CATALOG_GROUPS,
   CATALOG_PAGES,
   isCatalogName,
 } from './catalog/catalogPages';
+import { catalogPropertyNames } from './catalog/catalogPropertyNames';
 import { JsonWell } from './JsonWell';
-import { antdCatalog } from '@kotodama/antd-catalog';
 
 export function CatalogPage({ theme }: { theme: 'light' | 'dark' }) {
   const { component = 'Column' } = useParams();

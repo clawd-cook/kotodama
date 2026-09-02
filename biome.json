@@ -27,19 +27,19 @@
   "files": {
     "includes": [
       "**",
-      "!**/.agents/**",
-      "!**/dist/**",
-      "!**/node_modules/**",
-      "!**/build/**",
-      "!**/coverage/**",
-      "!**/dist/**",
-      "!**/node_modules/**",
-      "!**/submodules/**",
-      "!**/test/**",
-      "!**/tests/**",
-      "!**/tmp/**",
-      "!**/vendor/**",
-      "!**/tmp/**"
+      "!**/.agents",
+      "!**/dist",
+      "!**/node_modules",
+      "!**/build",
+      "!**/coverage",
+      "!**/dist",
+      "!**/node_modules",
+      "!**/submodules",
+      "!**/test",
+      "!**/tests",
+      "!**/tmp",
+      "!**/vendor",
+      "!**/tmp"
     ]
   }
 }

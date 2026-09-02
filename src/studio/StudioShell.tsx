@@ -10,9 +10,9 @@ import {
   Layout,
   Menu,
   Modal,
+  message,
   Space,
   Switch,
-  message,
 } from 'antd';
 import { useRef } from 'react';
 import {
@@ -25,15 +25,15 @@ import {
 } from 'react-router';
 import { EditorShell } from '../editor/EditorShell';
 import { useEditor } from '../editor/EditorState';
-import { isCurrentPage, saveTheme } from '../editor/storage';
 import { toMessages } from '../editor/snapshot';
+import { isCurrentPage, saveTheme } from '../editor/storage';
 import { CatalogPage } from './CatalogPage';
 import { ChannelProvider } from './ChannelContext';
+import { createScreen } from './createScreen';
 import { ExampleDetailPage, ExamplesPage } from './ExamplesPage';
 import { LandingPage } from './LandingPage';
 import { SettingsPage } from './SettingsPage';
 import { StudioSessionProvider, useStudioSession } from './StudioSession';
-import { createScreen } from './createScreen';
 import './studio.css';
 
 const RAIL = [

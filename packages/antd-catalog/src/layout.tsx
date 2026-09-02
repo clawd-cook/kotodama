@@ -10,9 +10,9 @@ import {
 } from '@a2ui/web_core/v0_9/basic_catalog';
 import {
   Card as AntCard,
+  List as AntList,
   Divider,
   Flex,
-  List as AntList,
   Modal,
   Tabs,
 } from 'antd';

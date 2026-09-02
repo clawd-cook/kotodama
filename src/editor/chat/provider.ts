@@ -1,6 +1,9 @@
+import type {
+  XModelMessage,
+  XModelParams,
+  XRequestOptions,
+} from '@ant-design/x-sdk';
 import { OpenAIChatProvider } from '@ant-design/x-sdk';
-import type { XModelMessage, XModelParams } from '@ant-design/x-sdk';
-import type { XRequestOptions } from '@ant-design/x-sdk';
 
 export class EditorChatProvider extends OpenAIChatProvider {
   constructor(

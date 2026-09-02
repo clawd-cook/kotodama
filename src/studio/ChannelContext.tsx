@@ -1,6 +1,6 @@
 import {
-  type ReactNode,
   createContext,
+  type ReactNode,
   useCallback,
   useContext,
   useEffect,
@@ -9,10 +9,10 @@ import {
 } from 'react';
 import {
   type ChannelFields,
-  type ResolvedChannel,
   channelOverride,
   emptyChannel,
   loadChannel,
+  type ResolvedChannel,
   resolveChannel,
   saveChannel,
 } from './channel';
