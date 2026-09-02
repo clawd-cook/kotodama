@@ -1,0 +1,51 @@
+[
+  {
+    "version": "v0.9",
+    "createSurface": {
+      "surfaceId": "main",
+      "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+      "sendDataModel": true
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateComponents": {
+      "surfaceId": "main",
+      "components": [
+        {
+          "id": "root",
+          "component": "Modal",
+          "trigger": "open",
+          "content": "body"
+        },
+        {
+          "id": "open",
+          "component": "Button",
+          "child": "open_label",
+          "variant": "default",
+          "action": { "event": { "name": "open" } }
+        },
+        {
+          "id": "open_label",
+          "component": "Text",
+          "text": { "path": "/openLabel" },
+          "variant": "body"
+        },
+        {
+          "id": "body",
+          "component": "Text",
+          "text": { "path": "/body" },
+          "variant": "body"
+        }
+      ]
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateDataModel": {
+      "surfaceId": "main",
+      "path": "/",
+      "value": { "openLabel": "打开", "body": "一层内容" }
+    }
+  }
+]

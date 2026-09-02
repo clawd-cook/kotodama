@@ -1,0 +1,39 @@
+[
+  {
+    "version": "v0.9",
+    "createSurface": {
+      "surfaceId": "main",
+      "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+      "sendDataModel": true
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateComponents": {
+      "surfaceId": "main",
+      "components": [
+        {
+          "id": "root",
+          "component": "Button",
+          "child": "label",
+          "variant": "primary",
+          "action": { "event": { "name": "press" } }
+        },
+        {
+          "id": "label",
+          "component": "Text",
+          "text": { "path": "/label" },
+          "variant": "body"
+        }
+      ]
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateDataModel": {
+      "surfaceId": "main",
+      "path": "/",
+      "value": { "label": "确定" }
+    }
+  }
+]

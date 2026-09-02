@@ -1,0 +1,37 @@
+[
+  {
+    "version": "v0.9",
+    "createSurface": {
+      "surfaceId": "main",
+      "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+      "sendDataModel": true
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateComponents": {
+      "surfaceId": "main",
+      "components": [
+        {
+          "id": "root",
+          "component": "ChoicePicker",
+          "label": "状态",
+          "variant": "mutuallyExclusive",
+          "options": [
+            { "label": "全部", "value": "all" },
+            { "label": "进行中", "value": "open" }
+          ],
+          "value": { "path": "/filter" }
+        }
+      ]
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateDataModel": {
+      "surfaceId": "main",
+      "path": "/",
+      "value": { "filter": ["all"] }
+    }
+  }
+]

@@ -1,0 +1,39 @@
+[
+  {
+    "version": "v0.9",
+    "createSurface": {
+      "surfaceId": "main",
+      "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+      "sendDataModel": true
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateComponents": {
+      "surfaceId": "main",
+      "components": [
+        {
+          "id": "root",
+          "component": "Column",
+          "children": ["label"],
+          "justify": "start",
+          "align": "stretch"
+        },
+        {
+          "id": "label",
+          "component": "Text",
+          "text": { "path": "/label" },
+          "variant": "body"
+        }
+      ]
+    }
+  },
+  {
+    "version": "v0.9",
+    "updateDataModel": {
+      "surfaceId": "main",
+      "path": "/",
+      "value": { "label": "从上到下排" }
+    }
+  }
+]
