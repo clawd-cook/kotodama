@@ -17,3 +17,4 @@
 [submodule "submodules/ant-design/ant-design"]
 	path = submodules/ant-design/ant-design
 	url = https://github.com/ant-design/ant-design.git
+	depth = 1
