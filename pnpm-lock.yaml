@@ -141,6 +141,9 @@ importers:
 
   .:
     dependencies:
+      element-plus:
+        specifier: ^2.14.5
+        version: 2.14.5(vue@3.5.42(typescript@5.9.3))
       pinia:
         specifier: ^3.0.4
         version: 3.0.4(typescript@5.9.3)(vue@3.5.42(typescript@5.9.3))
@@ -669,6 +672,10 @@ packages:
     resolution: {integrity: sha1-eYozlQ0RImoOu2rK+mD1WUQkln8=, tarball: http://registry.m.jd.com/@csstools/css-tokenizer/download/@csstools/css-tokenizer-4.0.0.tgz}
     engines: {node: '>=20.19.0'}
 
+  '@ctrl/tinycolor@4.2.0':
+    resolution: {integrity: sha1-ul0LkXMDwLPTwUxIZc3G3tJawF8=, tarball: http://registry.m.jd.com/@ctrl/tinycolor/download/@ctrl/tinycolor-4.2.0.tgz}
+    engines: {node: '>=14'}
+
   '@edge-runtime/primitives@6.0.0':
     resolution: {integrity: sha1-fKWREWBdcrZ4m1Xm2cJkr7ZWpbE=, tarball: http://registry.m.jd.com/@edge-runtime/primitives/download/@edge-runtime/primitives-6.0.0.tgz}
     engines: {node: '>=18'}
@@ -676,6 +683,11 @@ packages:
   '@edge-runtime/vm@5.0.0':
     resolution: {integrity: sha1-DbVmBxJSSLtY1TRwpDiMc45Pm/Q=, tarball: http://registry.m.jd.com/@edge-runtime/vm/download/@edge-runtime/vm-5.0.0.tgz}
     engines: {node: '>=18'}
+
+  '@element-plus/icons-vue@2.3.2':
+    resolution: {integrity: sha1-fpyyMftziyBW8z4iw6KeIUtTjc8=, tarball: http://registry.m.jd.com/@element-plus/icons-vue/download/@element-plus/icons-vue-2.3.2.tgz}
+    peerDependencies:
+      vue: ^3.2.0
 
   '@emnapi/core@1.11.3':
     resolution: {integrity: sha1-XpU0ikLNHgbwuao4DNdAkdqk1SA=, tarball: http://registry.m.jd.com/@emnapi/core/download/@emnapi/core-1.11.3.tgz}
@@ -1041,6 +1053,15 @@ packages:
     engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0}
     peerDependencies:
       '@noble/hashes': ^1.8.0 || ^2.0.0
+
+  '@floating-ui/core@1.8.0':
+    resolution: {integrity: sha1-0BwLvqAuSlf2/X1d5vwsXH3KQOE=, tarball: http://registry.m.jd.com/@floating-ui/core/download/@floating-ui/core-1.8.0.tgz}
+
+  '@floating-ui/dom@1.8.0':
+    resolution: {integrity: sha1-iiDm+sviRWr9vrbIuWinLfaJz2M=, tarball: http://registry.m.jd.com/@floating-ui/dom/download/@floating-ui/dom-1.8.0.tgz}
+
+  '@floating-ui/utils@0.2.12':
+    resolution: {integrity: sha1-r+/nhZSfFqxM3R5pWTWjIVct1Wo=, tarball: http://registry.m.jd.com/@floating-ui/utils/download/@floating-ui/utils-0.2.12.tgz}
 
   '@hapi/hoek@9.3.0':
     resolution: {integrity: sha1-g2iGnctzW+Ln9ct2R9544WeiUfs=, tarball: http://registry.m.jd.com/@hapi/hoek/download/@hapi/hoek-9.3.0.tgz}
@@ -1720,6 +1741,9 @@ packages:
     peerDependencies:
       eslint: ^9.0.0 || ^10.0.0
 
+  '@sxzz/popperjs-es@2.11.8':
+    resolution: {integrity: sha1-r4L/Xs0OxYdNPyNW25IiPuxdhmE=, tarball: http://registry.m.jd.com/@sxzz/popperjs-es/download/@sxzz/popperjs-es-2.11.8.tgz}
+
   '@testing-library/dom@10.4.1':
     resolution: {integrity: sha1-1ET4qInppG6aO087iOD8s++2z5U=, tarball: http://registry.m.jd.com/@testing-library/dom/download/@testing-library/dom-10.4.1.tgz}
     engines: {node: '>=18'}
@@ -1787,6 +1811,12 @@ packages:
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha1-WWoXRyM2lNUPatinhp/Lb1bPWEE=, tarball: http://registry.m.jd.com/@types/json-schema/download/@types/json-schema-7.0.15.tgz}
 
+  '@types/lodash-es@4.17.12':
+    resolution: {integrity: sha1-ZfbR5fgFOap8+/yWLeXe8M9PNBs=, tarball: http://registry.m.jd.com/@types/lodash-es/download/@types/lodash-es-4.17.12.tgz}
+
+  '@types/lodash@4.17.25':
+    resolution: {integrity: sha1-aXZax7zdsOsHKWHPKSUkqPWzwsA=, tarball: http://registry.m.jd.com/@types/lodash/download/@types/lodash-4.17.25.tgz}
+
   '@types/node@20.19.43':
     resolution: {integrity: sha1-/Oz1gLpCoNtVz0BMNyyXlzw3bJc=, tarball: http://registry.m.jd.com/@types/node/download/@types/node-20.19.43.tgz}
 
@@ -1810,6 +1840,9 @@ packages:
 
   '@types/tough-cookie@4.0.5':
     resolution: {integrity: sha1-y24qaRtwyxd8bjrpwdLosuqM0wQ=, tarball: http://registry.m.jd.com/@types/tough-cookie/download/@types/tough-cookie-4.0.5.tgz}
+
+  '@types/web-bluetooth@0.0.21':
+    resolution: {integrity: sha1-UlQzx4Su2bRXqqDuPZKutx80a2M=, tarball: http://registry.m.jd.com/@types/web-bluetooth/download/@types/web-bluetooth-0.0.21.tgz}
 
   '@types/whatwg-mimetype@3.0.2':
     resolution: {integrity: sha1-5eBtzT6S1OYi7wEpY3cH1mwo1qQ=, tarball: http://registry.m.jd.com/@types/whatwg-mimetype/download/@types/whatwg-mimetype-3.0.2.tgz}
@@ -2114,6 +2147,19 @@ packages:
       typescript: 5.x
       vue: ^3.4.0
 
+  '@vueuse/core@14.4.0':
+    resolution: {integrity: sha1-qEHaazx9VIve7Vv2Eec/PeYtIPo=, tarball: http://registry.m.jd.com/@vueuse/core/download/@vueuse/core-14.4.0.tgz}
+    peerDependencies:
+      vue: ^3.5.0
+
+  '@vueuse/metadata@14.4.0':
+    resolution: {integrity: sha1-olCEmbgDusFHdanJuFK4c4/Bb5g=, tarball: http://registry.m.jd.com/@vueuse/metadata/download/@vueuse/metadata-14.4.0.tgz}
+
+  '@vueuse/shared@14.4.0':
+    resolution: {integrity: sha1-TomBPHhZ0VPUjAPXS/94c5+Wcjs=, tarball: http://registry.m.jd.com/@vueuse/shared/download/@vueuse/shared-14.4.0.tgz}
+    peerDependencies:
+      vue: ^3.5.0
+
   '@wdio/config@9.29.1':
     resolution: {integrity: sha1-qhcNj3WSY01Gf/zW2H75En448RA=, tarball: http://registry.m.jd.com/@wdio/config/download/@wdio/config-9.29.1.tgz}
     engines: {node: '>=18.20.0'}
@@ -2270,6 +2316,9 @@ packages:
 
   async-limiter@1.0.1:
     resolution: {integrity: sha1-3TeelPDbgxCwgpH51kwyCXZmF/0=, tarball: http://registry.m.jd.com/async-limiter/download/async-limiter-1.0.1.tgz}
+
+  async-validator@4.2.5:
+    resolution: {integrity: sha1-yW6jMypSFpnQr6rO7VEKVGVsYzk=, tarball: http://registry.m.jd.com/async-validator/download/async-validator-4.2.5.tgz}
 
   async@3.2.6:
     resolution: {integrity: sha1-Gwco4Ukp1RuFtEm38G4nwRReOM4=, tarball: http://registry.m.jd.com/async/download/async-3.2.6.tgz}
@@ -2838,6 +2887,11 @@ packages:
 
   electron-to-chromium@1.5.418:
     resolution: {integrity: sha1-QMy/bVckR2YwQWEeBZJLU7yaAzE=, tarball: http://registry.m.jd.com/electron-to-chromium/download/electron-to-chromium-1.5.418.tgz}
+
+  element-plus@2.14.5:
+    resolution: {integrity: sha1-R2kV9kcO8Siwf/6+mCh2rwDwIro=, tarball: http://registry.m.jd.com/element-plus/download/element-plus-2.14.5.tgz}
+    peerDependencies:
+      vue: ^3.3.7
 
   emoji-regex@10.6.0:
     resolution: {integrity: sha1-vz1uj3+P0ipl2XA0dbwBRzV6aw0=, tarball: http://registry.m.jd.com/emoji-regex/download/emoji-regex-10.6.0.tgz}
@@ -3774,6 +3828,16 @@ packages:
     resolution: {integrity: sha1-VTIeswn+u8WcSAHZMackUqaB0oY=, tarball: http://registry.m.jd.com/locate-path/download/locate-path-6.0.0.tgz}
     engines: {node: '>=10'}
 
+  lodash-es@4.18.1:
+    resolution: {integrity: sha1-uWLuuA2dmDqQC/NClh+3QYyhCx0=, tarball: http://registry.m.jd.com/lodash-es/download/lodash-es-4.18.1.tgz}
+
+  lodash-unified@1.0.3:
+    resolution: {integrity: sha1-gLHqwQ7S6wLtGJ8IYUopwn0HyJQ=, tarball: http://registry.m.jd.com/lodash-unified/download/lodash-unified-1.0.3.tgz}
+    peerDependencies:
+      '@types/lodash-es': '*'
+      lodash: '*'
+      lodash-es: '*'
+
   lodash.clonedeep@4.5.0:
     resolution: {integrity: sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=, tarball: http://registry.m.jd.com/lodash.clonedeep/download/lodash.clonedeep-4.5.0.tgz}
 
@@ -3862,6 +3926,9 @@ packages:
 
   memoize-one@5.2.1:
     resolution: {integrity: sha1-gzeqPEM1WBg57AHD1ZQJDOvo8A4=, tarball: http://registry.m.jd.com/memoize-one/download/memoize-one-5.2.1.tgz}
+
+  memoize-one@6.0.0:
+    resolution: {integrity: sha1-slkbhx7YKUiu5HJ9xqvO7qyMEEU=, tarball: http://registry.m.jd.com/memoize-one/download/memoize-one-6.0.0.tgz}
 
   memorystream@0.3.1:
     resolution: {integrity: sha1-htcJCzDORV1j+64S3aUaR93K+bI=, tarball: http://registry.m.jd.com/memorystream/download/memorystream-0.3.1.tgz}
@@ -4109,6 +4176,9 @@ packages:
   normalize-path@3.0.0:
     resolution: {integrity: sha1-Dc1p/yOhybEf0JeDFmRKA4ghamU=, tarball: http://registry.m.jd.com/normalize-path/download/normalize-path-3.0.0.tgz}
     engines: {node: '>=0.10.0'}
+
+  normalize-wheel-es@1.2.0:
+    resolution: {integrity: sha1-D6JZPWGfckWlQWUmGRBasHas8J4=, tarball: http://registry.m.jd.com/normalize-wheel-es/download/normalize-wheel-es-1.2.0.tgz}
 
   npm-normalize-package-bin@4.0.0:
     resolution: {integrity: sha1-33nnDNChE7d8AtH+JDyWuOYYrLE=, tarball: http://registry.m.jd.com/npm-normalize-package-bin/download/npm-normalize-package-bin-4.0.0.tgz}
@@ -6096,11 +6166,17 @@ snapshots:
 
   '@csstools/css-tokenizer@4.0.0': {}
 
+  '@ctrl/tinycolor@4.2.0': {}
+
   '@edge-runtime/primitives@6.0.0': {}
 
   '@edge-runtime/vm@5.0.0':
     dependencies:
       '@edge-runtime/primitives': 6.0.0
+
+  '@element-plus/icons-vue@2.3.2(vue@3.5.42(typescript@5.9.3))':
+    dependencies:
+      vue: 3.5.42(typescript@5.9.3)
 
   '@emnapi/core@1.11.3':
     dependencies:
@@ -6323,6 +6399,17 @@ snapshots:
   '@exodus/bytes@1.15.1(@noble/hashes@2.4.0)':
     dependencies:
       '@noble/hashes': 2.4.0
+
+  '@floating-ui/core@1.8.0':
+    dependencies:
+      '@floating-ui/utils': 0.2.12
+
+  '@floating-ui/dom@1.8.0':
+    dependencies:
+      '@floating-ui/core': 1.8.0
+      '@floating-ui/utils': 0.2.12
+
+  '@floating-ui/utils@0.2.12': {}
 
   '@hapi/hoek@9.3.0': {}
 
@@ -7068,6 +7155,8 @@ snapshots:
       estraverse: 5.3.0
       picomatch: 4.0.7
 
+  '@sxzz/popperjs-es@2.11.8': {}
+
   '@testing-library/dom@10.4.1':
     dependencies:
       '@babel/code-frame': 7.29.7
@@ -7153,6 +7242,12 @@ snapshots:
 
   '@types/json-schema@7.0.15': {}
 
+  '@types/lodash-es@4.17.12':
+    dependencies:
+      '@types/lodash': 4.17.25
+
+  '@types/lodash@4.17.25': {}
+
   '@types/node@20.19.43':
     dependencies:
       undici-types: 6.21.0
@@ -7176,6 +7271,8 @@ snapshots:
   '@types/statuses@2.0.6': {}
 
   '@types/tough-cookie@4.0.5': {}
+
+  '@types/web-bluetooth@0.0.21': {}
 
   '@types/whatwg-mimetype@3.0.2': {}
 
@@ -7226,8 +7323,8 @@ snapshots:
 
   '@typescript-eslint/project-service@8.68.0(supports-color@8.1.1)(typescript@5.9.3)':
     dependencies:
-      '@typescript-eslint/tsconfig-utils': 8.68.0(typescript@5.9.3)
-      '@typescript-eslint/types': 8.68.0
+      '@typescript-eslint/tsconfig-utils': 8.69.0(typescript@5.9.3)
+      '@typescript-eslint/types': 8.69.0
       debug: 4.4.3(supports-color@8.1.1)
       typescript: 5.9.3
     transitivePeerDependencies:
@@ -7668,6 +7765,19 @@ snapshots:
       typescript: 5.9.3
       vue: 3.5.42(typescript@5.9.3)
 
+  '@vueuse/core@14.4.0(vue@3.5.42(typescript@5.9.3))':
+    dependencies:
+      '@types/web-bluetooth': 0.0.21
+      '@vueuse/metadata': 14.4.0
+      '@vueuse/shared': 14.4.0(vue@3.5.42(typescript@5.9.3))
+      vue: 3.5.42(typescript@5.9.3)
+
+  '@vueuse/metadata@14.4.0': {}
+
+  '@vueuse/shared@14.4.0(vue@3.5.42(typescript@5.9.3))':
+    dependencies:
+      vue: 3.5.42(typescript@5.9.3)
+
   '@wdio/config@9.29.1(bare-abort-controller@1.1.2)(bare-buffer@3.7.0)(react-native-b4a@0.1.0(react-native@0.86.2(@babel/core@7.29.7(supports-color@8.1.1))(@react-native-community/cli@20.2.0(bufferutil@4.1.0)(supports-color@8.1.1)(typescript@5.9.3)(utf-8-validate@6.0.6))(@react-native/jest-preset@0.86.2(@babel/core@7.29.7(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1))(@react-native/metro-config@0.86.2(@babel/core@7.29.7(supports-color@8.1.1))(bufferutil@4.1.0)(supports-color@8.1.1)(utf-8-validate@6.0.6))(@types/react@19.2.18)(bufferutil@4.1.0)(react@19.2.8)(supports-color@8.1.1)(utf-8-validate@6.0.6))(react@19.2.8))(supports-color@8.1.1)':
     dependencies:
       '@wdio/logger': 9.29.1
@@ -7850,6 +7960,8 @@ snapshots:
   astral-regex@1.0.0: {}
 
   async-limiter@1.0.1: {}
+
+  async-validator@4.2.5: {}
 
   async@3.2.6: {}
 
@@ -8477,6 +8589,25 @@ snapshots:
   ee-first@1.1.1: {}
 
   electron-to-chromium@1.5.418: {}
+
+  element-plus@2.14.5(vue@3.5.42(typescript@5.9.3)):
+    dependencies:
+      '@ctrl/tinycolor': 4.2.0
+      '@element-plus/icons-vue': 2.3.2(vue@3.5.42(typescript@5.9.3))
+      '@floating-ui/dom': 1.8.0
+      '@popperjs/core': '@sxzz/popperjs-es@2.11.8'
+      '@types/lodash': 4.17.25
+      '@types/lodash-es': 4.17.12
+      '@vueuse/core': 14.4.0(vue@3.5.42(typescript@5.9.3))
+      async-validator: 4.2.5
+      dayjs: 1.11.23
+      lodash: 4.18.1
+      lodash-es: 4.18.1
+      lodash-unified: 1.0.3(@types/lodash-es@4.17.12)(lodash-es@4.18.1)(lodash@4.18.1)
+      memoize-one: 6.0.0
+      normalize-wheel-es: 1.2.0
+      vue: 3.5.42(typescript@5.9.3)
+      vue-component-type-helpers: 3.3.11
 
   emoji-regex@10.6.0: {}
 
@@ -9528,6 +9659,14 @@ snapshots:
     dependencies:
       p-locate: 5.0.0
 
+  lodash-es@4.18.1: {}
+
+  lodash-unified@1.0.3(@types/lodash-es@4.17.12)(lodash-es@4.18.1)(lodash@4.18.1):
+    dependencies:
+      '@types/lodash-es': 4.17.12
+      lodash: 4.18.1
+      lodash-es: 4.18.1
+
   lodash.clonedeep@4.5.0: {}
 
   lodash.debounce@4.0.8: {}
@@ -9601,6 +9740,8 @@ snapshots:
   media-typer@1.1.1: {}
 
   memoize-one@5.2.1: {}
+
+  memoize-one@6.0.0: {}
 
   memorystream@0.3.1: {}
 
@@ -9924,6 +10065,8 @@ snapshots:
       abbrev: 5.0.0
 
   normalize-path@3.0.0: {}
+
+  normalize-wheel-es@1.2.0: {}
 
   npm-normalize-package-bin@4.0.0: {}
 
