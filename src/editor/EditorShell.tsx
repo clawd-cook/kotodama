@@ -1,5 +1,5 @@
 import { Button, Layout, Space, Splitter, Switch, Typography } from 'antd';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BottomDock } from './BottomDock';
 import { useEditor } from './EditorState';
 import { Inspector } from './Inspector';
@@ -23,9 +23,13 @@ export function EditorShell({
     removeSelected,
     duplicateSelected,
   } = useEditor();
+  const [resetCount, setResetCount] = useState(0);
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
+      if (isTypingTarget(event.target)) {
+        return;
+      }
       const meta = event.metaKey || event.ctrlKey;
       if (meta && event.key.toLowerCase() === 'z') {
         event.preventDefault();
@@ -35,10 +39,7 @@ export function EditorShell({
           undo();
         }
       }
-      if (
-        (event.key === 'Delete' || event.key === 'Backspace') &&
-        !isTypingTarget(event.target)
-      ) {
+      if (event.key === 'Delete' || event.key === 'Backspace') {
         removeSelected();
       }
       if (meta && event.key.toLowerCase() === 'd') {
@@ -63,7 +64,13 @@ export function EditorShell({
           <Button size="small" onClick={redo} disabled={!canRedo}>
             重做
           </Button>
-          <Button size="small" onClick={reset}>
+          <Button
+            size="small"
+            onClick={() => {
+              reset();
+              setResetCount((count) => count + 1);
+            }}
+          >
             新建
           </Button>
           <span>暗色</span>
@@ -81,8 +88,8 @@ export function EditorShell({
       >
         <Splitter.Panel>
           <Splitter>
-            <Splitter.Panel defaultSize={260} min={200}>
-              <Sidebar />
+            <Splitter.Panel defaultSize={360} min={240}>
+              <Sidebar resetCount={resetCount} theme={theme} />
             </Splitter.Panel>
             <Splitter.Panel min={280}>
               <PreviewPane />

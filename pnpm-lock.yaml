@@ -17,6 +17,18 @@ importers:
       '@ant-design/icons':
         specifier: 6.3.2
         version: 6.3.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@ant-design/x':
+        specifier: ^2.9.0
+        version: 2.9.0(antd@6.6.1(date-fns@4.4.0)(luxon@3.7.2)(moment@2.30.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@ant-design/x-card':
+        specifier: ^2.5.0
+        version: 2.5.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@ant-design/x-markdown':
+        specifier: ^2.9.0
+        version: 2.9.0(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@ant-design/x-sdk':
+        specifier: ^2.9.0
+        version: 2.9.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@kotodama/antd-catalog':
         specifier: workspace:*
         version: link:packages/antd-catalog
@@ -163,6 +175,34 @@ packages:
       react: ^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
+  '@ant-design/x-card@2.5.0':
+    resolution: {integrity: sha1-QjwPZafNtLBMeyH7bwKZS8T1jNM=, tarball: http://registry.m.jd.com/@ant-design/x-card/download/@ant-design/x-card-2.5.0.tgz}
+    peerDependencies:
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
+
+  '@ant-design/x-markdown@2.9.0':
+    resolution: {integrity: sha1-AfSQHEGwNmDdfrSaCmfkPBQl+YU=, tarball: http://registry.m.jd.com/@ant-design/x-markdown/download/@ant-design/x-markdown-2.9.0.tgz}
+    peerDependencies:
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
+
+  '@ant-design/x-sdk@2.9.0':
+    resolution: {integrity: sha1-I3alC5t1MNFWjqhf6xZ3OEBDA/s=, tarball: http://registry.m.jd.com/@ant-design/x-sdk/download/@ant-design/x-sdk-2.9.0.tgz}
+    peerDependencies:
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
+
+  '@ant-design/x@2.9.0':
+    resolution: {integrity: sha1-8Geo39zwiO/RZOBYmHLjHnsW5I8=, tarball: http://registry.m.jd.com/@ant-design/x/download/@ant-design/x-2.9.0.tgz}
+    peerDependencies:
+      antd: ^6.1.1
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
+
+  '@antfu/install-pkg@1.1.0':
+    resolution: {integrity: sha1-ePoDa+GmCBtad6XPWfUMd1K2uiY=, tarball: http://registry.m.jd.com/@antfu/install-pkg/download/@antfu/install-pkg-1.1.0.tgz}
+
   '@babel/runtime@7.29.7':
     resolution: {integrity: sha1-EgIkUMRaTabY2Ch7GKT/Ldsj92g=, tarball: http://registry.m.jd.com/@babel/runtime/download/@babel/runtime-7.29.7.tgz}
     engines: {node: '>=6.9.0'}
@@ -181,6 +221,12 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@braintree/sanitize-url@7.1.2':
+    resolution: {integrity: sha1-yiA1sP7+lWqGdv8Maa9z5gX82B8=, tarball: http://registry.m.jd.com/@braintree/sanitize-url/download/@braintree/sanitize-url-7.1.2.tgz}
+
+  '@chevrotain/types@11.1.2':
+    resolution: {integrity: sha1-6DoaJwTwxeSedZKyFAMaD0o01+U=, tarball: http://registry.m.jd.com/@chevrotain/types/download/@chevrotain/types-11.1.2.tgz}
+
   '@emnapi/core@1.11.3':
     resolution: {integrity: sha1-XpU0ikLNHgbwuao4DNdAkdqk1SA=, tarball: http://registry.m.jd.com/@emnapi/core/download/@emnapi/core-1.11.3.tgz}
 
@@ -195,6 +241,15 @@ packages:
 
   '@emotion/unitless@0.7.5':
     resolution: {integrity: sha1-dyESkcGQCnALinjPr9oxYNdpSe0=, tarball: http://registry.m.jd.com/@emotion/unitless/download/@emotion/unitless-0.7.5.tgz}
+
+  '@iconify/types@2.0.0':
+    resolution: {integrity: sha1-qw6epoHWyKEhTzDNdB/jogzFf1c=, tarball: http://registry.m.jd.com/@iconify/types/download/@iconify/types-2.0.0.tgz}
+
+  '@iconify/utils@3.1.4':
+    resolution: {integrity: sha1-BNrQFOjtgLG740H10JAFnqDGBXg=, tarball: http://registry.m.jd.com/@iconify/utils/download/@iconify/utils-3.1.4.tgz}
+
+  '@mermaid-js/parser@1.2.1':
+    resolution: {integrity: sha1-lMxAQWE3uxDSvBsKScYj1xbnYjM=, tarball: http://registry.m.jd.com/@mermaid-js/parser/download/@mermaid-js/parser-1.2.1.tgz}
 
   '@module-federation/error-codes@0.22.0':
     resolution: {integrity: sha1-MczJkNwkDXORK6e9AB9+Nax1GZI=, tarball: http://registry.m.jd.com/@module-federation/error-codes/download/@module-federation/error-codes-0.22.0.tgz}
@@ -648,6 +703,108 @@ packages:
   '@tybys/wasm-util@0.10.3':
     resolution: {integrity: sha1-AVy6np3UfOFNA9KoxdVHv7FpZl0=, tarball: http://registry.m.jd.com/@tybys/wasm-util/download/@tybys/wasm-util-0.10.3.tgz}
 
+  '@types/d3-array@3.2.2':
+    resolution: {integrity: sha1-4CFRRk0C1KG0RkbQ/NuT+viP3ow=, tarball: http://registry.m.jd.com/@types/d3-array/download/@types/d3-array-3.2.2.tgz}
+
+  '@types/d3-axis@3.0.6':
+    resolution: {integrity: sha1-52DldluBiLHe+jK8i7YGL4Hkx5U=, tarball: http://registry.m.jd.com/@types/d3-axis/download/@types/d3-axis-3.0.6.tgz}
+
+  '@types/d3-brush@3.0.6':
+    resolution: {integrity: sha1-wvQ2KwRdRy4bGGzb7DKbpSva7mw=, tarball: http://registry.m.jd.com/@types/d3-brush/download/@types/d3-brush-3.0.6.tgz}
+
+  '@types/d3-chord@3.0.6':
+    resolution: {integrity: sha1-FwbKQM9+pZoK3Y9EVu//j4d1eT0=, tarball: http://registry.m.jd.com/@types/d3-chord/download/@types/d3-chord-3.0.6.tgz}
+
+  '@types/d3-color@3.1.3':
+    resolution: {integrity: sha1-NoyWGhjech2oIA6AvzlD+1MTavI=, tarball: http://registry.m.jd.com/@types/d3-color/download/@types/d3-color-3.1.3.tgz}
+
+  '@types/d3-contour@3.0.6':
+    resolution: {integrity: sha1-mto/qcTQDjpQk/7QNWx6uSlgQjE=, tarball: http://registry.m.jd.com/@types/d3-contour/download/@types/d3-contour-3.0.6.tgz}
+
+  '@types/d3-delaunay@6.0.4':
+    resolution: {integrity: sha1-GFwagMyAf92io/6WD3wRxKJ5UuE=, tarball: http://registry.m.jd.com/@types/d3-delaunay/download/@types/d3-delaunay-6.0.4.tgz}
+
+  '@types/d3-dispatch@3.0.7':
+    resolution: {integrity: sha1-7wBNihKARs/OQ00XGC+DTkTvlbI=, tarball: http://registry.m.jd.com/@types/d3-dispatch/download/@types/d3-dispatch-3.0.7.tgz}
+
+  '@types/d3-drag@3.0.7':
+    resolution: {integrity: sha1-sTq6iyRCtAaMmp5tHYL4vOp3/AI=, tarball: http://registry.m.jd.com/@types/d3-drag/download/@types/d3-drag-3.0.7.tgz}
+
+  '@types/d3-dsv@3.0.7':
+    resolution: {integrity: sha1-CjUfmW3Jmzf0+li0ksLRwE49rBc=, tarball: http://registry.m.jd.com/@types/d3-dsv/download/@types/d3-dsv-3.0.7.tgz}
+
+  '@types/d3-ease@3.0.2':
+    resolution: {integrity: sha1-4o2xv7+mFwdvd3DdHZpI6qO2xRs=, tarball: http://registry.m.jd.com/@types/d3-ease/download/@types/d3-ease-3.0.2.tgz}
+
+  '@types/d3-fetch@3.0.7':
+    resolution: {integrity: sha1-wEorTyMYGqN28wrwKD28eztWmYA=, tarball: http://registry.m.jd.com/@types/d3-fetch/download/@types/d3-fetch-3.0.7.tgz}
+
+  '@types/d3-force@3.0.10':
+    resolution: {integrity: sha1-bcj8bh81cE87BXCQvu63rGdL/xo=, tarball: http://registry.m.jd.com/@types/d3-force/download/@types/d3-force-3.0.10.tgz}
+
+  '@types/d3-format@3.0.4':
+    resolution: {integrity: sha1-seRGVkTds/3zomP+uyQKbNYW3pA=, tarball: http://registry.m.jd.com/@types/d3-format/download/@types/d3-format-3.0.4.tgz}
+
+  '@types/d3-geo@3.1.1':
+    resolution: {integrity: sha1-nig68XlgHFSVgWALP+wllBkRMp0=, tarball: http://registry.m.jd.com/@types/d3-geo/download/@types/d3-geo-3.1.1.tgz}
+
+  '@types/d3-hierarchy@3.1.7':
+    resolution: {integrity: sha1-YCP7Oy1GMiny1oD5rEtHRm9x8Xs=, tarball: http://registry.m.jd.com/@types/d3-hierarchy/download/@types/d3-hierarchy-3.1.7.tgz}
+
+  '@types/d3-interpolate@3.0.4':
+    resolution: {integrity: sha1-QSuQ6EhwKF8v+KhGxutgNE8SpBw=, tarball: http://registry.m.jd.com/@types/d3-interpolate/download/@types/d3-interpolate-3.0.4.tgz}
+
+  '@types/d3-path@3.1.1':
+    resolution: {integrity: sha1-9jKzgMOsoduo40qgSbzWpK8j34o=, tarball: http://registry.m.jd.com/@types/d3-path/download/@types/d3-path-3.1.1.tgz}
+
+  '@types/d3-polygon@3.0.2':
+    resolution: {integrity: sha1-365UptNdGedqyVZbyzKo5UaTGJw=, tarball: http://registry.m.jd.com/@types/d3-polygon/download/@types/d3-polygon-3.0.2.tgz}
+
+  '@types/d3-quadtree@3.0.6':
+    resolution: {integrity: sha1-1HQLD+NbHFi2bhSI9OftApUvVw8=, tarball: http://registry.m.jd.com/@types/d3-quadtree/download/@types/d3-quadtree-3.0.6.tgz}
+
+  '@types/d3-random@3.0.4':
+    resolution: {integrity: sha1-a9NoO4My/A8B5wWbdja8XH7eczc=, tarball: http://registry.m.jd.com/@types/d3-random/download/@types/d3-random-3.0.4.tgz}
+
+  '@types/d3-scale-chromatic@3.1.0':
+    resolution: {integrity: sha1-3G1Pmpg3bxjqULrWw5U38bVGPDk=, tarball: http://registry.m.jd.com/@types/d3-scale-chromatic/download/@types/d3-scale-chromatic-3.1.0.tgz}
+
+  '@types/d3-scale@4.0.9':
+    resolution: {integrity: sha1-V6L3ByQub+Hega17/Myq9gYXmvs=, tarball: http://registry.m.jd.com/@types/d3-scale/download/@types/d3-scale-4.0.9.tgz}
+
+  '@types/d3-selection@3.0.11':
+    resolution: {integrity: sha1-vXpF/AqMMWemMWdeYbwsorBY1KM=, tarball: http://registry.m.jd.com/@types/d3-selection/download/@types/d3-selection-3.0.11.tgz}
+
+  '@types/d3-shape@3.2.0':
+    resolution: {integrity: sha1-Zv80IBHcJDxsIOa4mVI9FIrKQS0=, tarball: http://registry.m.jd.com/@types/d3-shape/download/@types/d3-shape-3.2.0.tgz}
+
+  '@types/d3-time-format@4.0.3':
+    resolution: {integrity: sha1-1rwea2p9tpzM+73Uw0twYy2enbI=, tarball: http://registry.m.jd.com/@types/d3-time-format/download/@types/d3-time-format-4.0.3.tgz}
+
+  '@types/d3-time@3.0.4':
+    resolution: {integrity: sha1-hHL+7NY5aRRQ3YAA6zPt1EThMj8=, tarball: http://registry.m.jd.com/@types/d3-time/download/@types/d3-time-3.0.4.tgz}
+
+  '@types/d3-timer@3.0.2':
+    resolution: {integrity: sha1-cLvad9wjqnJ0E+IuIUr6Pw6FL3A=, tarball: http://registry.m.jd.com/@types/d3-timer/download/@types/d3-timer-3.0.2.tgz}
+
+  '@types/d3-transition@3.0.9':
+    resolution: {integrity: sha1-ETa8V+nds8OQ3MybX/O30rjZRwY=, tarball: http://registry.m.jd.com/@types/d3-transition/download/@types/d3-transition-3.0.9.tgz}
+
+  '@types/d3-zoom@3.0.8':
+    resolution: {integrity: sha1-3Msy0cVrHhxuDxGA2ZSJbwOLxAs=, tarball: http://registry.m.jd.com/@types/d3-zoom/download/@types/d3-zoom-3.0.8.tgz}
+
+  '@types/d3@7.4.3':
+    resolution: {integrity: sha1-1FUKhdCPSXj68KTDa4SMYeqsB+I=, tarball: http://registry.m.jd.com/@types/d3/download/@types/d3-7.4.3.tgz}
+
+  '@types/geojson@7946.0.16':
+    resolution: {integrity: sha1-jr5T1p762nBERU4zBcGQF9l87So=, tarball: http://registry.m.jd.com/@types/geojson/download/@types/geojson-7946.0.16.tgz}
+
+  '@types/hast@3.0.5':
+    resolution: {integrity: sha1-SAIN5MDmNJL0yp20IGjBCPaLf48=, tarball: http://registry.m.jd.com/@types/hast/download/@types/hast-3.0.5.tgz}
+
+  '@types/prismjs@1.26.6':
+    resolution: {integrity: sha1-bqJ8Em1kUxmuT3BV7aY6noNcAYc=, tarball: http://registry.m.jd.com/@types/prismjs/download/@types/prismjs-1.26.6.tgz}
+
   '@types/react-dom@19.2.5':
     resolution: {integrity: sha1-1Oz41wTKtZkB0/uwl1tvhVMGWV8=, tarball: http://registry.m.jd.com/@types/react-dom/download/@types/react-dom-19.2.5.tgz}
     peerDependencies:
@@ -658,6 +815,12 @@ packages:
 
   '@types/trusted-types@2.0.7':
     resolution: {integrity: sha1-usywepcLkXB986PoumiWxX6tLRE=, tarball: http://registry.m.jd.com/@types/trusted-types/download/@types/trusted-types-2.0.7.tgz}
+
+  '@types/unist@2.0.11':
+    resolution: {integrity: sha1-Ea9XsSfjJId3SEH3pOVOqxZtA8Q=, tarball: http://registry.m.jd.com/@types/unist/download/@types/unist-2.0.11.tgz}
+
+  '@types/unist@3.0.3':
+    resolution: {integrity: sha1-rKqw+RnOaczmKcLU7S60rcG2wgw=, tarball: http://registry.m.jd.com/@types/unist/download/@types/unist-3.0.3.tgz}
 
   '@typescript/typescript-aix-ppc64@7.0.2':
     resolution: {integrity: sha1-zcfOgdYPHgkDSWDd+x+4gNendrY=, tarball: http://registry.m.jd.com/@typescript/typescript-aix-ppc64/download/@typescript/typescript-aix-ppc64-7.0.2.tgz}
@@ -779,6 +942,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@upsetjs/venn.js@2.0.0':
+    resolution: {integrity: sha1-O+GSA4zdqSeqT4siq1Gvgqv0fzQ=, tarball: http://registry.m.jd.com/@upsetjs/venn.js/download/@upsetjs/venn.js-2.0.0.tgz}
+
   ansi-html-community@0.0.8:
     resolution: {integrity: sha1-afvE1sy+OD+XNpNK40w/gpDxv0E=, tarball: http://registry.m.jd.com/ansi-html-community/download/ansi-html-community-0.0.8.tgz}
     engines: {'0': node >= 0.8.0}
@@ -803,12 +969,32 @@ packages:
   argparse@2.0.1:
     resolution: {integrity: sha1-JG9Q88p4oyQPbJl+ipvR6sSeSzg=, tarball: http://registry.m.jd.com/argparse/download/argparse-2.0.1.tgz}
 
+  character-entities-legacy@3.0.0:
+    resolution: {integrity: sha1-dryDqQc4kB17wiOp6TdZ/dVgEls=, tarball: http://registry.m.jd.com/character-entities-legacy/download/character-entities-legacy-3.0.0.tgz}
+
+  character-entities@2.0.2:
+    resolution: {integrity: sha1-LQnC5yzZUjB2zLIRV9/2atQ/zCI=, tarball: http://registry.m.jd.com/character-entities/download/character-entities-2.0.2.tgz}
+
+  character-reference-invalid@2.0.1:
+    resolution: {integrity: sha1-hcZrBB5DtHIQ+vQBJ4q/gIrEXLk=, tarball: http://registry.m.jd.com/character-reference-invalid/download/character-reference-invalid-2.0.1.tgz}
+
   classnames@2.5.1:
     resolution: {integrity: sha1-undMYUvg8BbaEFyFjnFZ6ujnaHs=, tarball: http://registry.m.jd.com/classnames/download/classnames-2.5.1.tgz}
 
   clsx@2.1.1:
     resolution: {integrity: sha1-7tOXyf2L2IK/sY3qtxAgSaLzKZk=, tarball: http://registry.m.jd.com/clsx/download/clsx-2.1.1.tgz}
     engines: {node: '>=6'}
+
+  comma-separated-tokens@2.0.3:
+    resolution: {integrity: sha1-TonJRYrLYbyP7xn0UplzsjkoOe4=, tarball: http://registry.m.jd.com/comma-separated-tokens/download/comma-separated-tokens-2.0.3.tgz}
+
+  commander@7.2.0:
+    resolution: {integrity: sha1-o2y1fQtQHOEI5NIFWaFQo5HZerc=, tarball: http://registry.m.jd.com/commander/download/commander-7.2.0.tgz}
+    engines: {node: '>= 10'}
+
+  commander@8.3.0:
+    resolution: {integrity: sha1-SDfqGy2me5xhamevuw+v7lZ7ymY=, tarball: http://registry.m.jd.com/commander/download/commander-8.3.0.tgz}
+    engines: {node: '>= 12'}
 
   compute-scroll-into-view@3.1.1:
     resolution: {integrity: sha1-AsM4bsUx+2qYgZZziOU+hWTz6ao=, tarball: http://registry.m.jd.com/compute-scroll-into-view/download/compute-scroll-into-view-3.1.1.tgz}
@@ -819,8 +1005,170 @@ packages:
   core-js@3.47.0:
     resolution: {integrity: sha1-Q27wdlDhka/rhMJEgbKYvWDrShc=, tarball: http://registry.m.jd.com/core-js/download/core-js-3.47.0.tgz}
 
+  cose-base@1.0.3:
+    resolution: {integrity: sha1-ZQM0tBuGlXilQzWLgM2n4Kvgpgo=, tarball: http://registry.m.jd.com/cose-base/download/cose-base-1.0.3.tgz}
+
+  cose-base@2.2.0:
+    resolution: {integrity: sha1-HDlcNbbhC7g/l2nKi4F9YUrdXAE=, tarball: http://registry.m.jd.com/cose-base/download/cose-base-2.2.0.tgz}
+
   csstype@3.2.3:
     resolution: {integrity: sha1-7EjA8+mT5QZIyG2lWeJhCZXPmJo=, tarball: http://registry.m.jd.com/csstype/download/csstype-3.2.3.tgz}
+
+  cytoscape-cose-bilkent@4.1.0:
+    resolution: {integrity: sha1-di+hId+ZMP/rUaSV2HkXxXCsIJs=, tarball: http://registry.m.jd.com/cytoscape-cose-bilkent/download/cytoscape-cose-bilkent-4.1.0.tgz}
+    peerDependencies:
+      cytoscape: ^3.2.0
+
+  cytoscape-fcose@2.2.0:
+    resolution: {integrity: sha1-5Nb2SQ30+rWK6c6p5cOrjXRy9HE=, tarball: http://registry.m.jd.com/cytoscape-fcose/download/cytoscape-fcose-2.2.0.tgz}
+    peerDependencies:
+      cytoscape: ^3.2.0
+
+  cytoscape@3.34.2:
+    resolution: {integrity: sha1-KV7fyHa4e9lx3jrHqdZca+GPStY=, tarball: http://registry.m.jd.com/cytoscape/download/cytoscape-3.34.2.tgz}
+    engines: {node: '>=0.10'}
+
+  d3-array@2.12.1:
+    resolution: {integrity: sha1-4gtBqvzf/fXVCSgATs7PgVpGXoE=, tarball: http://registry.m.jd.com/d3-array/download/d3-array-2.12.1.tgz}
+
+  d3-array@3.2.4:
+    resolution: {integrity: sha1-Ff7DOyN/l6xdfJhtx32ic6jtC7U=, tarball: http://registry.m.jd.com/d3-array/download/d3-array-3.2.4.tgz}
+    engines: {node: '>=12'}
+
+  d3-axis@3.0.0:
+    resolution: {integrity: sha1-xCpKE+gTHWN7dF/Clzgkz+r5MyI=, tarball: http://registry.m.jd.com/d3-axis/download/d3-axis-3.0.0.tgz}
+    engines: {node: '>=12'}
+
+  d3-brush@3.0.0:
+    resolution: {integrity: sha1-b3Z8Ttjct53n7ePhwPieY+9k0xw=, tarball: http://registry.m.jd.com/d3-brush/download/d3-brush-3.0.0.tgz}
+    engines: {node: '>=12'}
+
+  d3-chord@3.0.1:
+    resolution: {integrity: sha1-0VbWH0hfzoMn5qvzOctB2Mu6aWY=, tarball: http://registry.m.jd.com/d3-chord/download/d3-chord-3.0.1.tgz}
+    engines: {node: '>=12'}
+
+  d3-color@3.1.0:
+    resolution: {integrity: sha1-OVsoM9+scVB/EqwvevI7+BneJOI=, tarball: http://registry.m.jd.com/d3-color/download/d3-color-3.1.0.tgz}
+    engines: {node: '>=12'}
+
+  d3-contour@4.0.2:
+    resolution: {integrity: sha1-u5IGO8jFZjrLJCL5nHPLtsauO8w=, tarball: http://registry.m.jd.com/d3-contour/download/d3-contour-4.0.2.tgz}
+    engines: {node: '>=12'}
+
+  d3-delaunay@6.0.4:
+    resolution: {integrity: sha1-mBaQOHM6ClurvtpVBU95W7nkpYs=, tarball: http://registry.m.jd.com/d3-delaunay/download/d3-delaunay-6.0.4.tgz}
+    engines: {node: '>=12'}
+
+  d3-dispatch@3.0.1:
+    resolution: {integrity: sha1-X8dShOnCN1w2yDlBGgz1UMv8TV4=, tarball: http://registry.m.jd.com/d3-dispatch/download/d3-dispatch-3.0.1.tgz}
+    engines: {node: '>=12'}
+
+  d3-drag@3.0.0:
+    resolution: {integrity: sha1-mUqunNI8cZ9TteEOOgphCMaWB7o=, tarball: http://registry.m.jd.com/d3-drag/download/d3-drag-3.0.0.tgz}
+    engines: {node: '>=12'}
+
+  d3-dsv@3.0.1:
+    resolution: {integrity: sha1-xjr5ePTWoNCEpSpnOSK+IWB4m3M=, tarball: http://registry.m.jd.com/d3-dsv/download/d3-dsv-3.0.1.tgz}
+    engines: {node: '>=12'}
+    hasBin: true
+
+  d3-ease@3.0.1:
+    resolution: {integrity: sha1-llisOKIUDVnTRhYPH2ww/aC9EvQ=, tarball: http://registry.m.jd.com/d3-ease/download/d3-ease-3.0.1.tgz}
+    engines: {node: '>=12'}
+
+  d3-fetch@3.0.1:
+    resolution: {integrity: sha1-gxQb/5hWoO21443onNz+Y9CmCiI=, tarball: http://registry.m.jd.com/d3-fetch/download/d3-fetch-3.0.1.tgz}
+    engines: {node: '>=12'}
+
+  d3-force@3.0.0:
+    resolution: {integrity: sha1-Piuhph5wiI/j2RlOMNbRTuzhVcQ=, tarball: http://registry.m.jd.com/d3-force/download/d3-force-3.0.0.tgz}
+    engines: {node: '>=12'}
+
+  d3-format@3.1.2:
+    resolution: {integrity: sha1-Af20a1i+sfVbELQq1wtuNE1esq4=, tarball: http://registry.m.jd.com/d3-format/download/d3-format-3.1.2.tgz}
+    engines: {node: '>=12'}
+
+  d3-geo@3.1.1:
+    resolution: {integrity: sha1-YCfPUSRvmy69ZPmeAdx8M2QDOk0=, tarball: http://registry.m.jd.com/d3-geo/download/d3-geo-3.1.1.tgz}
+    engines: {node: '>=12'}
+
+  d3-hierarchy@3.1.2:
+    resolution: {integrity: sha1-sBzULB7tPUbbd6WWbPcm+MCRYMY=, tarball: http://registry.m.jd.com/d3-hierarchy/download/d3-hierarchy-3.1.2.tgz}
+    engines: {node: '>=12'}
+
+  d3-interpolate@3.0.1:
+    resolution: {integrity: sha1-PEeqWzLFs9+1bvP9Q0IHimMrQA0=, tarball: http://registry.m.jd.com/d3-interpolate/download/d3-interpolate-3.0.1.tgz}
+    engines: {node: '>=12'}
+
+  d3-path@1.0.9:
+    resolution: {integrity: sha1-SMBQux/owmJJOoyvVSTj6VkXAc8=, tarball: http://registry.m.jd.com/d3-path/download/d3-path-1.0.9.tgz}
+
+  d3-path@3.1.0:
+    resolution: {integrity: sha1-It+TkDL7WnGuixgA1h3beFHEJSY=, tarball: http://registry.m.jd.com/d3-path/download/d3-path-3.1.0.tgz}
+    engines: {node: '>=12'}
+
+  d3-polygon@3.0.1:
+    resolution: {integrity: sha1-C0XT3RxIopyOBX5hNWk+yAvxY5g=, tarball: http://registry.m.jd.com/d3-polygon/download/d3-polygon-3.0.1.tgz}
+    engines: {node: '>=12'}
+
+  d3-quadtree@3.0.1:
+    resolution: {integrity: sha1-bco+i+Kzk8mp1RTau9gKkt7vGk8=, tarball: http://registry.m.jd.com/d3-quadtree/download/d3-quadtree-3.0.1.tgz}
+    engines: {node: '>=12'}
+
+  d3-random@3.0.1:
+    resolution: {integrity: sha1-1JJjeNMz2cC/0eb6AZTTCuuqIPQ=, tarball: http://registry.m.jd.com/d3-random/download/d3-random-3.0.1.tgz}
+    engines: {node: '>=12'}
+
+  d3-sankey@0.12.3:
+    resolution: {integrity: sha1-s8JoYnvXLl2AM26N5qy/7J0V0B0=, tarball: http://registry.m.jd.com/d3-sankey/download/d3-sankey-0.12.3.tgz}
+
+  d3-scale-chromatic@3.1.0:
+    resolution: {integrity: sha1-NMOdopiyPCDgLxpLI5vQ8i5/ExQ=, tarball: http://registry.m.jd.com/d3-scale-chromatic/download/d3-scale-chromatic-3.1.0.tgz}
+    engines: {node: '>=12'}
+
+  d3-scale@4.0.2:
+    resolution: {integrity: sha1-grOOjo/3CAdk+Nzsd71L45Nok5Y=, tarball: http://registry.m.jd.com/d3-scale/download/d3-scale-4.0.2.tgz}
+    engines: {node: '>=12'}
+
+  d3-selection@3.0.0:
+    resolution: {integrity: sha1-wlM4IH76csxbm9FFihpBkB8eGzE=, tarball: http://registry.m.jd.com/d3-selection/download/d3-selection-3.0.0.tgz}
+    engines: {node: '>=12'}
+
+  d3-shape@1.3.7:
+    resolution: {integrity: sha1-32OAG+B7yYa8VPY3ibT+UCmStdc=, tarball: http://registry.m.jd.com/d3-shape/download/d3-shape-1.3.7.tgz}
+
+  d3-shape@3.2.0:
+    resolution: {integrity: sha1-oag5y9m6RfKGdMadf4Vbz5HfxqU=, tarball: http://registry.m.jd.com/d3-shape/download/d3-shape-3.2.0.tgz}
+    engines: {node: '>=12'}
+
+  d3-time-format@4.1.0:
+    resolution: {integrity: sha1-erUlelBB0R7LT+cKXH0WoZW7QIo=, tarball: http://registry.m.jd.com/d3-time-format/download/d3-time-format-4.1.0.tgz}
+    engines: {node: '>=12'}
+
+  d3-time@3.1.0:
+    resolution: {integrity: sha1-kxDbVumS48AXXh7zheVF5Iqbtcc=, tarball: http://registry.m.jd.com/d3-time/download/d3-time-3.1.0.tgz}
+    engines: {node: '>=12'}
+
+  d3-timer@3.0.1:
+    resolution: {integrity: sha1-YoTSonCChbGrt+IB7aQ4CvNeY7A=, tarball: http://registry.m.jd.com/d3-timer/download/d3-timer-3.0.1.tgz}
+    engines: {node: '>=12'}
+
+  d3-transition@3.0.1:
+    resolution: {integrity: sha1-aGn93hRIhoB3/dWYkgDLYbKhZF8=, tarball: http://registry.m.jd.com/d3-transition/download/d3-transition-3.0.1.tgz}
+    engines: {node: '>=12'}
+    peerDependencies:
+      d3-selection: 2 - 3
+
+  d3-zoom@3.0.0:
+    resolution: {integrity: sha1-0T9BZccyF//qpUKVzWlps+eu6PM=, tarball: http://registry.m.jd.com/d3-zoom/download/d3-zoom-3.0.0.tgz}
+    engines: {node: '>=12'}
+
+  d3@7.9.0:
+    resolution: {integrity: sha1-V556yz10nK+IYL0XQa6NNxBwzV0=, tarball: http://registry.m.jd.com/d3/download/d3-7.9.0.tgz}
+    engines: {node: '>=12'}
+
+  dagre-d3-es@7.0.14:
+    resolution: {integrity: sha1-EnInbiZFfPO5faxWn48FMewzw3c=, tarball: http://registry.m.jd.com/dagre-d3-es/download/dagre-d3-es-7.0.14.tgz}
 
   date-fns@4.4.0:
     resolution: {integrity: sha1-gGU57fRcYWsrdrX3i4jFbtPH4DY=, tarball: http://registry.m.jd.com/date-fns/download/date-fns-4.4.0.tgz}
@@ -828,21 +1176,116 @@ packages:
   dayjs@1.11.13:
     resolution: {integrity: sha1-kkMLATkFXD67YBUKoT6GCktaNmw=, tarball: http://registry.m.jd.com/dayjs/download/dayjs-1.11.13.tgz}
 
+  dayjs@1.11.23:
+    resolution: {integrity: sha1-sKNjUG3eXzbPUHXkLr6BFRZajHk=, tarball: http://registry.m.jd.com/dayjs/download/dayjs-1.11.23.tgz}
+
+  decode-named-character-reference@1.3.0:
+    resolution: {integrity: sha1-PkBgN2CHTC5YZ2kbWZ1zp9oltT8=, tarball: http://registry.m.jd.com/decode-named-character-reference/download/decode-named-character-reference-1.3.0.tgz}
+
+  delaunator@5.1.0:
+    resolution: {integrity: sha1-0TJx+/Ov9nU/nqbiNVV/IJAQRuo=, tarball: http://registry.m.jd.com/delaunator/download/delaunator-5.1.0.tgz}
+
+  dom-serializer@2.0.0:
+    resolution: {integrity: sha1-5BuALh7t+fbK4YPOXmIteJ19jlM=, tarball: http://registry.m.jd.com/dom-serializer/download/dom-serializer-2.0.0.tgz}
+
+  domelementtype@2.3.0:
+    resolution: {integrity: sha1-XEXo6GmVJiYzHXqrMm0B2vZdWJ0=, tarball: http://registry.m.jd.com/domelementtype/download/domelementtype-2.3.0.tgz}
+
+  domhandler@5.0.3:
+    resolution: {integrity: sha1-zDhff3UfHR/GUMITdIBCVFOMfTE=, tarball: http://registry.m.jd.com/domhandler/download/domhandler-5.0.3.tgz}
+    engines: {node: '>= 4'}
+
   dompurify@3.4.14:
     resolution: {integrity: sha1-p4ntsse822mpNxOjTtt+ClJF2Mk=, tarball: http://registry.m.jd.com/dompurify/download/dompurify-3.4.14.tgz}
 
   dompurify@3.4.8:
     resolution: {integrity: sha1-bFT4wgcWDn+D/Lf0/QWoKsNrHNw=, tarball: http://registry.m.jd.com/dompurify/download/dompurify-3.4.8.tgz}
 
+  domutils@3.2.2:
+    resolution: {integrity: sha1-7b/itmiwwdl8JLrw8QYrEyIhvHg=, tarball: http://registry.m.jd.com/domutils/download/domutils-3.2.2.tgz}
+
   entities@4.5.0:
     resolution: {integrity: sha1-XSaOpecRPsdMTQM7eepaNaSI+0g=, tarball: http://registry.m.jd.com/entities/download/entities-4.5.0.tgz}
+    engines: {node: '>=0.12'}
+
+  entities@7.0.1:
+    resolution: {integrity: sha1-JuioiInbY0F9y5oeeaPxvJK1l2s=, tarball: http://registry.m.jd.com/entities/download/entities-7.0.1.tgz}
     engines: {node: '>=0.12'}
 
   error-stack-parser@2.1.4:
     resolution: {integrity: sha1-IpywHNv6hEQL+pGHYoW5RoAYgoY=, tarball: http://registry.m.jd.com/error-stack-parser/download/error-stack-parser-2.1.4.tgz}
 
+  es-toolkit@1.52.0:
+    resolution: {integrity: sha1-cerxqLGINO93Y37Mu4hbpMA81t0=, tarball: http://registry.m.jd.com/es-toolkit/download/es-toolkit-1.52.0.tgz}
+
+  fastdom@1.0.12:
+    resolution: {integrity: sha1-rkPVWvAXJSrkmbLhhlEauXQS3jk=, tarball: http://registry.m.jd.com/fastdom/download/fastdom-1.0.12.tgz}
+
+  fault@1.0.4:
+    resolution: {integrity: sha1-6vz8Cm0hT8lGAeFw3ymVSk+ELxM=, tarball: http://registry.m.jd.com/fault/download/fault-1.0.4.tgz}
+
+  format@0.2.2:
+    resolution: {integrity: sha1-1hcBB+nv3E7TDJ3DkBbflCtctYs=, tarball: http://registry.m.jd.com/format/download/format-0.2.2.tgz}
+    engines: {node: '>=0.4.x'}
+
+  hachure-fill@0.5.2:
+    resolution: {integrity: sha1-0ZvEzIdQpZYrR/sTAFV6hfz5NMw=, tarball: http://registry.m.jd.com/hachure-fill/download/hachure-fill-0.5.2.tgz}
+
+  hast-util-parse-selector@4.0.0:
+    resolution: {integrity: sha1-NSh5+obiVhYDYDfdiTH7XzTLSic=, tarball: http://registry.m.jd.com/hast-util-parse-selector/download/hast-util-parse-selector-4.0.0.tgz}
+
+  hastscript@9.0.1:
+    resolution: {integrity: sha1-28hL72BR1ACENCwinEUc2dxWff8=, tarball: http://registry.m.jd.com/hastscript/download/hastscript-9.0.1.tgz}
+
+  highlight.js@10.7.3:
+    resolution: {integrity: sha1-aXJy45kTVuQMPKxWanTu9oF1ZTE=, tarball: http://registry.m.jd.com/highlight.js/download/highlight.js-10.7.3.tgz}
+
+  highlightjs-vue@1.0.0:
+    resolution: {integrity: sha1-/f6X++pjVOcO5E46lVh14RTbCG0=, tarball: http://registry.m.jd.com/highlightjs-vue/download/highlightjs-vue-1.0.0.tgz}
+
+  html-dom-parser@5.1.8:
+    resolution: {integrity: sha1-O9zlNN/khykJ36YACn28CadhC1Y=, tarball: http://registry.m.jd.com/html-dom-parser/download/html-dom-parser-5.1.8.tgz}
+
   html-entities@2.6.0:
     resolution: {integrity: sha1-fGTx6js2gYzK49P7SLaXQgjphPg=, tarball: http://registry.m.jd.com/html-entities/download/html-entities-2.6.0.tgz}
+
+  html-react-parser@5.2.17:
+    resolution: {integrity: sha1-G0TJqSYSQ5pkm0o4LngN3Z6n9pc=, tarball: http://registry.m.jd.com/html-react-parser/download/html-react-parser-5.2.17.tgz}
+    peerDependencies:
+      '@types/react': 0.14 || 15 || 16 || 17 || 18 || 19
+      react: 0.14 || 15 || 16 || 17 || 18 || 19
+
+  htmlparser2@10.1.0:
+    resolution: {integrity: sha1-/j8uEsc7bkYtThA5XbnBEZ5NauQ=, tarball: http://registry.m.jd.com/htmlparser2/download/htmlparser2-10.1.0.tgz}
+
+  iconv-lite@0.6.3:
+    resolution: {integrity: sha1-pS+AvzjaGVLrXGgXkHGYcaGnJQE=, tarball: http://registry.m.jd.com/iconv-lite/download/iconv-lite-0.6.3.tgz}
+    engines: {node: '>=0.10.0'}
+
+  import-meta-resolve@4.2.0:
+    resolution: {integrity: sha1-CMuFtb037MjrHg9nDcJ2cALUNzQ=, tarball: http://registry.m.jd.com/import-meta-resolve/download/import-meta-resolve-4.2.0.tgz}
+
+  inline-style-parser@0.2.7:
+    resolution: {integrity: sha1-sfxov8AxO4aFdF5EZON/k3a5yQk=, tarball: http://registry.m.jd.com/inline-style-parser/download/inline-style-parser-0.2.7.tgz}
+
+  internmap@1.0.1:
+    resolution: {integrity: sha1-ABfMijuZYF8DAvKxmNJy4BXl35U=, tarball: http://registry.m.jd.com/internmap/download/internmap-1.0.1.tgz}
+
+  internmap@2.0.3:
+    resolution: {integrity: sha1-ZoXyN1XkPFJOJR0py8lySOMGEAk=, tarball: http://registry.m.jd.com/internmap/download/internmap-2.0.3.tgz}
+    engines: {node: '>=12'}
+
+  is-alphabetical@2.0.1:
+    resolution: {integrity: sha1-AQcgU+p8EDbfPH0Zptqux/GeeJs=, tarball: http://registry.m.jd.com/is-alphabetical/download/is-alphabetical-2.0.1.tgz}
+
+  is-alphanumerical@2.0.1:
+    resolution: {integrity: sha1-fAP76W4+kxET5X+WSwo2jMLf2HU=, tarball: http://registry.m.jd.com/is-alphanumerical/download/is-alphanumerical-2.0.1.tgz}
+
+  is-decimal@2.0.1:
+    resolution: {integrity: sha1-lGnS3BkNAhT9h9eLeMrswMwU7vc=, tarball: http://registry.m.jd.com/is-decimal/download/is-decimal-2.0.1.tgz}
+
+  is-hexadecimal@2.0.1:
+    resolution: {integrity: sha1-hrW/Zo/KMHSY0xnfwDKJ14GpACc=, tarball: http://registry.m.jd.com/is-hexadecimal/download/is-hexadecimal-2.0.1.tgz}
 
   is-mobile@5.0.0:
     resolution: {integrity: sha1-Hgig7yw4pnv/hKUq9o1nvO9EUzM=, tarball: http://registry.m.jd.com/is-mobile/download/is-mobile-5.0.0.tgz}
@@ -854,8 +1297,30 @@ packages:
   json2mq@0.2.0:
     resolution: {integrity: sha1-tje9O6nqvhIsg+lyBIOusQ0skEo=, tarball: http://registry.m.jd.com/json2mq/download/json2mq-0.2.0.tgz}
 
+  katex@0.16.47:
+    resolution: {integrity: sha1-ChOkLC3rT3TmHxYtRAuRZaVIAw8=, tarball: http://registry.m.jd.com/katex/download/katex-0.16.47.tgz}
+    hasBin: true
+
+  khroma@2.1.0:
+    resolution: {integrity: sha1-RfLOlM4jGkN89bY8LohubrQru7E=, tarball: http://registry.m.jd.com/khroma/download/khroma-2.1.0.tgz}
+
+  layout-base@1.0.2:
+    resolution: {integrity: sha1-EpHilog8Miqd1MXdggY3IbU+JuI=, tarball: http://registry.m.jd.com/layout-base/download/layout-base-1.0.2.tgz}
+
+  layout-base@2.0.1:
+    resolution: {integrity: sha1-0DN5E1hskPnCwHUpIGn1wtpd0oU=, tarball: http://registry.m.jd.com/layout-base/download/layout-base-2.0.1.tgz}
+
   linkify-it@5.0.2:
     resolution: {integrity: sha1-074KaTrz2p3ziD8eNGoOl0YajBk=, tarball: http://registry.m.jd.com/linkify-it/download/linkify-it-5.0.2.tgz}
+
+  lodash-es@4.18.1:
+    resolution: {integrity: sha1-uWLuuA2dmDqQC/NClh+3QYyhCx0=, tarball: http://registry.m.jd.com/lodash-es/download/lodash-es-4.18.1.tgz}
+
+  lodash.throttle@4.1.1:
+    resolution: {integrity: sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=, tarball: http://registry.m.jd.com/lodash.throttle/download/lodash.throttle-4.1.1.tgz}
+
+  lowlight@1.20.0:
+    resolution: {integrity: sha1-3bGX0zRirQ2TvxnRe2wwGqOUGIg=, tarball: http://registry.m.jd.com/lowlight/download/lowlight-1.20.0.tgz}
 
   luxon@3.7.2:
     resolution: {integrity: sha1-1pfkj0eFU8yhh6D4Q2r/Ro47oLo=, tarball: http://registry.m.jd.com/luxon/download/luxon-3.7.2.tgz}
@@ -870,14 +1335,49 @@ packages:
     engines: {node: '>= 18'}
     hasBin: true
 
+  marked@15.0.12:
+    resolution: {integrity: sha1-MHIsc0bhLQotAgermwxPAQLYbE4=, tarball: http://registry.m.jd.com/marked/download/marked-15.0.12.tgz}
+    engines: {node: '>= 18'}
+    hasBin: true
+
+  marked@16.4.2:
+    resolution: {integrity: sha1-SVmmS+bEhvDbdGfq184ojeVCkKM=, tarball: http://registry.m.jd.com/marked/download/marked-16.4.2.tgz}
+    engines: {node: '>= 20'}
+    hasBin: true
+
   mdurl@2.1.0:
     resolution: {integrity: sha1-1xHT97zn8ixIfJG+eFRfNW+pZXM=, tarball: http://registry.m.jd.com/mdurl/download/mdurl-2.1.0.tgz}
+
+  mermaid@11.17.2:
+    resolution: {integrity: sha1-48rzcXWCwOROXQTP8EPgJcrsfLo=, tarball: http://registry.m.jd.com/mermaid/download/mermaid-11.17.2.tgz}
 
   moment@2.30.1:
     resolution: {integrity: sha1-+MkcB7enhuMMWZJt9TC06slpdK4=, tarball: http://registry.m.jd.com/moment/download/moment-2.30.1.tgz}
 
   monaco-editor@0.56.0:
     resolution: {integrity: sha1-6FrAC3q3CSyh0HeJRQSRmvUHPPA=, tarball: http://registry.m.jd.com/monaco-editor/download/monaco-editor-0.56.0.tgz}
+
+  package-manager-detector@1.8.0:
+    resolution: {integrity: sha1-cMmixL0aUT3NbK0Aap/OvsIqElM=, tarball: http://registry.m.jd.com/package-manager-detector/download/package-manager-detector-1.8.0.tgz}
+
+  parse-entities@4.0.2:
+    resolution: {integrity: sha1-YdRvXtKOTuYundxD1rAQGIRD8Vk=, tarball: http://registry.m.jd.com/parse-entities/download/parse-entities-4.0.2.tgz}
+
+  path-data-parser@0.1.0:
+    resolution: {integrity: sha1-j1ulzHD8e+yz3O+uoI4mWaumC4w=, tarball: http://registry.m.jd.com/path-data-parser/download/path-data-parser-0.1.0.tgz}
+
+  points-on-curve@0.2.0:
+    resolution: {integrity: sha1-fbuYxDeRhZQ0KEdhMw+ok8uBtNE=, tarball: http://registry.m.jd.com/points-on-curve/download/points-on-curve-0.2.0.tgz}
+
+  points-on-path@0.2.1:
+    resolution: {integrity: sha1-VTICtUJMU77TcTWzGIWOrP+F3VI=, tarball: http://registry.m.jd.com/points-on-path/download/points-on-path-0.2.1.tgz}
+
+  prismjs@1.30.0:
+    resolution: {integrity: sha1-2XCZadnU4WQD9vNIxjVTsZ8Jdak=, tarball: http://registry.m.jd.com/prismjs/download/prismjs-1.30.0.tgz}
+    engines: {node: '>=6'}
+
+  property-information@7.2.0:
+    resolution: {integrity: sha1-CAmzQmTplcC/zTInAooeNSEK+Ao=, tarball: http://registry.m.jd.com/property-information/download/property-information-7.2.0.tgz}
 
   punycode.js@2.3.1:
     resolution: {integrity: sha1-a1PlatdViCNOefSv+pCXLH3Yzbc=, tarball: http://registry.m.jd.com/punycode.js/download/punycode.js-2.3.1.tgz}
@@ -1113,16 +1613,40 @@ packages:
   react-is@19.2.8:
     resolution: {integrity: sha1-CYJvn7wYe8Zo4+XGLtwAH4BNUBg=, tarball: http://registry.m.jd.com/react-is/download/react-is-19.2.8.tgz}
 
+  react-property@2.0.2:
+    resolution: {integrity: sha1-1ayeJEzvVkiAphC8jYaL1vYP3aY=, tarball: http://registry.m.jd.com/react-property/download/react-property-2.0.2.tgz}
+
   react-refresh@0.18.0:
     resolution: {integrity: sha1-Lc6X9P6TKk2BQvoWMOR1wXKcgGI=, tarball: http://registry.m.jd.com/react-refresh/download/react-refresh-0.18.0.tgz}
     engines: {node: '>=0.10.0'}
+
+  react-syntax-highlighter@16.1.1:
+    resolution: {integrity: sha1-koRZhV03X1z8jmRgceINVBzry1I=, tarball: http://registry.m.jd.com/react-syntax-highlighter/download/react-syntax-highlighter-16.1.1.tgz}
+    engines: {node: '>= 16.20.2'}
+    peerDependencies:
+      react: '>= 0.14.0'
 
   react@19.2.8:
     resolution: {integrity: sha1-qAZj27WNacb+P9KR08syTop9/y0=, tarball: http://registry.m.jd.com/react/download/react-19.2.8.tgz}
     engines: {node: '>=0.10.0'}
 
+  refractor@5.0.0:
+    resolution: {integrity: sha1-hdrwRIptlH9TYXlusiwxcz1h2QQ=, tarball: http://registry.m.jd.com/refractor/download/refractor-5.0.0.tgz}
+
   resize-observer-polyfill@1.5.1:
     resolution: {integrity: sha1-DpAg3T0hAkRY1OvSfiPkAmmBBGQ=, tarball: http://registry.m.jd.com/resize-observer-polyfill/download/resize-observer-polyfill-1.5.1.tgz}
+
+  robust-predicates@3.0.3:
+    resolution: {integrity: sha1-EJkGGzNJ4sWr7GwqsKzUQNJNQGI=, tarball: http://registry.m.jd.com/robust-predicates/download/robust-predicates-3.0.3.tgz}
+
+  roughjs@4.6.6:
+    resolution: {integrity: sha1-EFn0ml4MgN7lQaAFsgzDIrIiFYs=, tarball: http://registry.m.jd.com/roughjs/download/roughjs-4.6.6.tgz}
+
+  rw@1.3.3:
+    resolution: {integrity: sha1-P4Yt+pGrdmsUiF700BEkv9oHT7Q=, tarball: http://registry.m.jd.com/rw/download/rw-1.3.3.tgz}
+
+  safer-buffer@2.1.2:
+    resolution: {integrity: sha1-RPoWGwGHuVSd2Eu5GAL5vYOFzWo=, tarball: http://registry.m.jd.com/safer-buffer/download/safer-buffer-2.1.2.tgz}
 
   scheduler@0.27.0:
     resolution: {integrity: sha1-DE74LWfR5cHjWej8dtOofwRf5b0=, tarball: http://registry.m.jd.com/scheduler/download/scheduler-0.27.0.tgz}
@@ -1130,11 +1654,17 @@ packages:
   scroll-into-view-if-needed@3.1.0:
     resolution: {integrity: sha1-+pUkUYx5m0Wi72u/+5K8rQKW0B8=, tarball: http://registry.m.jd.com/scroll-into-view-if-needed/download/scroll-into-view-if-needed-3.1.0.tgz}
 
+  space-separated-tokens@2.0.2:
+    resolution: {integrity: sha1-Hs2dI1CjhEVyw/SjErzrAYNIhZ8=, tarball: http://registry.m.jd.com/space-separated-tokens/download/space-separated-tokens-2.0.2.tgz}
+
   stackframe@1.3.4:
     resolution: {integrity: sha1-uIGgBMjBSaXo7+831RsW5BKUMxA=, tarball: http://registry.m.jd.com/stackframe/download/stackframe-1.3.4.tgz}
 
   state-local@1.0.7:
     resolution: {integrity: sha1-2lAhHQfwV0jVMAm+5GMHo32zhtU=, tarball: http://registry.m.jd.com/state-local/download/state-local-1.0.7.tgz}
+
+  strictdom@1.0.1:
+    resolution: {integrity: sha1-GJ3pFkn3PUTVm4Qy76aO+dJllGA=, tarball: http://registry.m.jd.com/strictdom/download/strictdom-1.0.1.tgz}
 
   string-convert@0.2.1:
     resolution: {integrity: sha1-aYLMMEn7tM2F+LJFaLnZvznu/5c=, tarball: http://registry.m.jd.com/string-convert/download/string-convert-0.2.1.tgz}
@@ -1143,6 +1673,12 @@ packages:
     resolution: {integrity: sha1-nibGPTD1NEPpSJSVshBdN7Z6hdk=, tarball: http://registry.m.jd.com/strip-ansi/download/strip-ansi-6.0.1.tgz}
     engines: {node: '>=8'}
 
+  style-to-js@1.1.21:
+    resolution: {integrity: sha1-KQiUEYf4V+eeKOnNeACLmgs+Do0=, tarball: http://registry.m.jd.com/style-to-js/download/style-to-js-1.1.21.tgz}
+
+  style-to-object@1.0.14:
+    resolution: {integrity: sha1-HSLw5yZruMbYyuXK9OxPAF4I9hE=, tarball: http://registry.m.jd.com/style-to-object/download/style-to-object-1.0.14.tgz}
+
   stylis@4.4.0:
     resolution: {integrity: sha1-xYRsk0X0v8Ub0MvXyjWgdE9IWl0=, tarball: http://registry.m.jd.com/stylis/download/stylis-4.4.0.tgz}
 
@@ -1150,8 +1686,16 @@ packages:
     resolution: {integrity: sha1-7FVJ2E4FPwQ8n9Dypt2JL/hEVrE=, tarball: http://registry.m.jd.com/throttle-debounce/download/throttle-debounce-5.0.2.tgz}
     engines: {node: '>=12.22'}
 
+  tinyexec@1.3.0:
+    resolution: {integrity: sha1-qswdux1Ok+atjdZJROCfmtFHpHQ=, tarball: http://registry.m.jd.com/tinyexec/download/tinyexec-1.3.0.tgz}
+    engines: {node: '>=18'}
+
   toggle-selection@1.0.6:
     resolution: {integrity: sha1-bkWxJj8gF/oKzH2J14sVuL932jI=, tarball: http://registry.m.jd.com/toggle-selection/download/toggle-selection-1.0.6.tgz}
+
+  ts-dedent@2.3.0:
+    resolution: {integrity: sha1-j6w2x5ArVBwVSsE6J6xGeZevEfg=, tarball: http://registry.m.jd.com/ts-dedent/download/ts-dedent-2.3.0.tgz}
+    engines: {node: '>=6.10'}
 
   tslib@2.8.1:
     resolution: {integrity: sha1-YS7+TtI11Wfoq6Xypfq3AoCt6D8=, tarball: http://registry.m.jd.com/tslib/download/tslib-2.8.1.tgz}
@@ -1163,6 +1707,10 @@ packages:
 
   uc.micro@2.1.0:
     resolution: {integrity: sha1-+NP30OxMPeo1p+PI76TLi0XJ5+4=, tarball: http://registry.m.jd.com/uc.micro/download/uc.micro-2.1.0.tgz}
+
+  uuid@14.0.2:
+    resolution: {integrity: sha1-1a4D5NsIgchycfiwub1zEtAseZo=, tarball: http://registry.m.jd.com/uuid/download/uuid-14.0.2.tgz}
+    hasBin: true
 
   webpack-hot-middleware@2.26.1:
     resolution: {integrity: sha1-hyFPHj+fOsq5Jx/vnm7XtjfXGcA=, tarball: http://registry.m.jd.com/webpack-hot-middleware/download/webpack-hot-middleware-2.26.1.tgz}
@@ -1296,6 +1844,57 @@ snapshots:
       react-dom: 19.2.8(react@19.2.8)
       throttle-debounce: 5.0.2
 
+  '@ant-design/x-card@2.5.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+    dependencies:
+      '@ant-design/icons': 6.3.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@babel/runtime': 7.29.7
+      classnames: 2.5.1
+      rc-util: 5.44.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react: 19.2.8
+      react-dom: 19.2.8(react@19.2.8)
+
+  '@ant-design/x-markdown@2.9.0(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+    dependencies:
+      clsx: 2.1.1
+      dompurify: 3.4.14
+      html-react-parser: 5.2.17(@types/react@19.2.18)(react@19.2.8)
+      katex: 0.16.47
+      marked: 15.0.12
+      react: 19.2.8
+      react-dom: 19.2.8(react@19.2.8)
+    transitivePeerDependencies:
+      - '@types/react'
+
+  '@ant-design/x-sdk@2.9.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+    dependencies:
+      '@rc-component/util': 1.12.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react: 19.2.8
+      react-dom: 19.2.8(react@19.2.8)
+
+  '@ant-design/x@2.9.0(antd@6.6.1(date-fns@4.4.0)(luxon@3.7.2)(moment@2.30.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+    dependencies:
+      '@ant-design/colors': 8.0.1
+      '@ant-design/cssinjs': 2.1.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@ant-design/cssinjs-utils': 2.1.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@ant-design/fast-color': 3.0.1
+      '@ant-design/icons': 6.3.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@babel/runtime': 7.29.7
+      '@rc-component/motion': 1.3.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@rc-component/resize-observer': 1.1.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@rc-component/util': 1.12.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      antd: 6.6.1(date-fns@4.4.0)(luxon@3.7.2)(moment@2.30.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      clsx: 2.1.1
+      lodash.throttle: 4.1.1
+      mermaid: 11.17.2
+      react: 19.2.8
+      react-dom: 19.2.8(react@19.2.8)
+      react-syntax-highlighter: 16.1.1(react@19.2.8)
+
+  '@antfu/install-pkg@1.1.0':
+    dependencies:
+      package-manager-detector: 1.8.0
+      tinyexec: 1.3.0
+
   '@babel/runtime@7.29.7': {}
 
   '@babel/runtime@8.0.0': {}
@@ -1306,6 +1905,10 @@ snapshots:
 
   '@biomejs/cli-win32-x64@2.5.11':
     optional: true
+
+  '@braintree/sanitize-url@7.1.2': {}
+
+  '@chevrotain/types@11.1.2': {}
 
   '@emnapi/core@1.11.3':
     dependencies:
@@ -1326,6 +1929,18 @@ snapshots:
   '@emotion/hash@0.8.0': {}
 
   '@emotion/unitless@0.7.5': {}
+
+  '@iconify/types@2.0.0': {}
+
+  '@iconify/utils@3.1.4':
+    dependencies:
+      '@antfu/install-pkg': 1.1.0
+      '@iconify/types': 2.0.0
+      import-meta-resolve: 4.2.0
+
+  '@mermaid-js/parser@1.2.1':
+    dependencies:
+      '@chevrotain/types': 11.1.2
 
   '@module-federation/error-codes@0.22.0': {}
 
@@ -1873,6 +2488,131 @@ snapshots:
       tslib: 2.8.1
     optional: true
 
+  '@types/d3-array@3.2.2': {}
+
+  '@types/d3-axis@3.0.6':
+    dependencies:
+      '@types/d3-selection': 3.0.11
+
+  '@types/d3-brush@3.0.6':
+    dependencies:
+      '@types/d3-selection': 3.0.11
+
+  '@types/d3-chord@3.0.6': {}
+
+  '@types/d3-color@3.1.3': {}
+
+  '@types/d3-contour@3.0.6':
+    dependencies:
+      '@types/d3-array': 3.2.2
+      '@types/geojson': 7946.0.16
+
+  '@types/d3-delaunay@6.0.4': {}
+
+  '@types/d3-dispatch@3.0.7': {}
+
+  '@types/d3-drag@3.0.7':
+    dependencies:
+      '@types/d3-selection': 3.0.11
+
+  '@types/d3-dsv@3.0.7': {}
+
+  '@types/d3-ease@3.0.2': {}
+
+  '@types/d3-fetch@3.0.7':
+    dependencies:
+      '@types/d3-dsv': 3.0.7
+
+  '@types/d3-force@3.0.10': {}
+
+  '@types/d3-format@3.0.4': {}
+
+  '@types/d3-geo@3.1.1':
+    dependencies:
+      '@types/geojson': 7946.0.16
+
+  '@types/d3-hierarchy@3.1.7': {}
+
+  '@types/d3-interpolate@3.0.4':
+    dependencies:
+      '@types/d3-color': 3.1.3
+
+  '@types/d3-path@3.1.1': {}
+
+  '@types/d3-polygon@3.0.2': {}
+
+  '@types/d3-quadtree@3.0.6': {}
+
+  '@types/d3-random@3.0.4': {}
+
+  '@types/d3-scale-chromatic@3.1.0': {}
+
+  '@types/d3-scale@4.0.9':
+    dependencies:
+      '@types/d3-time': 3.0.4
+
+  '@types/d3-selection@3.0.11': {}
+
+  '@types/d3-shape@3.2.0':
+    dependencies:
+      '@types/d3-path': 3.1.1
+
+  '@types/d3-time-format@4.0.3': {}
+
+  '@types/d3-time@3.0.4': {}
+
+  '@types/d3-timer@3.0.2': {}
+
+  '@types/d3-transition@3.0.9':
+    dependencies:
+      '@types/d3-selection': 3.0.11
+
+  '@types/d3-zoom@3.0.8':
+    dependencies:
+      '@types/d3-interpolate': 3.0.4
+      '@types/d3-selection': 3.0.11
+
+  '@types/d3@7.4.3':
+    dependencies:
+      '@types/d3-array': 3.2.2
+      '@types/d3-axis': 3.0.6
+      '@types/d3-brush': 3.0.6
+      '@types/d3-chord': 3.0.6
+      '@types/d3-color': 3.1.3
+      '@types/d3-contour': 3.0.6
+      '@types/d3-delaunay': 6.0.4
+      '@types/d3-dispatch': 3.0.7
+      '@types/d3-drag': 3.0.7
+      '@types/d3-dsv': 3.0.7
+      '@types/d3-ease': 3.0.2
+      '@types/d3-fetch': 3.0.7
+      '@types/d3-force': 3.0.10
+      '@types/d3-format': 3.0.4
+      '@types/d3-geo': 3.1.1
+      '@types/d3-hierarchy': 3.1.7
+      '@types/d3-interpolate': 3.0.4
+      '@types/d3-path': 3.1.1
+      '@types/d3-polygon': 3.0.2
+      '@types/d3-quadtree': 3.0.6
+      '@types/d3-random': 3.0.4
+      '@types/d3-scale': 4.0.9
+      '@types/d3-scale-chromatic': 3.1.0
+      '@types/d3-selection': 3.0.11
+      '@types/d3-shape': 3.2.0
+      '@types/d3-time': 3.0.4
+      '@types/d3-time-format': 4.0.3
+      '@types/d3-timer': 3.0.2
+      '@types/d3-transition': 3.0.9
+      '@types/d3-zoom': 3.0.8
+
+  '@types/geojson@7946.0.16': {}
+
+  '@types/hast@3.0.5':
+    dependencies:
+      '@types/unist': 3.0.3
+
+  '@types/prismjs@1.26.6': {}
+
   '@types/react-dom@19.2.5(@types/react@19.2.18)':
     dependencies:
       '@types/react': 19.2.18
@@ -1883,6 +2623,10 @@ snapshots:
 
   '@types/trusted-types@2.0.7':
     optional: true
+
+  '@types/unist@2.0.11': {}
+
+  '@types/unist@3.0.3': {}
 
   '@typescript/typescript-aix-ppc64@7.0.2':
     optional: true
@@ -1943,6 +2687,11 @@ snapshots:
 
   '@typescript/typescript-win32-x64@7.0.2':
     optional: true
+
+  '@upsetjs/venn.js@2.0.0':
+    optionalDependencies:
+      d3-selection: 3.0.0
+      d3-transition: 3.0.1(d3-selection@3.0.0)
 
   ansi-html-community@0.0.8: {}
 
@@ -2065,9 +2814,21 @@ snapshots:
 
   argparse@2.0.1: {}
 
+  character-entities-legacy@3.0.0: {}
+
+  character-entities@2.0.2: {}
+
+  character-reference-invalid@2.0.1: {}
+
   classnames@2.5.1: {}
 
   clsx@2.1.1: {}
+
+  comma-separated-tokens@2.0.3: {}
+
+  commander@7.2.0: {}
+
+  commander@8.3.0: {}
 
   compute-scroll-into-view@3.1.1: {}
 
@@ -2077,11 +2838,225 @@ snapshots:
 
   core-js@3.47.0: {}
 
+  cose-base@1.0.3:
+    dependencies:
+      layout-base: 1.0.2
+
+  cose-base@2.2.0:
+    dependencies:
+      layout-base: 2.0.1
+
   csstype@3.2.3: {}
+
+  cytoscape-cose-bilkent@4.1.0(cytoscape@3.34.2):
+    dependencies:
+      cose-base: 1.0.3
+      cytoscape: 3.34.2
+
+  cytoscape-fcose@2.2.0(cytoscape@3.34.2):
+    dependencies:
+      cose-base: 2.2.0
+      cytoscape: 3.34.2
+
+  cytoscape@3.34.2: {}
+
+  d3-array@2.12.1:
+    dependencies:
+      internmap: 1.0.1
+
+  d3-array@3.2.4:
+    dependencies:
+      internmap: 2.0.3
+
+  d3-axis@3.0.0: {}
+
+  d3-brush@3.0.0:
+    dependencies:
+      d3-dispatch: 3.0.1
+      d3-drag: 3.0.0
+      d3-interpolate: 3.0.1
+      d3-selection: 3.0.0
+      d3-transition: 3.0.1(d3-selection@3.0.0)
+
+  d3-chord@3.0.1:
+    dependencies:
+      d3-path: 3.1.0
+
+  d3-color@3.1.0: {}
+
+  d3-contour@4.0.2:
+    dependencies:
+      d3-array: 3.2.4
+
+  d3-delaunay@6.0.4:
+    dependencies:
+      delaunator: 5.1.0
+
+  d3-dispatch@3.0.1: {}
+
+  d3-drag@3.0.0:
+    dependencies:
+      d3-dispatch: 3.0.1
+      d3-selection: 3.0.0
+
+  d3-dsv@3.0.1:
+    dependencies:
+      commander: 7.2.0
+      iconv-lite: 0.6.3
+      rw: 1.3.3
+
+  d3-ease@3.0.1: {}
+
+  d3-fetch@3.0.1:
+    dependencies:
+      d3-dsv: 3.0.1
+
+  d3-force@3.0.0:
+    dependencies:
+      d3-dispatch: 3.0.1
+      d3-quadtree: 3.0.1
+      d3-timer: 3.0.1
+
+  d3-format@3.1.2: {}
+
+  d3-geo@3.1.1:
+    dependencies:
+      d3-array: 3.2.4
+
+  d3-hierarchy@3.1.2: {}
+
+  d3-interpolate@3.0.1:
+    dependencies:
+      d3-color: 3.1.0
+
+  d3-path@1.0.9: {}
+
+  d3-path@3.1.0: {}
+
+  d3-polygon@3.0.1: {}
+
+  d3-quadtree@3.0.1: {}
+
+  d3-random@3.0.1: {}
+
+  d3-sankey@0.12.3:
+    dependencies:
+      d3-array: 2.12.1
+      d3-shape: 1.3.7
+
+  d3-scale-chromatic@3.1.0:
+    dependencies:
+      d3-color: 3.1.0
+      d3-interpolate: 3.0.1
+
+  d3-scale@4.0.2:
+    dependencies:
+      d3-array: 3.2.4
+      d3-format: 3.1.2
+      d3-interpolate: 3.0.1
+      d3-time: 3.1.0
+      d3-time-format: 4.1.0
+
+  d3-selection@3.0.0: {}
+
+  d3-shape@1.3.7:
+    dependencies:
+      d3-path: 1.0.9
+
+  d3-shape@3.2.0:
+    dependencies:
+      d3-path: 3.1.0
+
+  d3-time-format@4.1.0:
+    dependencies:
+      d3-time: 3.1.0
+
+  d3-time@3.1.0:
+    dependencies:
+      d3-array: 3.2.4
+
+  d3-timer@3.0.1: {}
+
+  d3-transition@3.0.1(d3-selection@3.0.0):
+    dependencies:
+      d3-color: 3.1.0
+      d3-dispatch: 3.0.1
+      d3-ease: 3.0.1
+      d3-interpolate: 3.0.1
+      d3-selection: 3.0.0
+      d3-timer: 3.0.1
+
+  d3-zoom@3.0.0:
+    dependencies:
+      d3-dispatch: 3.0.1
+      d3-drag: 3.0.0
+      d3-interpolate: 3.0.1
+      d3-selection: 3.0.0
+      d3-transition: 3.0.1(d3-selection@3.0.0)
+
+  d3@7.9.0:
+    dependencies:
+      d3-array: 3.2.4
+      d3-axis: 3.0.0
+      d3-brush: 3.0.0
+      d3-chord: 3.0.1
+      d3-color: 3.1.0
+      d3-contour: 4.0.2
+      d3-delaunay: 6.0.4
+      d3-dispatch: 3.0.1
+      d3-drag: 3.0.0
+      d3-dsv: 3.0.1
+      d3-ease: 3.0.1
+      d3-fetch: 3.0.1
+      d3-force: 3.0.0
+      d3-format: 3.1.2
+      d3-geo: 3.1.1
+      d3-hierarchy: 3.1.2
+      d3-interpolate: 3.0.1
+      d3-path: 3.1.0
+      d3-polygon: 3.0.1
+      d3-quadtree: 3.0.1
+      d3-random: 3.0.1
+      d3-scale: 4.0.2
+      d3-scale-chromatic: 3.1.0
+      d3-selection: 3.0.0
+      d3-shape: 3.2.0
+      d3-time: 3.1.0
+      d3-time-format: 4.1.0
+      d3-timer: 3.0.1
+      d3-transition: 3.0.1(d3-selection@3.0.0)
+      d3-zoom: 3.0.0
+
+  dagre-d3-es@7.0.14:
+    dependencies:
+      d3: 7.9.0
+      lodash-es: 4.18.1
 
   date-fns@4.4.0: {}
 
   dayjs@1.11.13: {}
+
+  dayjs@1.11.23: {}
+
+  decode-named-character-reference@1.3.0:
+    dependencies:
+      character-entities: 2.0.2
+
+  delaunator@5.1.0:
+    dependencies:
+      robust-predicates: 3.0.3
+
+  dom-serializer@2.0.0:
+    dependencies:
+      domelementtype: 2.3.0
+      domhandler: 5.0.3
+      entities: 4.5.0
+
+  domelementtype@2.3.0: {}
+
+  domhandler@5.0.3:
+    dependencies:
+      domelementtype: 2.3.0
 
   dompurify@3.4.14:
     optionalDependencies:
@@ -2091,13 +3066,95 @@ snapshots:
     optionalDependencies:
       '@types/trusted-types': 2.0.7
 
+  domutils@3.2.2:
+    dependencies:
+      dom-serializer: 2.0.0
+      domelementtype: 2.3.0
+      domhandler: 5.0.3
+
   entities@4.5.0: {}
+
+  entities@7.0.1: {}
 
   error-stack-parser@2.1.4:
     dependencies:
       stackframe: 1.3.4
 
+  es-toolkit@1.52.0: {}
+
+  fastdom@1.0.12:
+    dependencies:
+      strictdom: 1.0.1
+
+  fault@1.0.4:
+    dependencies:
+      format: 0.2.2
+
+  format@0.2.2: {}
+
+  hachure-fill@0.5.2: {}
+
+  hast-util-parse-selector@4.0.0:
+    dependencies:
+      '@types/hast': 3.0.5
+
+  hastscript@9.0.1:
+    dependencies:
+      '@types/hast': 3.0.5
+      comma-separated-tokens: 2.0.3
+      hast-util-parse-selector: 4.0.0
+      property-information: 7.2.0
+      space-separated-tokens: 2.0.2
+
+  highlight.js@10.7.3: {}
+
+  highlightjs-vue@1.0.0: {}
+
+  html-dom-parser@5.1.8:
+    dependencies:
+      domhandler: 5.0.3
+      htmlparser2: 10.1.0
+
   html-entities@2.6.0: {}
+
+  html-react-parser@5.2.17(@types/react@19.2.18)(react@19.2.8):
+    dependencies:
+      '@types/react': 19.2.18
+      domhandler: 5.0.3
+      html-dom-parser: 5.1.8
+      react: 19.2.8
+      react-property: 2.0.2
+      style-to-js: 1.1.21
+
+  htmlparser2@10.1.0:
+    dependencies:
+      domelementtype: 2.3.0
+      domhandler: 5.0.3
+      domutils: 3.2.2
+      entities: 7.0.1
+
+  iconv-lite@0.6.3:
+    dependencies:
+      safer-buffer: 2.1.2
+
+  import-meta-resolve@4.2.0: {}
+
+  inline-style-parser@0.2.7: {}
+
+  internmap@1.0.1: {}
+
+  internmap@2.0.3: {}
+
+  is-alphabetical@2.0.1: {}
+
+  is-alphanumerical@2.0.1:
+    dependencies:
+      is-alphabetical: 2.0.1
+      is-decimal: 2.0.1
+
+  is-decimal@2.0.1: {}
+
+  is-hexadecimal@2.0.1: {}
 
   is-mobile@5.0.0: {}
 
@@ -2107,9 +3164,28 @@ snapshots:
     dependencies:
       string-convert: 0.2.1
 
+  katex@0.16.47:
+    dependencies:
+      commander: 8.3.0
+
+  khroma@2.1.0: {}
+
+  layout-base@1.0.2: {}
+
+  layout-base@2.0.1: {}
+
   linkify-it@5.0.2:
     dependencies:
       uc.micro: 2.1.0
+
+  lodash-es@4.18.1: {}
+
+  lodash.throttle@4.1.1: {}
+
+  lowlight@1.20.0:
+    dependencies:
+      fault: 1.0.4
+      highlight.js: 10.7.3
 
   luxon@3.7.2: {}
 
@@ -2124,7 +3200,36 @@ snapshots:
 
   marked@14.0.0: {}
 
+  marked@15.0.12: {}
+
+  marked@16.4.2: {}
+
   mdurl@2.1.0: {}
+
+  mermaid@11.17.2:
+    dependencies:
+      '@braintree/sanitize-url': 7.1.2
+      '@iconify/utils': 3.1.4
+      '@mermaid-js/parser': 1.2.1
+      '@types/d3': 7.4.3
+      '@upsetjs/venn.js': 2.0.0
+      cytoscape: 3.34.2
+      cytoscape-cose-bilkent: 4.1.0(cytoscape@3.34.2)
+      cytoscape-fcose: 2.2.0(cytoscape@3.34.2)
+      d3: 7.9.0
+      d3-sankey: 0.12.3
+      dagre-d3-es: 7.0.14
+      dayjs: 1.11.23
+      dompurify: 3.4.14
+      es-toolkit: 1.52.0
+      fastdom: 1.0.12
+      katex: 0.16.47
+      khroma: 2.1.0
+      marked: 16.4.2
+      roughjs: 4.6.6
+      stylis: 4.4.0
+      ts-dedent: 2.3.0
+      uuid: 14.0.2
 
   moment@2.30.1: {}
 
@@ -2132,6 +3237,31 @@ snapshots:
     dependencies:
       dompurify: 3.4.8
       marked: 14.0.0
+
+  package-manager-detector@1.8.0: {}
+
+  parse-entities@4.0.2:
+    dependencies:
+      '@types/unist': 2.0.11
+      character-entities-legacy: 3.0.0
+      character-reference-invalid: 2.0.1
+      decode-named-character-reference: 1.3.0
+      is-alphanumerical: 2.0.1
+      is-decimal: 2.0.1
+      is-hexadecimal: 2.0.1
+
+  path-data-parser@0.1.0: {}
+
+  points-on-curve@0.2.0: {}
+
+  points-on-path@0.2.1:
+    dependencies:
+      path-data-parser: 0.1.0
+      points-on-curve: 0.2.0
+
+  prismjs@1.30.0: {}
+
+  property-information@7.2.0: {}
 
   punycode.js@2.3.1: {}
 
@@ -2465,11 +3595,43 @@ snapshots:
 
   react-is@19.2.8: {}
 
+  react-property@2.0.2: {}
+
   react-refresh@0.18.0: {}
+
+  react-syntax-highlighter@16.1.1(react@19.2.8):
+    dependencies:
+      '@babel/runtime': 7.29.7
+      highlight.js: 10.7.3
+      highlightjs-vue: 1.0.0
+      lowlight: 1.20.0
+      prismjs: 1.30.0
+      react: 19.2.8
+      refractor: 5.0.0
 
   react@19.2.8: {}
 
+  refractor@5.0.0:
+    dependencies:
+      '@types/hast': 3.0.5
+      '@types/prismjs': 1.26.6
+      hastscript: 9.0.1
+      parse-entities: 4.0.2
+
   resize-observer-polyfill@1.5.1: {}
+
+  robust-predicates@3.0.3: {}
+
+  roughjs@4.6.6:
+    dependencies:
+      hachure-fill: 0.5.2
+      path-data-parser: 0.1.0
+      points-on-curve: 0.2.0
+      points-on-path: 0.2.1
+
+  rw@1.3.3: {}
+
+  safer-buffer@2.1.2: {}
 
   scheduler@0.27.0: {}
 
@@ -2477,9 +3639,13 @@ snapshots:
     dependencies:
       compute-scroll-into-view: 3.1.1
 
+  space-separated-tokens@2.0.2: {}
+
   stackframe@1.3.4: {}
 
   state-local@1.0.7: {}
+
+  strictdom@1.0.1: {}
 
   string-convert@0.2.1: {}
 
@@ -2487,11 +3653,23 @@ snapshots:
     dependencies:
       ansi-regex: 5.0.1
 
+  style-to-js@1.1.21:
+    dependencies:
+      style-to-object: 1.0.14
+
+  style-to-object@1.0.14:
+    dependencies:
+      inline-style-parser: 0.2.7
+
   stylis@4.4.0: {}
 
   throttle-debounce@5.0.2: {}
 
+  tinyexec@1.3.0: {}
+
   toggle-selection@1.0.6: {}
+
+  ts-dedent@2.3.0: {}
 
   tslib@2.8.1: {}
 
@@ -2519,6 +3697,8 @@ snapshots:
       '@typescript/typescript-win32-x64': 7.0.2
 
   uc.micro@2.1.0: {}
+
+  uuid@14.0.2: {}
 
   webpack-hot-middleware@2.26.1:
     dependencies:

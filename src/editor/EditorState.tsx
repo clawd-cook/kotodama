@@ -35,7 +35,7 @@ type EditorContextValue = {
   duplicateSelected: () => void;
   updateSelectedProps: (props: Record<string, unknown>) => void;
   setDataModel: (value: unknown) => void;
-  applyJson: (text: string) => void;
+  applyJson: (text: string) => boolean;
   setJsonText: (text: string) => void;
   undo: () => void;
   redo: () => void;
@@ -129,7 +129,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const applyJson = useCallback(
-    (text: string) => {
+    (text: string): boolean => {
       try {
         const parsed = JSON.parse(text) as unknown;
         const next = foldMessages(parsed);
@@ -141,6 +141,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
         setErrors((current) =>
           current.filter((item) => item.source !== 'json'),
         );
+        return true;
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
         setJsonError(message);
@@ -148,6 +149,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
           ...current.filter((item) => item.source !== 'json'),
           { id: crypto.randomUUID(), message, source: 'json' },
         ]);
+        return false;
       }
     },
     [commit],

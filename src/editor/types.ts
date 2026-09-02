@@ -39,7 +39,7 @@ export type A2uiMessage = {
 export type EditorError = {
   id: string;
   message: string;
-  source: 'json' | 'protocol' | 'preview';
+  source: 'json' | 'protocol' | 'preview' | 'chat';
 };
 
 export type EditorEvent = {

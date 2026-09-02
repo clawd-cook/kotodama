@@ -1,10 +1,40 @@
-import { Button, Space, Tree, Typography } from 'antd';
+import { Button, Space, Tabs, Tree, Typography } from 'antd';
 import type { DataNode } from 'antd/es/tree';
-import { useEditor } from './EditorState';
+import { ChatPanel } from './chat/ChatPanel';
 import { PALETTE } from './demo';
+import { useEditor } from './EditorState';
 import { buildTree, canInsertInto } from './tree';
 
-export function Sidebar() {
+export function Sidebar({
+  resetCount,
+  theme,
+}: {
+  resetCount: number;
+  theme: 'light' | 'dark';
+}) {
+  return (
+    <div className="sidebar sidebar-with-tabs">
+      <Tabs
+        size="small"
+        defaultActiveKey="chat"
+        items={[
+          {
+            key: 'chat',
+            label: '对话',
+            children: <ChatPanel resetCount={resetCount} theme={theme} />,
+          },
+          {
+            key: 'tree',
+            label: '组件',
+            children: <ComponentPane />,
+          },
+        ]}
+      />
+    </div>
+  );
+}
+
+function ComponentPane() {
   const {
     snapshot,
     selectedId,
@@ -29,7 +59,7 @@ export function Sidebar() {
     }));
 
   return (
-    <div className="sidebar">
+    <div className="component-pane">
       <Typography.Text strong>组件树</Typography.Text>
       <Tree
         blockNode

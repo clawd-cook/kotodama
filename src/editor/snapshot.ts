@@ -62,6 +62,28 @@ function applyDataPath(
   return root;
 }
 
+type SurfaceAcc = {
+  catalogId: string;
+  sendDataModel: boolean;
+  components: Map<string, A2uiComponent>;
+  dataModel: unknown;
+};
+
+function ensureSurface(bySurface: Map<string, SurfaceAcc>, surfaceId: string): SurfaceAcc {
+  const existing = bySurface.get(surfaceId);
+  if (existing) {
+    return existing;
+  }
+  const created: SurfaceAcc = {
+    catalogId: BASIC_CATALOG_ID,
+    sendDataModel: true,
+    components: new Map(),
+    dataModel: {},
+  };
+  bySurface.set(surfaceId, created);
+  return created;
+}
+
 export function foldMessages(input: unknown): Snapshot {
   const list = Array.isArray(input) ? input : [];
   const bySurface = new Map<
@@ -99,10 +121,8 @@ export function foldMessages(input: unknown): Snapshot {
     }
     if (message.updateComponents) {
       const { surfaceId, components } = message.updateComponents;
-      const surface = bySurface.get(surfaceId);
-      if (!surface) {
-        continue;
-      }
+      const surface = ensureSurface(bySurface, surfaceId);
+      activeId = surfaceId;
       for (const component of components ?? []) {
         if (component?.id) {
           surface.components.set(component.id, { ...component });
@@ -111,10 +131,8 @@ export function foldMessages(input: unknown): Snapshot {
     }
     if (message.updateDataModel) {
       const { surfaceId, path, value } = message.updateDataModel;
-      const surface = bySurface.get(surfaceId);
-      if (!surface) {
-        continue;
-      }
+      const surface = ensureSurface(bySurface, surfaceId);
+      activeId = surfaceId;
       surface.dataModel = applyDataPath(surface.dataModel, path, value);
     }
   }
