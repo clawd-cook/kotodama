@@ -6,7 +6,9 @@ import loginOtp from './fixtures/login-otp.json';
 import login from './fixtures/login.json';
 import settings from './fixtures/settings.json';
 import { foldMessages, toMessages } from './snapshot';
+import { emptySnapshot } from './storage';
 import type { A2uiComponent, Snapshot } from './types';
+import { resolveChannel } from '../studio/channel';
 
 function applyFixture(doc: unknown) {
   return applyDocument(JSON.stringify(doc), createDemoSnapshot());
@@ -159,5 +161,21 @@ describe('C fixture round-trip', () => {
     expect((result.snapshot.dataModel as { itemOne?: string }).itemOne).toBe(
       '整理登录页',
     );
+  });
+
+  it('C-05 downloaded source does not contain the API key', () => {
+    const applied = applyDocument(JSON.stringify(login), emptySnapshot());
+    expect(applied.ok).toBe(true);
+    if (!applied.ok) {
+      return;
+    }
+    const resolved = resolveChannel(
+      { baseUrl: '', apiKey: 'test-key', model: '' },
+      { baseUrl: 'https://env.example', apiKey: 'env-key', model: 'env-model' },
+    );
+    expect(resolved.apiKey).toBe('test-key');
+    const text = JSON.stringify(toMessages(applied.snapshot));
+    expect(text).not.toContain('test-key');
+    expect(text).not.toContain('OPENAI_API_KEY');
   });
 });
