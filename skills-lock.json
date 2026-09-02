@@ -85,6 +85,12 @@
       "skillPath": "skills/narrative-text-visualization/SKILL.md",
       "computedHash": "eda161335a1d910121f1e8af1b8614aab68e6a47cef5214ddfe5b7c6e97568cb"
     },
+    "technical-writing": {
+      "source": "vercel/eve",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/technical-writing/SKILL.md",
+      "computedHash": "7df53a8749eb85f2e8d7363954b3c2762b0f23db344fb7d6d63cad26b2c51fe1"
+    },
     "vercel-react-best-practices": {
       "source": "vercel-labs/agent-skills",
       "sourceType": "github",
