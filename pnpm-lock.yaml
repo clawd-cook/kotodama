@@ -1,0 +1,508 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      react:
+        specifier: ^19.1.0
+        version: 19.2.8
+      react-dom:
+        specifier: ^19.1.0
+        version: 19.2.8(react@19.2.8)
+    devDependencies:
+      '@biomejs/biome':
+        specifier: ^1.9.4
+        version: 1.9.4
+      '@rsbuild/core':
+        specifier: ^1.3.1
+        version: 1.7.6
+      '@rsbuild/plugin-react':
+        specifier: ^1.1.1
+        version: 1.4.6(@rsbuild/core@1.7.6)(webpack-hot-middleware@2.26.1)
+      '@types/react':
+        specifier: ^19.1.0
+        version: 19.2.18
+      '@types/react-dom':
+        specifier: ^19.1.1
+        version: 19.2.5(@types/react@19.2.18)
+      typescript:
+        specifier: ^5.8.2
+        version: 5.9.3
+
+packages:
+
+  '@biomejs/biome@1.9.4':
+    resolution: {integrity: sha1-iXZigcvDoKroZaf/E9aq/+ooQr8=, tarball: http://registry.m.jd.com/@biomejs/biome/download/@biomejs/biome-1.9.4.tgz}
+    engines: {node: '>=14.21.3'}
+    hasBin: true
+
+  '@biomejs/cli-darwin-arm64@1.9.4':
+    resolution: {integrity: sha1-36N20jpUotjxcTPJLyPBvy5iUJ8=, tarball: http://registry.m.jd.com/@biomejs/cli-darwin-arm64/download/@biomejs/cli-darwin-arm64-1.9.4.tgz}
+    engines: {node: '>=14.21.3'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@biomejs/cli-darwin-x64@1.9.4':
+    resolution: {integrity: sha1-6vws44SdOF/AIjiq0cpKczlaZNk=, tarball: http://registry.m.jd.com/@biomejs/cli-darwin-x64/download/@biomejs/cli-darwin-x64-1.9.4.tgz}
+    engines: {node: '>=14.21.3'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@biomejs/cli-linux-arm64-musl@1.9.4':
+    resolution: {integrity: sha1-14DD4BdY/JDzJoNX4/GRY9H4T8o=, tarball: http://registry.m.jd.com/@biomejs/cli-linux-arm64-musl/download/@biomejs/cli-linux-arm64-musl-1.9.4.tgz}
+    engines: {node: '>=14.21.3'}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
+
+  '@biomejs/cli-linux-arm64@1.9.4':
+    resolution: {integrity: sha1-jtHdDolBmktmpH+VrvuMRq5gQck=, tarball: http://registry.m.jd.com/@biomejs/cli-linux-arm64/download/@biomejs/cli-linux-arm64-1.9.4.tgz}
+    engines: {node: '>=14.21.3'}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
+  '@biomejs/cli-linux-x64-musl@1.9.4':
+    resolution: {integrity: sha1-82mCuWa9Zxo2Zx4d5EF5Y9fbFfs=, tarball: http://registry.m.jd.com/@biomejs/cli-linux-x64-musl/download/@biomejs/cli-linux-x64-musl-1.9.4.tgz}
+    engines: {node: '>=14.21.3'}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+
+  '@biomejs/cli-linux-x64@1.9.4':
+    resolution: {integrity: sha1-oKf1ZoDHa4A03cFJ2/OYvdOkYug=, tarball: http://registry.m.jd.com/@biomejs/cli-linux-x64/download/@biomejs/cli-linux-x64-1.9.4.tgz}
+    engines: {node: '>=14.21.3'}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
+  '@biomejs/cli-win32-arm64@1.9.4':
+    resolution: {integrity: sha1-4u9OAITna34m8PyIfF7xJl6lYgA=, tarball: http://registry.m.jd.com/@biomejs/cli-win32-arm64/download/@biomejs/cli-win32-arm64-1.9.4.tgz}
+    engines: {node: '>=14.21.3'}
+    cpu: [arm64]
+    os: [win32]
+
+  '@biomejs/cli-win32-x64@1.9.4':
+    resolution: {integrity: sha1-THr6kOOXAhNZm0CV5i+H5ZcrI0A=, tarball: http://registry.m.jd.com/@biomejs/cli-win32-x64/download/@biomejs/cli-win32-x64-1.9.4.tgz}
+    engines: {node: '>=14.21.3'}
+    cpu: [x64]
+    os: [win32]
+
+  '@emnapi/core@1.11.3':
+    resolution: {integrity: sha1-XpU0ikLNHgbwuao4DNdAkdqk1SA=, tarball: http://registry.m.jd.com/@emnapi/core/download/@emnapi/core-1.11.3.tgz}
+
+  '@emnapi/runtime@1.11.3':
+    resolution: {integrity: sha1-hCV647BTHrKuwf+iPXBwDaAHupU=, tarball: http://registry.m.jd.com/@emnapi/runtime/download/@emnapi/runtime-1.11.3.tgz}
+
+  '@emnapi/wasi-threads@1.2.3':
+    resolution: {integrity: sha1-yb9y/UvluSiu6JSCDo2BTtc5Fuk=, tarball: http://registry.m.jd.com/@emnapi/wasi-threads/download/@emnapi/wasi-threads-1.2.3.tgz}
+
+  '@module-federation/error-codes@0.22.0':
+    resolution: {integrity: sha1-MczJkNwkDXORK6e9AB9+Nax1GZI=, tarball: http://registry.m.jd.com/@module-federation/error-codes/download/@module-federation/error-codes-0.22.0.tgz}
+
+  '@module-federation/runtime-core@0.22.0':
+    resolution: {integrity: sha1-cyHseSu30dIr7mFi7ENWS3adKjw=, tarball: http://registry.m.jd.com/@module-federation/runtime-core/download/@module-federation/runtime-core-0.22.0.tgz}
+
+  '@module-federation/runtime-tools@0.22.0':
+    resolution: {integrity: sha1-NvKnyyZ68gip0aI3/ppxtL8xQx4=, tarball: http://registry.m.jd.com/@module-federation/runtime-tools/download/@module-federation/runtime-tools-0.22.0.tgz}
+
+  '@module-federation/runtime@0.22.0':
+    resolution: {integrity: sha1-94nJ70DYRtEQcRyCIezArZONQ9g=, tarball: http://registry.m.jd.com/@module-federation/runtime/download/@module-federation/runtime-0.22.0.tgz}
+
+  '@module-federation/sdk@0.22.0':
+    resolution: {integrity: sha1-atTB3oWpAMPID/JsuHzOJT46J3A=, tarball: http://registry.m.jd.com/@module-federation/sdk/download/@module-federation/sdk-0.22.0.tgz}
+
+  '@module-federation/webpack-bundler-runtime@0.22.0':
+    resolution: {integrity: sha1-3L6Ply1yL+J45qfCGYjUvuU9QB0=, tarball: http://registry.m.jd.com/@module-federation/webpack-bundler-runtime/download/@module-federation/webpack-bundler-runtime-0.22.0.tgz}
+
+  '@napi-rs/wasm-runtime@1.0.7':
+    resolution: {integrity: sha1-3P6pmnXwYgmiNfPZQeNGClHpsUw=, tarball: http://registry.m.jd.com/@napi-rs/wasm-runtime/download/@napi-rs/wasm-runtime-1.0.7.tgz}
+
+  '@rsbuild/core@1.7.6':
+    resolution: {integrity: sha1-G6ax98XfdrFCJpujxA6wDG2wwts=, tarball: http://registry.m.jd.com/@rsbuild/core/download/@rsbuild/core-1.7.6.tgz}
+    engines: {node: '>=18.12.0'}
+    hasBin: true
+
+  '@rsbuild/plugin-react@1.4.6':
+    resolution: {integrity: sha1-ad2p6YIZduR264ObpOtTFT56Lrk=, tarball: http://registry.m.jd.com/@rsbuild/plugin-react/download/@rsbuild/plugin-react-1.4.6.tgz}
+    peerDependencies:
+      '@rsbuild/core': ^1.0.0 || ^2.0.0-0
+
+  '@rspack/binding-darwin-arm64@1.7.12':
+    resolution: {integrity: sha1-5uEOf/FcIlTWy+kSWnR62ogKNPM=, tarball: http://registry.m.jd.com/@rspack/binding-darwin-arm64/download/@rspack/binding-darwin-arm64-1.7.12.tgz}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@rspack/binding-darwin-x64@1.7.12':
+    resolution: {integrity: sha1-/pC2QijrSWEuSTIEkyX1Kk3c/Sg=, tarball: http://registry.m.jd.com/@rspack/binding-darwin-x64/download/@rspack/binding-darwin-x64-1.7.12.tgz}
+    cpu: [x64]
+    os: [darwin]
+
+  '@rspack/binding-linux-arm64-gnu@1.7.12':
+    resolution: {integrity: sha1-YdY6D8ubTrJbnWjh+JfI4mGailo=, tarball: http://registry.m.jd.com/@rspack/binding-linux-arm64-gnu/download/@rspack/binding-linux-arm64-gnu-1.7.12.tgz}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
+  '@rspack/binding-linux-arm64-musl@1.7.12':
+    resolution: {integrity: sha1-/VFXiQsSUJN7uYMy3Ls1/y16r9M=, tarball: http://registry.m.jd.com/@rspack/binding-linux-arm64-musl/download/@rspack/binding-linux-arm64-musl-1.7.12.tgz}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
+
+  '@rspack/binding-linux-x64-gnu@1.7.12':
+    resolution: {integrity: sha1-qMljxHoEMGmxVMcE2Hv2plh3Ksc=, tarball: http://registry.m.jd.com/@rspack/binding-linux-x64-gnu/download/@rspack/binding-linux-x64-gnu-1.7.12.tgz}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
+  '@rspack/binding-linux-x64-musl@1.7.12':
+    resolution: {integrity: sha1-HpWvKxUqCDMnLCbDRzz6YIMu+LA=, tarball: http://registry.m.jd.com/@rspack/binding-linux-x64-musl/download/@rspack/binding-linux-x64-musl-1.7.12.tgz}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+
+  '@rspack/binding-wasm32-wasi@1.7.12':
+    resolution: {integrity: sha1-N6EPMi6Cy9URFOijGC9Gxq8QGiA=, tarball: http://registry.m.jd.com/@rspack/binding-wasm32-wasi/download/@rspack/binding-wasm32-wasi-1.7.12.tgz}
+    cpu: [wasm32]
+
+  '@rspack/binding-win32-arm64-msvc@1.7.12':
+    resolution: {integrity: sha1-d/ZI7hy3F8UP3QISalKLSWBlQRY=, tarball: http://registry.m.jd.com/@rspack/binding-win32-arm64-msvc/download/@rspack/binding-win32-arm64-msvc-1.7.12.tgz}
+    cpu: [arm64]
+    os: [win32]
+
+  '@rspack/binding-win32-ia32-msvc@1.7.12':
+    resolution: {integrity: sha1-n3y7JqnI2aHMFdIFneIRcrFiPEE=, tarball: http://registry.m.jd.com/@rspack/binding-win32-ia32-msvc/download/@rspack/binding-win32-ia32-msvc-1.7.12.tgz}
+    cpu: [ia32]
+    os: [win32]
+
+  '@rspack/binding-win32-x64-msvc@1.7.12':
+    resolution: {integrity: sha1-tMbc6qY970qiBdJSRsGlsF1/NrA=, tarball: http://registry.m.jd.com/@rspack/binding-win32-x64-msvc/download/@rspack/binding-win32-x64-msvc-1.7.12.tgz}
+    cpu: [x64]
+    os: [win32]
+
+  '@rspack/binding@1.7.12':
+    resolution: {integrity: sha1-jAsZeV+YCw5ROFUkXmiXGTUsCKQ=, tarball: http://registry.m.jd.com/@rspack/binding/download/@rspack/binding-1.7.12.tgz}
+
+  '@rspack/core@1.7.12':
+    resolution: {integrity: sha1-4qNr0WoQ4QruWQWCcGSsS4pjsyE=, tarball: http://registry.m.jd.com/@rspack/core/download/@rspack/core-1.7.12.tgz}
+    engines: {node: '>=18.12.0'}
+    peerDependencies:
+      '@swc/helpers': '>=0.5.1'
+    peerDependenciesMeta:
+      '@swc/helpers':
+        optional: true
+
+  '@rspack/lite-tapable@1.1.0':
+    resolution: {integrity: sha1-PP2v7tAQeOEWvU8ZG2hMi0hN5CU=, tarball: http://registry.m.jd.com/@rspack/lite-tapable/download/@rspack/lite-tapable-1.1.0.tgz}
+
+  '@rspack/lite-tapable@1.1.5':
+    resolution: {integrity: sha1-1xEB6J4B6gMtvuVZxgrnSy+GI1M=, tarball: http://registry.m.jd.com/@rspack/lite-tapable/download/@rspack/lite-tapable-1.1.5.tgz}
+
+  '@rspack/plugin-react-refresh@1.6.2':
+    resolution: {integrity: sha1-u1Cm49mSzBiNsTAtrNiZ/NaQ6/k=, tarball: http://registry.m.jd.com/@rspack/plugin-react-refresh/download/@rspack/plugin-react-refresh-1.6.2.tgz}
+    peerDependencies:
+      react-refresh: '>=0.10.0 <1.0.0'
+      webpack-hot-middleware: 2.x
+
+  '@swc/helpers@0.5.23':
+    resolution: {integrity: sha1-GSh9DYbZYrERN2A5pQx5KQLJqGo=, tarball: http://registry.m.jd.com/@swc/helpers/download/@swc/helpers-0.5.23.tgz}
+
+  '@tybys/wasm-util@0.10.3':
+    resolution: {integrity: sha1-AVy6np3UfOFNA9KoxdVHv7FpZl0=, tarball: http://registry.m.jd.com/@tybys/wasm-util/download/@tybys/wasm-util-0.10.3.tgz}
+
+  '@types/react-dom@19.2.5':
+    resolution: {integrity: sha1-1Oz41wTKtZkB0/uwl1tvhVMGWV8=, tarball: http://registry.m.jd.com/@types/react-dom/download/@types/react-dom-19.2.5.tgz}
+    peerDependencies:
+      '@types/react': ^19.2.0
+
+  '@types/react@19.2.18':
+    resolution: {integrity: sha1-6wtqH7Y10alpLV+Eo0lb2K0VNwc=, tarball: http://registry.m.jd.com/@types/react/download/@types/react-19.2.18.tgz}
+
+  ansi-html-community@0.0.8:
+    resolution: {integrity: sha1-afvE1sy+OD+XNpNK40w/gpDxv0E=, tarball: http://registry.m.jd.com/ansi-html-community/download/ansi-html-community-0.0.8.tgz}
+    engines: {'0': node >= 0.8.0}
+    hasBin: true
+
+  ansi-regex@5.0.1:
+    resolution: {integrity: sha1-CCyyyJyf6GWaMRpTvWpNxTAdswQ=, tarball: http://registry.m.jd.com/ansi-regex/download/ansi-regex-5.0.1.tgz}
+    engines: {node: '>=8'}
+
+  core-js@3.47.0:
+    resolution: {integrity: sha1-Q27wdlDhka/rhMJEgbKYvWDrShc=, tarball: http://registry.m.jd.com/core-js/download/core-js-3.47.0.tgz}
+
+  csstype@3.2.3:
+    resolution: {integrity: sha1-7EjA8+mT5QZIyG2lWeJhCZXPmJo=, tarball: http://registry.m.jd.com/csstype/download/csstype-3.2.3.tgz}
+
+  error-stack-parser@2.1.4:
+    resolution: {integrity: sha1-IpywHNv6hEQL+pGHYoW5RoAYgoY=, tarball: http://registry.m.jd.com/error-stack-parser/download/error-stack-parser-2.1.4.tgz}
+
+  html-entities@2.6.0:
+    resolution: {integrity: sha1-fGTx6js2gYzK49P7SLaXQgjphPg=, tarball: http://registry.m.jd.com/html-entities/download/html-entities-2.6.0.tgz}
+
+  jiti@2.7.0:
+    resolution: {integrity: sha1-l0Io8vTKK8IYhaF5e0X+po6VDGQ=, tarball: http://registry.m.jd.com/jiti/download/jiti-2.7.0.tgz}
+    hasBin: true
+
+  react-dom@19.2.8:
+    resolution: {integrity: sha1-O0a57tqHfN/yzxPSdw//SuNsLsI=, tarball: http://registry.m.jd.com/react-dom/download/react-dom-19.2.8.tgz}
+    peerDependencies:
+      react: ^19.2.8
+
+  react-refresh@0.18.0:
+    resolution: {integrity: sha1-Lc6X9P6TKk2BQvoWMOR1wXKcgGI=, tarball: http://registry.m.jd.com/react-refresh/download/react-refresh-0.18.0.tgz}
+    engines: {node: '>=0.10.0'}
+
+  react@19.2.8:
+    resolution: {integrity: sha1-qAZj27WNacb+P9KR08syTop9/y0=, tarball: http://registry.m.jd.com/react/download/react-19.2.8.tgz}
+    engines: {node: '>=0.10.0'}
+
+  scheduler@0.27.0:
+    resolution: {integrity: sha1-DE74LWfR5cHjWej8dtOofwRf5b0=, tarball: http://registry.m.jd.com/scheduler/download/scheduler-0.27.0.tgz}
+
+  stackframe@1.3.4:
+    resolution: {integrity: sha1-uIGgBMjBSaXo7+831RsW5BKUMxA=, tarball: http://registry.m.jd.com/stackframe/download/stackframe-1.3.4.tgz}
+
+  strip-ansi@6.0.1:
+    resolution: {integrity: sha1-nibGPTD1NEPpSJSVshBdN7Z6hdk=, tarball: http://registry.m.jd.com/strip-ansi/download/strip-ansi-6.0.1.tgz}
+    engines: {node: '>=8'}
+
+  tslib@2.8.1:
+    resolution: {integrity: sha1-YS7+TtI11Wfoq6Xypfq3AoCt6D8=, tarball: http://registry.m.jd.com/tslib/download/tslib-2.8.1.tgz}
+
+  typescript@5.9.3:
+    resolution: {integrity: sha1-W09Z4VMQqxeiFvXWz1PuR27eZw8=, tarball: http://registry.m.jd.com/typescript/download/typescript-5.9.3.tgz}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
+  webpack-hot-middleware@2.26.1:
+    resolution: {integrity: sha1-hyFPHj+fOsq5Jx/vnm7XtjfXGcA=, tarball: http://registry.m.jd.com/webpack-hot-middleware/download/webpack-hot-middleware-2.26.1.tgz}
+
+snapshots:
+
+  '@biomejs/biome@1.9.4':
+    optionalDependencies:
+      '@biomejs/cli-darwin-arm64': 1.9.4
+      '@biomejs/cli-darwin-x64': 1.9.4
+      '@biomejs/cli-linux-arm64': 1.9.4
+      '@biomejs/cli-linux-arm64-musl': 1.9.4
+      '@biomejs/cli-linux-x64': 1.9.4
+      '@biomejs/cli-linux-x64-musl': 1.9.4
+      '@biomejs/cli-win32-arm64': 1.9.4
+      '@biomejs/cli-win32-x64': 1.9.4
+
+  '@biomejs/cli-darwin-arm64@1.9.4':
+    optional: true
+
+  '@biomejs/cli-darwin-x64@1.9.4':
+    optional: true
+
+  '@biomejs/cli-linux-arm64-musl@1.9.4':
+    optional: true
+
+  '@biomejs/cli-linux-arm64@1.9.4':
+    optional: true
+
+  '@biomejs/cli-linux-x64-musl@1.9.4':
+    optional: true
+
+  '@biomejs/cli-linux-x64@1.9.4':
+    optional: true
+
+  '@biomejs/cli-win32-arm64@1.9.4':
+    optional: true
+
+  '@biomejs/cli-win32-x64@1.9.4':
+    optional: true
+
+  '@emnapi/core@1.11.3':
+    dependencies:
+      '@emnapi/wasi-threads': 1.2.3
+      tslib: 2.8.1
+    optional: true
+
+  '@emnapi/runtime@1.11.3':
+    dependencies:
+      tslib: 2.8.1
+    optional: true
+
+  '@emnapi/wasi-threads@1.2.3':
+    dependencies:
+      tslib: 2.8.1
+    optional: true
+
+  '@module-federation/error-codes@0.22.0': {}
+
+  '@module-federation/runtime-core@0.22.0':
+    dependencies:
+      '@module-federation/error-codes': 0.22.0
+      '@module-federation/sdk': 0.22.0
+
+  '@module-federation/runtime-tools@0.22.0':
+    dependencies:
+      '@module-federation/runtime': 0.22.0
+      '@module-federation/webpack-bundler-runtime': 0.22.0
+
+  '@module-federation/runtime@0.22.0':
+    dependencies:
+      '@module-federation/error-codes': 0.22.0
+      '@module-federation/runtime-core': 0.22.0
+      '@module-federation/sdk': 0.22.0
+
+  '@module-federation/sdk@0.22.0': {}
+
+  '@module-federation/webpack-bundler-runtime@0.22.0':
+    dependencies:
+      '@module-federation/runtime': 0.22.0
+      '@module-federation/sdk': 0.22.0
+
+  '@napi-rs/wasm-runtime@1.0.7':
+    dependencies:
+      '@emnapi/core': 1.11.3
+      '@emnapi/runtime': 1.11.3
+      '@tybys/wasm-util': 0.10.3
+    optional: true
+
+  '@rsbuild/core@1.7.6':
+    dependencies:
+      '@rspack/core': 1.7.12(@swc/helpers@0.5.23)
+      '@rspack/lite-tapable': 1.1.5
+      '@swc/helpers': 0.5.23
+      core-js: 3.47.0
+      jiti: 2.7.0
+
+  '@rsbuild/plugin-react@1.4.6(@rsbuild/core@1.7.6)(webpack-hot-middleware@2.26.1)':
+    dependencies:
+      '@rsbuild/core': 1.7.6
+      '@rspack/plugin-react-refresh': 1.6.2(react-refresh@0.18.0)(webpack-hot-middleware@2.26.1)
+      react-refresh: 0.18.0
+    transitivePeerDependencies:
+      - webpack-hot-middleware
+
+  '@rspack/binding-darwin-arm64@1.7.12':
+    optional: true
+
+  '@rspack/binding-darwin-x64@1.7.12':
+    optional: true
+
+  '@rspack/binding-linux-arm64-gnu@1.7.12':
+    optional: true
+
+  '@rspack/binding-linux-arm64-musl@1.7.12':
+    optional: true
+
+  '@rspack/binding-linux-x64-gnu@1.7.12':
+    optional: true
+
+  '@rspack/binding-linux-x64-musl@1.7.12':
+    optional: true
+
+  '@rspack/binding-wasm32-wasi@1.7.12':
+    dependencies:
+      '@napi-rs/wasm-runtime': 1.0.7
+    optional: true
+
+  '@rspack/binding-win32-arm64-msvc@1.7.12':
+    optional: true
+
+  '@rspack/binding-win32-ia32-msvc@1.7.12':
+    optional: true
+
+  '@rspack/binding-win32-x64-msvc@1.7.12':
+    optional: true
+
+  '@rspack/binding@1.7.12':
+    optionalDependencies:
+      '@rspack/binding-darwin-arm64': 1.7.12
+      '@rspack/binding-darwin-x64': 1.7.12
+      '@rspack/binding-linux-arm64-gnu': 1.7.12
+      '@rspack/binding-linux-arm64-musl': 1.7.12
+      '@rspack/binding-linux-x64-gnu': 1.7.12
+      '@rspack/binding-linux-x64-musl': 1.7.12
+      '@rspack/binding-wasm32-wasi': 1.7.12
+      '@rspack/binding-win32-arm64-msvc': 1.7.12
+      '@rspack/binding-win32-ia32-msvc': 1.7.12
+      '@rspack/binding-win32-x64-msvc': 1.7.12
+
+  '@rspack/core@1.7.12(@swc/helpers@0.5.23)':
+    dependencies:
+      '@module-federation/runtime-tools': 0.22.0
+      '@rspack/binding': 1.7.12
+      '@rspack/lite-tapable': 1.1.0
+    optionalDependencies:
+      '@swc/helpers': 0.5.23
+
+  '@rspack/lite-tapable@1.1.0': {}
+
+  '@rspack/lite-tapable@1.1.5': {}
+
+  '@rspack/plugin-react-refresh@1.6.2(react-refresh@0.18.0)(webpack-hot-middleware@2.26.1)':
+    dependencies:
+      error-stack-parser: 2.1.4
+      react-refresh: 0.18.0
+      webpack-hot-middleware: 2.26.1
+
+  '@swc/helpers@0.5.23':
+    dependencies:
+      tslib: 2.8.1
+
+  '@tybys/wasm-util@0.10.3':
+    dependencies:
+      tslib: 2.8.1
+    optional: true
+
+  '@types/react-dom@19.2.5(@types/react@19.2.18)':
+    dependencies:
+      '@types/react': 19.2.18
+
+  '@types/react@19.2.18':
+    dependencies:
+      csstype: 3.2.3
+
+  ansi-html-community@0.0.8: {}
+
+  ansi-regex@5.0.1: {}
+
+  core-js@3.47.0: {}
+
+  csstype@3.2.3: {}
+
+  error-stack-parser@2.1.4:
+    dependencies:
+      stackframe: 1.3.4
+
+  html-entities@2.6.0: {}
+
+  jiti@2.7.0: {}
+
+  react-dom@19.2.8(react@19.2.8):
+    dependencies:
+      react: 19.2.8
+      scheduler: 0.27.0
+
+  react-refresh@0.18.0: {}
+
+  react@19.2.8: {}
+
+  scheduler@0.27.0: {}
+
+  stackframe@1.3.4: {}
+
+  strip-ansi@6.0.1:
+    dependencies:
+      ansi-regex: 5.0.1
+
+  tslib@2.8.1: {}
+
+  typescript@5.9.3: {}
+
+  webpack-hot-middleware@2.26.1:
+    dependencies:
+      ansi-html-community: 0.0.8
+      html-entities: 2.6.0
+      strip-ansi: 6.0.1
