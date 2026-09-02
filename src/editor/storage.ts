@@ -1,6 +1,39 @@
-import { createDemoSnapshot } from './demo';
-import { foldMessages } from './snapshot';
-import type { Snapshot } from './types';
+import { SURFACE_ID, foldMessages, toMessages } from './snapshot';
+import { BASIC_CATALOG_ID, type Snapshot } from './types';
+import { validateSnapshot } from './validate';
+
+export function emptySnapshot(): Snapshot {
+  return {
+    surfaceId: SURFACE_ID,
+    catalogId: BASIC_CATALOG_ID,
+    sendDataModel: true,
+    components: [],
+    dataModel: {},
+  };
+}
+
+export function isCurrentPage(snapshot: Snapshot): boolean {
+  return validateSnapshot(snapshot, toMessages(snapshot)) === null;
+}
+
+export function parseDraft(raw: string | null): Snapshot {
+  if (!raw) {
+    return emptySnapshot();
+  }
+  try {
+    const parsed = JSON.parse(raw) as unknown;
+    const snapshot =
+      parsed && typeof parsed === 'object' && 'components' in parsed
+        ? (parsed as Snapshot)
+        : foldMessages(parsed);
+    if (!isCurrentPage(snapshot)) {
+      return emptySnapshot();
+    }
+    return snapshot;
+  } catch {
+    return emptySnapshot();
+  }
+}
 
 const DRAFT_KEY = 'kotodama.draft';
 const THEME_KEY = 'kotodama.theme';
@@ -29,17 +62,9 @@ function clamp(value: number, min: number, max: number) {
 
 export function loadDraft(): Snapshot {
   try {
-    const raw = localStorage.getItem(DRAFT_KEY);
-    if (!raw) {
-      return createDemoSnapshot();
-    }
-    const parsed = JSON.parse(raw) as unknown;
-    if (parsed && typeof parsed === 'object' && 'components' in parsed) {
-      return parsed as Snapshot;
-    }
-    return foldMessages(parsed);
+    return parseDraft(localStorage.getItem(DRAFT_KEY));
   } catch {
-    return createDemoSnapshot();
+    return emptySnapshot();
   }
 }
 

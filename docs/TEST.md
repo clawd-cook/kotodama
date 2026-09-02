@@ -1,9 +1,9 @@
 # 言灵 TEST
 
-**产品：** 言灵（kotodama） v1.0.0  
+**产品：** 言灵（kotodama） v1.0.1  
 **依据：** [PRD](./PRD.md) · [TRD](./TRD.md) · [Design](./Design.md)
 
-本文是 v1.0.0 的用例清单，不是测试实现。实现时按 **TDD 切片**：先写一条会失败的用例，再写刚好让它通过的代码。不要一次把全表写成空壳测试再补实现。
+本文是用例清单，不是测试实现。v1.0.0 的 W / C / P / F / M 仍然有效。v1.0.1 补外壳、图鉴、案例、设置。实现时按 **TDD 切片**：先写一条会失败的用例，再写刚好让它通过的代码。不要一次把全表写成空壳测试再补实现。
 
 期望值来自本文件、夹具文件和 PRD/TRD/Design 的原文，不要用实现函数再算一遍当作 expected。
 
@@ -15,11 +15,18 @@
 
 | ID | Seam | Public interface | Observe |
 | --- | --- | --- | --- |
-| **W** | Write gate | `applyDocument(text, current): ApplyResult`（可由现有 `applyJson` 长成） | 成功得到新 `Snapshot`；失败 `ok: false`，`current` 原样，中文 `message` |
-| **C** | Codec | `toMessages(snapshot)` / `foldMessages(messages)` | 源文件数组 ↔ 快照。往返后 `surfaceId`、`catalogId`、按 id 的组件、`dataModel` 与夹具一致 |
-| **P** | Chat present | `presentAssistant(raw, applyResult)`（parse + 展示可同模块导出） | 给气泡的字符串；成功是 `summary` 或「已更新界面。」；失败是「页面没改。」开头；不含 `createSurface` / `updateComponents` |
-| **F** | Fixtures | `src/editor/fixtures/*.json` 作为独立真源 | 夹具本身能 `applyDocument` 成功；字段是手写字面量 |
-| **M** | Manual | 浏览器里的工坊 / 纸页 / 真模型 | 清单勾选，不进单元套件 |
+| **W** | Write gate | `applyDocument(text, current): ApplyResult` | 成功得到新 `Snapshot`；失败 `ok: false`，`current` 原样，中文 `message` |
+| **C** | Codec | `toMessages(snapshot)` / `foldMessages(messages)` | 源文件数组 ↔ 快照。往返后 `surfaceId`、`catalogId`、按 id 的组件、`dataModel` 与夹具一致。下载文本不含 API Key |
+| **P** | Chat present | `presentAssistant(raw, applyResult)` | 给气泡的字符串；成功是 `summary` 或「已更新界面。」；失败是「页面没改。」开头；不含 `createSurface` / `updateComponents` |
+| **F** | Fixtures | `src/editor/fixtures/*.json` 作为独立真源 | 夹具本身能 `applyDocument` 成功；字段是手写字面量。精选案例与这三份黄金夹具是同一文件 |
+| **D** | Draft | `emptySnapshot()` / `isCurrentPage(snapshot)` / `parseDraft(raw)` | 空稿不能当当前页。缺 key、坏 JSON、通不过校验都得到空稿，不是 demo。合法草稿按字段恢复 |
+| **R** | Create room | `createScreen({ snapshot, visitedWorkshop })` | `'landing'` 或 `'workshop'`。刷新只认当前页；会话内进过工坊则打开工坊 |
+| **L** | Landing submit | `PROMPT_ITEMS` / `landingSubmit(text, ready)` | 三个提示文案与 Design 原文相同。`ready` 则 `autoSend`；否则 `prefill`。不要发请求（那是调用方的事） |
+| **G** | Gallery | `src/studio/catalog/fixtures/<Name>.json` + `catalogPropertyNames(name)` | 18 份夹具都能 `applyDocument`；组件名 ⊆ 白名单；属性名 ⊆ 对应 `*Api.schema`，没有 `id` / `component` / `placeholder` / `className`。浏览路径不调用 `applyDocument` 去改工坊稿 |
+| **E** | Examples | `EXAMPLE_PAGES` + `shouldConfirmReplace(snapshot)` + `applyDocument` | 三个 id 指向黄金夹具。空稿装入后与 `foldMessages` 一致。已有合法当前页时，未确认前不 `commit`（由 `shouldConfirmReplace === true` 表达） |
+| **H** | Channel | `resolveChannel(ui, env)` | `ready` 与各字段用谁，按下方字面量表。空字符串和空白都当空 |
+| **X** | Chat proxy | `createChatProxy(env, fetchImpl)` 处理 health 与 completions | 发给上游的 URL / `Authorization` / `model`；body 没有 `kotodamaChannel`。`ready === false` 则 503。health JSON 没有 `apiKey` 字段，也不含 env 里的 Key 字符串 |
+| **M** | Manual | 浏览器里的屋子 / 工坊 / 纸页 / 真模型 | 清单勾选，不进单元套件 |
 
 `ApplyResult` 契约（实现须满足，测试只认这个形状）：
 
@@ -37,7 +44,9 @@ type ApplyResult =
 
 ## Slice order
 
-按这个顺序做 red → green。前一条绿了再写下一条。
+按这个顺序做 red → green。前一条绿了再写下一条。v1.0.0 闸门已经绿，v1.0.1 从 D-01 起切外壳。
+
+**v1.0.0（已完成，回归必须继续绿）**
 
 1. W-01 未知组件不能盖掉当前页  
 2. W-02 合法 demo 可以写入  
@@ -52,7 +61,27 @@ type ApplyResult =
 11. P-03 裸数组回退句「已更新界面。」  
 12. F-01…F-03 三份黄金夹具可写入  
 13. C-02…C-04 三份黄金夹具往返  
-14. M 清单（Design + KR1 真模型）
+
+**v1.0.1**
+
+1. D-01 空稿不是当前页  
+2. D-02 缺草稿 / 坏草稿得到空稿，不是 demo  
+3. D-03 合法草稿按字面量恢复  
+4. R-01 无当前页 → 落地页；有当前页 → 工坊  
+5. R-02 本会话进过工坊 → 工坊（即使当前是空稿）  
+6. L-01 通道就绪则自动发送；未就绪则预填  
+7. L-02 三个提示文案与工坊空状态相同  
+8. G-01 18 个图鉴夹具都能写入，且没有白名单外的组件名  
+9. G-02 属性名来自 schema，不含 `placeholder` / `className` / `id` / `component`  
+10. E-01 三个案例 id 指向黄金夹具文件  
+11. E-02 空稿装入后与 fold 夹具一致  
+12. E-03 已有合法当前页时 `shouldConfirmReplace` 为 true；空稿为 false  
+13. H-01…H-05 `resolveChannel` 字面量表  
+14. C-05 源文件文本不含已保存的 API Key  
+15. X-01 中间件按合并结果 `fetch` 上游，body 无 `kotodamaChannel`  
+16. X-02 未就绪返回 503 和通道未配那句话  
+17. X-03 health 不含 Key  
+18. M 清单（外壳 + Design + KR1 真模型）
 
 ---
 
@@ -308,6 +337,216 @@ type ApplyResult =
 
 系统开启减少动效。换稿时纸页可以换内容，不应再有落下位移。
 
+### M-07 · studio shell
+
+无合法草稿时打开产品。
+
+- 四个左轨文字可见：**开始创建**、**基础组件**、**精选案例**、**设置**。  
+- 落地页标题是 **从这里说出一页**。输入 placeholder 是 **描述你想要的界面…**。  
+- 落地页没有打开 / 下载 / 撤销 / 重做 / 新建。深色开关在。  
+- 点「做一个登录表单」：进入工坊；通道配齐时说话栏出现 **正在写下这一页…**。  
+- 基础组件默认是 `Column`。预览、JSON、属性表都在。复制成功文案 **已复制 JSON。** 工坊纸页不变。  
+- 精选案例三张纸。详情 **用这一页** 后进入工坊，纸页与案例一致。已有当前页时确认框文案为 **换上这一页？当前页会被盖掉。** / **留下** / **换上**。  
+- 设置三项有可见 label。保存文案 **已保存。后续对话用这组通道。** 清空保存 **已清空。下次对话用环境变量。** Key 是密码框。  
+- 刷新深层路径（`/catalog/Row`、`/examples/login`、`/settings`）仍停在该房间。  
+- 下载的 `kotodama.json` 里没有 API Key。
+
+### M-08 · live gold tasks from landing
+
+通道配齐后，从落地页点三个提示各走一遍。通过校验则纸页更新。与 M-04 相同的失败规则。
+
+---
+
+## D — Draft (KR5 foundation)
+
+空稿字面量：`components` 为 `[]`，`dataModel` 为 `{}`，`surfaceId` 为 `main`，`catalogId` 为上表 URL。它不是合法源文件。
+
+`isCurrentPage(snapshot)` 为真，当且仅当 `validateSnapshot(snapshot, toMessages(snapshot)) === null`。测试只认这个布尔结果，不要去读 `localStorage`。
+
+### D-01 · empty snapshot is not a current page
+
+- **Seam:** D  
+- **When:** `emptySnapshot()`。  
+- **Then:** `components` 长度为 0。`dataModel` 为 `{}`。`surfaceId` 为 `main`。`isCurrentPage` 为 false。
+
+### D-02 · missing or invalid draft becomes empty, not demo
+
+- **Seam:** D  
+- **When:** `parseDraft(null)`；另测 `parseDraft("{")`；另测一份带 `components` 但缺少 `root` 的对象 JSON。  
+- **Then:** 结果 `components` 长度为 0。`dataModel` 为 `{}`。结果里没有字面量 `任务管理`。
+
+### D-03 · valid draft restores literal fields
+
+- **Seam:** D  
+- **Given:** `JSON.stringify` 一份已通过校验的黄金登录快照（先 `applyDocument` 登录夹具得到 snapshot，再序列化该 snapshot）。  
+- **When:** `parseDraft` 这段文本。  
+- **Then:** `isCurrentPage` 为 true。`dataModel.title` 为 `登录`。
+
+---
+
+## R — Create room (KR5)
+
+`createScreen({ snapshot, visitedWorkshop })` 返回 `'landing'` 或 `'workshop'`。刷新后 `visitedWorkshop` 为 false。
+
+### R-01 · empty page opens landing; valid page opens workshop
+
+- **Seam:** R + D  
+- **When:** `visitedWorkshop` 为 false，snapshot 为空稿。  
+- **Then:** `'landing'`。  
+- **When:** `visitedWorkshop` 为 false，snapshot 为合法登录页。  
+- **Then:** `'workshop'`。
+
+### R-02 · visited workshop stays in workshop even if the page is empty
+
+- **Seam:** R  
+- **When:** snapshot 为空稿，`visitedWorkshop` 为 true（落地页提交过，或「用这一页」成功过）。  
+- **Then:** `'workshop'`。
+
+---
+
+## L — Landing submit (KR5)
+
+`PROMPT_ITEMS` 的 `label` 必须精确等于：
+
+- `做一个登录表单`
+- `做一个设置页`
+- `做一个带筛选的列表`
+
+`landingSubmit(text, ready)`：
+
+```ts
+type LandingSubmit =
+  | { autoSend: string }
+  | { prefill: string };
+```
+
+不要在这个函数里发 HTTP。通道是否就绪由调用方传入。
+
+### L-01 · ready auto-sends; not ready prefills
+
+- **Seam:** L  
+- **When:** `landingSubmit("做一个登录表单", true)`。  
+- **Then:** 结果含 `autoSend`，值为 `做一个登录表单`。不含 `prefill`。  
+- **When:** `landingSubmit("做一个登录表单", false)`。  
+- **Then:** 结果含 `prefill`，值为 `做一个登录表单`。不含 `autoSend`。
+
+### L-02 · landing prompts match workshop empty state
+
+- **Seam:** L  
+- **Then:** `PROMPT_ITEMS` 三个 `label` 精确等于上表三句。
+
+---
+
+## G — Catalog gallery (KR6)
+
+夹具路径：`src/studio/catalog/fixtures/<Name>.json`，`<Name>` 为白名单协议名（`Column`、`TextField` 等）。内容是手写消息数组。
+
+属性名来自 `@a2ui/web_core` 对应 `*Api.schema` 的字段，不是 antd。测试自己从 schema 取出字段集合当 expected。
+
+### G-01 · every catalog fixture is a valid page
+
+- **Seam:** G + W  
+- **When:** 对 `ALLOWED_COMPONENTS` 每一个名字，读取对应夹具，`applyDocument` 到一份空稿（或 demo，结果不应依赖 current）。  
+- **Then:** `ok` 为 true。夹具里出现的 `component` 值都在白名单内。文档里出现该协议名。
+
+### G-02 · property names stay inside the catalog schema
+
+- **Seam:** G  
+- **When:** `catalogPropertyNames(name)`。  
+- **Then:** 返回的名字 ⊆ 该组件 schema 字段。不含 `id`、`component`、`placeholder`、`className`。
+
+图鉴浏览不得 `commit` 工坊稿。单元层不要拿一份共享 `current` 去断言浏览后稿被改写——浏览路径根本不应调用写入管道。
+
+---
+
+## E — Featured examples (KR7)
+
+```ts
+type ExampleId = 'login' | 'settings' | 'filtered-list';
+```
+
+`EXAMPLE_PAGES[id].messages` 必须是 `src/editor/fixtures/` 下对应文件，不要另抄一份 JSON。
+
+`shouldConfirmReplace(snapshot)` 为 true，当且仅当 `isCurrentPage(snapshot)`。
+
+### E-01 · example ids point at golden fixture files
+
+- **Seam:** E + F  
+- **Then:** `login` / `settings` / `filtered-list` 三份 messages 分别与 `fixtures/login.json`、`settings.json`、`filtered-list.json` 的解析结果一致（`JSON.stringify` 相等即可，因为是同一份真源）。
+
+### E-02 · applying an example onto an empty page matches a fold
+
+- **Seam:** E + W + C  
+- **Given:** current 为空稿。  
+- **When:** `applyDocument(JSON.stringify(EXAMPLE_PAGES.login.messages), current)`。  
+- **Then:** `ok`。按 id 的组件与 `dataModel` 与 `foldMessages(login.json)` 一致。`dataModel.title` 为 `登录`。
+
+同条可再跑 `settings`、`filtered-list`。
+
+### E-03 · replacing a valid page requires confirmation
+
+- **Seam:** E + D  
+- **Then:** 空稿 `shouldConfirmReplace` 为 false。合法登录页 `shouldConfirmReplace` 为 true。
+
+---
+
+## H — Channel resolve (KR8)
+
+```ts
+type ChannelFields = { baseUrl: string; apiKey: string; model: string };
+type ResolvedChannel = ChannelFields & { ready: boolean };
+```
+
+空字符串、只含空白，都当空。expected 是下表字面量，不要用实现再算一遍。
+
+| ID | ui | env | ready | 字段 |
+| --- | --- | --- | --- | --- |
+| H-01 | 三项 `""` | `https://env.example` / `env-key` / `env-model` | true | 全 env |
+| H-02 | `""` / `""` / `ui-model` | 同上三项都有 | true | `baseUrl`/`apiKey` 为 env，`model` 为 `ui-model` |
+| H-03 | `https://ui.example` / `ui-key` / `ui-model` | 任意非空 | true | 全界面 |
+| H-04 | `https://ui.example` / `""` / `""` | `https://env.example` / `""` / `env-model` | false | `baseUrl` 为界面，`apiKey` 为空，`model` 为 env |
+| H-05 | 三项 `""` | 三项 `""` | false | 三项都空 |
+
+不要把真实 Key 写进测试文件。用 `env-key` / `ui-key` / `test-key`。
+
+---
+
+## C-05 · downloaded source does not contain the API key
+
+- **Seam:** C + H  
+- **Given:** 一份合法登录快照；界面已保存 `apiKey: "test-key"`。  
+- **When:** `JSON.stringify(toMessages(snapshot))`。  
+- **Then:** 文本不含 `test-key`，不含 `OPENAI_API_KEY`。
+
+---
+
+## X — Chat proxy (KR8)
+
+系统边界才允许 mock：注入 `fetchImpl`。不要 mock `resolveChannel`。
+
+通道未配的人话（Design）：**通道没配好。去设置里填 Base URL、API Key 和模型名。**
+
+### X-01 · proxy fetches upstream with the resolved channel
+
+- **Seam:** X + H  
+- **Given:** env 为 H-01 的 env。请求 body 含 `model: "ignored"`，以及 `kotodamaChannel: { baseUrl: "https://ui.example", apiKey: "ui-key", model: "ui-model" }`。  
+- **When:** POST `/api/chat/completions`。  
+- **Then:** `fetchImpl` 的 URL 为 `https://ui.example/v1/chat/completions`。`Authorization` 为 `Bearer ui-key`。发给上游的 JSON `model` 为 `ui-model`。发给上游的 JSON **没有** `kotodamaChannel`。
+
+### X-02 · unready channel is 503 and does not fetch
+
+- **Seam:** X  
+- **Given:** env 三项都空。请求没有 `kotodamaChannel`。  
+- **When:** POST `/api/chat/completions`。  
+- **Then:** 状态码 503。JSON `error.message` 精确等于通道未配那句话。`fetchImpl` 未被调用。
+
+### X-03 · health never echoes the key
+
+- **Seam:** X  
+- **Given:** env `OPENAI_API_KEY` 为 `secret-key`，另两项非空。  
+- **When:** GET `/api/chat/health`。  
+- **Then:** JSON 有 `ok: true` 和 `env.hasApiKey: true`。没有 `apiKey` 字段。响应文本不含 `secret-key`。
+
 ---
 
 ## Out of suite
@@ -317,8 +556,9 @@ type ApplyResult =
 - `ensureRootId`、zod 内部、`antdApi` 的 `passthrough`  
 - `MessageProcessor` / `A2uiSurface` 像素  
 - 纸页 840px、印 8px、落下 6px（M-02 / 目视）  
-- 聊天代理如何改写 HTTP body  
-- 模型是否总能产出合法信封（M-04）
+- 模型是否总能产出合法信封（M-04 / M-08）  
+- React Router 是否调用了 `navigate`（测 R / L 的纯函数结果，不要测路由库）  
+- 图鉴「复制」是否调用了 Clipboard API（M-07）
 
 ---
 
@@ -328,7 +568,12 @@ type ApplyResult =
 | --- | --- |
 | KR1 | F-01…F-04，M-04 |
 | KR2 | W-01…W-09，P-02 |
-| KR3 | C-01…C-04，M-03 |
+| KR3 | C-01…C-04，C-05，M-03 |
 | KR4 | P-01…P-05，M-04 气泡 |
+| KR5 | D-01…D-03，R-01…R-02，L-01…L-02，M-07 |
+| KR6 | G-01…G-02，M-07 |
+| KR7 | E-01…E-03，M-07 |
+| KR8 | H-01…H-05，X-01…X-03，M-07 |
 
-首条 tracer：**W-01**。它一旦红，说明闸门还不存在；它一旦绿，坏 JSON 不能再毁掉 demo 页。
+v1.0.0 首条 tracer：**W-01**。  
+v1.0.1 首条 tracer：**D-01**。它一旦红，说明空稿还不存在；它一旦绿，进门不再落到 demo 任务管理页。
