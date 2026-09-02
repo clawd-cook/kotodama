@@ -1,5 +1,6 @@
 import { BASIC_CATALOG_ID } from '@kotodama/antd-catalog';
 import type { A2uiComponent, A2uiMessage, Snapshot } from './types';
+import { ALLOWED_COMPONENTS } from './validate';
 
 export const SURFACE_ID = 'main';
 
@@ -87,6 +88,145 @@ function ensureSurface(
   return created;
 }
 
+const ALLOWED_TYPE = new Set<string>(ALLOWED_COMPONENTS);
+const RESERVED_KEYS = new Set(['id', 'weight', 'component', 'type']);
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+}
+
+function flattenChildren(value: unknown): unknown {
+  if (Array.isArray(value)) {
+    return value.map((item) => {
+      if (typeof item === 'string') {
+        return item;
+      }
+      if (isRecord(item) && typeof item.componentId === 'string') {
+        return item.componentId;
+      }
+      return item;
+    });
+  }
+  if (isRecord(value) && Array.isArray(value.explicitList)) {
+    return flattenChildren(value.explicitList);
+  }
+  return value;
+}
+
+function childIdsOf(value: unknown): string[] {
+  if (typeof value === 'string') {
+    return [value];
+  }
+  if (!Array.isArray(value)) {
+    return [];
+  }
+  return value.filter((item): item is string => typeof item === 'string');
+}
+
+function slotId(value: unknown): string | undefined {
+  return typeof value === 'string' && value.length > 0 ? value : undefined;
+}
+
+/** Modal/Card/Button 用 trigger/content/child；模型常误写成 children。 */
+function healChildSlots(type: string, props: Record<string, unknown>): void {
+  const ids = childIdsOf(props.children);
+  if (type === 'Modal') {
+    if (ids.length >= 2) {
+      props.trigger = slotId(props.trigger) ?? ids[0];
+      props.content = slotId(props.content) ?? ids[1];
+    } else if (ids.length === 1) {
+      props.content = slotId(props.content) ?? ids[0];
+    }
+    delete props.children;
+    return;
+  }
+  if (type === 'Card' || type === 'Button') {
+    if (ids.length >= 1) {
+      props.child = slotId(props.child) ?? ids[0];
+    }
+    delete props.children;
+  }
+}
+
+function pickMappedType(
+  value: unknown,
+): { type: string; props: Record<string, unknown> } | null {
+  if (!isRecord(value)) {
+    return null;
+  }
+  const keys = Object.keys(value);
+  const allowed = keys.filter((key) => ALLOWED_TYPE.has(key));
+  const pick =
+    allowed.length === 1 ? allowed[0] : keys.length === 1 ? keys[0] : undefined;
+  if (!pick || !isRecord(value[pick])) {
+    return null;
+  }
+  return { type: pick, props: { ...(value[pick] as Record<string, unknown>) } };
+}
+
+export function flattenComponent(raw: unknown): A2uiComponent | null {
+  if (!isRecord(raw) || typeof raw.id !== 'string' || raw.id.length === 0) {
+    return null;
+  }
+  let type: string | undefined;
+  let props: Record<string, unknown> = { ...raw };
+  delete props.id;
+
+  if (typeof raw.component === 'string') {
+    type = raw.component;
+    delete props.component;
+  } else {
+    const mapped = pickMappedType(raw.component);
+    if (mapped) {
+      type = mapped.type;
+      props = { ...props, ...mapped.props };
+      delete props.component;
+    } else if (
+      isRecord(raw.component) &&
+      typeof raw.component.type === 'string'
+    ) {
+      type = raw.component.type;
+      const rest = { ...raw.component };
+      delete rest.type;
+      props = { ...props, ...rest };
+      delete props.component;
+    }
+  }
+
+  if (!type && typeof raw.type === 'string') {
+    type = raw.type;
+    delete props.type;
+  }
+
+  if (!type) {
+    const mapped = pickMappedType(
+      Object.fromEntries(
+        Object.entries(raw).filter(([key]) => !RESERVED_KEYS.has(key)),
+      ),
+    );
+    if (mapped) {
+      type = mapped.type;
+      props = { ...props, ...mapped.props };
+      delete props[mapped.type];
+    }
+  }
+
+  if (props.children !== undefined) {
+    props.children = flattenChildren(props.children);
+  }
+  if (type) {
+    healChildSlots(type, props);
+  }
+  delete props.type;
+  delete props.component;
+
+  return {
+    id: raw.id,
+    component: type ?? '',
+    ...props,
+  };
+}
+
 export function foldMessages(input: unknown): Snapshot {
   const list = Array.isArray(input) ? input : [];
   const bySurface = new Map<
@@ -127,8 +267,9 @@ export function foldMessages(input: unknown): Snapshot {
       const surface = ensureSurface(bySurface, surfaceId);
       activeId = surfaceId;
       for (const component of components ?? []) {
-        if (component?.id) {
-          surface.components.set(component.id, { ...component });
+        const flat = flattenComponent(component);
+        if (flat) {
+          surface.components.set(flat.id, flat);
         }
       }
     }

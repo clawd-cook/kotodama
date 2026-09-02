@@ -204,10 +204,17 @@ export function validateSnapshot(
   }
 
   for (const component of snapshot.components) {
-    if (!ALLOWED_SET.has(component.component)) {
+    const type = component.component;
+    if (typeof type !== 'string' || type.length === 0) {
       return {
         code: 'UNKNOWN_COMPONENT',
-        message: `组件 \`${component.id}\` 使用了未允许的组件 \`${component.component}\``,
+        message: `组件 \`${component.id}\` 缺少 component 类型。`,
+      };
+    }
+    if (!ALLOWED_SET.has(type)) {
+      return {
+        code: 'UNKNOWN_COMPONENT',
+        message: `组件 \`${component.id}\` 使用了未允许的组件 \`${type}\``,
       };
     }
 

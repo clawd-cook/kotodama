@@ -237,4 +237,159 @@ describe('W write gate', () => {
     }
     assertUnchanged(current);
   });
+
+  it('W-10 nested A2UI component maps still become a page', () => {
+    const catalogId =
+      'https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json';
+    const result = applyDocument(
+      JSON.stringify([
+        {
+          version: 'v0.9',
+          createSurface: {
+            surfaceId: 'main',
+            catalogId,
+            sendDataModel: true,
+          },
+        },
+        {
+          version: 'v0.9',
+          updateComponents: {
+            surfaceId: 'main',
+            components: [
+              {
+                id: 'root',
+                component: {
+                  Column: {
+                    children: { explicitList: ['title', 'submit'] },
+                    justify: 'start',
+                    align: 'stretch',
+                  },
+                },
+              },
+              {
+                id: 'title',
+                Text: {
+                  text: { path: '/title' },
+                  variant: 'h3',
+                },
+              },
+              {
+                id: 'submit',
+                type: 'Button',
+                child: 'label',
+                variant: 'primary',
+                action: { event: { name: 'login' } },
+              },
+              {
+                id: 'label',
+                component: { Text: { text: { path: '/submitLabel' } } },
+              },
+            ],
+          },
+        },
+        {
+          version: 'v0.9',
+          updateDataModel: {
+            surfaceId: 'main',
+            path: '/',
+            value: { title: '登录', submitLabel: '登录' },
+          },
+        },
+      ]),
+      currentPage(),
+    );
+    expect(result.ok).toBe(true);
+    if (!result.ok) {
+      return;
+    }
+    expect(
+      result.snapshot.components.find((item) => item.id === 'root')?.component,
+    ).toBe('Column');
+    expect(
+      result.snapshot.components.find((item) => item.id === 'root')?.children,
+    ).toEqual(['title', 'submit']);
+    expect(
+      result.snapshot.components.find((item) => item.id === 'title')?.component,
+    ).toBe('Text');
+    expect(
+      result.snapshot.components.find((item) => item.id === 'submit')?.component,
+    ).toBe('Button');
+  });
+
+  it('W-11 Modal children become trigger and content', () => {
+    const catalogId =
+      'https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json';
+    const result = applyDocument(
+      JSON.stringify([
+        {
+          version: 'v0.9',
+          createSurface: {
+            surfaceId: 'main',
+            catalogId,
+            sendDataModel: true,
+          },
+        },
+        {
+          version: 'v0.9',
+          updateComponents: {
+            surfaceId: 'main',
+            components: [
+              {
+                id: 'root',
+                component: 'Column',
+                children: ['row_modal'],
+              },
+              {
+                id: 'row_modal',
+                component: 'Modal',
+                children: ['open_btn', 'modal_body'],
+              },
+              {
+                id: 'open_btn',
+                component: 'Button',
+                children: ['btn_label'],
+                variant: 'default',
+              },
+              {
+                id: 'btn_label',
+                component: 'Text',
+                text: '查看序号',
+              },
+              {
+                id: 'modal_body',
+                component: 'Text',
+                text: { path: '/rowIndex' },
+                variant: 'body',
+              },
+            ],
+          },
+        },
+        {
+          version: 'v0.9',
+          updateDataModel: {
+            surfaceId: 'main',
+            path: '/',
+            value: { rowIndex: '1' },
+          },
+        },
+      ]),
+      currentPage(),
+    );
+    expect(result.ok).toBe(true);
+    if (!result.ok) {
+      return;
+    }
+    const modal = result.snapshot.components.find(
+      (item) => item.id === 'row_modal',
+    );
+    expect(modal?.component).toBe('Modal');
+    expect(modal?.trigger).toBe('open_btn');
+    expect(modal?.content).toBe('modal_body');
+    expect(modal?.children).toBeUndefined();
+    const button = result.snapshot.components.find(
+      (item) => item.id === 'open_btn',
+    );
+    expect(button?.child).toBe('btn_label');
+    expect(button?.children).toBeUndefined();
+  });
 });

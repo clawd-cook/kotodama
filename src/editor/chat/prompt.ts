@@ -9,8 +9,8 @@ export function buildSystemPrompt(currentJson: string): string {
 
 规则：
 1. 只能使用这些组件：${COMPONENTS}。不要编造其它组件名。
-2. 根组件 id 必须是 "root"。children / child 只引用其它组件的 id，不要内联定义。
-3. Column、Row、List 用 children（id 数组）。Card 只用 child（单个 id），不要写 children。Button 的可见文字放在独立 Text 子组件里，用 child 指向它。variant 只能是 default | primary | borderless。
+2. 根组件 id 必须是 "root"。children / child 只引用其它组件的 id，不要内联定义。component 必须是组件名字符串，例如 "component": "Column"。不要写成 "component": { "Column": { ... } }，不要用 type，不要把 Column 当成对象键。
+3. Column、Row、List 用 children（id 数组）。Card 只用 child（单个 id），不要写 children。Modal 只用 trigger 和 content（各一个 id），不要写 children。Button 的可见文字放在独立 Text 子组件里，用 child 指向它。variant 只能是 default | primary | borderless。
 4. TextField 属性只能用 label、value、variant、validationRegexp、checks。variant 只能是 shortText | longText | number | obscured。密码框用 variant: "obscured"，禁止写 type、placeholder、className、style。不要写 checks，除非 condition 是布尔值或 { "path": "/..." }。
 5. Image 用 url，不要写 src。验证码用 TextField，不要用 Image 冒充输入框。
 6. 文案尽量用数据绑定 { "path": "/xxx" }，并在 updateDataModel 里给出对应值。
