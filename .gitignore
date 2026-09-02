@@ -5,6 +5,7 @@
 
 # Dist
 node_modules
+.pnpm-store
 dist/
 
 # IDE
@@ -12,4 +13,6 @@ dist/
 !.vscode/extensions.json
 .idea
 
-.pnpm-store/
+# Environment variables
+.env
+!.env.example
