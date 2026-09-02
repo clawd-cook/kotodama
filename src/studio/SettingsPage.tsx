@@ -35,9 +35,7 @@ export function SettingsPage() {
           <Form.Item
             label="Base URL"
             extra={
-              <span className="settings-source">
-                {sourceLabel(ui.baseUrl)}
-              </span>
+              <span className="settings-source">{sourceLabel(ui.baseUrl)}</span>
             }
           >
             <Input
@@ -49,9 +47,7 @@ export function SettingsPage() {
           <Form.Item
             label="API Key"
             extra={
-              <span className="settings-source">
-                {sourceLabel(ui.apiKey)}
-              </span>
+              <span className="settings-source">{sourceLabel(ui.apiKey)}</span>
             }
           >
             <Input.Password
@@ -64,9 +60,7 @@ export function SettingsPage() {
           <Form.Item
             label="模型名"
             extra={
-              <span className="settings-source">
-                {sourceLabel(ui.model)}
-              </span>
+              <span className="settings-source">{sourceLabel(ui.model)}</span>
             }
           >
             <Input

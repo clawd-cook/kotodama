@@ -269,9 +269,7 @@ function StudioHouse({
             <div
               className="studio-workshop"
               hidden={!showWorkshop}
-              {...(!showWorkshop
-                ? { inert: true, 'aria-hidden': true }
-                : {})}
+              {...(!showWorkshop ? { inert: true, 'aria-hidden': true } : {})}
             >
               <EditorShell
                 theme={theme}

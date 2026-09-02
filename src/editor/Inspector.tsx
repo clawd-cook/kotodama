@@ -119,8 +119,7 @@ export function Inspector() {
     }
     return objectShape(impl.schema as ZodLike);
   }, [impl]);
-  const propError =
-    errorState.id === selectedId ? errorState.message : null;
+  const propError = errorState.id === selectedId ? errorState.message : null;
 
   if (!component) {
     return (
