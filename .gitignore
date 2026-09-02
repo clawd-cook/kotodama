@@ -16,3 +16,6 @@ dist/
 # Environment variables
 .env
 !.env.example
+
+# Test
+coverage

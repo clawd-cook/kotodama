@@ -28,6 +28,6 @@
     }
   },
   "files": {
-    "ignore": ["**/.agents/**", "**/node_modules/**", "**/submodules/**"]
+    "ignore": ["**/.agents/**", "**/node_modules/**", "**/submodules/**", "coverage/**"]
   }
 }
