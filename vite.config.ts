@@ -6,6 +6,11 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
+  server: {
+    watch: {
+      ignored: ['**/submodules/**'],
+    },
+  },
   plugins: [
     vue(),
     vueDevTools(),
@@ -14,5 +19,8 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
+  },
+  optimizeDeps: {
+    entries: ['index.html', '!**/submodules/**'],
   },
 })
