@@ -77,8 +77,8 @@ body,
 }
 
 .editor-seal {
-  width: 4px;
-  height: 16px;
+  width: 5px;
+  height: 18px;
   border-radius: 1px;
   background: #cf1322;
 }
@@ -308,7 +308,8 @@ body,
 .preview-sheet {
   width: 100%;
   max-width: 840px;
-  padding: 24px;
+  min-height: 360px;
+  padding: 32px 24px;
   border: 1px solid var(--ant-color-split);
   border-radius: 4px;
   background: var(--ant-color-bg-container);
