@@ -7,40 +7,91 @@ import {
   VideoApi,
 } from '@a2ui/web_core/v0_9/basic_catalog';
 import {
+  ArrowLeftOutlined,
+  ArrowRightOutlined,
+  BellOutlined,
+  CalendarOutlined,
+  CameraOutlined,
+  CheckOutlined,
+  CloseCircleOutlined,
   CloseOutlined,
   DeleteOutlined,
+  DownloadOutlined,
   EditOutlined,
+  ExclamationCircleOutlined,
+  EyeInvisibleOutlined,
+  EyeOutlined,
+  FolderOutlined,
+  HeartOutlined,
   HomeOutlined,
   InfoCircleOutlined,
+  LockOutlined,
   MailOutlined,
+  MenuOutlined,
+  PauseOutlined,
+  PhoneOutlined,
+  PlayCircleOutlined,
   PlusOutlined,
   QuestionCircleOutlined,
   SearchOutlined,
+  SendOutlined,
   SettingOutlined,
+  ShareAltOutlined,
+  ShoppingCartOutlined,
   StarOutlined,
+  StopOutlined,
+  UnlockOutlined,
+  UploadOutlined,
   UserOutlined,
+  WarningOutlined,
 } from '@ant-design/icons';
-import { Image, Typography } from 'antd';
+import { Card, Image, Typography } from 'antd';
 import type { CSSProperties, ReactNode } from 'react';
+import { antdApi } from './api';
 import { weightStyle } from './style';
 
 const ICON_MAP: Record<string, ReactNode> = {
   accountCircle: <UserOutlined />,
   add: <PlusOutlined />,
+  arrowBack: <ArrowLeftOutlined />,
+  arrowForward: <ArrowRightOutlined />,
+  calendarToday: <CalendarOutlined />,
+  camera: <CameraOutlined />,
+  check: <CheckOutlined />,
   close: <CloseOutlined />,
   delete: <DeleteOutlined />,
+  download: <DownloadOutlined />,
   edit: <EditOutlined />,
+  error: <CloseCircleOutlined />,
+  event: <CalendarOutlined />,
+  favorite: <HeartOutlined />,
+  folder: <FolderOutlined />,
   help: <QuestionCircleOutlined />,
   home: <HomeOutlined />,
   info: <InfoCircleOutlined />,
+  lock: <LockOutlined />,
+  lockOpen: <UnlockOutlined />,
   mail: <MailOutlined />,
-  search: <SearchOutlined />,
-  settings: <SettingOutlined />,
-  star: <StarOutlined />,
+  menu: <MenuOutlined />,
+  notifications: <BellOutlined />,
+  pause: <PauseOutlined />,
   person: <UserOutlined />,
+  phone: <PhoneOutlined />,
+  play: <PlayCircleOutlined />,
+  search: <SearchOutlined />,
+  send: <SendOutlined />,
+  settings: <SettingOutlined />,
+  share: <ShareAltOutlined />,
+  shoppingCart: <ShoppingCartOutlined />,
+  star: <StarOutlined />,
+  stop: <StopOutlined />,
+  upload: <UploadOutlined />,
+  visibility: <EyeOutlined />,
+  visibilityOff: <EyeInvisibleOutlined />,
+  warning: <WarningOutlined />,
 };
 
-export const Text = createComponentImplementation(TextApi, ({ props }) => {
+export const Text = createComponentImplementation(antdApi(TextApi), ({ props }) => {
   const text =
     typeof props.text === 'string' ? props.text : String(props.text ?? '');
   const style = weightStyle(props.weight);
@@ -70,7 +121,7 @@ export const Text = createComponentImplementation(TextApi, ({ props }) => {
 });
 
 export const ImageView = createComponentImplementation(
-  ImageApi,
+  antdApi(ImageApi),
   ({ props }) => {
     const fit =
       props.fit === 'scaleDown'
@@ -104,55 +155,59 @@ export const ImageView = createComponentImplementation(
   },
 );
 
-export const Icon = createComponentImplementation(IconApi, ({ props }) => {
+export const Icon = createComponentImplementation(antdApi(IconApi), ({ props }) => {
   if (
     typeof props.name === 'object' &&
     props.name !== null &&
     'svgPath' in props.name
   ) {
     return (
-      <svg
-        viewBox="0 0 24 24"
-        width={20}
-        height={20}
-        role="img"
-        aria-label="icon"
-        style={weightStyle(props.weight)}
-      >
-        <title>icon</title>
-        <path
-          d={(props.name as { svgPath: string }).svgPath}
-          fill="currentColor"
-        />
-      </svg>
+      <Typography.Text style={weightStyle(props.weight)}>
+        <svg
+          viewBox="0 0 24 24"
+          width={20}
+          height={20}
+          role="img"
+          aria-label="icon"
+        >
+          <title>icon</title>
+          <path
+            d={(props.name as { svgPath: string }).svgPath}
+            fill="currentColor"
+          />
+        </svg>
+      </Typography.Text>
     );
   }
   const name = typeof props.name === 'string' ? props.name : '';
   return (
-    <span style={weightStyle(props.weight)}>
-      {ICON_MAP[name] ?? <QuestionCircleOutlined />}
-    </span>
+    <Typography.Text style={weightStyle(props.weight)}>
+      {ICON_MAP[name] ?? <ExclamationCircleOutlined />}
+    </Typography.Text>
   );
 });
 
-export const Video = createComponentImplementation(VideoApi, ({ props }) => (
-  // biome-ignore lint/a11y/useMediaCaption: A2UI schema has no caption track
-  <video
-    src={props.url}
-    controls
-    style={{ width: '100%', ...weightStyle(props.weight) }}
-  />
+export const Video = createComponentImplementation(antdApi(VideoApi), ({ props }) => (
+  <Card
+    size="small"
+    styles={{ body: { padding: 0 } }}
+    style={weightStyle(props.weight)}
+  >
+    {/* biome-ignore lint/a11y/useMediaCaption: A2UI schema has no caption track */}
+    <video src={props.url} controls style={{ width: '100%', display: 'block' }} />
+  </Card>
 ));
 
 export const AudioPlayer = createComponentImplementation(
-  AudioPlayerApi,
+  antdApi(AudioPlayerApi),
   ({ props }) => (
-    <div style={weightStyle(props.weight)}>
-      {props.description ? (
-        <Typography.Text type="secondary">{props.description}</Typography.Text>
-      ) : null}
+    <Card
+      size="small"
+      title={props.description || undefined}
+      style={weightStyle(props.weight)}
+    >
       {/* biome-ignore lint/a11y/useMediaCaption: A2UI schema has no caption track */}
       <audio src={props.url} controls style={{ width: '100%' }} />
-    </div>
+    </Card>
   ),
 );

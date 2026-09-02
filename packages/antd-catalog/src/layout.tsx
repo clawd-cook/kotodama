@@ -8,13 +8,14 @@ import {
   RowApi,
   TabsApi,
 } from '@a2ui/web_core/v0_9/basic_catalog';
-import { Card as AntCard, Divider, Flex, Modal, Tabs } from 'antd';
+import { Card as AntCard, Divider, Flex, List as AntList, Modal, Tabs } from 'antd';
 import { useState } from 'react';
-import { ChildList } from './ChildList';
+import { antdApi } from './api';
+import { ChildList, type ChildRef } from './ChildList';
 import { mapAlign, mapJustify, weightStyle } from './style';
 
 export const Row = createComponentImplementation(
-  RowApi,
+  antdApi(RowApi),
   ({ props, buildChild, context }) => (
     <Flex
       gap={8}
@@ -34,7 +35,7 @@ export const Row = createComponentImplementation(
 );
 
 export const Column = createComponentImplementation(
-  ColumnApi,
+  antdApi(ColumnApi),
   ({ props, buildChild, context }) => (
     <Flex
       vertical
@@ -55,32 +56,50 @@ export const Column = createComponentImplementation(
 );
 
 export const List = createComponentImplementation(
-  ListApi,
+  antdApi(ListApi),
   ({ props, buildChild, context }) => {
     const horizontal = props.direction === 'horizontal';
+    const items: ChildRef[] = Array.isArray(props.children)
+      ? (props.children as ChildRef[])
+      : [];
+    if (horizontal) {
+      return (
+        <Flex
+          align={mapAlign(props.align)}
+          gap={8}
+          style={{
+            ...weightStyle(props.weight),
+            overflowX: 'auto',
+          }}
+        >
+          <ChildList
+            childList={props.children}
+            buildChild={buildChild}
+            context={context}
+          />
+        </Flex>
+      );
+    }
     return (
-      <Flex
-        vertical={!horizontal}
-        align={mapAlign(props.align)}
-        gap={8}
-        style={{
-          ...weightStyle(props.weight),
-          overflowX: horizontal ? 'auto' : 'hidden',
-          overflowY: horizontal ? 'hidden' : 'auto',
-        }}
-      >
-        <ChildList
-          childList={props.children}
-          buildChild={buildChild}
-          context={context}
-        />
-      </Flex>
+      <AntList
+        size="small"
+        split
+        style={weightStyle(props.weight)}
+        dataSource={items}
+        renderItem={(childRef) => (
+          <AntList.Item>
+            {typeof childRef === 'string'
+              ? buildChild(childRef)
+              : buildChild(childRef.id, childRef.basePath)}
+          </AntList.Item>
+        )}
+      />
     );
   },
 );
 
 export const Card = createComponentImplementation(
-  CardApi,
+  antdApi(CardApi),
   ({ props, buildChild }) => (
     <AntCard size="small" style={weightStyle(props.weight)}>
       {props.child ? buildChild(props.child) : null}
@@ -89,7 +108,7 @@ export const Card = createComponentImplementation(
 );
 
 export const TabsView = createComponentImplementation(
-  TabsApi,
+  antdApi(TabsApi),
   ({ props, buildChild }) => {
     const tabs = props.tabs ?? [];
     return (
@@ -106,7 +125,7 @@ export const TabsView = createComponentImplementation(
 );
 
 export const ModalView = createComponentImplementation(
-  ModalApi,
+  antdApi(ModalApi),
   ({ props, buildChild }) => {
     const [open, setOpen] = useState(false);
     return (
@@ -129,7 +148,7 @@ export const ModalView = createComponentImplementation(
 );
 
 export const DividerView = createComponentImplementation(
-  DividerApi,
+  antdApi(DividerApi),
   ({ props }) => (
     <Divider
       type={props.axis === 'vertical' ? 'vertical' : 'horizontal'}

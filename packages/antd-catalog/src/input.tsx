@@ -15,16 +15,24 @@ import {
   InputNumber,
   Radio,
   Slider,
-  Space,
   TimePicker,
-  Typography,
 } from 'antd';
 import dayjs from 'dayjs';
 import type { ReactNode } from 'react';
+import { antdApi } from './api';
+import { Field } from './Field';
 import { weightStyle } from './style';
 
+function extraString(
+  props: object,
+  key: string,
+): string | undefined {
+  const value = (props as Record<string, unknown>)[key];
+  return typeof value === 'string' ? value : undefined;
+}
+
 export const ButtonView = createComponentImplementation(
-  ButtonApi,
+  antdApi(ButtonApi),
   ({ props, buildChild }) => {
     const type =
       props.variant === 'primary'
@@ -46,12 +54,13 @@ export const ButtonView = createComponentImplementation(
 );
 
 export const TextField = createComponentImplementation(
-  TextFieldApi,
+  antdApi(TextFieldApi),
   ({ props }) => {
     const error = props.validationErrors?.[0];
+    const htmlType = extraString(props, 'type');
+    const obscured = props.variant === 'obscured' || htmlType === 'password';
     const common = {
       value: props.value ?? '',
-      onChange: (value: string) => props.setValue(value),
       status: error ? ('error' as const) : undefined,
     };
 
@@ -61,72 +70,66 @@ export const TextField = createComponentImplementation(
         <Input.TextArea
           value={common.value}
           status={common.status}
-          onChange={(event) => common.onChange(event.target.value)}
+          onChange={(event) => props.setValue(event.target.value)}
           rows={4}
         />
       );
-    } else if (props.variant === 'number') {
+    } else if (props.variant === 'number' || htmlType === 'number') {
       control = (
         <InputNumber
           style={{ width: '100%' }}
           value={common.value === '' ? undefined : Number(common.value)}
           status={common.status}
           onChange={(value) =>
-            common.onChange(value === null ? '' : String(value))
+            props.setValue(value === null ? '' : String(value))
           }
         />
       );
-    } else if (props.variant === 'obscured') {
+    } else if (obscured) {
       control = (
         <Input.Password
+          style={{ width: '100%' }}
           value={common.value}
           status={common.status}
-          onChange={(event) => common.onChange(event.target.value)}
+          onChange={(event) => props.setValue(event.target.value)}
         />
       );
     } else {
       control = (
         <Input
+          style={{ width: '100%' }}
+          type={htmlType && htmlType !== 'password' ? htmlType : undefined}
           value={common.value}
           status={common.status}
-          onChange={(event) => common.onChange(event.target.value)}
+          onChange={(event) => props.setValue(event.target.value)}
         />
       );
     }
 
     return (
-      <div style={weightStyle(props.weight)}>
-        {props.label ? <Typography.Text>{props.label}</Typography.Text> : null}
+      <Field label={props.label} error={error} weight={props.weight}>
         {control}
-        {error ? (
-          <Typography.Text type="danger">{error}</Typography.Text>
-        ) : null}
-      </div>
+      </Field>
     );
   },
 );
 
 export const CheckBox = createComponentImplementation(
-  CheckBoxApi,
+  antdApi(CheckBoxApi),
   ({ props }) => (
-    <div style={weightStyle(props.weight)}>
+    <Field error={props.validationErrors?.[0]} weight={props.weight}>
       <Checkbox
         checked={!!props.value}
         onChange={(event) => props.setValue(event.target.checked)}
       >
         {props.label}
       </Checkbox>
-      {props.validationErrors?.[0] ? (
-        <Typography.Text type="danger">
-          {props.validationErrors[0]}
-        </Typography.Text>
-      ) : null}
-    </div>
+    </Field>
   ),
 );
 
 export const ChoicePicker = createComponentImplementation(
-  ChoicePickerApi,
+  antdApi(ChoicePickerApi),
   ({ props }) => {
     const values = Array.isArray(props.value) ? props.value : [];
     const options = (props.options ?? []).map((opt) => ({
@@ -135,8 +138,7 @@ export const ChoicePicker = createComponentImplementation(
     }));
 
     return (
-      <Space direction="vertical" style={weightStyle(props.weight)}>
-        {props.label ? <Typography.Text>{props.label}</Typography.Text> : null}
+      <Field label={props.label} error={props.validationErrors?.[0]} weight={props.weight}>
         {props.variant === 'mutuallyExclusive' ? (
           <Radio.Group
             value={values[0]}
@@ -150,59 +152,69 @@ export const ChoicePicker = createComponentImplementation(
             onChange={(next) => props.setValue(next as string[])}
           />
         )}
-      </Space>
+      </Field>
     );
   },
 );
 
 export const SliderView = createComponentImplementation(
-  SliderApi,
+  antdApi(SliderApi),
   ({ props }) => (
-    <div style={weightStyle(props.weight)}>
-      {props.label ? <Typography.Text>{props.label}</Typography.Text> : null}
+    <Field label={props.label} error={props.validationErrors?.[0]} weight={props.weight}>
       <Slider
         min={props.min ?? 0}
         max={props.max}
         value={props.value ?? 0}
         onChange={(value) => props.setValue(value)}
       />
-    </div>
+    </Field>
   ),
 );
 
 export const DateTimeInput = createComponentImplementation(
-  DateTimeInputApi,
+  antdApi(DateTimeInputApi),
   ({ props }) => {
     if (!props.enableDate && !props.enableTime) {
       return null;
     }
     const value = props.value ? dayjs(props.value) : null;
     const parsed = value?.isValid() ? value : null;
+    let picker: ReactNode;
+    if (props.enableDate && props.enableTime) {
+      picker = (
+        <DatePicker
+          showTime
+          style={{ width: '100%' }}
+          value={parsed}
+          onChange={(next) => props.setValue(next ? next.toISOString() : '')}
+        />
+      );
+    } else if (props.enableDate) {
+      picker = (
+        <DatePicker
+          style={{ width: '100%' }}
+          value={parsed}
+          onChange={(next) =>
+            props.setValue(next ? next.format('YYYY-MM-DD') : '')
+          }
+        />
+      );
+    } else {
+      picker = (
+        <TimePicker
+          style={{ width: '100%' }}
+          value={parsed}
+          onChange={(next) =>
+            props.setValue(next ? next.format('HH:mm:ss') : '')
+          }
+        />
+      );
+    }
+
     return (
-      <div style={weightStyle(props.weight)}>
-        {props.label ? <Typography.Text>{props.label}</Typography.Text> : null}
-        {props.enableDate && props.enableTime ? (
-          <DatePicker
-            showTime
-            value={parsed}
-            onChange={(next) => props.setValue(next ? next.toISOString() : '')}
-          />
-        ) : props.enableDate ? (
-          <DatePicker
-            value={parsed}
-            onChange={(next) =>
-              props.setValue(next ? next.format('YYYY-MM-DD') : '')
-            }
-          />
-        ) : (
-          <TimePicker
-            value={parsed}
-            onChange={(next) =>
-              props.setValue(next ? next.format('HH:mm:ss') : '')
-            }
-          />
-        )}
-      </div>
+      <Field label={props.label} error={props.validationErrors?.[0]} weight={props.weight}>
+        {picker}
+      </Field>
     );
   },
 );

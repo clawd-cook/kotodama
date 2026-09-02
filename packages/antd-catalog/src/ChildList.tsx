@@ -1,7 +1,7 @@
 import type { ComponentContext } from '@a2ui/web_core/v0_9';
 import { Fragment, type ReactNode } from 'react';
 
-type ChildRef = string | { id: string; basePath: string };
+export type ChildRef = string | { id: string; basePath: string };
 
 export function ChildList({
   childList,
