@@ -26,7 +26,7 @@ export function SettingsPage() {
 
   return (
     <main className="settings-desk">
-      <div className="settings-sheet">
+      <div className="settings-form">
         <h1 className="studio-title">设置</h1>
         <Typography.Paragraph type="secondary">
           这三项只存在这台浏览器里。空着则用环境变量。
@@ -34,11 +34,17 @@ export function SettingsPage() {
         <Form id="channel-form" layout="vertical" onFinish={onSave}>
           <Form.Item
             label="Base URL"
+            htmlFor="channel-base-url"
             extra={
               <span className="settings-source">{sourceLabel(ui.baseUrl)}</span>
             }
           >
             <Input
+              id="channel-base-url"
+              name="baseUrl"
+              inputMode="url"
+              autoComplete="off"
+              spellCheck={false}
               value={fields.baseUrl}
               placeholder="对应 OPENAI_BASE_URL"
               onChange={(event) => setField('baseUrl', event.target.value)}
@@ -46,11 +52,16 @@ export function SettingsPage() {
           </Form.Item>
           <Form.Item
             label="API Key"
+            htmlFor="channel-api-key"
             extra={
               <span className="settings-source">{sourceLabel(ui.apiKey)}</span>
             }
           >
             <Input.Password
+              id="channel-api-key"
+              name="apiKey"
+              autoComplete="off"
+              spellCheck={false}
               value={fields.apiKey}
               placeholder="对应 OPENAI_API_KEY"
               visibilityToggle
@@ -59,11 +70,16 @@ export function SettingsPage() {
           </Form.Item>
           <Form.Item
             label="模型名"
+            htmlFor="channel-model"
             extra={
               <span className="settings-source">{sourceLabel(ui.model)}</span>
             }
           >
             <Input
+              id="channel-model"
+              name="model"
+              autoComplete="off"
+              spellCheck={false}
               value={fields.model}
               placeholder="对应 OPENAI_MODEL"
               onChange={(event) => setField('model', event.target.value)}

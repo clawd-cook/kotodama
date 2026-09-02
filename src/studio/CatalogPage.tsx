@@ -1,6 +1,6 @@
 import { antdCatalog } from '@kotodama/antd-catalog';
 import { Menu, Table, Typography } from 'antd';
-import { Navigate, useNavigate, useParams } from 'react-router';
+import { Link, Navigate, useParams } from 'react-router';
 import { PaperPreview } from '../editor/PaperPreview';
 import { foldMessages } from '../editor/snapshot';
 import {
@@ -14,7 +14,6 @@ import { JsonWell } from './JsonWell';
 
 export function CatalogPage({ theme }: { theme: 'light' | 'dark' }) {
   const { component = 'Column' } = useParams();
-  const navigate = useNavigate();
 
   if (!isCatalogName(component)) {
     return <Navigate to="/catalog/Column" replace />;
@@ -35,21 +34,28 @@ export function CatalogPage({ theme }: { theme: 'light' | 'dark' }) {
         <Menu
           mode="inline"
           selectedKeys={[component]}
-          onClick={({ key }) => {
-            navigate(`/catalog/${key}`);
-          }}
           items={CATALOG_GROUPS.map((group) => ({
             type: 'group' as const,
             label: group.label,
             children: group.names.map((name) => ({
               key: name,
-              label: name,
+              label: (
+                <Link
+                  to={`/catalog/${name}`}
+                  aria-current={component === name ? 'page' : undefined}
+                  translate="no"
+                >
+                  {name}
+                </Link>
+              ),
             })),
           }))}
         />
       </nav>
       <main className="catalog-detail">
-        <h1 className="studio-title">{component}</h1>
+        <h1 className="studio-title" translate="no">
+          {component}
+        </h1>
         <Typography.Paragraph type="secondary">
           {CATALOG_BLURBS[component]}
         </Typography.Paragraph>
@@ -60,8 +66,9 @@ export function CatalogPage({ theme }: { theme: 'light' | 'dark' }) {
           sheetId="sheet"
         />
         <JsonWell text={jsonText} />
-        <Typography.Text strong>属性</Typography.Text>
+        <h2 className="studio-section-title catalog-props-title">属性</h2>
         <Table
+          className="catalog-props"
           size="small"
           pagination={false}
           columns={[

@@ -259,7 +259,18 @@ function StudioHouse({
             items={RAIL.map((item) => ({
               key: item.key,
               icon: item.icon,
-              label: item.label,
+              label: (
+                <Link
+                  to={item.path}
+                  aria-current={
+                    roomKey(location.pathname) === item.key
+                      ? 'page'
+                      : undefined
+                  }
+                >
+                  {item.label}
+                </Link>
+              ),
             }))}
           />
         </nav>

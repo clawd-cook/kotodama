@@ -1,10 +1,1 @@
-@font-face {
-  font-family: "JINGDONGLangZhengTi2-Regular";
-  src: url("https://storage.360buyimg.com/hour-main-pro/JINGDONGLangZhengTi/JINGDONGLangZhengTi2-Regular.ttf")
-    format("truetype");
-  font-display: swap;
-}
-
-body {
-  font-family: "JINGDONGLangZhengTi2-Regular", -apple-system, sans-serif;
-}
+/* Chrome type is Ant Design's system stack. Display serif is only the wordmark. */

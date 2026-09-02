@@ -405,7 +405,7 @@ JSON                               复制
 - 标题 `<h2>`：**说你想要的那一页**（16px / 600）
 - 说明：**说完后，中间会换成一页。这一页可以留下、再打开。**
 - 小标题：**可以说**
-- 三个提示做成**一行一条**，不要大卡片。仍用 `Prompts`，用样式压成列表。文案与落地页相同。
+- 三个提示做成**一行一条**，不要大卡片，不要每行一条底边。仍用 `Prompts`，用样式压成列表。文案与落地页相同。
 
 工坊本页的 `<h1>` 对屏幕阅读器可见、对视觉隐藏：**工坊**。欢迎标题保持 `<h2>`。
 
@@ -547,30 +547,34 @@ Ant Design `Drawer` 右 280px，无遮罩，挂在书桌里。标题 **属性**�
 
 ## Accessibility
 
-- 焦点环用 Ant Design 默认，不要 `outline: none`。
-- 印装饰 `aria-hidden`。字标仍是可读文本「言灵」，但是链接不是 `<h1>`。
-- 每一房间一个 `<h1>`：落地页「从这里说出一页」；工坊视隐「工坊」；图鉴为组件名；案例列表「精选案例」；案例详情为案例标题；设置「设置」。
-- 第一个可聚焦控件是跳过链，目标随房间变。
+- 焦点环用 Ant Design 默认，不要 `outline: none`。可聚焦控件用 `:focus-visible`，不要在点击时画环。
+- 印装饰 `aria-hidden`。字标仍是可读文本「言灵」，但是链接不是 `<h1>`。字标链接要有 hover 与 `:focus-visible`。
+- 每一房间一个 `<h1>`：落地页「从这里说出一页」；工坊视隐「工坊」；图鉴为组件名；案例列表「精选案例」；案例详情为案例标题；设置「设置」。JSON / 属性是 `<h2>`。
+- 第一个可聚焦控件是跳过链，目标随房间变。未聚焦时视觉隐藏；聚焦用 `:focus-visible` 滑入。
 - 左轨文字可见；图标 `aria-hidden`。不要做成无障碍名称为空的图标按钮。
 - 「正在写下这一页…」对 `aria-live="polite"` 可见。失败句同样进入 live region。
 - 纸页选中不能只靠颜色：已有 2px 描边，保留。
-- 设置三项必须有 `<label>`。Key 用密码框，并提供显隐。保存后的回看仍是掩码。
-- `prefers-reduced-motion: reduce` 时关掉纸页位移。
+- 设置三项必须有 `<label>`（`htmlFor` 对上控件 `id`）。Key 用密码框，并提供显隐。保存后的回看仍是掩码。非登录字段 `autocomplete="off"`，URL / Key `spellCheck={false}`。
+- `prefers-reduced-motion: reduce` 时关掉纸页位移。过渡只写 `transform` / `opacity` / `color` / `border-color`，不要 `transition: all`。
 - 工坊深色用 `darkAlgorithm`，纸页内层同步算法、仍用默认 seed。外壳跟工坊同一算法。不要手工反色。根节点设 `color-scheme`，让滚动条和系统控件跟主题走。
 - 工坊根：`touch-action: manipulation`。说话轨、属性抽屉、源文件条、图鉴 JSON 井：`overscroll-behavior: contain`。
-- 主色与白字对比：Ant Design 已说明 `#1677FF` 上白字可能低于 WCAG AA。v1.0.1 不改 primary；严格无障碍时再通过 `ConfigProvider` 加深 `colorPrimary`，工作室、工坊和纸页一起加深，避免两套主色。
+- 主色与白字对比：Ant Design 已说明 `#1677FF` 上白字可能低于 WCAG AA。v1.0.2 不改 primary；严格无障碍时再通过 `ConfigProvider` 加深 `colorPrimary`，工作室、工坊和纸页一起加深，避免两套主色。
 - 触控目标：左轨每一项高度至少 40px（Ant Design Menu 默认够用）。不要把可点区域收成只有 16px 图标。
+- 长标题、案例一句：`min-width: 0` + `truncate` / `line-clamp`，不要撑破横排。
 
 ---
 
 ## Current UI gaps
 
-已按书桌结构改工坊 chrome。v1.0.1 还缺屋子。实现外壳时仍不要做的：
+v1.0.2 针对「纸上叠纸」做减法。实现时仍不要做的：
 
 | Don't | Why |
 | --- | --- |
 | 给生成页套工坊衬线或印泥 | 三套表面必须分开 |
 | 落地页用比纸页更重的卡片和阴影 | 进门会抢过那一页 |
+| 给设置、JSON、案例列表再套一张纸 | 只有生成页配得上落影 |
+| 房间标题继续用 16px | 屋子会像表单，撑不开气 |
+| 给 chrome 套展示标题体 | 字标以外必须是系统栈 |
 | 左轨只用图标 | 四个入口必须能读出来 |
 | 把 18 个组件写进左轨 | 四个房间会和目录混成一层 |
 | 属性未选中时占一列 | 会挤纸页 |
@@ -587,8 +591,10 @@ Ant Design `Drawer` 右 280px，无遮罩，挂在书桌里。标题 **属性**�
 - 不要两个 primary 并排（顶栏、落地页、设置页尤其不要）。
 - 不要把 JSON 当作对话内容的一部分来「增强专业感」。图鉴和案例可以展示 JSON，因为那两页的工作就是看协议。
 - 不要为工作室发明 Ant Design 预设盘以外的装饰色。印泥只用 `#CF1322` / `#FF4D4F`，且只用于字标旁竖章。
-- 不要用 Studio 的红选中、胶囊提示、传图识别、卡片市场。
-- 不要用 Composer 的图标轨、渲染器切换、Gemini 空状态、连接徽章。
-- 不要用魔法数字间距。现有 `.editor-header` 的 48px 和 16px 已在网格上，保留。左轨 168px、索引 200px 是这一版新的网格值（42 格、50 格）。
+- 不要用 Studio 的红选中、胶囊提示、传图识别、卡片市场、黑顶栏。
+- 不要用 Composer 的图标轨、渲染器切换、Gemini 空状态、连接徽章、诊断双卡。
+- 不要用紫粉 AI 皮、电子墨水噪点、杂志超大字、报纸细线通栏。
+- 不要用魔法数字间距。现有 `.editor-header` 的 48px 和 16px 已在网格上，保留。左轨 168px、索引 200px 是网格值（42 格、50 格）。
+- 不要 `transition: all`，不要无替代的 `outline: none`。
 
-实现入口：屋子壳（左轨 + 房间路由）、落地页 Sender、图鉴夹具预览、案例装入确认、设置三项与来源说明。工坊仍是 `EditorApp` 的主题与 `color-scheme`、`EditorShell` 布局、`editor.css` 的工坊壳、`Inspector` 抽屉、`BottomDock` 收起、`ChatPanel` 文案与展示。纸页内部组件继续走 `@kotodama/antd-catalog`。
+实现入口：屋子壳的留白与链接、落地页 Sender 发丝框、图鉴 / 案例预览不再套第二层书桌、JSON 标题行与井分离、设置表单直接坐桌、系统栈字体。工坊仍是 `EditorApp` 的主题与 `color-scheme`、`EditorShell` 布局、`editor.css` 的工坊壳、`Inspector` 抽屉、`BottomDock` 收起、`ChatPanel` 文案与展示。纸页内部组件继续走 `@kotodama/antd-catalog`。

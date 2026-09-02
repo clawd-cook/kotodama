@@ -37,7 +37,7 @@ export function ExamplesPage({ theme }: { theme: 'light' | 'dark' }) {
           return (
             <Link
               key={card.id}
-              className="example-card"
+              className="example-paper"
               to={`/examples/${card.id}`}
             >
               <div className="example-thumb" aria-hidden>
