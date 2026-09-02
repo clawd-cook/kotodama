@@ -15,6 +15,7 @@ export function PaperPreview({
   theme,
   catalog,
   drop = false,
+  flush = false,
   interactive = false,
   sheetId,
   className,
@@ -27,6 +28,7 @@ export function PaperPreview({
   theme: 'light' | 'dark';
   catalog: Catalog<ReactComponentImplementation>;
   drop?: boolean;
+  flush?: boolean;
   interactive?: boolean;
   sheetId?: string;
   className?: string;
@@ -92,7 +94,14 @@ export function PaperPreview({
     // biome-ignore lint/a11y/noStaticElementInteractions: click and Escape clear the editor selection
     <div
       id={sheetId}
-      className={['preview-canvas', className].filter(Boolean).join(' ')}
+      className={[
+        'preview-canvas',
+        flush ? 'is-flush' : '',
+        empty ? 'is-empty' : '',
+        className,
+      ]
+        .filter(Boolean)
+        .join(' ')}
       tabIndex={-1}
       onClick={
         interactive

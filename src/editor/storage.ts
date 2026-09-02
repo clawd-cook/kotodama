@@ -39,12 +39,14 @@ const DRAFT_KEY = 'kotodama.draft';
 const THEME_KEY = 'kotodama.theme';
 const CHROME_KEY = 'kotodama.chrome';
 
-const SPEECH_MIN = 240;
-const SPEECH_MAX = 320;
-const SOURCE_MIN = 280;
-const SOURCE_MAX = 400;
-const TRACE_MIN = 160;
-const TRACE_MAX = 280;
+export const SPEECH_MIN = 240;
+export const SPEECH_MAX = 320;
+export const SOURCE_MIN = 280;
+export const SOURCE_MAX = 400;
+export const SOURCE_STRIP = 40;
+export const TRACE_MIN = 160;
+export const TRACE_MAX = 280;
+export const TRACE_STRIP = 40;
 
 export type ChromeLayout = {
   speech: number;

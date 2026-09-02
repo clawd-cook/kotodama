@@ -46,26 +46,24 @@ function wrapImpl(
     const id = props.context.componentModel.id;
     const selected = selectedId === id;
     const hovered = hoveredId === id && !selected;
+    const className = `a2ui-selectable${selected ? ' is-selected' : ''}${hovered ? ' is-hovered' : ''}`;
+    const onClick = (event: MouseEvent<HTMLDivElement>) => {
+      const closest = (event.target as HTMLElement).closest('.a2ui-selectable');
+      if (closest !== event.currentTarget) {
+        return;
+      }
+      onSelect(id);
+    };
+    const onMouseOver = (event: MouseEvent<HTMLDivElement>) => {
+      event.stopPropagation();
+      onHover(id);
+    };
     return (
-      // biome-ignore lint/a11y/useKeyWithClickEvents: selection is also driven from the component tree
-      // biome-ignore lint/a11y/useKeyWithMouseEvents: hover is visual-only
-      // biome-ignore lint/a11y/noStaticElementInteractions: overlay for selection; nested widgets stay the controls
       <div
         data-a2ui-id={id}
-        className={`a2ui-selectable${selected ? ' is-selected' : ''}${hovered ? ' is-hovered' : ''}`}
-        onClick={(event: MouseEvent<HTMLDivElement>) => {
-          const closest = (event.target as HTMLElement).closest(
-            '.a2ui-selectable',
-          );
-          if (closest !== event.currentTarget) {
-            return;
-          }
-          onSelect(id);
-        }}
-        onMouseOver={(event: MouseEvent<HTMLDivElement>) => {
-          event.stopPropagation();
-          onHover(id);
-        }}
+        className={className}
+        onClick={onClick}
+        onMouseOver={onMouseOver}
       >
         <Inner {...props} />
       </div>

@@ -92,7 +92,7 @@ Ant Design 界面只用 400 和 600，14px 正文。工作室控件遵守这条�
 | Room | Ant Design 系统栈 | 落地页、图鉴、案例、设置的 `<h1>`：24px / 600 / 32px，`text-wrap: balance` |
 | Body | Ant Design 系统栈（`-apple-system`, `Segoe UI`, `PingFang SC`, …） | 轨、对话、按钮、属性、欢迎、图鉴说明。14px / 400 |
 | Section | 系统栈 | JSON、属性：14px / 600。是 `<h2>`，不是第三张卡片的标题 |
-| Code | `"SFMono-Regular", Consolas, Menlo, monospace` | 底栏和图鉴 / 案例里的 JSON。13px / 20px |
+| Code | `"SFMono-Regular", Consolas, Menlo, monospace` | 源文件列和图鉴 / 案例里的 JSON。13px / 20px |
 
 不要给标题、Tab、按钮、左轨、落地页大标题套衬线。衬线一旦离开字标，屋子会变成模板杂志。v1.0.1 把房间标题压成 16px，屋子看起来像表单；v1.0.2 用 24px 把房间撑开，仍远小于杂志 Hero。
 

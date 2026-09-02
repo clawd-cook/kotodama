@@ -48,6 +48,7 @@ export function PreviewPane({
         theme={theme}
         catalog={editorCatalog}
         drop
+        flush
         interactive
         sheetId={sheetId}
         onEvent={logEvent}
