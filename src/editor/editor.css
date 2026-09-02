@@ -190,11 +190,16 @@ body,
 }
 
 .chat-welcome-title {
-  margin: 0;
+  margin: 0 0 4px;
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
+  color: var(--ant-color-text);
   text-wrap: balance;
+}
+
+.chat-welcome-desc {
+  display: block;
 }
 
 .chat-panel .ant-sender {

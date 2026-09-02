@@ -174,7 +174,7 @@ Tab：**说话** | **组件**。激活态用 Ant Design Tabs：主色文字 + 2p
 
 输入框 placeholder：**描述你想要的界面…**（用省略号 `…`）。发送是这一栏唯一的 primary（Sender 自带）。停止沿用 Sender 的取消。说话轨内部 `overscroll-behavior: contain`，避免滚动手势把整页带走。
 
-欢迎标题是这一栏的 `<h2>`（Ant Design X `Welcome` 的 title）。不要跳级成 `h4`。
+欢迎标题是这一栏的 `<h2>`。不要用 Ant Design X `Welcome` 的 `Typography.Title`（写死 `level={4}`，会跳级）。提示仍用 `Prompts`。
 
 组件 Tab：树、插入、复制、删除保持 Ant Design `Tree` / `Button` `size="small"`。插入区不要做成彩色积木。组件名可保留英文（与协议一致），旁边不要再加图标套件。
 

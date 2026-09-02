@@ -1,7 +1,7 @@
 import { RobotOutlined, UserOutlined } from '@ant-design/icons';
-import { Bubble, Prompts, Sender, Welcome } from '@ant-design/x';
+import { Bubble, Prompts, Sender } from '@ant-design/x';
 import { useXChat, XRequest } from '@ant-design/x-sdk';
-import { Avatar, Flex } from 'antd';
+import { Avatar, Flex, Typography } from 'antd';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { ApplyResult } from '../applyDocument';
 import { applyDocument } from '../applyDocument';
@@ -165,11 +165,12 @@ export function ChatPanel({
     <Flex vertical className="chat-panel">
       {messages.length === 0 ? (
         <Flex vertical flex={1} justify="center" gap={12} className="chat-welcome">
-          <Welcome
-            variant="borderless"
-            title={<h2 className="chat-welcome-title">说你想要的那一页</h2>}
-            description="说完后，中间会换成一页。这一页可以留下、再打开。"
-          />
+          <div>
+            <h2 className="chat-welcome-title">说你想要的那一页</h2>
+            <Typography.Text type="secondary" className="chat-welcome-desc">
+              说完后，中间会换成一页。这一页可以留下、再打开。
+            </Typography.Text>
+          </div>
           <Prompts
             items={PROMPT_ITEMS}
             wrap
