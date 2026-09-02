@@ -1,9 +1,19 @@
 import Editor from '@monaco-editor/react';
-import { Alert, Tabs } from 'antd';
-import { useEffect, useRef } from 'react';
+import { Alert, Button, Tabs } from 'antd';
+import { useEffect, useRef, useState } from 'react';
 import { useEditor } from './EditorState';
 
-export function BottomDock({ theme }: { theme: 'light' | 'dark' }) {
+export function BottomDock({
+  theme,
+  open,
+  onOpen,
+  onClose,
+}: {
+  theme: 'light' | 'dark';
+  open: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+}) {
   const {
     jsonText,
     jsonError,
@@ -15,6 +25,7 @@ export function BottomDock({ theme }: { theme: 'light' | 'dark' }) {
     errors,
   } = useEditor();
   const timer = useRef<number | undefined>(undefined);
+  const [activeKey, setActiveKey] = useState('json');
 
   useEffect(() => {
     return () => {
@@ -23,6 +34,13 @@ export function BottomDock({ theme }: { theme: 'light' | 'dark' }) {
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+    window.dispatchEvent(new Event('resize'));
+  }, [open]);
 
   const onJsonChange = (value?: string) => {
     const text = value ?? '';
@@ -39,6 +57,20 @@ export function BottomDock({ theme }: { theme: 'light' | 'dark' }) {
     <Tabs
       size="small"
       className="bottom-dock"
+      activeKey={activeKey}
+      onTabClick={(key) => {
+        setActiveKey(key);
+        if (!open) {
+          onOpen();
+        }
+      }}
+      tabBarExtraContent={
+        open ? (
+          <Button size="small" type="text" onClick={onClose}>
+            收起
+          </Button>
+        ) : null
+      }
       items={[
         {
           key: 'json',
@@ -49,7 +81,7 @@ export function BottomDock({ theme }: { theme: 'light' | 'dark' }) {
                 <Alert type="error" showIcon message={jsonError} />
               ) : null}
               <Editor
-                height="220px"
+                height="100%"
                 defaultLanguage="json"
                 theme={theme === 'dark' ? 'vs-dark' : 'light'}
                 value={jsonText}
@@ -69,7 +101,7 @@ export function BottomDock({ theme }: { theme: 'light' | 'dark' }) {
           children: (
             <div className="dock-pane">
               <Editor
-                height="220px"
+                height="100%"
                 defaultLanguage="json"
                 theme={theme === 'dark' ? 'vs-dark' : 'light'}
                 value={dataText}

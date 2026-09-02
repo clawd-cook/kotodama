@@ -124,7 +124,6 @@ export function Inspector() {
   if (!component) {
     return (
       <div className="inspector">
-        <Typography.Text strong>属性</Typography.Text>
         <Empty description="点纸页上的一块，或在组件树里选中。" />
       </div>
     );
@@ -132,7 +131,6 @@ export function Inspector() {
   if (!shape) {
     return (
       <div className="inspector">
-        <Typography.Text strong>属性</Typography.Text>
         <Empty description="没有 schema" />
       </div>
     );
@@ -146,7 +144,6 @@ export function Inspector() {
 
   return (
     <div className="inspector">
-      <Typography.Text strong>属性</Typography.Text>
       {propError ? (
         <Alert type="error" showIcon message={propError} style={{ marginTop: 12 }} />
       ) : null}

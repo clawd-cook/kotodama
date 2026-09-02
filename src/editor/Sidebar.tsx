@@ -66,7 +66,7 @@ function ComponentPane() {
         selectedKeys={selectedId ? [selectedId] : []}
         treeData={toData(tree)}
         defaultExpandAll
-        onSelect={(keys) => setSelectedId(String(keys[0] ?? 'root'))}
+        onSelect={(keys) => setSelectedId(keys[0] ? String(keys[0]) : null)}
         style={{ margin: '8px 0 16px' }}
       />
       <Space style={{ marginBottom: 12 }}>

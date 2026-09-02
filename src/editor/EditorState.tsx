@@ -58,7 +58,7 @@ function stringifyMessages(snapshot: Snapshot) {
 
 export function EditorProvider({ children }: { children: ReactNode }) {
   const [snapshot, setSnapshot] = useState<Snapshot>(() => loadDraft());
-  const [selectedId, setSelectedId] = useState<string | null>('root');
+  const [selectedId, setSelectedId] = useState<string | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [errors, setErrors] = useState<EditorError[]>([]);
   const [events, setEvents] = useState<EditorEvent[]>([]);
@@ -235,7 +235,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
 
   const reset = useCallback(() => {
     commit(createDemoSnapshot());
-    setSelectedId('root');
+    setSelectedId(null);
     setEvents([]);
     setErrors([]);
   }, [commit]);

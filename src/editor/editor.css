@@ -6,14 +6,47 @@ body,
 }
 
 .editor-root {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
   height: 100vh;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
   background: var(--ant-color-bg-layout);
+  touch-action: manipulation;
+}
+
+.editor-root[data-theme='light'] {
+  color-scheme: light;
+}
+
+.editor-root[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: 8px;
+  z-index: 50;
+  padding: 8px 16px;
+  background: var(--ant-color-bg-container);
+  color: var(--ant-color-text);
+  border-radius: 4px;
+  transform: translateY(-200%);
+  transition: transform 0.15s var(--ant-motion-ease-out, ease-out);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
 }
 
 .editor-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-shrink: 0;
+  z-index: 20;
   height: 48px !important;
   line-height: 48px !important;
   padding-inline: 16px;
@@ -27,12 +60,14 @@ body,
 }
 
 .editor-wordmark {
+  margin: 0;
   font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
   font-weight: 600;
   font-size: 18px;
   letter-spacing: 0.12em;
   line-height: 48px;
   color: var(--ant-color-text);
+  text-wrap: balance;
 }
 
 .editor-seal {
@@ -47,15 +82,59 @@ body,
   background: #ff4d4f;
 }
 
-.editor-body {
-  height: calc(100vh - 48px);
+.editor-theme {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
 }
 
-.sidebar,
+.editor-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.editor-stage-split {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  height: 100%;
+}
+
+.editor-stage {
+  position: relative;
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.inspector-drawer {
+  z-index: 30;
+  pointer-events: none;
+}
+
+.inspector-drawer .ant-drawer-content-wrapper {
+  pointer-events: auto;
+}
+
+.inspector-drawer .ant-drawer-body {
+  overscroll-behavior: contain;
+}
+
 .inspector {
   height: 100%;
   overflow: auto;
+  padding: 0;
+  overscroll-behavior: contain;
+}
+
+.sidebar {
+  height: 100%;
+  overflow: auto;
   padding: 12px;
+  overscroll-behavior: contain;
 }
 
 .sidebar-with-tabs {
@@ -85,6 +164,7 @@ body,
   height: 100%;
   overflow: auto;
   padding-bottom: 12px;
+  overscroll-behavior: contain;
 }
 
 .chat-panel {
@@ -95,18 +175,26 @@ body,
   padding-bottom: 12px;
 }
 
-.chat-log {
-  flex: 1;
+.chat-log,
+.chat-welcome {
   min-height: 0;
   overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.chat-log {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.chat-welcome {
-  min-height: 0;
-  overflow: auto;
+.chat-welcome-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  text-wrap: balance;
 }
 
 .chat-panel .ant-sender {
@@ -127,12 +215,15 @@ body,
 
 .preview-canvas {
   height: 100%;
+  min-width: 0;
   overflow: auto;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   padding: 24px;
   background: var(--ant-color-bg-layout);
+  scroll-margin-top: 48px;
+  overscroll-behavior: contain;
 }
 
 .preview-sheet {
@@ -160,8 +251,10 @@ body,
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .preview-sheet-drop {
+  .preview-sheet-drop,
+  .skip-link {
     animation: none;
+    transition: none;
   }
 }
 
@@ -179,22 +272,87 @@ body,
   outline: 2px solid var(--ant-color-primary, #1677ff);
 }
 
+.editor-dock {
+  position: relative;
+  z-index: 20;
+  flex-shrink: 0;
+  min-height: 40px;
+  background: var(--ant-color-bg-container);
+  border-top: 1px solid var(--ant-color-split);
+  overflow: hidden;
+}
+
+.editor-dock-handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  height: 4px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: ns-resize;
+  touch-action: none;
+}
+
+.editor-dock-handle:hover,
+.editor-dock-handle:focus-visible {
+  background: var(--ant-color-split);
+}
+
 .bottom-dock {
   height: 100%;
   padding: 0 12px;
+}
+
+.bottom-dock.ant-tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+.bottom-dock .ant-tabs-nav {
+  margin: 0;
+}
+
+.bottom-dock .ant-tabs-content-holder,
+.bottom-dock .ant-tabs-content,
+.bottom-dock .ant-tabs-tabpane {
+  height: 100%;
+}
+
+.editor-dock:not(.is-open) .ant-tabs-content-holder {
+  display: none;
+}
+
+.editor-dock.is-open .ant-tabs-content-holder {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .dock-pane {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  height: 100%;
+  min-height: 0;
+  overscroll-behavior: contain;
+}
+
+.dock-pane .monaco-editor {
+  flex: 1;
+  min-height: 0;
 }
 
 .dock-log {
-  height: 220px;
+  flex: 1;
+  min-height: 0;
   overflow: auto;
   margin: 0;
   font-family: "SFMono-Regular", Consolas, Menlo, monospace;
   font-size: 13px;
   line-height: 20px;
+  overscroll-behavior: contain;
 }

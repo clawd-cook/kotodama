@@ -27,7 +27,7 @@ v1.0.0 用两套主题，不要混成一套。
 
 | Surface | Job | Theme |
 | --- | --- | --- |
-| **工坊** | 顶栏、对话、组件树、属性、底栏 | 言灵种子，见下方 tokens |
+| **工坊** | 顶栏、说话轨、属性抽屉、源文件条 | 言灵种子，见下方 tokens |
 | **纸页** | 中间预览里渲染出的界面 | Ant Design 默认 `defaultAlgorithm` / `darkAlgorithm`，不改 `colorPrimary` |
 
 实现：外层 `ConfigProvider`（已有 `XProvider`）负责工坊。预览根节点再包一层 `ConfigProvider`，只传 Ant Design 默认算法和默认 seed，把工坊的 `colorPrimary` 隔开。
@@ -75,29 +75,39 @@ Ant Design 界面只用 400 和 600，14px 正文。工坊控件遵守这条。
 
 ### Layout
 
-4px 网格。间距只用 Ant Design 的 xs/sm/md/lg/xl（4 / 8 / 16 / 24 / 32）。顶栏高度 48px（12×4），已有。
+4px 网格。间距只用 Ant Design 的 xs/sm/md/lg/xl（4 / 8 / 16 / 24 / 32）。顶栏高度 48px（12×4）。整屏用 `100dvh`，并加 `env(safe-area-inset-*)`，避免刘海切掉顶栏。
 
-结构表示信息：左栏是说话；中栏是落下的那一页；右栏和底栏是核对用的逃生舱，视觉权重低于前两者。
+这一屏不是 IDE。三栏加底栏会把纸页挤成一条缝，逃生舱和主路径抢权重。结构是 **说话轨 + 舞台**；属性和源文件是覆盖层，默认不占舞台宽度。
 
 ```
-┌─ 工坊 ─────────────────────────────────────────────┐
-│ 言灵印   打开  下载     撤销 重做 新建     深色     │
-├──────────┬────────────────────┬───────────────────┤
-│ 说话     │                    │ 属性              │
-│ · 欢迎   │     ┌──纸页──┐     │ 安静、无主色块    │
-│ · 一句   │     │ AntD   │     │                   │
-│ · 输入   │     │ 页面   │     │                   │
-│ ──组件── │     └────────┘     │                   │
-├──────────┴────────────────────┴───────────────────┤
-│ 源文件 JSON · 数据 · 事件 · 错误   （默认收矮）     │
-└───────────────────────────────────────────────────┘
+┌─ 工坊 ──────────────────────────────────────────────┐
+│ [跳到纸页]  言灵印     打开 下载  撤销 重做 新建  深色 │
+├────────────┬────────────────────────────────────────┤
+│ 说话轨     │  <main id="sheet">  舞台               │
+│ 280px      │                                        │
+│ 说话 / 组件│         ┌────纸页────┐                 │
+│            │         │   AntD     │                 │
+│ 输入贴底   │         └────────────┘                 │
+│            │   选中后：右侧抽屉「属性」280px         │
+├────────────┴────────────────────────────────────────┤
+│ 源文件条 40px：JSON · 数据 · 事件 · 错误   （默认收） │
+└─────────────────────────────────────────────────────┘
 ```
 
-左栏默认 Tab 是 **说话**（现文案「对话」改为「说话」）。「组件」是逃生舱，不要做成第二个主 Tab 的视觉。
+区域职责：
 
-中栏不是铺满的灰画布。纸页是一块 `sheet` 表面：最大宽度 840px，水平居中，外边距 24px，圆角 8px（Ant Design 卡片），阴影用 `boxShadowTertiary`。纸页内部 padding 24px。生成页画在这张纸上，不要再给生成页套一层品牌底。
+| 区 | 宽度 / 高度 | 默认 | 角色 |
+| --- | --- | --- | --- |
+| 说话轨 | 280px，可拖 240–360 | 打开 | 主入口。Tab **说话** 默认；**组件** 是逃生舱 |
+| 舞台 | `minmax(0, 1fr)` | 打开 | 唯一 `<main>`。纸页在此居中 |
+| 属性 | 抽屉 280px，无遮罩 | **关上** | 选中组件才滑出；覆盖纸页右侧，不挤舞台 |
+| 源文件条 | 收 40px / 开 240px | **收起** | Tab 仍在；点 Tab 才展开。可拖高，不要主色 |
 
-底栏默认约 200–280px，可拖。打开时也不要用主色。它是源文件抽屉，不是第二舞台。
+纸页是一块 `sheet` 表面：最大宽度 840px，水平居中，外边距 24px，圆角 8px（Ant Design 卡片），阴影用 `boxShadowTertiary`。纸页内部 padding 24px。生成页画在这张纸上，不要再给生成页套一层品牌底。
+
+z-index 只用四档，不要 `9999`：`skip` 50 · `header` 20 · `drawer` 30 · `dock` 20。
+
+不要用三栏 Splitter 当默认布局。不要让属性面板在未选中时占一列。持久化只记说话轨宽度、源文件条是否展开、展开高度。旧的 `number[]` 分栏尺寸可忽略。
 
 ### Signature
 
@@ -124,16 +134,18 @@ Ant Design 的 Do/Don't 全部适用于纸页。工坊额外遵守：印泥红�
 
 ## Chrome specs
 
+键盘用户第一个焦点是 **跳到纸页**（链到 `#sheet`）。未聚焦时视觉隐藏，聚焦时出现在顶栏上方。不要把它做成第三个主按钮。
+
 ### Header
 
-左：字标「言灵」+ 印。印是 8×8 圆角 2px 的 `seal` 色块，贴在字标右侧 8px，`aria-hidden`。不要写成 Logo 图。
+左：字标「言灵」用 `<h1>`，外观仍是 18px / 600 / 衬线，`translate="no"`。印是 8×8 圆角 2px 的 `seal` 色块，贴在字标右侧 8px，`aria-hidden`。不要写成 Logo 图。不要用 `Typography.Title` 冒充字标。
 
 右：动作分组，中间用 16px 空隙，不要用主色。
 
 1. **打开**、**下载**（`Button` default，`size="small"`）。这是源文件动作，放最前。
 2. **撤销**、**重做**（disabled 时用 Ant Design 默认 disabled，不自调透明度）。
 3. **新建**（default，不是 primary，也不是 danger）。
-4. **深色** `Switch`。当前文案「暗色」改为「深色」。Switch 在右，短标签在左。
+4. **深色** `Switch`。当前文案「暗色」改为「深色」。Switch 在右，短标签在左。Switch 需要 `aria-label="深色"`。「打开」的隐藏 file input 需要 `aria-label="打开 JSON"`。
 
 顶栏背景用 `colorBgContainer`，底边 1px `colorSplit`。不要用主色顶栏。
 
@@ -160,13 +172,15 @@ Tab：**说话** | **组件**。激活态用 Ant Design Tabs：主色文字 + 2p
 - 助手：左对齐。成功只显示一句 `summary`，例如 **已改成带验证码的登录表单。** 失败只显示校验人话，例如 **页面没改。组件 `password` 用了未允许的属性 `placeholder`。**
 - 进行中：只显示 **正在写下这一页…**（替换现有「正在生成界面…」）。不要把模型 token 或 JSON 流进气泡。
 
-输入框 placeholder：**描述你想要的界面** 可保留。发送是这一栏唯一的 primary（Sender 自带）。停止沿用 Sender 的取消。
+输入框 placeholder：**描述你想要的界面…**（用省略号 `…`）。发送是这一栏唯一的 primary（Sender 自带）。停止沿用 Sender 的取消。说话轨内部 `overscroll-behavior: contain`，避免滚动手势把整页带走。
+
+欢迎标题是这一栏的 `<h2>`（Ant Design X `Welcome` 的 title）。不要跳级成 `h4`。
 
 组件 Tab：树、插入、复制、删除保持 Ant Design `Tree` / `Button` `size="small"`。插入区不要做成彩色积木。组件名可保留英文（与协议一致），旁边不要再加图标套件。
 
-### Sheet（中）
+### Sheet（舞台）
 
-外层 `preview-canvas` 铺 `paper`（`colorBgLayout` 工坊值）。
+外层 `preview-canvas` 是 `<main id="sheet">`，铺 `paper`（`colorBgLayout` 工坊值）。`min-width: 0`，让纸页在窄舞台里可以横向滚，而不是撑破工坊。`scroll-margin-top` 给跳转链留出顶栏高度。
 
 内层纸页：
 
@@ -178,13 +192,15 @@ Tab：**说话** | **组件**。激活态用 Ant Design Tabs：主色文字 + 2p
 
 试填、试点：纸页内控件就是 Ant Design 控件。不要在预览里加「演示模式」黄条。事件只进底栏「事件」。
 
-### Inspector（右）
+### Inspector（抽屉）
 
-标题用 `title-md`（14px / 600）：**属性**。未选中时：`Empty`，**点纸页上的一块，或在组件树里选中。**
+用 Ant Design `Drawer`，`placement="right"`，`width={280}`，**不要遮罩**（`mask={false}`），挂在舞台里（`getContainer={false}`），这样点纸页仍能选中。标题 **属性**（`title-md`）。未选中：抽屉关上，不要留空列。打开后若没有选中项：`Empty`，**点纸页上的一块，或在组件树里选中。**
 
-表单用 Ant Design Form，密度 `small`。不要在右侧放「应用到画布」主按钮——改完即走同一套校验；失败用 `Alert` error，文案与说话栏失败句同一套规则。
+表单用 Ant Design Form，密度 `small`。不要在右侧放「应用到画布」主按钮——改完即走同一套校验；失败用 `Alert` error，文案与说话栏失败句同一套规则。抽屉滚动用 `overscroll-behavior: contain`。关闭抽屉等于取消选中。
 
-### Dock（底）
+### Dock（源文件条）
+
+默认收成 40px 一条：只露 Tab，不露编辑器。点任一 Tab 展开到 240px（可拖，最小 160）。展开后右上有 **收起**，不要用主色。收起时 JSON 编辑缓冲仍留在内存里，不要丢掉未保存的打字。展开 / 收起不要做高度动画（跟手、无位移）。
 
 Tab 文案：
 
@@ -231,6 +247,7 @@ Tab 文案：
 | Place | Copy |
 | --- | --- |
 | 字标 | 言灵 |
+| 跳过 | 跳到纸页 |
 | 左 Tab | 说话 / 组件 |
 | 欢迎标题 | 说你想要的那一页 |
 | 发送中 | 正在写下这一页… |
@@ -243,6 +260,7 @@ Tab 文案：
 | 未选中 | 点纸页上的一块，或在组件树里选中。 |
 | 无事件 | 还没有事件。在纸页上点一下就会出现。 |
 | 无错误 | 没有错误。 |
+| 源文件条 | 收起 |
 
 不要道歉。不要「抱歉，AI 出错了」。原因来自校验，指向字段或规则。
 
@@ -257,6 +275,7 @@ Tab 文案：
 | 纸页换稿 | `motionDurationMid` 0.2s，`motionEaseOut` | 落下一次 |
 | 控件悬停/焦点 | `motionDurationFast` 0.1s | 交给 Ant Design |
 | 底栏 / 分栏拖拽 | 无动画 | 跟手 |
+| 属性抽屉 | Ant Design Drawer 默认（只动 transform） | 选中滑出；`prefers-reduced-motion` 时交给组件默认减弱 |
 
 不要加对话入场列表动画、不要给印做呼吸闪烁。
 
@@ -265,29 +284,27 @@ Tab 文案：
 ## Accessibility
 
 - 焦点环用 Ant Design 默认，不要 `outline: none`。
-- 印装饰 `aria-hidden`。字标仍是可读文本「言灵」。
+- 印装饰 `aria-hidden`。字标仍是可读文本「言灵」，且是页面唯一的 `<h1>`。
+- 第一个可聚焦控件是跳过链 **跳到纸页**。
 - 「正在写下这一页…」对 `aria-live="polite"` 可见。
 - 失败句同样进入 live region。
 - 纸页选中不能只靠颜色：已有 2px 描边，保留。
 - `prefers-reduced-motion: reduce` 时关掉纸页位移。
-- 工坊深色用 `darkAlgorithm`，纸页内层同步算法、仍用默认 seed。不要手工反色。
+- 工坊深色用 `darkAlgorithm`，纸页内层同步算法、仍用默认 seed。不要手工反色。根节点设 `color-scheme`，让滚动条和系统控件跟主题走。
+- 工坊根：`touch-action: manipulation`。说话轨、属性抽屉、源文件条：`overscroll-behavior: contain`。
 - 主色与白字对比：Ant Design 已说明 `#1677FF` 上白字可能低于 WCAG AA。v1.0.0 不改 primary；严格无障碍时再通过 `ConfigProvider` 加深 `colorPrimary`，工坊和纸页一起加深，避免两套主色。
 
 ---
 
 ## Current UI gaps
 
-相对 `src/editor/editor.css` 与 `EditorShell.tsx`：
+舞台优先布局已对齐上文。仍不要做的：
 
-| Now | Design |
+| Don't | Why |
 | --- | --- |
-| 单层主题，预览跟着工坊走 | 预览内层默认 Ant Design seed |
-| 预览铺满 padding 24px | 居中纸页，最大宽度 840px，三级阴影 |
-| 顶栏无打开/下载；有「暗色」 | 打开、下载；「深色」 |
-| 欢迎「用自然语言生成界面」 | 「说你想要的那一页」 |
-| 气泡渲染模型 JSON | 只渲染一句人话 |
-| 底栏英文 Data Model / Events / Errors | 数据 / 事件 / 错误 |
-| 选中描边已有 | 保留；不要加填充蒙层 |
+| 给生成页套工坊衬线或印泥 | 两套表面必须分开 |
+| 属性未选中时占一列 | 会挤纸页 |
+| 源文件条默认展开 | 逃生舱不应和主路径抢高度 |
 
 ---
 
@@ -299,4 +316,4 @@ Tab 文案：
 - 不要为工坊发明 Ant Design 预设盘以外的装饰色。印泥只用 `#CF1322` / `#FF4D4F`。
 - 不要用魔法数字间距。现有 `.editor-header` 的 48px 和 16px 已在网格上，保留。
 
-实现入口：`EditorApp` 的主题、`EditorShell` 顶栏、`editor.css` 的预览壳、`ChatPanel` 文案与展示。纸页内部组件继续走 `@kotodama/antd-catalog`。
+实现入口：`EditorApp` 的主题与 `color-scheme`、`EditorShell` 布局、`editor.css` 的工坊壳、`Inspector` 抽屉、`BottomDock` 收起、`ChatPanel` 文案与展示。纸页内部组件继续走 `@kotodama/antd-catalog`。

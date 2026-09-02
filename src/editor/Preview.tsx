@@ -79,7 +79,8 @@ export function PreviewPane({ theme }: { theme: 'light' | 'dark' }) {
         onHover: setHoveredId,
       }}
     >
-      <div
+      <main
+        id="sheet"
         className="preview-canvas"
         tabIndex={-1}
         onClick={() => setSelectedId(null)}
@@ -106,7 +107,7 @@ export function PreviewPane({ theme }: { theme: 'light' | 'dark' }) {
             )}
           </div>
         </ConfigProvider>
-      </div>
+      </main>
     </SelectionProvider>
   );
 }

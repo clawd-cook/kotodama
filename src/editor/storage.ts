@@ -4,7 +4,28 @@ import type { Snapshot } from './types';
 
 const DRAFT_KEY = 'kotodama.draft';
 const THEME_KEY = 'kotodama.theme';
-const LAYOUT_KEY = 'kotodama.layout';
+const CHROME_KEY = 'kotodama.chrome';
+
+const SPEECH_MIN = 240;
+const SPEECH_MAX = 360;
+const DOCK_MIN = 160;
+const DOCK_MAX = 480;
+
+export type ChromeLayout = {
+  speech: number;
+  dockOpen: boolean;
+  dockSize: number;
+};
+
+export const DEFAULT_CHROME: ChromeLayout = {
+  speech: 280,
+  dockOpen: false,
+  dockSize: 240,
+};
+
+function clamp(value: number, min: number, max: number) {
+  return Math.min(max, Math.max(min, value));
+}
 
 export function loadDraft(): Snapshot {
   try {
@@ -40,15 +61,31 @@ export function saveTheme(theme: 'light' | 'dark') {
   localStorage.setItem(THEME_KEY, theme);
 }
 
-export function loadLayout(): number[] | null {
+export function loadChromeLayout(): ChromeLayout {
   try {
-    const raw = localStorage.getItem(LAYOUT_KEY);
-    return raw ? (JSON.parse(raw) as number[]) : null;
+    const raw = localStorage.getItem(CHROME_KEY);
+    if (!raw) {
+      return { ...DEFAULT_CHROME };
+    }
+    const parsed = JSON.parse(raw) as Partial<ChromeLayout>;
+    return {
+      speech: clamp(
+        Number(parsed.speech) || DEFAULT_CHROME.speech,
+        SPEECH_MIN,
+        SPEECH_MAX,
+      ),
+      dockOpen: Boolean(parsed.dockOpen),
+      dockSize: clamp(
+        Number(parsed.dockSize) || DEFAULT_CHROME.dockSize,
+        DOCK_MIN,
+        DOCK_MAX,
+      ),
+    };
   } catch {
-    return null;
+    return { ...DEFAULT_CHROME };
   }
 }
 
-export function saveLayout(sizes: number[]) {
-  localStorage.setItem(LAYOUT_KEY, JSON.stringify(sizes));
+export function saveChromeLayout(layout: ChromeLayout) {
+  localStorage.setItem(CHROME_KEY, JSON.stringify(layout));
 }

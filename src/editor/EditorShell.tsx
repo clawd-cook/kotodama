@@ -1,4 +1,4 @@
-import { Button, Layout, Modal, Space, Splitter, Switch, message } from 'antd';
+import { Button, Drawer, Layout, Modal, Space, Splitter, Switch, message } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import { BottomDock } from './BottomDock';
 import { useEditor } from './EditorState';
@@ -6,7 +6,13 @@ import { Inspector } from './Inspector';
 import { PreviewPane } from './Preview';
 import { Sidebar } from './Sidebar';
 import { toMessages } from './snapshot';
-import { loadLayout, saveLayout } from './storage';
+import { loadChromeLayout, saveChromeLayout } from './storage';
+
+const SPEECH_MIN = 240;
+const SPEECH_MAX = 360;
+const DOCK_MIN = 160;
+const DOCK_MAX = 480;
+const DOCK_STRIP = 40;
 
 export function EditorShell({
   theme,
@@ -17,6 +23,8 @@ export function EditorShell({
 }) {
   const {
     snapshot,
+    selectedId,
+    setSelectedId,
     undo,
     redo,
     reset,
@@ -27,7 +35,12 @@ export function EditorShell({
     openJson,
   } = useEditor();
   const [resetCount, setResetCount] = useState(0);
+  const [chrome, setChrome] = useState(loadChromeLayout);
   const fileRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    saveChromeLayout(chrome);
+  }, [chrome]);
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
@@ -81,9 +94,14 @@ export function EditorShell({
 
   return (
     <Layout className="editor-root" data-theme={theme}>
+      <a className="skip-link" href="#sheet">
+        跳到纸页
+      </a>
       <Layout.Header className="editor-header">
         <span className="editor-mark">
-          <span className="editor-wordmark">言灵</span>
+          <h1 className="editor-wordmark" translate="no">
+            言灵
+          </h1>
           <span className="editor-seal" aria-hidden />
         </span>
         <Space size={16}>
@@ -106,20 +124,22 @@ export function EditorShell({
               新建
             </Button>
           </Space>
-          <Space>
-            <span>深色</span>
+          <label className="editor-theme">
+            深色
             <Switch
               size="small"
               checked={theme === 'dark'}
+              aria-label="深色"
               onChange={(checked) => onThemeChange(checked ? 'dark' : 'light')}
             />
-          </Space>
+          </label>
         </Space>
         <input
           ref={fileRef}
           type="file"
           accept="application/json,.json"
           hidden
+          aria-label="打开 JSON"
           onChange={async (event) => {
             const file = event.target.files?.[0];
             event.target.value = '';
@@ -134,28 +154,98 @@ export function EditorShell({
           }}
         />
       </Layout.Header>
-      <Splitter
-        layout="vertical"
-        className="editor-body"
-        onResize={(sizes) => saveLayout(sizes)}
-      >
-        <Splitter.Panel>
-          <Splitter>
-            <Splitter.Panel defaultSize={360} min={240}>
-              <Sidebar resetCount={resetCount} theme={theme} />
-            </Splitter.Panel>
-            <Splitter.Panel min={280}>
+      <div className="editor-body">
+        <Splitter
+          className="editor-stage-split"
+          onResizeEnd={(sizes) => {
+            const next = sizes[0];
+            if (typeof next !== 'number') {
+              return;
+            }
+            setChrome((current) => ({
+              ...current,
+              speech: Math.min(SPEECH_MAX, Math.max(SPEECH_MIN, Math.round(next))),
+            }));
+          }}
+        >
+          <Splitter.Panel
+            defaultSize={chrome.speech}
+            min={SPEECH_MIN}
+            max={SPEECH_MAX}
+          >
+            <Sidebar resetCount={resetCount} theme={theme} />
+          </Splitter.Panel>
+          <Splitter.Panel min={280}>
+            <div className="editor-stage">
               <PreviewPane theme={theme} />
-            </Splitter.Panel>
-            <Splitter.Panel defaultSize={320} min={240}>
-              <Inspector />
-            </Splitter.Panel>
-          </Splitter>
-        </Splitter.Panel>
-        <Splitter.Panel defaultSize={loadLayout()?.[1] ?? 280} min={160}>
-          <BottomDock theme={theme} />
-        </Splitter.Panel>
-      </Splitter>
+              <Drawer
+                title="属性"
+                placement="right"
+                width={280}
+                open={Boolean(selectedId)}
+                onClose={() => setSelectedId(null)}
+                mask={false}
+                getContainer={false}
+                rootClassName="inspector-drawer"
+                zIndex={30}
+                styles={{
+                  body: { padding: 16, overflow: 'auto' },
+                }}
+              >
+                <Inspector />
+              </Drawer>
+            </div>
+          </Splitter.Panel>
+        </Splitter>
+        <div
+          className={chrome.dockOpen ? 'editor-dock is-open' : 'editor-dock'}
+          style={{
+            height: chrome.dockOpen ? chrome.dockSize : DOCK_STRIP,
+          }}
+        >
+          {chrome.dockOpen ? (
+            <button
+              type="button"
+              className="editor-dock-handle"
+              aria-label="调整源文件条高度"
+              onPointerDown={(event) => {
+                event.preventDefault();
+                const handle = event.currentTarget;
+                handle.setPointerCapture(event.pointerId);
+                const startY = event.clientY;
+                const start = chrome.dockSize;
+                const onMove = (move: PointerEvent) => {
+                  const next = Math.min(
+                    DOCK_MAX,
+                    Math.max(DOCK_MIN, start + (startY - move.clientY)),
+                  );
+                  setChrome((current) => ({
+                    ...current,
+                    dockSize: Math.round(next),
+                  }));
+                };
+                const onUp = () => {
+                  handle.releasePointerCapture(event.pointerId);
+                  handle.removeEventListener('pointermove', onMove);
+                  handle.removeEventListener('pointerup', onUp);
+                };
+                handle.addEventListener('pointermove', onMove);
+                handle.addEventListener('pointerup', onUp);
+              }}
+            />
+          ) : null}
+          <BottomDock
+            theme={theme}
+            open={chrome.dockOpen}
+            onOpen={() =>
+              setChrome((current) => ({ ...current, dockOpen: true }))
+            }
+            onClose={() =>
+              setChrome((current) => ({ ...current, dockOpen: false }))
+            }
+          />
+        </div>
+      </div>
     </Layout>
   );
 }

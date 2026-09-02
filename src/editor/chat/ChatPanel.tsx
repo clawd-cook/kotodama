@@ -167,7 +167,7 @@ export function ChatPanel({
         <Flex vertical flex={1} justify="center" gap={12} className="chat-welcome">
           <Welcome
             variant="borderless"
-            title="说你想要的那一页"
+            title={<h2 className="chat-welcome-title">说你想要的那一页</h2>}
             description="说完后，中间会换成一页。这一页可以留下、再打开。"
           />
           <Prompts
@@ -211,7 +211,7 @@ export function ChatPanel({
       <Sender
         key={resetCount}
         className="chat-input"
-        placeholder="描述你想要的界面"
+        placeholder="描述你想要的界面…"
         loading={isRequesting}
         onSubmit={(value) => send(value)}
         onCancel={() => abort()}

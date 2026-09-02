@@ -25,6 +25,13 @@ export default defineConfig({
   plugins: [pluginReact(), chatProxyPlugin()],
   html: {
     title: '言灵',
+    lang: 'zh-CN',
+    tags: [
+      {
+        tag: 'meta',
+        attrs: { name: 'color-scheme', content: 'light dark' },
+      },
+    ],
   },
   server: baseUrl
     ? {
