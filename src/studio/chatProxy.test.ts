@@ -101,4 +101,30 @@ describe('X chat proxy', () => {
     });
     expect(fetches).toHaveLength(0);
   });
+
+  it('X-03 health never echoes the key', async () => {
+    const handle = createChatProxy(
+      {
+        OPENAI_BASE_URL: 'https://env.example',
+        OPENAI_API_KEY: 'secret-key',
+        OPENAI_MODEL: 'env-model',
+      },
+      async () => new Response('{}'),
+    );
+    const result = await invoke(handle, {
+      method: 'GET',
+      url: '/api/chat/health',
+      on() {},
+    });
+    const json = JSON.parse(result.body) as {
+      ok?: boolean;
+      apiKey?: unknown;
+      env?: { hasApiKey?: boolean; apiKey?: unknown };
+    };
+    expect(json.ok).toBe(true);
+    expect(json.env?.hasApiKey).toBe(true);
+    expect(json).not.toHaveProperty('apiKey');
+    expect(json.env).not.toHaveProperty('apiKey');
+    expect(result.body).not.toContain('secret-key');
+  });
 });
