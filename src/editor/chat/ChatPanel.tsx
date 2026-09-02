@@ -156,7 +156,7 @@ export function ChatPanel(_props: { theme: 'light' | 'dark' }) {
         });
       }
     }
-  }, [clearLanding, landing, location.key, location.state, navigate]);
+  }, [clearLanding, landing, location.state, navigate]);
 
   useEffect(() => {
     const last = messages[messages.length - 1];
