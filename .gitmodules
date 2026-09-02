@@ -6,3 +6,11 @@
 	path = submodules/a2ui-project/a2ui
 	url = https://github.com/a2ui-project/a2ui.git
 	depth = 1
+[submodule "submodules/easyops-cn/a2ui-sdk"]
+	path = submodules/easyops-cn/a2ui-sdk
+	url = https://github.com/easyops-cn/a2ui-sdk.git
+	depth = 1
+[submodule "submodules/shawnwang15/a2ui-vue"]
+	path = submodules/shawnwang15/a2ui-vue
+	url = https://github.com/shawnwang15/a2ui-vue.git
+	depth = 1
