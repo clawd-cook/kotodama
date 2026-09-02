@@ -132,7 +132,13 @@ export const ModalView = createComponentImplementation(
     return (
       <>
         {/* biome-ignore lint/a11y/useKeyWithClickEvents: trigger child already handles activation */}
-        <span onClick={() => setOpen(true)} style={{ display: 'inline-block' }}>
+        <span
+          onClick={(event) => {
+            event.stopPropagation();
+            setOpen(true);
+          }}
+          style={{ display: 'inline-block' }}
+        >
           {props.trigger ? buildChild(props.trigger) : null}
         </span>
         <Modal
@@ -140,6 +146,8 @@ export const ModalView = createComponentImplementation(
           onCancel={() => setOpen(false)}
           footer={null}
           destroyOnClose
+          width={720}
+          styles={{ body: { maxHeight: '60vh', overflow: 'auto' } }}
         >
           {props.content ? buildChild(props.content) : null}
         </Modal>

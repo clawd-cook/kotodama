@@ -34,6 +34,22 @@ function button(
   ];
 }
 
+function actionIds(actions: A2uiComponent[]): string[] {
+  const triggers = new Set(
+    actions
+      .filter((item) => item.component === 'Modal')
+      .map((item) => item.trigger)
+      .filter((id): id is string => typeof id === 'string'),
+  );
+  return actions
+    .filter(
+      (item) =>
+        item.component === 'Modal' ||
+        (item.component === 'Button' && !triggers.has(item.id)),
+    )
+    .map((item) => item.id);
+}
+
 function rowCells(
   prefix: string,
   paths: string[],
@@ -53,7 +69,7 @@ function rowCells(
     ...paths.map((path, index) =>
       text(cellIds[index], { path }, {
         weight: 1,
-        variant: prefix === 'table_head' ? 'caption' : 'body',
+        variant: prefix.endsWith('_head') ? 'caption' : 'body',
       }),
     ),
     ...(actions
@@ -61,9 +77,7 @@ function rowCells(
           {
             id: actionId,
             component: 'Row',
-            children: actions
-              .filter((item) => item.component === 'Button')
-              .map((item) => item.id),
+            children: actionIds(actions),
             justify: 'start',
             align: 'center',
             weight: 1,
@@ -71,6 +85,18 @@ function rowCells(
           ...actions,
         ]
       : []),
+  ];
+}
+
+function logModal(modalId: string, triggerId: string, labelId: string): A2uiComponent[] {
+  return [
+    {
+      id: modalId,
+      component: 'Modal',
+      trigger: triggerId,
+      content: 'log_body',
+    },
+    ...button(triggerId, labelId, { path: '/logLabel' }, 'borderless', 'openLog'),
   ];
 }
 
@@ -84,10 +110,12 @@ export function createDemoSnapshot(): Snapshot {
   const row1Ops = [
     ...button('r1_view', 'r1_view_label', { path: '/viewLabel' }, 'borderless', 'view'),
     ...button('r1_copy', 'r1_copy_label', { path: '/copyLabel' }, 'borderless', 'copy'),
+    ...logModal('r1_log_modal', 'r1_log', 'r1_log_label'),
   ];
   const row2Ops = [
     ...button('r2_view', 'r2_view_label', { path: '/viewLabel' }, 'borderless', 'view'),
     ...button('r2_copy', 'r2_copy_label', { path: '/copyLabel' }, 'borderless', 'copy'),
+    ...logModal('r2_log_modal', 'r2_log', 'r2_log_label'),
   ];
 
   return {
@@ -255,6 +283,41 @@ export function createDemoSnapshot(): Snapshot {
       text('empty_pending', { path: '/emptyPending' }),
       text('empty_active', { path: '/emptyActive' }),
       text('empty_ended', { path: '/emptyEnded' }),
+      {
+        id: 'log_body',
+        component: 'Column',
+        children: ['log_title', 'log_head', 'log_list'],
+        justify: 'start',
+        align: 'stretch',
+      },
+      text('log_title', { path: '/logTitle' }, { variant: 'h4' }),
+      ...rowCells('log_head', [
+        '/logColId',
+        '/logColAccount',
+        '/logColContent',
+        '/logColTime',
+        '/logColIp',
+      ]),
+      {
+        id: 'log_list',
+        component: 'List',
+        children: ['log_1', 'log_2'],
+        direction: 'vertical',
+      },
+      ...rowCells('log_1', [
+        '/log1Id',
+        '/log1Account',
+        '/log1Content',
+        '/log1Time',
+        '/log1Ip',
+      ]),
+      ...rowCells('log_2', [
+        '/log2Id',
+        '/log2Account',
+        '/log2Content',
+        '/log2Time',
+        '/log2Ip',
+      ]),
     ],
     dataModel: {
       title: '任务管理',
@@ -286,6 +349,24 @@ export function createDemoSnapshot(): Snapshot {
       r2Time: '2026-04-01 ~ 2026-09-30',
       viewLabel: '查看',
       copyLabel: '复制',
+      logLabel: '操作日志',
+      logTitle: '操作日志',
+      logColId: '编号',
+      logColAccount: '操作账号',
+      logColContent: '操作内容',
+      logColTime: '操作时间',
+      logColIp: 'IP',
+      log1Id: '7024612',
+      log1Account: 'zhangkexing1',
+      log1Content:
+        '新建-提交审批（字段: 对内任务名称, 原值: null, 新值: 春季保洁激励）',
+      log1Time: '2026-09-02 15:56:25',
+      log1Ip: '10.253.30.28',
+      log2Id: '7024613',
+      log2Account: 'heyongqi10',
+      log2Content: '编辑（字段: 任务有效时间, 原值: 空, 新值: 2026-03-01 ~ 2026-06-30）',
+      log2Time: '2026-09-02 16:08:11',
+      log2Ip: '10.253.42.247',
       emptyPending: '暂无待生效任务。',
       emptyActive: '暂无生效中任务。',
       emptyEnded: '暂无已结束任务。',
