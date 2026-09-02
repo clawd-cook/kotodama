@@ -67,21 +67,20 @@ type ApplyResult =
 1. D-01 空稿不是当前页  
 2. D-02 缺草稿 / 坏草稿得到空稿，不是 demo  
 3. D-03 合法草稿按字面量恢复  
-4. R-01 无当前页 → 落地页；有当前页 → 工坊  
-5. R-02 本会话进过工坊 → 工坊（即使当前是空稿）  
-6. L-01 通道就绪则自动发送；未就绪则预填  
-7. L-02 三个提示文案与工坊空状态相同  
-8. G-01 18 个图鉴夹具都能写入，且没有白名单外的组件名  
-9. G-02 属性名来自 schema，不含 `placeholder` / `className` / `id` / `component`  
-10. E-01 三个案例 id 指向黄金夹具文件  
-11. E-02 空稿装入后与 fold 夹具一致  
-12. E-03 已有合法当前页时 `shouldConfirmReplace` 为 true；空稿为 false  
-13. H-01…H-05 `resolveChannel` 字面量表  
-14. C-05 源文件文本不含已保存的 API Key  
-15. X-01 中间件按合并结果 `fetch` 上游，body 无 `kotodamaChannel`  
-16. X-02 未就绪返回 503 和通道未配那句话  
-17. X-03 health 不含 Key  
-18. M 清单（外壳 + Design + KR1 真模型）
+4. R-01 开始创建恒为工坊（空稿也进）  
+5. L-01 通道就绪则自动发送；未就绪则预填  
+6. L-02 三个提示文案与工坊空状态相同  
+7. G-01 18 个图鉴夹具都能写入，且没有白名单外的组件名  
+8. G-02 属性名来自 schema，不含 `placeholder` / `className` / `id` / `component`  
+9. E-01 三个案例 id 指向黄金夹具文件  
+10. E-02 空稿装入后与 fold 夹具一致  
+11. E-03 已有合法当前页时 `shouldConfirmReplace` 为 true；空稿为 false  
+12. H-01…H-05 `resolveChannel` 字面量表  
+13. C-05 源文件文本不含已保存的 API Key  
+14. X-01 中间件按合并结果 `fetch` 上游，body 无 `kotodamaChannel`  
+15. X-02 未就绪返回 503 和通道未配那句话  
+16. X-03 health 不含 Key  
+17. M 清单（外壳 + Design + KR1 真模型）
 
 ---
 
@@ -342,18 +341,18 @@ type ApplyResult =
 无合法草稿时打开产品。
 
 - 四个左轨文字可见：**开始创建**、**基础组件**、**精选案例**、**设置**。  
-- 落地页标题是 **从这里说出一页**。输入 placeholder 是 **描述你想要的界面…**。  
-- 落地页没有打开 / 下载 / 撤销 / 重做 / 新建。深色开关在。  
-- 点「做一个登录表单」：进入工坊；通道配齐时说话栏出现 **正在写下这一页…**。  
+- 开始创建直接是工坊三栏：说话 / 预览 Empty / JSON。视隐 h1 是 **工坊**。不要出现 **从这里说出一页**。  
+- 工坊有打开 / 下载 / 撤销 / 重做 / 新建。深色开关在。下载在空稿时不可用。  
+- 点「做一个登录表单」：通道配齐时说话栏出现 **正在写下这一页…**。  
 - 基础组件默认是 `Column`。预览、JSON、属性表都在。复制成功文案 **已复制 JSON。** 工坊纸页不变。  
 - 精选案例三张纸。详情 **用这一页** 后进入工坊，纸页与案例一致。已有当前页时确认框文案为 **换上这一页？当前页会被盖掉。** / **留下** / **换上**。  
 - 设置三项有可见 label。保存文案 **已保存。后续对话用这组通道。** 清空保存 **已清空。下次对话用环境变量。** Key 是密码框。  
 - 刷新深层路径（`/catalog/Row`、`/examples/login`、`/settings`）仍停在该房间。  
 - 下载的 `kotodama.json` 里没有 API Key。
 
-### M-08 · live gold tasks from landing
+### M-08 · live gold tasks from workshop
 
-通道配齐后，从落地页点三个提示各走一遍。通过校验则纸页更新。与 M-04 相同的失败规则。
+通道配齐后，从工坊说话列点三个提示各走一遍。通过校验则纸页更新。与 M-04 相同的失败规则。
 
 ---
 
@@ -386,20 +385,14 @@ type ApplyResult =
 
 ## R — Create room (KR5)
 
-`createScreen({ snapshot, visitedWorkshop })` 返回 `'landing'` 或 `'workshop'`。刷新后 `visitedWorkshop` 为 false。
+`createScreen({ snapshot, visitedWorkshop })` 恒返回 `'workshop'`。
 
-### R-01 · empty page opens landing; valid page opens workshop
+### R-01 · create room is always the workshop
 
 - **Seam:** R + D  
 - **When:** `visitedWorkshop` 为 false，snapshot 为空稿。  
-- **Then:** `'landing'`。  
+- **Then:** `'workshop'`。  
 - **When:** `visitedWorkshop` 为 false，snapshot 为合法登录页。  
-- **Then:** `'workshop'`。
-
-### R-02 · visited workshop stays in workshop even if the page is empty
-
-- **Seam:** R  
-- **When:** snapshot 为空稿，`visitedWorkshop` 为 true（落地页提交过，或「用这一页」成功过）。  
 - **Then:** `'workshop'`。
 
 ---
