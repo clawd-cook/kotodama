@@ -134,9 +134,18 @@ body,
 }
 
 .editor-stage {
-  position: relative;
+  display: flex;
+  flex-direction: column;
   height: 100%;
   min-width: 0;
+  overflow: hidden;
+}
+
+.editor-preview {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
   overflow: hidden;
 }
 
@@ -316,6 +325,10 @@ body,
   overscroll-behavior: contain;
 }
 
+.preview-canvas.is-flush {
+  background: var(--ant-color-bg-container);
+}
+
 .preview-sheet-frame {
   display: flex;
   justify-content: center;
@@ -324,6 +337,17 @@ body,
   width: 100%;
   min-height: 100%;
   padding: 48px 32px;
+}
+
+.preview-canvas.is-flush .preview-sheet-frame {
+  padding: 32px 24px;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.preview-canvas.is-flush.is-empty .preview-sheet-frame {
+  align-items: center;
+  justify-content: center;
 }
 
 .preview-sheet {
@@ -339,10 +363,23 @@ body,
     0 16px 40px rgba(31, 31, 31, 0.08);
 }
 
+.preview-canvas.is-flush .preview-sheet {
+  max-width: none;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
 .editor-root[data-theme="dark"] .preview-sheet {
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.04),
     0 16px 40px rgba(0, 0, 0, 0.4);
+}
+
+.editor-root[data-theme="dark"] .preview-canvas.is-flush .preview-sheet {
+  box-shadow: none;
 }
 
 .preview-sheet-drop {
@@ -382,17 +419,17 @@ body,
   outline: 2px solid var(--ant-color-primary, #1677ff);
 }
 
-.editor-dock {
+.editor-trace {
   position: relative;
   z-index: 20;
   flex-shrink: 0;
   min-height: 40px;
-  background: var(--ant-color-bg-layout);
+  background: var(--ant-color-bg-container);
   border-top: 1px solid var(--ant-color-split);
   overflow: hidden;
 }
 
-.editor-dock-handle {
+.editor-trace-handle {
   position: absolute;
   top: 0;
   left: 0;
@@ -407,9 +444,14 @@ body,
   touch-action: none;
 }
 
-.editor-dock-handle:hover,
-.editor-dock-handle:focus-visible {
+.editor-trace-handle:hover,
+.editor-trace-handle:focus-visible {
   background: var(--ant-color-split);
+}
+
+.editor-trace-handle:focus-visible {
+  outline: 2px solid var(--ant-color-primary);
+  outline-offset: 2px;
 }
 
 .bottom-dock {
@@ -432,11 +474,11 @@ body,
   height: 100%;
 }
 
-.editor-dock:not(.is-open) .ant-tabs-content-holder {
+.editor-trace:not(.is-open) .ant-tabs-content-holder {
   display: none;
 }
 
-.editor-dock.is-open .ant-tabs-content-holder {
+.editor-trace.is-open .ant-tabs-content-holder {
   flex: 1;
   min-height: 0;
   overflow: hidden;
@@ -470,4 +512,86 @@ body,
   font-size: 13px;
   line-height: 20px;
   overscroll-behavior: contain;
+}
+
+.source-pane {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+  background: var(--ant-color-bg-container);
+  overscroll-behavior: contain;
+}
+
+.source-pane-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-shrink: 0;
+  min-width: 0;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--ant-color-split);
+}
+
+.source-pane-head .studio-section-title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.source-pane-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 4px;
+}
+
+.source-pane .ant-alert {
+  flex-shrink: 0;
+  margin: 8px 8px 0;
+}
+
+.source-pane-editor {
+  flex: 1;
+  min-height: 0;
+  margin: 8px;
+  overflow: hidden;
+  border: 1px solid var(--ant-color-split);
+  border-radius: 4px;
+  background: var(--ant-color-bg-container);
+  overscroll-behavior: contain;
+}
+
+.source-pane-editor > section,
+.source-pane-editor > div {
+  height: 100%;
+}
+
+.source-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 8px 0;
+  border: 0;
+  background: var(--ant-color-bg-container);
+  color: var(--ant-color-text);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  line-height: 16px;
+  writing-mode: vertical-rl;
+  cursor: pointer;
+}
+
+.source-strip:hover {
+  color: var(--ant-color-primary);
+}
+
+.source-strip:focus-visible {
+  color: var(--ant-color-primary);
+  outline: 2px solid var(--ant-color-primary);
+  outline-offset: -2px;
 }

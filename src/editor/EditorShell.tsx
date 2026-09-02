@@ -72,6 +72,7 @@ export function EditorShell({
     <div className="editor-body">
       <h1 className="studio-visually-hidden">工坊</h1>
       <Splitter
+        key={chrome.sourceOpen ? 'source-open' : 'source-shut'}
         className="editor-stage-split"
         onResizeEnd={(sizes) => {
           const speech = sizes[0];
