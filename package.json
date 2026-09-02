@@ -11,6 +11,8 @@
     "preview": "rsbuild preview"
   },
   "dependencies": {
+    "@a2ui/react": "^0.10.0",
+    "@a2ui/web_core": "^0.10.7",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

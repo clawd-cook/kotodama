@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@a2ui/react':
+        specifier: ^0.10.0
+        version: 0.10.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(zod@3.25.76)
+      '@a2ui/web_core':
+        specifier: ^0.10.7
+        version: 0.10.7
       react:
         specifier: ^19.1.0
         version: 19.2.8
@@ -35,6 +41,22 @@ importers:
         version: 5.9.3
 
 packages:
+
+  '@a2ui/markdown-it@0.0.4':
+    resolution: {integrity: sha1-MdgaaJ12Tla73TQdUhFTIJWgHM0=, tarball: http://registry.m.jd.com/@a2ui/markdown-it/download/@a2ui/markdown-it-0.0.4.tgz}
+    peerDependencies:
+      '@a2ui/web_core': ^0.9.2
+
+  '@a2ui/react@0.10.0':
+    resolution: {integrity: sha1-VpT0TpXVjL8NnWqEvSW3QpRFenc=, tarball: http://registry.m.jd.com/@a2ui/react/download/@a2ui/react-0.10.0.tgz}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+      zod: ^3.23.8
+
+  '@a2ui/web_core@0.10.7':
+    resolution: {integrity: sha1-i2KAgqrXpKZusuWEAyoIPNF1h/o=, tarball: http://registry.m.jd.com/@a2ui/web_core/download/@a2ui/web_core-0.10.7.tgz}
 
   '@biomejs/biome@1.9.4':
     resolution: {integrity: sha1-iXZigcvDoKroZaf/E9aq/+ooQr8=, tarball: http://registry.m.jd.com/@biomejs/biome/download/@biomejs/biome-1.9.4.tgz}
@@ -122,6 +144,9 @@ packages:
 
   '@napi-rs/wasm-runtime@1.0.7':
     resolution: {integrity: sha1-3P6pmnXwYgmiNfPZQeNGClHpsUw=, tarball: http://registry.m.jd.com/@napi-rs/wasm-runtime/download/@napi-rs/wasm-runtime-1.0.7.tgz}
+
+  '@preact/signals-core@1.14.4':
+    resolution: {integrity: sha1-01iMvaI3/LPIqOR49sw3BlNgnrc=, tarball: http://registry.m.jd.com/@preact/signals-core/download/@preact/signals-core-1.14.4.tgz}
 
   '@rsbuild/core@1.7.6':
     resolution: {integrity: sha1-G6ax98XfdrFCJpujxA6wDG2wwts=, tarball: http://registry.m.jd.com/@rsbuild/core/download/@rsbuild/core-1.7.6.tgz}
@@ -224,6 +249,9 @@ packages:
   '@types/react@19.2.18':
     resolution: {integrity: sha1-6wtqH7Y10alpLV+Eo0lb2K0VNwc=, tarball: http://registry.m.jd.com/@types/react/download/@types/react-19.2.18.tgz}
 
+  '@types/trusted-types@2.0.7':
+    resolution: {integrity: sha1-usywepcLkXB986PoumiWxX6tLRE=, tarball: http://registry.m.jd.com/@types/trusted-types/download/@types/trusted-types-2.0.7.tgz}
+
   ansi-html-community@0.0.8:
     resolution: {integrity: sha1-afvE1sy+OD+XNpNK40w/gpDxv0E=, tarball: http://registry.m.jd.com/ansi-html-community/download/ansi-html-community-0.0.8.tgz}
     engines: {'0': node >= 0.8.0}
@@ -233,11 +261,28 @@ packages:
     resolution: {integrity: sha1-CCyyyJyf6GWaMRpTvWpNxTAdswQ=, tarball: http://registry.m.jd.com/ansi-regex/download/ansi-regex-5.0.1.tgz}
     engines: {node: '>=8'}
 
+  argparse@2.0.1:
+    resolution: {integrity: sha1-JG9Q88p4oyQPbJl+ipvR6sSeSzg=, tarball: http://registry.m.jd.com/argparse/download/argparse-2.0.1.tgz}
+
+  clsx@2.1.1:
+    resolution: {integrity: sha1-7tOXyf2L2IK/sY3qtxAgSaLzKZk=, tarball: http://registry.m.jd.com/clsx/download/clsx-2.1.1.tgz}
+    engines: {node: '>=6'}
+
   core-js@3.47.0:
     resolution: {integrity: sha1-Q27wdlDhka/rhMJEgbKYvWDrShc=, tarball: http://registry.m.jd.com/core-js/download/core-js-3.47.0.tgz}
 
   csstype@3.2.3:
     resolution: {integrity: sha1-7EjA8+mT5QZIyG2lWeJhCZXPmJo=, tarball: http://registry.m.jd.com/csstype/download/csstype-3.2.3.tgz}
+
+  date-fns@4.4.0:
+    resolution: {integrity: sha1-gGU57fRcYWsrdrX3i4jFbtPH4DY=, tarball: http://registry.m.jd.com/date-fns/download/date-fns-4.4.0.tgz}
+
+  dompurify@3.4.14:
+    resolution: {integrity: sha1-p4ntsse822mpNxOjTtt+ClJF2Mk=, tarball: http://registry.m.jd.com/dompurify/download/dompurify-3.4.14.tgz}
+
+  entities@4.5.0:
+    resolution: {integrity: sha1-XSaOpecRPsdMTQM7eepaNaSI+0g=, tarball: http://registry.m.jd.com/entities/download/entities-4.5.0.tgz}
+    engines: {node: '>=0.12'}
 
   error-stack-parser@2.1.4:
     resolution: {integrity: sha1-IpywHNv6hEQL+pGHYoW5RoAYgoY=, tarball: http://registry.m.jd.com/error-stack-parser/download/error-stack-parser-2.1.4.tgz}
@@ -248,6 +293,20 @@ packages:
   jiti@2.7.0:
     resolution: {integrity: sha1-l0Io8vTKK8IYhaF5e0X+po6VDGQ=, tarball: http://registry.m.jd.com/jiti/download/jiti-2.7.0.tgz}
     hasBin: true
+
+  linkify-it@5.0.2:
+    resolution: {integrity: sha1-074KaTrz2p3ziD8eNGoOl0YajBk=, tarball: http://registry.m.jd.com/linkify-it/download/linkify-it-5.0.2.tgz}
+
+  markdown-it@14.3.1:
+    resolution: {integrity: sha1-iXTiRzd5Nj7VaC6jd/MVZO5R4pI=, tarball: http://registry.m.jd.com/markdown-it/download/markdown-it-14.3.1.tgz}
+    hasBin: true
+
+  mdurl@2.1.0:
+    resolution: {integrity: sha1-1xHT97zn8ixIfJG+eFRfNW+pZXM=, tarball: http://registry.m.jd.com/mdurl/download/mdurl-2.1.0.tgz}
+
+  punycode.js@2.3.1:
+    resolution: {integrity: sha1-a1PlatdViCNOefSv+pCXLH3Yzbc=, tarball: http://registry.m.jd.com/punycode.js/download/punycode.js-2.3.1.tgz}
+    engines: {node: '>=6'}
 
   react-dom@19.2.8:
     resolution: {integrity: sha1-O0a57tqHfN/yzxPSdw//SuNsLsI=, tarball: http://registry.m.jd.com/react-dom/download/react-dom-19.2.8.tgz}
@@ -280,10 +339,44 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
+  uc.micro@2.1.0:
+    resolution: {integrity: sha1-+NP30OxMPeo1p+PI76TLi0XJ5+4=, tarball: http://registry.m.jd.com/uc.micro/download/uc.micro-2.1.0.tgz}
+
   webpack-hot-middleware@2.26.1:
     resolution: {integrity: sha1-hyFPHj+fOsq5Jx/vnm7XtjfXGcA=, tarball: http://registry.m.jd.com/webpack-hot-middleware/download/webpack-hot-middleware-2.26.1.tgz}
 
+  zod-to-json-schema@3.25.2:
+    resolution: {integrity: sha1-P6eZp7rdVUVBRy+2WEP9xGCy5ao=, tarball: http://registry.m.jd.com/zod-to-json-schema/download/zod-to-json-schema-3.25.2.tgz}
+    peerDependencies:
+      zod: ^3.25.28 || ^4
+
+  zod@3.25.76:
+    resolution: {integrity: sha1-JoQcP2/SKmonYOfMtxkXl2hHHjQ=, tarball: http://registry.m.jd.com/zod/download/zod-3.25.76.tgz}
+
 snapshots:
+
+  '@a2ui/markdown-it@0.0.4(@a2ui/web_core@0.10.7)':
+    dependencies:
+      '@a2ui/web_core': 0.10.7
+      dompurify: 3.4.14
+      markdown-it: 14.3.1
+
+  '@a2ui/react@0.10.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(zod@3.25.76)':
+    dependencies:
+      '@a2ui/markdown-it': 0.0.4(@a2ui/web_core@0.10.7)
+      '@a2ui/web_core': 0.10.7
+      clsx: 2.1.1
+      markdown-it: 14.3.1
+      react: 19.2.8
+      react-dom: 19.2.8(react@19.2.8)
+      zod: 3.25.76
+
+  '@a2ui/web_core@0.10.7':
+    dependencies:
+      '@preact/signals-core': 1.14.4
+      date-fns: 4.4.0
+      zod: 3.25.76
+      zod-to-json-schema: 3.25.2(zod@3.25.76)
 
   '@biomejs/biome@1.9.4':
     optionalDependencies:
@@ -367,6 +460,8 @@ snapshots:
       '@emnapi/runtime': 1.11.3
       '@tybys/wasm-util': 0.10.3
     optional: true
+
+  '@preact/signals-core@1.14.4': {}
 
   '@rsbuild/core@1.7.6':
     dependencies:
@@ -464,13 +559,28 @@ snapshots:
     dependencies:
       csstype: 3.2.3
 
+  '@types/trusted-types@2.0.7':
+    optional: true
+
   ansi-html-community@0.0.8: {}
 
   ansi-regex@5.0.1: {}
 
+  argparse@2.0.1: {}
+
+  clsx@2.1.1: {}
+
   core-js@3.47.0: {}
 
   csstype@3.2.3: {}
+
+  date-fns@4.4.0: {}
+
+  dompurify@3.4.14:
+    optionalDependencies:
+      '@types/trusted-types': 2.0.7
+
+  entities@4.5.0: {}
 
   error-stack-parser@2.1.4:
     dependencies:
@@ -479,6 +589,23 @@ snapshots:
   html-entities@2.6.0: {}
 
   jiti@2.7.0: {}
+
+  linkify-it@5.0.2:
+    dependencies:
+      uc.micro: 2.1.0
+
+  markdown-it@14.3.1:
+    dependencies:
+      argparse: 2.0.1
+      entities: 4.5.0
+      linkify-it: 5.0.2
+      mdurl: 2.1.0
+      punycode.js: 2.3.1
+      uc.micro: 2.1.0
+
+  mdurl@2.1.0: {}
+
+  punycode.js@2.3.1: {}
 
   react-dom@19.2.8(react@19.2.8):
     dependencies:
@@ -501,8 +628,16 @@ snapshots:
 
   typescript@5.9.3: {}
 
+  uc.micro@2.1.0: {}
+
   webpack-hot-middleware@2.26.1:
     dependencies:
       ansi-html-community: 0.0.8
       html-entities: 2.6.0
       strip-ansi: 6.0.1
+
+  zod-to-json-schema@3.25.2(zod@3.25.76):
+    dependencies:
+      zod: 3.25.76
+
+  zod@3.25.76: {}
