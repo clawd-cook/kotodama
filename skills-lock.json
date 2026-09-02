@@ -91,6 +91,12 @@
       "skillPath": "skills/narrative-text-visualization/SKILL.md",
       "computedHash": "eda161335a1d910121f1e8af1b8614aab68e6a47cef5214ddfe5b7c6e97568cb"
     },
+    "tdd": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/tdd/SKILL.md",
+      "computedHash": "e753a5da75292bbe59d302d89566bc2c53d0e73944da2f0e944a7578883c07d0"
+    },
     "technical-writing": {
       "source": "vercel/eve",
       "sourceType": "github",
