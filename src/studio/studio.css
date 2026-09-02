@@ -191,6 +191,10 @@
   overflow: hidden;
 }
 
+.example-thumb .preview-canvas {
+  height: 200px;
+}
+
 .example-thumb .preview-sheet-frame {
   min-height: 200px;
   padding: 16px;

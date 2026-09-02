@@ -40,12 +40,13 @@ export function ExamplesPage({ theme }: { theme: 'light' | 'dark' }) {
               className="example-card"
               to={`/examples/${card.id}`}
             >
-              <PaperPreview
-                snapshot={snapshot}
-                theme={theme}
-                catalog={antdCatalog}
-                className="example-thumb"
-              />
+              <div className="example-thumb" aria-hidden>
+                <PaperPreview
+                  snapshot={snapshot}
+                  theme={theme}
+                  catalog={antdCatalog}
+                />
+              </div>
               <h2 className="example-card-title">{card.title}</h2>
               <Typography.Paragraph type="secondary">
                 {card.blurb}
