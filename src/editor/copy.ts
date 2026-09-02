@@ -12,3 +12,6 @@ export function pageUnchanged(reason: string): string {
 export function openFailed(reason: string): string {
   return `没有打开。${trimReason(reason)}。`;
 }
+
+export const CHANNEL_UNREADY =
+  '通道没配好。去设置里填 Base URL、API Key 和模型名。';

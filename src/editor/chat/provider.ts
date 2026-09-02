@@ -6,6 +6,7 @@ export class EditorChatProvider extends OpenAIChatProvider {
   constructor(
     config: ConstructorParameters<typeof OpenAIChatProvider>[0],
     private getSystemPrompt: () => string,
+    private getChannel: () => Record<string, string> | undefined,
   ) {
     super(config);
   }
@@ -16,10 +17,12 @@ export class EditorChatProvider extends OpenAIChatProvider {
   ): XModelParams {
     const params = super.transformParams(requestParams, options);
     const history = (params.messages ?? []).filter((item) => item.role !== 'system');
+    const channel = this.getChannel();
     return {
       ...params,
       messages: [{ role: 'system', content: this.getSystemPrompt() }, ...history],
-    };
+      ...(channel ? { kotodamaChannel: channel } : {}),
+    } as XModelParams;
   }
 }
 

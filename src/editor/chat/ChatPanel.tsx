@@ -1,17 +1,23 @@
 import { Bubble, Prompts, Sender } from '@ant-design/x';
 import { useXChat, XRequest } from '@ant-design/x-sdk';
-import { Flex, Typography } from 'antd';
+import { Alert, Flex, Typography } from 'antd';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router';
+import { useChannel } from '../../studio/ChannelContext';
+import { PROMPT_ITEMS } from '../../studio/landingSubmit';
 import type { ApplyResult } from '../applyDocument';
 import { applyDocument } from '../applyDocument';
-import { STREAMING_PLACEHOLDER } from '../copy';
+import { CHANNEL_UNREADY, STREAMING_PLACEHOLDER } from '../copy';
 import { useEditor } from '../EditorState';
 import { toMessages } from '../snapshot';
 import { parseChatOutput } from './parseA2ui';
 import { presentAssistant } from './presentAssistant';
 import { EditorChatProvider, textOf } from './provider';
-import { PROMPT_ITEMS } from '../../studio/landingSubmit';
 import { buildSystemPrompt } from './prompt';
+
+const consumedLandingKeys = new Set<string>();
+
+type LandingState = { autoSend?: string; prefill?: string };
 
 export function ChatPanel({
   resetCount,
@@ -20,28 +26,24 @@ export function ChatPanel({
   theme: 'light' | 'dark';
 }) {
   const { snapshot, applyJson, logError, clearErrors } = useEditor();
+  const { resolved, override } = useChannel();
+  const location = useLocation();
+  const navigate = useNavigate();
   const snapshotRef = useRef(snapshot);
   snapshotRef.current = snapshot;
   const applyJsonRef = useRef(applyJson);
   applyJsonRef.current = applyJson;
   const logErrorRef = useRef(logError);
   logErrorRef.current = logError;
+  const overrideRef = useRef(override);
+  overrideRef.current = override;
+  const onRequestRef = useRef<(payload: { messages: { role: string; content: string }[] }) => void>(
+    () => undefined,
+  );
   const appliedIds = useRef(new Set<string>());
-  const [model, setModel] = useState('');
   const [presented, setPresented] = useState<Record<string, string>>({});
-
-  useEffect(() => {
-    void fetch('/api/chat/health')
-      .then((response) => response.json())
-      .then((data: { env?: { model?: string } }) => {
-        if (data.env?.model) {
-          setModel(data.env.model);
-        }
-      })
-      .catch(() => {
-        /* health is optional until send */
-      });
-  }, []);
+  const landing = location.state as LandingState | null;
+  const [input, setInput] = useState(landing?.prefill ?? '');
 
   const roles = useMemo(
     () => ({
@@ -68,7 +70,7 @@ export function ChatPanel({
             manual: true,
             params: {
               stream: true,
-              ...(model ? { model } : {}),
+              ...(resolved.model ? { model: resolved.model } : {}),
             },
           }),
         },
@@ -76,8 +78,9 @@ export function ChatPanel({
           buildSystemPrompt(
             JSON.stringify(toMessages(snapshotRef.current), null, 2),
           ),
+        () => overrideRef.current,
       ),
-    [model, resetCount],
+    [resetCount, resolved.model],
   );
 
   const { messages, onRequest, isRequesting, abort, setMessages } = useXChat({
@@ -99,6 +102,39 @@ export function ChatPanel({
       return { content: message, role: 'assistant' };
     },
   });
+  onRequestRef.current = onRequest as typeof onRequestRef.current;
+
+  const send = (text: string) => {
+    const content = text.trim();
+    if (!content || isRequesting || !resolved.ready) {
+      return;
+    }
+    setInput('');
+    onRequest({
+      messages: [{ role: 'user', content }],
+    });
+  };
+
+  useEffect(() => {
+    const state = location.state as LandingState | null;
+    if (!state?.autoSend && !state?.prefill) {
+      return;
+    }
+    if (consumedLandingKeys.has(location.key)) {
+      return;
+    }
+    consumedLandingKeys.add(location.key);
+    const autoSend = state.autoSend;
+    navigate('.', { replace: true, state: null });
+    if (autoSend) {
+      const content = autoSend.trim();
+      if (content) {
+        onRequestRef.current({
+          messages: [{ role: 'user', content }],
+        });
+      }
+    }
+  }, [location.key, location.state, navigate]);
 
   useEffect(() => {
     appliedIds.current.clear();
@@ -144,16 +180,6 @@ export function ChatPanel({
       logErrorRef.current(display, 'chat');
     }
   }, [clearErrors, messages]);
-
-  const send = (text: string) => {
-    const content = text.trim();
-    if (!content || isRequesting) {
-      return;
-    }
-    onRequest({
-      messages: [{ role: 'user', content }],
-    });
-  };
 
   return (
     <Flex vertical className="chat-panel">
@@ -209,11 +235,17 @@ export function ChatPanel({
             })}
         />
       )}
+      {resolved.ready ? null : (
+        <Alert type="warning" showIcon message={CHANNEL_UNREADY} />
+      )}
       <Sender
         key={resetCount}
         className="chat-input"
         placeholder="描述你想要的界面…"
+        value={input}
         loading={isRequesting}
+        disabled={!resolved.ready}
+        onChange={(value) => setInput(value)}
         onSubmit={(value) => send(value)}
         onCancel={() => abort()}
       />

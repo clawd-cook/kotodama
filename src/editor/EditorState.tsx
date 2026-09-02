@@ -9,7 +9,6 @@ import {
 } from 'react';
 import { applyDocument } from './applyDocument';
 import { openFailed, pageUnchanged } from './copy';
-import { createDemoSnapshot } from './demo';
 import {
   deleteComponent,
   duplicateComponent,
@@ -17,7 +16,7 @@ import {
   updateComponentProps,
 } from './ops';
 import { toMessages } from './snapshot';
-import { loadDraft, saveDraft } from './storage';
+import { emptySnapshot, loadDraft, saveDraft } from './storage';
 import type { EditorError, EditorEvent, Snapshot } from './types';
 import { validateSnapshot } from './validate';
 
@@ -40,6 +39,7 @@ type EditorContextValue = {
   setDataModel: (value: unknown) => void;
   applyJson: (text: string) => boolean;
   openJson: (text: string) => string | null;
+  loadPage: (text: string) => string | null;
   setJsonText: (text: string) => void;
   undo: () => void;
   redo: () => void;
@@ -233,8 +233,24 @@ export function EditorProvider({ children }: { children: ReactNode }) {
     setSnapshot(next);
   }, [future, past, snapshot]);
 
+  const loadPage = useCallback(
+    (text: string): string | null => {
+      const result = applyDocument(text, snapshot);
+      if (!result.ok) {
+        return result.message;
+      }
+      commit(result.snapshot);
+      setJsonError(null);
+      setSelectedId(null);
+      setEvents([]);
+      setErrors((current) => current.filter((item) => item.source !== 'json'));
+      return null;
+    },
+    [commit, snapshot],
+  );
+
   const reset = useCallback(() => {
-    commit(createDemoSnapshot());
+    commit(emptySnapshot());
     setSelectedId(null);
     setEvents([]);
     setErrors([]);
@@ -284,6 +300,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
       setDataModel,
       applyJson,
       openJson,
+      loadPage,
       setJsonText,
       undo,
       redo,
@@ -296,6 +313,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
     [
       applyJson,
       openJson,
+      loadPage,
       clearErrors,
       duplicateSelected,
       errors,

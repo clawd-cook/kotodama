@@ -3,9 +3,9 @@ import xZhCN from '@ant-design/x/locale/zh_CN';
 import { theme as antdTheme } from 'antd';
 import antdZhCN from 'antd/locale/zh_CN';
 import { useEffect, useState } from 'react';
-import { EditorShell } from './EditorShell';
 import { EditorProvider } from './EditorState';
-import { loadTheme, saveTheme } from './storage';
+import { loadTheme } from './storage';
+import { StudioShell } from '../studio/StudioShell';
 import './editor.css';
 
 export function EditorApp() {
@@ -30,13 +30,7 @@ export function EditorApp() {
       }}
     >
       <EditorProvider>
-        <EditorShell
-          theme={theme}
-          onThemeChange={(next) => {
-            saveTheme(next);
-            setTheme(next);
-          }}
-        />
+        <StudioShell theme={theme} onThemeChange={setTheme} />
       </EditorProvider>
     </XProvider>
   );

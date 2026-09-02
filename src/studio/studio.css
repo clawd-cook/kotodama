@@ -1,0 +1,264 @@
+.studio-house {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+}
+
+.studio-rail {
+  flex: 0 0 168px;
+  width: 168px;
+  z-index: 20;
+  background: var(--ant-color-bg-container);
+  border-inline-end: 1px solid var(--ant-color-split);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.studio-rail .ant-menu {
+  height: 100%;
+  border-inline-end: 0 !important;
+}
+
+.studio-rail .ant-menu-item {
+  height: 40px;
+  line-height: 40px;
+  margin-inline: 8px;
+  width: calc(100% - 16px);
+}
+
+.studio-desk {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--ant-color-bg-layout);
+}
+
+.studio-workshop {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+}
+
+.studio-workshop[hidden] {
+  display: none !important;
+}
+
+.studio-workshop .editor-body {
+  flex: 1;
+}
+
+.editor-wordmark {
+  color: inherit;
+  text-decoration: none;
+}
+
+.studio-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.studio-title {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.landing-desk {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+}
+
+.landing-copy {
+  width: 100%;
+  max-width: 560px;
+}
+
+.landing-title {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+}
+
+.landing-desc {
+  margin-bottom: 16px !important;
+  text-align: center;
+}
+
+.landing-sender .ant-sender {
+  box-shadow: none;
+}
+
+.landing-prompts {
+  margin-top: 16px;
+}
+
+.catalog-room {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.catalog-index {
+  flex: 0 0 200px;
+  width: 200px;
+  background: var(--ant-color-bg-container);
+  border-inline-end: 1px solid var(--ant-color-split);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.catalog-index .ant-menu {
+  border-inline-end: 0 !important;
+}
+
+.catalog-index .ant-menu-item-group-title {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ant-color-text-secondary);
+}
+
+.catalog-detail {
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+  padding: 24px;
+  overscroll-behavior: contain;
+}
+
+.catalog-detail .preview-canvas {
+  height: auto;
+  min-height: 280px;
+  margin: 16px 0;
+}
+
+.examples-list,
+.example-detail,
+.settings-desk {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 24px;
+}
+
+.examples-row {
+  display: flex;
+  gap: 16px;
+}
+
+.example-card {
+  flex: 1;
+  min-width: 0;
+  max-width: 100%;
+  padding: 16px;
+  color: inherit;
+  text-decoration: none;
+  background: var(--ant-color-bg-container);
+  border: 1px solid var(--ant-color-split);
+  border-radius: 4px;
+  box-shadow:
+    0 1px 0 rgba(31, 31, 31, 0.04),
+    0 16px 40px rgba(31, 31, 31, 0.08);
+}
+
+.example-card-title {
+  margin: 12px 0 4px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.example-thumb {
+  height: 200px;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.example-thumb .preview-sheet-frame {
+  min-height: 200px;
+  padding: 16px;
+}
+
+.example-detail-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.example-detail .preview-canvas {
+  height: auto;
+  min-height: 280px;
+  margin: 16px 0;
+}
+
+.settings-desk {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.settings-sheet {
+  width: 100%;
+  max-width: 560px;
+  padding: 32px 24px;
+  background: var(--ant-color-bg-container);
+  border: 1px solid var(--ant-color-split);
+  border-radius: 4px;
+}
+
+.settings-source {
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--ant-color-text-secondary);
+}
+
+.json-well {
+  margin: 16px 0;
+  background: var(--ant-color-bg-container);
+  border: 1px solid var(--ant-color-split);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.json-well-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px 4px 16px;
+  border-bottom: 1px solid var(--ant-color-split);
+}
+
+.json-well-body {
+  margin: 0;
+  padding: 16px;
+  max-height: 320px;
+  overflow: auto;
+  font-family: "SFMono-Regular", Consolas, Menlo, monospace;
+  font-size: 13px;
+  line-height: 20px;
+  overscroll-behavior: contain;
+}
+
+.editor-root[data-theme='dark'] .example-card {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04),
+    0 16px 40px rgba(0, 0, 0, 0.4);
+}
