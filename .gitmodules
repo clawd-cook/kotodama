@@ -14,3 +14,6 @@
 	path = submodules/shawnwang15/a2ui-vue
 	url = https://github.com/shawnwang15/a2ui-vue.git
 	depth = 1
+[submodule "submodules/ant-design/ant-design"]
+	path = submodules/ant-design/ant-design
+	url = https://github.com/ant-design/ant-design.git
