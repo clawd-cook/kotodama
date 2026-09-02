@@ -41,7 +41,7 @@ type ApplyResult =
 
 1. W-01 未知组件不能盖掉当前页  
 2. W-02 合法 demo 可以写入  
-3. C-01 demo 往返后标题仍是「欢迎使用言灵」  
+3. C-01 demo 往返后标题仍是「任务管理」  
 4. W-03 缺少 `root` 失败（不再自动改名）  
 5. W-04 `placeholder` 失败  
 6. W-05 内联 children 失败  
@@ -65,10 +65,10 @@ type ApplyResult =
 | `surfaceId` | `main` |
 | `catalogId` | `https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json` |
 | root | `id` 为 `root`，`component` 为 `Column` |
-| `dataModel.title` | `欢迎使用言灵` |
-| `dataModel.submitLabel` | `提交` |
+| `dataModel.title` | `任务管理` |
+| `dataModel.queryLabel` | `查询` |
 
-失败用例的 Then 一律包括：`result.ok === false`；`current.dataModel.title` 仍为 `欢迎使用言灵`；`result.message` 为非空中文。
+失败用例的 Then 一律包括：`result.ok === false`；`current.dataModel.title` 仍为 `任务管理`；`result.message` 为非空中文。
 
 ---
 
@@ -81,7 +81,7 @@ type ApplyResult =
 - **Seam:** W  
 - **Given:** 当前页为 demo。  
 - **When:** 写入一份其它部分合法、但某组件 `"component": "Table"` 的消息数组。  
-- **Then:** `ok` 为 false。`message` 含 `Table`。当前页 `dataModel.title` 仍为 `欢迎使用言灵`。
+- **Then:** `ok` 为 false。`message` 含 `Table`。当前页 `dataModel.title` 仍为 `任务管理`。
 
 同条可再跑 `"component": "Form"`：`message` 含 `Form`。可作为 W-01b，同一切片。
 
@@ -89,13 +89,13 @@ type ApplyResult =
 
 - **Seam:** W  
 - **When:** 写入 `toMessages(createDemoSnapshot())` 的 JSON 文本。  
-- **Then:** `ok` 为 true。`snapshot.surfaceId` 为 `main`。存在 `id === "root"`。`snapshot.dataModel.title` 为 `欢迎使用言灵`。
+- **Then:** `ok` 为 true。`snapshot.surfaceId` 为 `main`。存在 `id === "root"`。`snapshot.dataModel.title` 为 `任务管理`。
 
 ### W-03 · missing root does not rename another node
 
 - **Seam:** W  
 - **When:** 组件列表只有 `id: "title"` 的 `Text`，没有 `root`。  
-- **Then:** `ok` 为 false。`message` 含 `root`。当前页仍是 demo（`submitLabel` 仍为 `提交`）。
+- **Then:** `ok` 为 false。`message` 含 `root`。当前页仍是 demo（`queryLabel` 仍为 `查询`）。
 
 ### W-04 · extra TextField props are rejected
 
@@ -148,7 +148,7 @@ type ApplyResult =
 
 - **Seam:** C  
 - **When:** `foldMessages(toMessages(createDemoSnapshot()))`。  
-- **Then:** `dataModel.title` 为 `欢迎使用言灵`。`dataModel.submitLabel` 为 `提交`。存在 `root`。`surfaceId` 为 `main`。
+- **Then:** `dataModel.title` 为 `任务管理`。`dataModel.queryLabel` 为 `查询`。存在 `root`。`surfaceId` 为 `main`。
 
 再经 `applyDocument(JSON.stringify(toMessages(that)))` 亦 `ok`。
 

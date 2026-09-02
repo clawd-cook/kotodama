@@ -4,8 +4,8 @@ import { createDemoSnapshot } from './demo';
 import { foldMessages, toMessages } from './snapshot';
 import type { A2uiMessage, Snapshot } from './types';
 
-const TITLE = '欢迎使用言灵';
-const SUBMIT = '提交';
+const TITLE = '任务管理';
+const QUERY = '查询';
 
 function currentPage(): Snapshot {
   return createDemoSnapshot();
@@ -73,8 +73,8 @@ describe('W write gate', () => {
   it('C-01 demo round-trip keeps copy', () => {
     const folded = foldMessages(toMessages(createDemoSnapshot()));
     expect((folded.dataModel as { title?: string }).title).toBe(TITLE);
-    expect((folded.dataModel as { submitLabel?: string }).submitLabel).toBe(
-      SUBMIT,
+    expect((folded.dataModel as { queryLabel?: string }).queryLabel).toBe(
+      QUERY,
     );
     expect(folded.components.some((item) => item.id === 'root')).toBe(true);
     expect(folded.surfaceId).toBe('main');
@@ -127,8 +127,8 @@ describe('W write gate', () => {
     if (!result.ok) {
       expect(result.message).toContain('root');
     }
-    expect((current.dataModel as { submitLabel?: string }).submitLabel).toBe(
-      SUBMIT,
+    expect((current.dataModel as { queryLabel?: string }).queryLabel).toBe(
+      QUERY,
     );
   });
 

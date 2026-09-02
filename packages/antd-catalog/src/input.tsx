@@ -13,7 +13,7 @@ import {
   DatePicker,
   Input,
   InputNumber,
-  Radio,
+  Select,
   Slider,
   TimePicker,
 } from 'antd';
@@ -140,10 +140,11 @@ export const ChoicePicker = createComponentImplementation(
     return (
       <Field label={props.label} error={props.validationErrors?.[0]} weight={props.weight}>
         {props.variant === 'mutuallyExclusive' ? (
-          <Radio.Group
-            value={values[0]}
+          <Select
+            style={{ width: '100%' }}
             options={options}
-            onChange={(event) => props.setValue([event.target.value])}
+            value={values[0]}
+            onChange={(next) => props.setValue(next ? [next] : [])}
           />
         ) : (
           <Checkbox.Group

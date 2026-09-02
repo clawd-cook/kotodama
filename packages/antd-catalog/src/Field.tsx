@@ -15,10 +15,11 @@ export function Field({
 }) {
   return (
     <Form.Item
+      layout="vertical"
       label={label || undefined}
       validateStatus={error ? 'error' : undefined}
       help={error}
-      style={{ ...weightStyle(weight), marginBottom: 0 }}
+      style={{ ...weightStyle(weight), marginBottom: 0, minWidth: 0 }}
     >
       {children}
     </Form.Item>

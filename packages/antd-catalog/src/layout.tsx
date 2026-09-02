@@ -19,6 +19,7 @@ export const Row = createComponentImplementation(
   ({ props, buildChild, context }) => (
     <Flex
       gap={8}
+      wrap="wrap"
       style={{
         ...weightStyle(props.weight),
         justifyContent: mapJustify(props.justify),
