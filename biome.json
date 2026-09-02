@@ -26,5 +26,8 @@
     "rules": {
       "recommended": true
     }
+  },
+  "files": {
+    "ignore": ["**/.agents/**", "**/node_modules/**", "**/submodules/**"]
   }
 }
