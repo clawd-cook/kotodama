@@ -99,12 +99,14 @@ export function PreviewPane({ theme }: { theme: 'light' | 'dark' }) {
             token: { ...antdTheme.defaultSeed },
           }}
         >
-          <div className={`preview-sheet ${dropClass}`.trim()}>
-            {surface ? (
-              <A2uiSurface surface={surface} />
-            ) : (
-              <Empty description="没有可预览的页面" />
-            )}
+          <div className="preview-sheet-frame">
+            <div className={`preview-sheet ${dropClass}`.trim()}>
+              {surface ? (
+                <A2uiSurface surface={surface} />
+              ) : (
+                <Empty description="没有可预览的页面" />
+              )}
+            </div>
           </div>
         </ConfigProvider>
       </main>

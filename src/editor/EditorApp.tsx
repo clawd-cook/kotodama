@@ -25,7 +25,7 @@ export function EditorApp() {
             : antdTheme.defaultAlgorithm,
         token: {
           colorPrimary: '#1677FF',
-          colorBgLayout: theme === 'dark' ? '#141414' : '#F0F2F5',
+          colorBgLayout: theme === 'dark' ? '#121212' : '#E6EAEF',
         },
       }}
     >

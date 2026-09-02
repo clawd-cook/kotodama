@@ -1,4 +1,4 @@
-import { Button, Drawer, Layout, Modal, Space, Splitter, Switch, message } from 'antd';
+import { Button, Divider, Drawer, Layout, Modal, Space, Splitter, Switch, message } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import { BottomDock } from './BottomDock';
 import { useEditor } from './EditorState';
@@ -9,7 +9,7 @@ import { toMessages } from './snapshot';
 import { loadChromeLayout, saveChromeLayout } from './storage';
 
 const SPEECH_MIN = 240;
-const SPEECH_MAX = 360;
+const SPEECH_MAX = 320;
 const DOCK_MIN = 160;
 const DOCK_MAX = 480;
 const DOCK_STRIP = 40;
@@ -99,28 +99,28 @@ export function EditorShell({
       </a>
       <Layout.Header className="editor-header">
         <span className="editor-mark">
+          <span className="editor-seal" aria-hidden />
           <h1 className="editor-wordmark" translate="no">
             言灵
           </h1>
-          <span className="editor-seal" aria-hidden />
         </span>
-        <Space size={16}>
-          <Space>
-            <Button size="small" onClick={() => fileRef.current?.click()}>
+        <Space size={4} split={<Divider type="vertical" />}>
+          <Space size={0}>
+            <Button type="text" size="small" onClick={() => fileRef.current?.click()}>
               打开
             </Button>
-            <Button size="small" onClick={download}>
+            <Button type="text" size="small" onClick={download}>
               下载
             </Button>
           </Space>
-          <Space>
-            <Button size="small" onClick={undo} disabled={!canUndo}>
+          <Space size={0}>
+            <Button type="text" size="small" onClick={undo} disabled={!canUndo}>
               撤销
             </Button>
-            <Button size="small" onClick={redo} disabled={!canRedo}>
+            <Button type="text" size="small" onClick={redo} disabled={!canRedo}>
               重做
             </Button>
-            <Button size="small" onClick={confirmReset}>
+            <Button type="text" size="small" onClick={confirmReset}>
               新建
             </Button>
           </Space>
@@ -240,6 +240,7 @@ export function EditorShell({
           <BottomDock
             theme={theme}
             open={chrome.dockOpen}
+            size={chrome.dockSize}
             onOpen={() =>
               setChrome((current) => ({ ...current, dockOpen: true }))
             }

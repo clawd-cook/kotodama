@@ -7,7 +7,7 @@ const THEME_KEY = 'kotodama.theme';
 const CHROME_KEY = 'kotodama.chrome';
 
 const SPEECH_MIN = 240;
-const SPEECH_MAX = 360;
+const SPEECH_MAX = 320;
 const DOCK_MIN = 160;
 const DOCK_MAX = 480;
 
@@ -18,9 +18,9 @@ export type ChromeLayout = {
 };
 
 export const DEFAULT_CHROME: ChromeLayout = {
-  speech: 280,
+  speech: 264,
   dockOpen: false,
-  dockSize: 240,
+  dockSize: 200,
 };
 
 function clamp(value: number, min: number, max: number) {

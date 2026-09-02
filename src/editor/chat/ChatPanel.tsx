@@ -1,7 +1,6 @@
-import { RobotOutlined, UserOutlined } from '@ant-design/icons';
 import { Bubble, Prompts, Sender } from '@ant-design/x';
 import { useXChat, XRequest } from '@ant-design/x-sdk';
-import { Avatar, Flex, Typography } from 'antd';
+import { Flex, Typography } from 'antd';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { ApplyResult } from '../applyDocument';
 import { applyDocument } from '../applyDocument';
@@ -53,14 +52,14 @@ export function ChatPanel({
     () => ({
       assistant: {
         placement: 'start' as const,
-        avatar: <Avatar size={28} icon={<RobotOutlined />} />,
+        variant: 'borderless' as const,
         contentRender: (content: string) => (
           <div aria-live="polite">{content}</div>
         ),
       },
       user: {
         placement: 'end' as const,
-        avatar: <Avatar size={28} icon={<UserOutlined />} />,
+        variant: 'borderless' as const,
       },
     }),
     [],
@@ -164,18 +163,24 @@ export function ChatPanel({
   return (
     <Flex vertical className="chat-panel">
       {messages.length === 0 ? (
-        <Flex vertical flex={1} justify="center" gap={12} className="chat-welcome">
+        <Flex vertical flex={1} gap={16} className="chat-welcome">
           <div>
             <h2 className="chat-welcome-title">说你想要的那一页</h2>
             <Typography.Text type="secondary" className="chat-welcome-desc">
               说完后，中间会换成一页。这一页可以留下、再打开。
             </Typography.Text>
           </div>
-          <Prompts
-            items={PROMPT_ITEMS}
-            wrap
-            onItemClick={(info) => send(String(info.data.label ?? ''))}
-          />
+          <div>
+            <Typography.Text type="secondary" className="chat-prompts-label">
+              可以说
+            </Typography.Text>
+            <Prompts
+              className="chat-prompts"
+              items={PROMPT_ITEMS}
+              vertical
+              onItemClick={(info) => send(String(info.data.label ?? ''))}
+            />
+          </div>
         </Flex>
       ) : (
         <Bubble.List

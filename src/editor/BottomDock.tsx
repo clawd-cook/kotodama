@@ -6,11 +6,13 @@ import { useEditor } from './EditorState';
 export function BottomDock({
   theme,
   open,
+  size,
   onOpen,
   onClose,
 }: {
   theme: 'light' | 'dark';
   open: boolean;
+  size: number;
   onOpen: () => void;
   onClose: () => void;
 }) {
@@ -52,6 +54,7 @@ export function BottomDock({
   };
 
   const dataText = JSON.stringify(snapshot.dataModel ?? {}, null, 2);
+  const editorHeight = Math.max(96, size - 48);
 
   return (
     <Tabs
@@ -81,15 +84,17 @@ export function BottomDock({
                 <Alert type="error" showIcon message={jsonError} />
               ) : null}
               <Editor
-                height="100%"
+                height={editorHeight}
                 defaultLanguage="json"
                 theme={theme === 'dark' ? 'vs-dark' : 'light'}
                 value={jsonText}
                 onChange={onJsonChange}
                 options={{
                   minimap: { enabled: false },
-                  fontSize: 12,
+                  fontSize: 13,
+                  lineHeight: 20,
                   automaticLayout: true,
+                  padding: { top: 8, bottom: 8 },
                 }}
               />
             </div>
@@ -101,7 +106,7 @@ export function BottomDock({
           children: (
             <div className="dock-pane">
               <Editor
-                height="100%"
+                height={editorHeight}
                 defaultLanguage="json"
                 theme={theme === 'dark' ? 'vs-dark' : 'light'}
                 value={dataText}
@@ -114,8 +119,10 @@ export function BottomDock({
                 }}
                 options={{
                   minimap: { enabled: false },
-                  fontSize: 12,
+                  fontSize: 13,
+                  lineHeight: 20,
                   automaticLayout: true,
+                  padding: { top: 8, bottom: 8 },
                 }}
               />
             </div>
@@ -125,11 +132,13 @@ export function BottomDock({
           key: 'events',
           label: `事件${events.length ? ` (${events.length})` : ''}`,
           children: (
-            <pre className="dock-log">
-              {events.length === 0
-                ? '还没有事件。在纸页上点一下就会出现。'
-                : JSON.stringify(events, null, 2)}
-            </pre>
+            <div className="dock-pane">
+              <pre className="dock-log">
+                {events.length === 0
+                  ? '还没有事件。在纸页上点一下就会出现。'
+                  : JSON.stringify(events, null, 2)}
+              </pre>
+            </div>
           ),
         },
         {
