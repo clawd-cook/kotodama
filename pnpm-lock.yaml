@@ -18,16 +18,16 @@ importers:
         specifier: 6.3.2
         version: 6.3.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@ant-design/x':
-        specifier: ^2.9.0
+        specifier: 2.9.0
         version: 2.9.0(antd@6.6.1(date-fns@4.4.0)(luxon@3.7.2)(moment@2.30.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@ant-design/x-card':
-        specifier: ^2.5.0
+        specifier: 2.5.0
         version: 2.5.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@ant-design/x-markdown':
-        specifier: ^2.9.0
+        specifier: 2.9.0
         version: 2.9.0(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@ant-design/x-sdk':
-        specifier: ^2.9.0
+        specifier: 2.9.0
         version: 2.9.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@kotodama/antd-catalog':
         specifier: workspace:*
@@ -47,6 +47,9 @@ importers:
       react-dom:
         specifier: 19.2.8
         version: 19.2.8(react@19.2.8)
+      react-router:
+        specifier: 8.3.1
+        version: 8.3.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       zod:
         specifier: 4.5.4
         version: 4.5.4
@@ -70,7 +73,7 @@ importers:
         specifier: 7.0.2
         version: 7.0.2
       vitest:
-        specifier: ^4.1.11
+        specifier: 4.1.11
         version: 4.1.11(@edge-runtime/vm@5.0.0)(@opentelemetry/api@1.9.1)(@types/node@26.4.0)(@vitest/browser-playwright@4.1.11)(@vitest/browser-preview@4.1.11)(@vitest/browser-webdriverio@4.1.11)(@vitest/coverage-istanbul@4.1.11)(@vitest/coverage-v8@4.1.11)(@vitest/ui@4.1.11)(happy-dom@20.12.0(bufferutil@4.1.0)(utf-8-validate@6.0.6))(jsdom@30.0.1(@noble/hashes@2.4.0)(canvas@3.2.3))(msw@2.15.0(@types/node@26.4.0)(typescript@7.0.2))(vite@8.2.2)
 
   packages/antd-catalog:
@@ -2815,6 +2818,9 @@ packages:
   convert-source-map@2.0.0:
     resolution: {integrity: sha1-S1YPZJ/E6RjdCrdc9JYei8iC2Co=, tarball: http://registry.m.jd.com/convert-source-map/download/convert-source-map-2.0.0.tgz}
 
+  cookie-es@3.1.1:
+    resolution: {integrity: sha1-xKihbPiMtaGFsj9KYdbpqF61Moc=, tarball: http://registry.m.jd.com/cookie-es/download/cookie-es-3.1.1.tgz}
+
   cookie@1.1.1:
     resolution: {integrity: sha1-O7m9/II2nbnC9pyTycPOsxDIizw=, tarball: http://registry.m.jd.com/cookie/download/cookie-1.1.1.tgz}
     engines: {node: '>=18'}
@@ -5045,6 +5051,16 @@ packages:
   react-refresh@0.18.0:
     resolution: {integrity: sha1-Lc6X9P6TKk2BQvoWMOR1wXKcgGI=, tarball: http://registry.m.jd.com/react-refresh/download/react-refresh-0.18.0.tgz}
     engines: {node: '>=0.10.0'}
+
+  react-router@8.3.1:
+    resolution: {integrity: sha1-1wTKWlZOK8ic4FpTerV3V46Ue3s=, tarball: http://registry.m.jd.com/react-router/download/react-router-8.3.1.tgz}
+    engines: {node: '>=22.22.0'}
+    peerDependencies:
+      react: '>=19.2.7'
+      react-dom: '>=19.2.7'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
 
   react-syntax-highlighter@16.1.1:
     resolution: {integrity: sha1-koRZhV03X1z8jmRgceINVBzry1I=, tarball: http://registry.m.jd.com/react-syntax-highlighter/download/react-syntax-highlighter-16.1.1.tgz}
@@ -8389,7 +8405,7 @@ snapshots:
 
   '@types/yauzl@2.10.3':
     dependencies:
-      '@types/node': 20.19.43
+      '@types/node': 26.4.0
     optional: true
 
   '@typescript/typescript-aix-ppc64@7.0.2':
@@ -9425,6 +9441,8 @@ snapshots:
   content-type@2.1.0: {}
 
   convert-source-map@2.0.0: {}
+
+  cookie-es@3.1.1: {}
 
   cookie@1.1.1: {}
 
@@ -12017,6 +12035,13 @@ snapshots:
   react-refresh@0.14.2: {}
 
   react-refresh@0.18.0: {}
+
+  react-router@8.3.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
+    dependencies:
+      cookie-es: 3.1.1
+      react: 19.2.8
+    optionalDependencies:
+      react-dom: 19.2.8(react@19.2.8)
 
   react-syntax-highlighter@16.1.1(react@19.2.8):
     dependencies:
