@@ -41,19 +41,25 @@ const CHROME_KEY = 'kotodama.chrome';
 
 const SPEECH_MIN = 240;
 const SPEECH_MAX = 320;
-const DOCK_MIN = 160;
-const DOCK_MAX = 480;
+const SOURCE_MIN = 280;
+const SOURCE_MAX = 400;
+const TRACE_MIN = 160;
+const TRACE_MAX = 280;
 
 export type ChromeLayout = {
   speech: number;
-  dockOpen: boolean;
-  dockSize: number;
+  source: number;
+  sourceOpen: boolean;
+  traceOpen: boolean;
+  traceSize: number;
 };
 
 export const DEFAULT_CHROME: ChromeLayout = {
-  speech: 264,
-  dockOpen: false,
-  dockSize: 200,
+  speech: 280,
+  source: 320,
+  sourceOpen: true,
+  traceOpen: false,
+  traceSize: 160,
 };
 
 function clamp(value: number, min: number, max: number) {
@@ -99,11 +105,20 @@ export function loadChromeLayout(): ChromeLayout {
         SPEECH_MIN,
         SPEECH_MAX,
       ),
-      dockOpen: Boolean(parsed.dockOpen),
-      dockSize: clamp(
-        Number(parsed.dockSize) || DEFAULT_CHROME.dockSize,
-        DOCK_MIN,
-        DOCK_MAX,
+      source: clamp(
+        Number(parsed.source) || DEFAULT_CHROME.source,
+        SOURCE_MIN,
+        SOURCE_MAX,
+      ),
+      sourceOpen:
+        typeof parsed.sourceOpen === 'boolean'
+          ? parsed.sourceOpen
+          : DEFAULT_CHROME.sourceOpen,
+      traceOpen: Boolean(parsed.traceOpen),
+      traceSize: clamp(
+        Number(parsed.traceSize) || DEFAULT_CHROME.traceSize,
+        TRACE_MIN,
+        TRACE_MAX,
       ),
     };
   } catch {
