@@ -6,7 +6,11 @@ import settings from '../editor/fixtures/settings.json';
 import { foldMessages } from '../editor/snapshot';
 import { emptySnapshot } from '../editor/storage';
 import type { A2uiMessage } from '../editor/types';
-import { EXAMPLE_PAGES, type ExampleId } from './examples';
+import {
+  EXAMPLE_PAGES,
+  shouldConfirmReplace,
+  type ExampleId,
+} from './examples';
 
 const FIXTURES: Record<ExampleId, A2uiMessage[]> = {
   login: login as A2uiMessage[],
@@ -58,5 +62,18 @@ describe('E featured examples', () => {
         (loginResult.snapshot.dataModel as { title?: string }).title,
       ).toBe('登录');
     }
+  });
+
+  it('E-03 replacing a valid page requires confirmation', () => {
+    expect(shouldConfirmReplace(emptySnapshot())).toBe(false);
+    const applied = applyDocument(
+      JSON.stringify(EXAMPLE_PAGES.login.messages),
+      emptySnapshot(),
+    );
+    expect(applied.ok).toBe(true);
+    if (!applied.ok) {
+      return;
+    }
+    expect(shouldConfirmReplace(applied.snapshot)).toBe(true);
   });
 });
