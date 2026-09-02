@@ -31,7 +31,6 @@ import { CatalogPage } from './CatalogPage';
 import { ChannelProvider } from './ChannelContext';
 import { createScreen } from './createScreen';
 import { ExampleDetailPage, ExamplesPage } from './ExamplesPage';
-import { LandingPage } from './LandingPage';
 import { SettingsPage } from './SettingsPage';
 import { StudioSessionProvider, useStudioSession } from './StudioSession';
 import './studio.css';
@@ -76,13 +75,7 @@ function roomKey(pathname: string): string {
   return 'create';
 }
 
-function skipLink(
-  pathname: string,
-  workshop: boolean,
-): { href: string; label: string } {
-  if (pathname === '/' && !workshop) {
-    return { href: '#prompt', label: '跳到输入' };
-  }
+function skipLink(pathname: string): { href: string; label: string } {
   if (pathname.startsWith('/settings')) {
     return { href: '#channel-form', label: '跳到表单' };
   }
@@ -122,8 +115,7 @@ function StudioHouse({
   const screen = createScreen({ snapshot, visitedWorkshop });
   const onCreate = location.pathname === '/';
   const showWorkshop = onCreate && screen === 'workshop';
-  const showLanding = onCreate && screen === 'landing';
-  const skip = skipLink(location.pathname, showWorkshop);
+  const skip = skipLink(location.pathname);
   const current = isCurrentPage(snapshot);
 
   const download = () => {
@@ -275,7 +267,6 @@ function StudioHouse({
           />
         </nav>
         <div className="studio-desk">
-          {showLanding ? <LandingPage /> : null}
           {screen === 'workshop' || visitedWorkshop || current ? (
             <div
               className="studio-workshop"

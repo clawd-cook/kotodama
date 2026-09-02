@@ -5,10 +5,10 @@ import { emptySnapshot } from '../editor/storage';
 import { createScreen } from './createScreen';
 
 describe('R create room', () => {
-  it('R-01 empty page opens landing; valid page opens workshop', () => {
+  it('R-01 create room is always the workshop', () => {
     expect(
       createScreen({ snapshot: emptySnapshot(), visitedWorkshop: false }),
-    ).toBe('landing');
+    ).toBe('workshop');
 
     const applied = applyDocument(JSON.stringify(login), emptySnapshot());
     expect(applied.ok).toBe(true);
@@ -20,12 +20,6 @@ describe('R create room', () => {
         snapshot: applied.snapshot,
         visitedWorkshop: false,
       }),
-    ).toBe('workshop');
-  });
-
-  it('R-02 visited workshop stays in workshop even if the page is empty', () => {
-    expect(
-      createScreen({ snapshot: emptySnapshot(), visitedWorkshop: true }),
     ).toBe('workshop');
   });
 });
