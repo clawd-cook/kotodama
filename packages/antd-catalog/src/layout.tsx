@@ -152,11 +152,24 @@ export const ModalView = createComponentImplementation(
           open={open}
           onCancel={() => setOpen(false)}
           footer={null}
-          destroyOnClose
+          destroyOnHidden
           width={720}
           styles={{ body: { maxHeight: '60vh', overflow: 'auto' } }}
         >
-          {props.content ? buildChild(props.content) : null}
+          {/* biome-ignore lint/a11y/noStaticElementInteractions: content buttons close the overlay */}
+          <div
+            onClick={(event) => {
+              const target = event.target;
+              if (
+                target instanceof Element &&
+                target.closest('button, .ant-btn')
+              ) {
+                setOpen(false);
+              }
+            }}
+          >
+            {props.content ? buildChild(props.content) : null}
+          </div>
         </Modal>
       </>
     );

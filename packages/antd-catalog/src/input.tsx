@@ -30,7 +30,7 @@ function extraString(props: object, key: string): string | undefined {
 
 export const ButtonView = createComponentImplementation(
   antdApi(ButtonApi),
-  ({ props, buildChild }) => {
+  ({ props, buildChild, context }) => {
     const type =
       props.variant === 'primary'
         ? 'primary'
@@ -40,7 +40,15 @@ export const ButtonView = createComponentImplementation(
     return (
       <Button
         type={type}
-        onClick={props.action}
+        onClick={() => {
+          if (props.action) {
+            props.action();
+            return;
+          }
+          void context.dispatchAction({
+            event: { name: context.componentModel.id },
+          });
+        }}
         disabled={props.isValid === false}
         style={weightStyle(props.weight)}
       >

@@ -391,5 +391,55 @@ describe('W write gate', () => {
     );
     expect(button?.child).toBe('btn_label');
     expect(button?.children).toBeUndefined();
+    expect(button?.action).toEqual({ event: { name: 'open_btn' } });
+  });
+
+  it('W-12 Button without action gets the component id as event name', () => {
+    const catalogId =
+      'https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json';
+    const result = applyDocument(
+      JSON.stringify([
+        {
+          version: 'v0.9',
+          createSurface: {
+            surfaceId: 'main',
+            catalogId,
+            sendDataModel: true,
+          },
+        },
+        {
+          version: 'v0.9',
+          updateComponents: {
+            surfaceId: 'main',
+            components: [
+              {
+                id: 'root',
+                component: 'Column',
+                children: ['confirm'],
+              },
+              {
+                id: 'confirm',
+                component: 'Button',
+                child: 'confirm_label',
+                variant: 'primary',
+              },
+              {
+                id: 'confirm_label',
+                component: 'Text',
+                text: '确认',
+              },
+            ],
+          },
+        },
+      ]),
+      currentPage(),
+    );
+    expect(result.ok).toBe(true);
+    if (!result.ok) {
+      return;
+    }
+    expect(
+      result.snapshot.components.find((item) => item.id === 'confirm')?.action,
+    ).toEqual({ event: { name: 'confirm' } });
   });
 });

@@ -5,8 +5,9 @@ import {
   MessageProcessor,
   type SurfaceModel,
 } from '@a2ui/web_core/v0_9';
-import { theme as antdTheme, ConfigProvider, Empty } from 'antd';
-import { useEffect, useState } from 'react';
+import { theme as antdTheme, ConfigProvider, Empty, message } from 'antd';
+import { useEffect, useRef, useState } from 'react';
+import { actionToastText } from './copy';
 import { toMessages } from './snapshot';
 import type { Snapshot } from './types';
 
@@ -41,6 +42,11 @@ export function PaperPreview({
     useState<SurfaceModel<ReactComponentImplementation> | null>(null);
   const [dropClass, setDropClass] = useState(drop ? 'preview-sheet-drop' : '');
   const empty = snapshot.components.length === 0;
+  const onEventRef = useRef(onEvent);
+  onEventRef.current = onEvent;
+  const toastEvents = Boolean(interactive || onEvent);
+  const toastEventsRef = useRef(toastEvents);
+  toastEventsRef.current = toastEvents;
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: data model is synced in the following effect
   useEffect(() => {
@@ -54,7 +60,10 @@ export function PaperPreview({
     }
     try {
       const processor = new MessageProcessor([catalog], (action) => {
-        onEvent?.(action);
+        onEventRef.current?.(action);
+        if (toastEventsRef.current) {
+          void message.info(actionToastText(action));
+        }
       });
       processor.processMessages(toMessages(snapshot) as never);
       const next = Array.from(processor.model.surfacesMap.values())[0];

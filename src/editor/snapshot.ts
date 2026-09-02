@@ -152,6 +152,32 @@ function healChildSlots(type: string, props: Record<string, unknown>): void {
   }
 }
 
+function hasButtonAction(value: unknown): boolean {
+  if (!isRecord(value)) {
+    return false;
+  }
+  if (isRecord(value.functionCall)) {
+    return true;
+  }
+  return (
+    isRecord(value.event) &&
+    typeof value.event.name === 'string' &&
+    value.event.name.length > 0
+  );
+}
+
+/** 模型常漏写 Button.action；没有事件名时用组件 id，点击才能进事件日志。 */
+function healButtonAction(
+  type: string,
+  id: string,
+  props: Record<string, unknown>,
+): void {
+  if (type !== 'Button' || hasButtonAction(props.action)) {
+    return;
+  }
+  props.action = { event: { name: id } };
+}
+
 function pickMappedType(
   value: unknown,
 ): { type: string; props: Record<string, unknown> } | null {
@@ -220,6 +246,7 @@ export function flattenComponent(raw: unknown): A2uiComponent | null {
   }
   if (type) {
     healChildSlots(type, props);
+    healButtonAction(type, raw.id, props);
   }
   delete props.type;
   delete props.component;

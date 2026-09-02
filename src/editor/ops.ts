@@ -185,6 +185,7 @@ function createNodes(
             component: 'Button',
             child: label,
             variant: 'default',
+            action: { event: { name: trigger } },
           },
           { id: label, component: 'Text', text: '打开' },
           { id: content, component: 'Text', text: '弹层内容', variant: 'body' },
@@ -196,7 +197,13 @@ function createNodes(
       return {
         rootId: id,
         nodes: [
-          { id, component: 'Button', child: label, variant: 'default' },
+          {
+            id,
+            component: 'Button',
+            child: label,
+            variant: 'default',
+            action: { event: { name: id } },
+          },
           { id: label, component: 'Text', text: '按钮' },
         ],
       };

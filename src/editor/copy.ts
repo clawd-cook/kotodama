@@ -15,3 +15,15 @@ export function openFailed(reason: string): string {
 
 export const CHANNEL_UNREADY =
   '通道没配好。去设置里填 Base URL、API Key 和模型名。';
+
+export const ACTION_RECORDED = '已记下事件。';
+
+export function actionToastText(action: unknown): string {
+  if (action && typeof action === 'object' && 'name' in action) {
+    const name = (action as { name: unknown }).name;
+    if (typeof name === 'string' && name.length > 0) {
+      return `已记下事件：${name}`;
+    }
+  }
+  return ACTION_RECORDED;
+}
