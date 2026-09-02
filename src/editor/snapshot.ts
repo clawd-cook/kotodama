@@ -117,7 +117,7 @@ function flattenChildren(value: unknown): unknown {
   return value;
 }
 
-function childIdsOf(value: unknown): string[] {
+function slotIdsFromChildren(value: unknown): string[] {
   if (typeof value === 'string') {
     return [value];
   }
@@ -133,7 +133,7 @@ function slotId(value: unknown): string | undefined {
 
 /** Modal/Card/Button 用 trigger/content/child；模型常误写成 children。 */
 function healChildSlots(type: string, props: Record<string, unknown>): void {
-  const ids = childIdsOf(props.children);
+  const ids = slotIdsFromChildren(props.children);
   if (type === 'Modal') {
     if (ids.length >= 2) {
       props.trigger = slotId(props.trigger) ?? ids[0];
