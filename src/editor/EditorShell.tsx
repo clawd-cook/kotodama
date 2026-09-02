@@ -72,7 +72,6 @@ export function EditorShell({
     <div className="editor-body">
       <h1 className="studio-visually-hidden">工坊</h1>
       <Splitter
-        key={chrome.sourceOpen ? 'source-open' : 'source-shut'}
         className="editor-stage-split"
         onResizeEnd={(sizes) => {
           const speech = sizes[0];
@@ -173,33 +172,27 @@ export function EditorShell({
             </div>
           </div>
         </Splitter.Panel>
-        {chrome.sourceOpen ? (
-          <Splitter.Panel
-            defaultSize={chrome.source}
-            min={SOURCE_MIN}
-            max={SOURCE_MAX}
-          >
+        <Splitter.Panel
+          size={chrome.sourceOpen ? chrome.source : SOURCE_STRIP}
+          min={chrome.sourceOpen ? SOURCE_MIN : SOURCE_STRIP}
+          max={chrome.sourceOpen ? SOURCE_MAX : SOURCE_STRIP}
+          resizable={chrome.sourceOpen}
+        >
+          {chrome.sourceOpen ? (
             <SourcePane
               theme={theme}
               onClose={() =>
                 setChrome((current) => ({ ...current, sourceOpen: false }))
               }
             />
-          </Splitter.Panel>
-        ) : (
-          <Splitter.Panel
-            defaultSize={SOURCE_STRIP}
-            min={SOURCE_STRIP}
-            max={SOURCE_STRIP}
-            resizable={false}
-          >
+          ) : (
             <SourceStrip
               onOpen={() =>
                 setChrome((current) => ({ ...current, sourceOpen: true }))
               }
             />
-          </Splitter.Panel>
-        )}
+          )}
+        </Splitter.Panel>
       </Splitter>
     </div>
   );

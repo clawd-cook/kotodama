@@ -126,6 +126,12 @@ body,
 
 .editor-stage-split .ant-splitter-bar {
   width: 1px;
+  transition: none;
+}
+
+.editor-stage-split .ant-splitter-panel {
+  overflow: hidden;
+  transition: none;
 }
 
 .editor-stage-split .ant-splitter-bar-dragger::before {
@@ -147,6 +153,10 @@ body,
   min-width: 0;
   min-height: 0;
   overflow: hidden;
+}
+
+.editor-preview .preview-canvas {
+  height: 100%;
 }
 
 .inspector-drawer {
