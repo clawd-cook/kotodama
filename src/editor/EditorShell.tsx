@@ -5,13 +5,19 @@ import { useEditor } from './EditorState';
 import { Inspector } from './Inspector';
 import { PreviewPane } from './Preview';
 import { Sidebar } from './Sidebar';
-import { loadChromeLayout, saveChromeLayout } from './storage';
-
-const SPEECH_MIN = 240;
-const SPEECH_MAX = 320;
-const DOCK_MIN = 160;
-const DOCK_MAX = 480;
-const DOCK_STRIP = 40;
+import { SourcePane, SourceStrip } from './SourcePane';
+import {
+  loadChromeLayout,
+  saveChromeLayout,
+  SOURCE_MAX,
+  SOURCE_MIN,
+  SOURCE_STRIP,
+  SPEECH_MAX,
+  SPEECH_MIN,
+  TRACE_MAX,
+  TRACE_MIN,
+  TRACE_STRIP,
+} from './storage';
 
 export function EditorShell({
   theme,
@@ -68,16 +74,20 @@ export function EditorShell({
       <Splitter
         className="editor-stage-split"
         onResizeEnd={(sizes) => {
-          const next = sizes[0];
-          if (typeof next !== 'number') {
-            return;
-          }
+          const speech = sizes[0];
+          const source = sizes[2];
           setChrome((current) => ({
             ...current,
-            speech: Math.min(
-              SPEECH_MAX,
-              Math.max(SPEECH_MIN, Math.round(next)),
-            ),
+            speech:
+              typeof speech === 'number'
+                ? Math.min(SPEECH_MAX, Math.max(SPEECH_MIN, Math.round(speech)))
+                : current.speech,
+            source:
+              current.sourceOpen &&
+              typeof source === 'number' &&
+              source >= SOURCE_MIN
+                ? Math.min(SOURCE_MAX, Math.max(SOURCE_MIN, Math.round(source)))
+                : current.source,
           }));
         }}
       >
@@ -90,75 +100,106 @@ export function EditorShell({
         </Splitter.Panel>
         <Splitter.Panel min={280}>
           <div className="editor-stage">
-            <PreviewPane theme={theme} sheetId={sheetId} />
-            <Drawer
-              title="属性"
-              placement="right"
-              width={280}
-              open={Boolean(selectedId)}
-              onClose={() => setSelectedId(null)}
-              mask={false}
-              getContainer={false}
-              rootClassName="inspector-drawer"
-              zIndex={30}
-              styles={{
-                body: { padding: 16, overflow: 'auto' },
+            <div className="editor-preview">
+              <PreviewPane theme={theme} sheetId={sheetId} />
+              <Drawer
+                title="属性"
+                placement="right"
+                width={280}
+                open={Boolean(selectedId)}
+                onClose={() => setSelectedId(null)}
+                mask={false}
+                getContainer={false}
+                rootClassName="inspector-drawer"
+                zIndex={30}
+                styles={{
+                  body: { padding: 16, overflow: 'auto' },
+                }}
+              >
+                <Inspector />
+              </Drawer>
+            </div>
+            <div
+              className={
+                chrome.traceOpen ? 'editor-trace is-open' : 'editor-trace'
+              }
+              style={{
+                height: chrome.traceOpen ? chrome.traceSize : TRACE_STRIP,
               }}
             >
-              <Inspector />
-            </Drawer>
+              {chrome.traceOpen ? (
+                <button
+                  type="button"
+                  className="editor-trace-handle"
+                  aria-label="调整记录条高度"
+                  onPointerDown={(event) => {
+                    event.preventDefault();
+                    const handle = event.currentTarget;
+                    handle.setPointerCapture(event.pointerId);
+                    const startY = event.clientY;
+                    const start = chrome.traceSize;
+                    const onMove = (move: PointerEvent) => {
+                      const next = Math.min(
+                        TRACE_MAX,
+                        Math.max(TRACE_MIN, start + (startY - move.clientY)),
+                      );
+                      setChrome((current) => ({
+                        ...current,
+                        traceSize: Math.round(next),
+                      }));
+                    };
+                    const onUp = () => {
+                      handle.releasePointerCapture(event.pointerId);
+                      handle.removeEventListener('pointermove', onMove);
+                      handle.removeEventListener('pointerup', onUp);
+                    };
+                    handle.addEventListener('pointermove', onMove);
+                    handle.addEventListener('pointerup', onUp);
+                  }}
+                />
+              ) : null}
+              <BottomDock
+                theme={theme}
+                open={chrome.traceOpen}
+                size={chrome.traceSize}
+                onOpen={() =>
+                  setChrome((current) => ({ ...current, traceOpen: true }))
+                }
+                onClose={() =>
+                  setChrome((current) => ({ ...current, traceOpen: false }))
+                }
+              />
+            </div>
           </div>
         </Splitter.Panel>
+        {chrome.sourceOpen ? (
+          <Splitter.Panel
+            defaultSize={chrome.source}
+            min={SOURCE_MIN}
+            max={SOURCE_MAX}
+          >
+            <SourcePane
+              theme={theme}
+              onClose={() =>
+                setChrome((current) => ({ ...current, sourceOpen: false }))
+              }
+            />
+          </Splitter.Panel>
+        ) : (
+          <Splitter.Panel
+            defaultSize={SOURCE_STRIP}
+            min={SOURCE_STRIP}
+            max={SOURCE_STRIP}
+            resizable={false}
+          >
+            <SourceStrip
+              onOpen={() =>
+                setChrome((current) => ({ ...current, sourceOpen: true }))
+              }
+            />
+          </Splitter.Panel>
+        )}
       </Splitter>
-      <div
-        className={chrome.dockOpen ? 'editor-dock is-open' : 'editor-dock'}
-        style={{
-          height: chrome.dockOpen ? chrome.dockSize : DOCK_STRIP,
-        }}
-      >
-        {chrome.dockOpen ? (
-          <button
-            type="button"
-            className="editor-dock-handle"
-            aria-label="调整源文件条高度"
-            onPointerDown={(event) => {
-              event.preventDefault();
-              const handle = event.currentTarget;
-              handle.setPointerCapture(event.pointerId);
-              const startY = event.clientY;
-              const start = chrome.dockSize;
-              const onMove = (move: PointerEvent) => {
-                const next = Math.min(
-                  DOCK_MAX,
-                  Math.max(DOCK_MIN, start + (startY - move.clientY)),
-                );
-                setChrome((current) => ({
-                  ...current,
-                  dockSize: Math.round(next),
-                }));
-              };
-              const onUp = () => {
-                handle.releasePointerCapture(event.pointerId);
-                handle.removeEventListener('pointermove', onMove);
-                handle.removeEventListener('pointerup', onUp);
-              };
-              handle.addEventListener('pointermove', onMove);
-              handle.addEventListener('pointerup', onUp);
-            }}
-          />
-        ) : null}
-        <BottomDock
-          theme={theme}
-          open={chrome.dockOpen}
-          size={chrome.dockSize}
-          onOpen={() =>
-            setChrome((current) => ({ ...current, dockOpen: true }))
-          }
-          onClose={() =>
-            setChrome((current) => ({ ...current, dockOpen: false }))
-          }
-        />
-      </div>
     </div>
   );
 }

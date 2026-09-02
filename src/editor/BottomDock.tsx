@@ -1,7 +1,16 @@
 import Editor from '@monaco-editor/react';
 import { Alert, Button, Tabs } from 'antd';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useEditor } from './EditorState';
+
+const MONACO_JSON = {
+  minimap: { enabled: false },
+  fontSize: 13,
+  lineHeight: 20,
+  automaticLayout: true,
+  padding: { top: 8, bottom: 8 },
+  scrollBeyondLastLine: false,
+};
 
 export function BottomDock({
   theme,
@@ -16,26 +25,8 @@ export function BottomDock({
   onOpen: () => void;
   onClose: () => void;
 }) {
-  const {
-    jsonText,
-    jsonError,
-    applyJson,
-    setJsonText,
-    snapshot,
-    setDataModel,
-    events,
-    errors,
-  } = useEditor();
-  const timer = useRef<number | undefined>(undefined);
-  const [activeKey, setActiveKey] = useState('json');
-
-  useEffect(() => {
-    return () => {
-      if (timer.current) {
-        window.clearTimeout(timer.current);
-      }
-    };
-  }, []);
+  const { snapshot, setDataModel, events, errors } = useEditor();
+  const [activeKey, setActiveKey] = useState('data');
 
   useEffect(() => {
     if (!open) {
@@ -43,15 +34,6 @@ export function BottomDock({
     }
     window.dispatchEvent(new Event('resize'));
   }, [open]);
-
-  const onJsonChange = (value?: string) => {
-    const text = value ?? '';
-    setJsonText(text);
-    if (timer.current) {
-      window.clearTimeout(timer.current);
-    }
-    timer.current = window.setTimeout(() => applyJson(text), 300);
-  };
 
   const dataText = JSON.stringify(snapshot.dataModel ?? {}, null, 2);
   const editorHeight = Math.max(96, size - 48);
@@ -76,31 +58,6 @@ export function BottomDock({
       }
       items={[
         {
-          key: 'json',
-          label: 'JSON',
-          children: (
-            <div className="dock-pane">
-              {jsonError ? (
-                <Alert type="error" showIcon message={jsonError} />
-              ) : null}
-              <Editor
-                height={editorHeight}
-                defaultLanguage="json"
-                theme={theme === 'dark' ? 'vs-dark' : 'light'}
-                value={jsonText}
-                onChange={onJsonChange}
-                options={{
-                  minimap: { enabled: false },
-                  fontSize: 13,
-                  lineHeight: 20,
-                  automaticLayout: true,
-                  padding: { top: 8, bottom: 8 },
-                }}
-              />
-            </div>
-          ),
-        },
-        {
           key: 'data',
           label: '数据',
           children: (
@@ -117,13 +74,7 @@ export function BottomDock({
                     /* ignore until valid */
                   }
                 }}
-                options={{
-                  minimap: { enabled: false },
-                  fontSize: 13,
-                  lineHeight: 20,
-                  automaticLayout: true,
-                  padding: { top: 8, bottom: 8 },
-                }}
+                options={MONACO_JSON}
               />
             </div>
           ),
