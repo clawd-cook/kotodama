@@ -20,7 +20,7 @@
 | **P** | Chat present | `presentAssistant(raw, applyResult)` | 给气泡的字符串；成功是 `summary` 或「已更新界面。」；失败是「页面没改。」开头；不含 `createSurface` / `updateComponents` |
 | **F** | Fixtures | `src/editor/fixtures/*.json` 作为独立真源 | 夹具本身能 `applyDocument` 成功；字段是手写字面量。精选案例与这三份黄金夹具是同一文件 |
 | **D** | Draft | `emptySnapshot()` / `isCurrentPage(snapshot)` / `parseDraft(raw)` | 空稿不能当当前页。缺 key、坏 JSON、通不过校验都得到空稿，不是 demo。合法草稿按字段恢复 |
-| **R** | Create room | `createScreen({ snapshot, visitedWorkshop })` | `'landing'` 或 `'workshop'`。刷新只认当前页；会话内进过工坊则打开工坊 |
+| **R** | Create room | `createScreen({ snapshot, visitedWorkshop })` | 恒为 `'workshop'`。开始创建不再经过落地页 |
 | **L** | Landing submit | `PROMPT_ITEMS` / `landingSubmit(text, ready)` | 三个提示文案与 Design 原文相同。`ready` 则 `autoSend`；否则 `prefill`。不要发请求（那是调用方的事） |
 | **G** | Gallery | `src/studio/catalog/fixtures/<Name>.json` + `catalogPropertyNames(name)` | 18 份夹具都能 `applyDocument`；组件名 ⊆ 白名单；属性名 ⊆ 对应 `*Api.schema`，没有 `id` / `component` / `placeholder` / `className`。浏览路径不调用 `applyDocument` 去改工坊稿 |
 | **E** | Examples | `EXAMPLE_PAGES` + `shouldConfirmReplace(snapshot)` + `applyDocument` | 三个 id 指向黄金夹具。空稿装入后与 `foldMessages` 一致。已有合法当前页时，未确认前不 `commit`（由 `shouldConfirmReplace === true` 表达） |

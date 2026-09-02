@@ -34,7 +34,7 @@ v1.0.3 仍用三套职责，不要混成一套。工作室和工坊共用言灵�
 
 | Surface | Job | Theme |
 | --- | --- | --- |
-| **工作室** | 左轨、落地页、图鉴、案例、设置 | 言灵种子，见下方 tokens |
+| **工作室** | 左轨、图鉴、案例、设置 | 言灵种子，见下方 tokens |
 | **工坊** | 顶栏动作、说话列、属性抽屉、源文件列 | 同一套言灵种子 |
 | **纸页** | 工坊预览、图鉴预览、案例预览里渲染出的界面 | Ant Design 默认 `defaultAlgorithm` / `darkAlgorithm`，不改 `colorPrimary` |
 
@@ -170,8 +170,8 @@ v1.0.4 的那一笔：开始创建直接是工坊三栏，不再先放一张居�
 | Value | 言灵里怎么落地 |
 | --- | --- |
 | Natural | 控件用 Ant Design 默认形态。发送、输入、Menu、Tab、树、表单都不自造。左轨用 `Menu`，不要自绘导航。 |
-| Certain | 校验失败时旧纸页不动。左轨四个入口永远在，选中态明确。人始终知道自己在落地页、工坊、图鉴、案例还是设置。 |
-| Meaningful | 每一屏只有一个 primary。落地页是发送，案例详情是「用这一页」，设置是「保存」，工坊是说话栏发送。顶栏没有 primary。 |
+| Certain | 校验失败时旧纸页不动。左轨四个入口永远在，选中态明确。人始终知道自己在工坊、图鉴、案例还是设置。 |
+| Meaningful | 每一屏只有一个 primary。工坊是说话栏发送，案例详情是「用这一页」，设置是「保存」。顶栏没有 primary。 |
 | Growing | 同一套纸页既能画登录表单也能画列表。外壳加页时只加房间，不换皮肤、不扩目录。 |
 
 Ant Design 的 Do/Don't 全部适用于纸页。工坊和外壳额外遵守：印泥红不是 primary；不要给相邻控件混用 16px 圆角。
@@ -513,7 +513,7 @@ Ant Design `Drawer` 右 280px，无遮罩，**挂在预览列里**，不要盖�
 | 纸页换稿 | `motionDurationMid` 0.2s，`motionEaseOut` | 落下一次（8px） |
 | 控件悬停 / 焦点 | `motionDurationFast` 0.1s | 交给 Ant Design |
 | 左轨选中 | `motionDurationFast` | Menu 默认 |
-| 落地页 → 工坊 | 无 | 立刻换成三栏首页，不要翻页 |
+| 落地页 → 工坊 | 无 | 不再经过落地页 |
 | 分栏拖拽 | 无动画 | 跟手 |
 | 源文件收起 / 展开 | 无动画 | 立刻改宽度 |
 | 属性抽屉 | Ant Design Drawer 默认（只动 transform） | 选中滑出；`prefers-reduced-motion` 时交给组件默认减弱 |
@@ -527,7 +527,7 @@ Ant Design `Drawer` 右 280px，无遮罩，**挂在预览列里**，不要盖�
 
 - 焦点环用 Ant Design 默认，不要 `outline: none`。可聚焦控件用 `:focus-visible`，不要在点击时画环。
 - 印装饰 `aria-hidden`。字标仍是可读文本「言灵」，但是链接不是 `<h1>`。字标链接要有 hover 与 `:focus-visible`。
-- 每一房间一个 `<h1>`：落地页「从这里说出一页」；工坊视隐「工坊」；图鉴为组件名；案例列表「精选案例」；案例详情为案例标题；设置「设置」。JSON / 属性是 `<h2>`。
+- 每一房间一个 `<h1>`：工坊视隐「工坊」；图鉴为组件名；案例列表「精选案例」；案例详情为案例标题；设置「设置」。JSON / 属性是 `<h2>`。
 - 第一个可聚焦控件是跳过链，目标随房间变。未聚焦时视觉隐藏；聚焦用 `:focus-visible` 滑入。
 - 左轨文字可见；图标 `aria-hidden`。不要做成无障碍名称为空的图标按钮。
 - 「正在写下这一页…」对 `aria-live="polite"` 可见。失败句同样进入 live region。
@@ -575,4 +575,4 @@ v1.0.3 把工坊首页改成 Composer 三栏。实现时仍不要做的：
 - 不要用魔法数字间距。现有 `.editor-header` 的 48px 和 16px 已在网格上，保留。左轨 168px、说话 280px、源文件 320px、索引 200px 是网格值。
 - 不要 `transition: all`，不要无替代的 `outline: none`。
 
-实现入口：`EditorShell` 三栏 Splitter（说话 | 预览+记录 | 源文件）、工坊预览铺满中间列、`BottomDock` 拆成源文件列与记录条、`storage` 的 chrome 五项。落地页 / 图鉴 / 案例 / 设置仍按 v1.0.2 的空桌与少一层皮。纸页内部组件继续走 `@kotodama/antd-catalog`。
+实现入口：`createScreen` 恒为工坊、`EditorShell` 三栏 Splitter（说话 | 预览+记录 | 源文件）、工坊预览铺满中间列。图鉴 / 案例 / 设置仍按 v1.0.2 的空桌与少一层皮。纸页内部组件继续走 `@kotodama/antd-catalog`。
