@@ -23,10 +23,20 @@ function landingOf(
   nav: unknown,
   session: LandingSubmit | null,
 ): LandingSubmit | null {
-  if (nav && typeof nav === 'object' && ('autoSend' in nav || 'prefill' in nav)) {
+  if (
+    nav &&
+    typeof nav === 'object' &&
+    ('autoSend' in nav || 'prefill' in nav)
+  ) {
     return nav as LandingSubmit;
   }
   return session;
+}
+
+function landingToken(state: LandingSubmit): string {
+  return 'autoSend' in state
+    ? `autoSend:${state.autoSend}`
+    : `prefill:${state.prefill}`;
 }
 
 export function ChatPanel(_props: { theme: 'light' | 'dark' }) {
@@ -48,10 +58,10 @@ export function ChatPanel(_props: { theme: 'light' | 'dark' }) {
   >(() => undefined);
   const appliedIds = useRef(new Set<string>());
   const [presented, setPresented] = useState<Record<string, string>>({});
-  const handoff = landingOf(location.state, landing);
-  const [input, setInput] = useState(
-    () => (handoff && 'prefill' in handoff ? handoff.prefill : '') ?? '',
-  );
+  const [input, setInput] = useState(() => {
+    const state = landingOf(location.state, landing);
+    return (state && 'prefill' in state ? state.prefill : '') ?? '';
+  });
 
   const roles = useMemo(
     () => ({
@@ -128,7 +138,7 @@ export function ChatPanel(_props: { theme: 'light' | 'dark' }) {
     if (!state || (!('autoSend' in state) && !('prefill' in state))) {
       return;
     }
-    const token = `${location.key}:${'autoSend' in state ? state.autoSend : state.prefill}`;
+    const token = landingToken(state);
     if (consumedLandingKeys.has(token)) {
       return;
     }
