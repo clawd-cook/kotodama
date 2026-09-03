@@ -111,6 +111,13 @@ describe('storage', () => {
 
     memory.setItem('kotodama.chrome', '{');
     expect(loadChromeLayout()).toEqual(DEFAULT_CHROME);
+    memory.setItem(
+      'kotodama.chrome',
+      JSON.stringify({ speech: 'x', source: 'y', sourceOpen: 'yes', traceSize: 'z' }),
+    );
+    const fallback = loadChromeLayout();
+    expect(fallback.speech).toBe(DEFAULT_CHROME.speech);
+    expect(fallback.sourceOpen).toBe(DEFAULT_CHROME.sourceOpen);
   });
 
   it('parseDraft rejects invalid JSON', () => {

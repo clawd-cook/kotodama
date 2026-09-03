@@ -275,6 +275,27 @@ describe('validateSnapshot', () => {
           catalogId: BASIC_CATALOG,
           sendDataModel: true,
           components: [
+            {
+              id: 'root',
+              component: 'Column',
+              children: { componentId: 'title' },
+              justify: 'start',
+              align: 'stretch',
+            },
+            { id: 'title', component: 'Text', text: 'x', variant: 'body' },
+          ],
+          dataModel: {},
+        },
+        messages,
+      )?.code,
+    ).toBe('PROPS');
+    expect(
+      validateSnapshot(
+        {
+          surfaceId: 'main',
+          catalogId: BASIC_CATALOG,
+          sendDataModel: true,
+          components: [
             { id: 'root', component: 'Column', children: { nope: true } },
           ],
           dataModel: {},

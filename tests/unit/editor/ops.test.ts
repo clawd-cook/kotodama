@@ -252,3 +252,16 @@ describe('updateComponentProps', () => {
     });
   });
 });
+
+describe('edge inserts', () => {
+  it('appends onto a non-container root without changing it', () => {
+    const page = {
+      ...emptySnapshot(),
+      components: [{ id: 'root', component: 'Text', text: 'x', variant: 'body' }],
+    };
+    const next = insertComponent(page, 'Icon', 'root');
+    expect(
+      next.snapshot.components.find((item) => item.id === 'root')?.children,
+    ).toBeUndefined();
+  });
+});

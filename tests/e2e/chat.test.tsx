@@ -163,6 +163,31 @@ describe('ChatPanel', () => {
     expect(await screen.findByRole('heading', { name: '工坊' })).toBeTruthy();
   });
 
+  it('sends from the input and ignores a consumed landing token', async () => {
+    const user = userEvent.setup();
+    renderStudio('/settings');
+    await user.type(screen.getByLabelText('Base URL'), 'https://ui.example');
+    await user.type(screen.getByLabelText('API Key'), 'ui-key');
+    await user.type(screen.getByLabelText('模型名'), 'ui-model');
+    await user.click(screen.getByRole('button', { name: /保\s*存/ }));
+    await user.click(screen.getByRole('link', { name: '开始创建' }));
+    const input = await screen.findByPlaceholderText('描述你想要的界面…');
+    await user.type(input, '再做一页');
+    await user.keyboard('{Enter}');
+    expect(chat.onRequest).toHaveBeenCalled();
+    cleanup();
+    const token = 'consumed-landing-token';
+    chat.onRequest.mockClear();
+    renderStudio({ pathname: '/', state: { autoSend: token } });
+    await waitFor(() => {
+      expect(chat.onRequest).toHaveBeenCalled();
+    });
+    cleanup();
+    chat.onRequest.mockClear();
+    renderStudio({ pathname: '/', state: { autoSend: token } });
+    expect(await screen.findByRole('heading', { name: '工坊' })).toBeTruthy();
+  });
+
   it('covers request fallbacks and abort', async () => {
     chat.isRequesting = true;
     renderStudio('/');
@@ -184,8 +209,13 @@ describe('ChatPanel', () => {
     expect(
       chat.requestFallback?.(undefined, { error: new Error('上游失败') }),
     ).toEqual({ content: '上游失败', role: 'assistant' });
-    expect(chat.requestFallback?.(undefined, { error: 'nope' as never })).toEqual(
-      { content: '对话请求失败', role: 'assistant' },
-    );
+    expect(
+      chat.requestFallback?.(undefined, { error: 'nope' as never }),
+    ).toEqual({ content: '对话请求失败', role: 'assistant' });
+    const stop = screen.queryByRole('button', { name: /停|取消|stop/i });
+    if (stop) {
+      await userEvent.click(stop);
+      expect(chat.abort).toHaveBeenCalled();
+    }
   });
 });

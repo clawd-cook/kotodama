@@ -1,5 +1,6 @@
 import {
   childIdsOf,
+  emptyDataModel,
   flattenComponent,
   foldMessages,
   SURFACE_ID,
@@ -145,6 +146,25 @@ describe('flattenComponent', () => {
     ).toMatchObject({
       action: { functionCall: { name: 'submit' } },
     });
+  });
+
+  it('heals a string Modal children slot', () => {
+    expect(
+      flattenComponent({
+        id: 'dialog',
+        component: 'Modal',
+        children: 'only',
+      }),
+    ).toMatchObject({ content: 'only' });
+  });
+
+  it('returns an empty type when a mapped type is ambiguous', () => {
+    expect(
+      flattenComponent({
+        id: 'x',
+        component: { Column: { children: [] }, Row: { children: [] } },
+      }),
+    ).toMatchObject({ id: 'x', component: '' });
   });
 });
 
@@ -301,7 +321,11 @@ describe('childIdsOf', () => {
   });
 });
 
-describe('toMessages', () => {
+describe('emptyDataModel', () => {
+  it('returns an empty object', () => {
+    expect(emptyDataModel()).toEqual({});
+  });
+});
   it('emits create, components, and data for a snapshot', () => {
     const messages = toMessages({
       surfaceId: 'main',

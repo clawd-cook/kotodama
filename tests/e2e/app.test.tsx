@@ -79,17 +79,46 @@ describe('session and channel hooks', () => {
     expect(screen.getByTestId('landing').textContent).toBe('null');
   });
 
-  it('exposes the channel context', async () => {
-    stubChatHealth();
+  it('maps health env into the channel context', async () => {
+    stubChatHealth({
+      baseUrl: 'https://env.example',
+      model: 'env-model',
+      hasApiKey: true,
+    });
     function Probe() {
       const channel = useChannel();
-      return <pre data-testid="ready">{String(channel.resolved.ready)}</pre>;
+      return (
+        <pre data-testid="env">
+          {channel.env.baseUrl}:{channel.env.model}:{channel.env.apiKey}
+        </pre>
+      );
     }
     render(
       <ChannelProvider>
         <Probe />
       </ChannelProvider>,
     );
-    expect(await screen.findByTestId('ready')).toBeTruthy();
+    expect(await screen.findByText('https://env.example:env-model:set')).toBeTruthy();
+  });
+
+  it('defaults missing health env fields', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async () => new Response(JSON.stringify({ ok: true, env: {} }), { status: 200 })),
+    );
+    function Probe() {
+      const channel = useChannel();
+      return (
+        <pre data-testid="env-empty">
+          {channel.env.baseUrl}|{channel.env.model}|{channel.env.apiKey}
+        </pre>
+      );
+    }
+    render(
+      <ChannelProvider>
+        <Probe />
+      </ChannelProvider>,
+    );
+    expect(await screen.findByText('||')).toBeTruthy();
   });
 });

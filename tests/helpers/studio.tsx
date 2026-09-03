@@ -3,22 +3,29 @@ import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { vi } from 'vitest';
 
-export function stubChatHealth(ok = true) {
+export function stubChatHealth(
+  ok: boolean | { baseUrl?: string; model?: string; hasApiKey?: boolean } = true,
+) {
   vi.stubGlobal(
     'fetch',
     vi.fn(async (input: RequestInfo | URL) => {
       const url = String(input);
       if (url.includes('/api/chat/health')) {
-        if (!ok) {
+        if (ok === false) {
           throw new Error('offline');
         }
-        return new Response(
-          JSON.stringify({
-            ok: true,
-            env: { baseUrl: '', model: '', hasApiKey: false },
-          }),
-          { status: 200, headers: { 'Content-Type': 'application/json' } },
-        );
+        const env =
+          ok === true
+            ? { baseUrl: '', model: '', hasApiKey: false }
+            : {
+                baseUrl: ok.baseUrl ?? '',
+                model: ok.model ?? '',
+                hasApiKey: Boolean(ok.hasApiKey),
+              };
+        return new Response(JSON.stringify({ ok: true, env }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        });
       }
       return new Response('{}', { status: 404 });
     }),

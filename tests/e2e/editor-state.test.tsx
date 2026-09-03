@@ -1,9 +1,10 @@
+import { Inspector } from '@src/editor/Inspector';
 import { PALETTE } from '@src/editor/demo';
 import { EditorProvider, useEditor } from '@src/editor/EditorState';
 import { toMessages } from '@src/editor/snapshot';
 import { emptySnapshot } from '@src/editor/storage';
 import { BASIC_CATALOG_ID } from '@src/editor/types';
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
@@ -155,6 +156,7 @@ function Harness() {
       <button type="button" onClick={() => editor.clearErrors()}>
         clear-all
       </button>
+      <Inspector />
     </div>
   );
 }
@@ -246,6 +248,56 @@ describe('EditorProvider', () => {
     await user.click(screen.getByRole('button', { name: 'clear-preview' }));
     await user.click(screen.getByRole('button', { name: 'clear-all' }));
     expect(screen.getByTestId('errors').textContent).toBe('');
+  });
+
+  it('edits inspector fields for text, slider, and checkbox', async () => {
+    const user = userEvent.setup({ pointerEventsCheck: 0 });
+    renderEditor();
+    await user.click(screen.getByRole('button', { name: 'apply-ok' }));
+    await user.click(screen.getByRole('button', { name: 'select-title' }));
+    expect(await screen.findByText(/Text · title/)).toBeTruthy();
+    await user.click(screen.getByRole('radio', { name: '绑定' }));
+    const pathInput = document.querySelector(
+      '.inspector input[placeholder="/title"]',
+    ) as HTMLInputElement | null;
+    if (pathInput) {
+      fireEvent.change(pathInput, { target: { value: '/title' } });
+    }
+    await user.click(screen.getByRole('radio', { name: '字面量' }));
+    const literal = document.querySelector(
+      '.inspector input:not([placeholder])',
+    ) as HTMLInputElement | null;
+    if (literal) {
+      fireEvent.change(literal, { target: { value: '改标题' } });
+    }
+    await user.click(screen.getByRole('button', { name: 'insert-Slider' }));
+    const numbers = document.querySelectorAll('.inspector .ant-input-number-input');
+    if (numbers[0]) {
+      fireEvent.change(numbers[0], { target: { value: '8' } });
+    }
+    await user.click(screen.getByRole('button', { name: 'insert-CheckBox' }));
+    const sw = document.querySelector('.inspector .ant-switch') as HTMLElement;
+    if (sw) {
+      await user.click(sw);
+    }
+    await user.click(screen.getByRole('button', { name: 'insert-ChoicePicker' }));
+    const selects = document.querySelectorAll('.inspector .ant-select');
+    if (selects[0]) {
+      await user.click(selects[0]);
+      const option = document.querySelector('.ant-select-item-option');
+      if (option) {
+        await user.click(option);
+      }
+    }
+    const json = document.querySelector(
+      '.inspector textarea',
+    ) as HTMLTextAreaElement;
+    if (json) {
+      fireEvent.change(json, { target: { value: 'not-json' } });
+      fireEvent.change(json, {
+        target: { value: '[{"label":"A","value":"a"}]' },
+      });
+    }
   });
 
   it('inserts every palette type onto an empty page', async () => {

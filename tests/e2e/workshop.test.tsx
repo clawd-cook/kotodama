@@ -50,6 +50,9 @@ describe('workshop chrome', () => {
     expect(URL.createObjectURL).toHaveBeenCalled();
     expect(click).toHaveBeenCalled();
     click.mockRestore();
+    await user.click(screen.getByRole('button', { name: '登录' }));
+    await user.click(screen.getByRole('tab', { name: /事件/ }));
+    expect(document.querySelector('.dock-log')?.textContent?.length).toBeGreaterThan(10);
   });
 
   it('opens JSON, confirms reset, and redirects unknown routes', async () => {
@@ -271,5 +274,15 @@ describe('workshop chrome', () => {
         pointerId: 1,
       }),
     );
+    const fileInput = document.querySelector(
+      'input[type="file"]',
+    ) as HTMLInputElement;
+    fireEvent.change(fileInput, { target: { files: [] } });
+    const bar = document.querySelector('.ant-splitter-bar');
+    if (bar) {
+      fireEvent.mouseDown(bar);
+      fireEvent.mouseMove(bar, { clientX: 260 });
+      fireEvent.mouseUp(bar);
+    }
   });
 });
