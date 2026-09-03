@@ -8,15 +8,8 @@ import { XProvider } from '@ant-design/x';
 import xZhCN from '@ant-design/x/locale/zh_CN';
 import { Divider, Layout, Menu, Space, Switch, theme as antdTheme } from 'antd';
 import antdZhCN from 'antd/locale/zh_CN';
-import { useEffect, useMemo, useState } from 'react';
-import {
-  Link,
-  Navigate,
-  Route,
-  Routes,
-  useLocation,
-  useNavigate,
-} from 'react-router';
+import { type ComponentType, useEffect, useMemo, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { EditorProvider } from '../editor/EditorState';
 import { loadTheme, saveTheme } from '../editor/storage';
 import {
@@ -24,60 +17,19 @@ import {
   WorkshopHistoryActions,
 } from '../editor/WorkshopActions';
 import '../editor/editor.css';
-import { Catalog } from '../pages/catalog';
-import { ExampleDetail, Examples } from '../pages/examples';
-import { Settings } from '../pages/settings';
 import { Workshop } from '../pages/workshop';
 import { ChannelProvider, useChannel } from './ChannelContext';
+import { RoomRoutes } from './RoomRoutes';
+import { type Room, ROOMS, keepAliveRoom, roomByPath } from './rooms';
 import { StudioSessionProvider, useStudioSession } from './StudioSession';
 import './studio.css';
 
-const RAIL = [
-  {
-    key: 'create',
-    path: '/',
-    label: '开始创建',
-    icon: <EditOutlined aria-hidden />,
-  },
-  {
-    key: 'catalog',
-    path: '/catalog',
-    label: '基础组件',
-    icon: <AppstoreOutlined aria-hidden />,
-  },
-  {
-    key: 'examples',
-    path: '/examples',
-    label: '精选案例',
-    icon: <FileTextOutlined aria-hidden />,
-  },
-  {
-    key: 'settings',
-    path: '/settings',
-    label: '设置',
-    icon: <SettingOutlined aria-hidden />,
-  },
-] as const;
-
-function currentRoom(pathname: string): (typeof RAIL)[number]['key'] {
-  if (pathname.startsWith('/catalog')) {
-    return 'catalog';
-  }
-  if (pathname.startsWith('/examples')) {
-    return 'examples';
-  }
-  if (pathname.startsWith('/settings')) {
-    return 'settings';
-  }
-  return 'create';
-}
-
-function skipLink(pathname: string): { href: string; label: string } {
-  if (pathname.startsWith('/settings')) {
-    return { href: '#channel-form', label: '跳到表单' };
-  }
-  return { href: '#sheet', label: '跳到纸页' };
-}
+const ROOM_ICONS = {
+  create: EditOutlined,
+  catalog: AppstoreOutlined,
+  examples: FileTextOutlined,
+  settings: SettingOutlined,
+} satisfies Record<Room['key'], ComponentType>;
 
 export function Studio() {
   const [theme, setTheme] = useState<'light' | 'dark'>(loadTheme);
@@ -146,20 +98,20 @@ function StudioHouse({
       resolved.ready,
     ],
   );
-  const room = currentRoom(location.pathname);
-  const inWorkshop = room === 'create';
-  const skip = skipLink(location.pathname);
+  const room = roomByPath(location.pathname);
+  const workshop = keepAliveRoom();
+  const inWorkshop = room.key === workshop.key;
 
   return (
     <Layout className="editor-root" data-theme={theme}>
-      <a className="skip-link" href={skip.href}>
-        {skip.label}
+      <a className="skip-link" href={room.skip.href}>
+        {room.skip.label}
       </a>
       <Layout.Header className="editor-header">
         <span className="editor-mark">
           <span className="editor-seal" aria-hidden />
           <Link
-            to="/"
+            to={workshop.path}
             className="editor-wordmark"
             translate="no"
             aria-label="言灵，返回开始创建"
@@ -196,47 +148,33 @@ function StudioHouse({
         <nav className="studio-rail" aria-label="工作室">
           <Menu
             mode="inline"
-            selectedKeys={[room]}
+            selectedKeys={[room.key]}
             onClick={({ key }) => {
-              const item = RAIL.find((entry) => entry.key === key);
+              const item = ROOMS.find((entry) => entry.key === key);
               if (item) {
                 navigate(item.path);
               }
             }}
-            items={RAIL.map((item) => ({
-              key: item.key,
-              icon: item.icon,
-              label: (
-                <Link
-                  to={item.path}
-                  aria-current={room === item.key ? 'page' : undefined}
-                >
-                  {item.label}
-                </Link>
-              ),
-            }))}
+            items={ROOMS.map((item) => {
+              const RailIcon = ROOM_ICONS[item.key];
+              return {
+                key: item.key,
+                icon: <RailIcon aria-hidden />,
+                label: (
+                  <Link
+                    to={item.path}
+                    aria-current={room.key === item.key ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </Link>
+                ),
+              };
+            })}
           />
         </nav>
         <div className="studio-desk">
           <Workshop theme={theme} active={inWorkshop} speech={speech} />
-          <Routes>
-            <Route
-              path="/catalog"
-              element={<Navigate to="/catalog/Column" replace />}
-            />
-            <Route
-              path="/catalog/:component"
-              element={<Catalog theme={theme} />}
-            />
-            <Route path="/examples" element={<Examples theme={theme} />} />
-            <Route
-              path="/examples/:id"
-              element={<ExampleDetail theme={theme} />}
-            />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/" element={null} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+          <RoomRoutes theme={theme} />
         </div>
       </div>
     </Layout>
