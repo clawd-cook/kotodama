@@ -4,6 +4,7 @@ import { Link, Navigate, useParams } from 'react-router';
 import { foldMessages } from '../../editor/snapshot';
 import { JsonWell } from '../../paper/JsonWell';
 import { PaperPreview } from '../../paper/PaperPreview';
+import { useStudioTheme } from '../../studio/Studio';
 import {
   CATALOG_BLURBS,
   CATALOG_GROUPS,
@@ -11,7 +12,6 @@ import {
   isCatalogName,
 } from './catalogPages';
 import { catalogPropertyNames } from './catalogPropertyNames';
-import { useStudioTheme } from '../../studio/Studio';
 
 export function Catalog() {
   const theme = useStudioTheme();

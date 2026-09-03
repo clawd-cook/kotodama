@@ -4,9 +4,9 @@ import { Link, Navigate, useParams } from 'react-router';
 import { foldMessages } from '../../editor/snapshot';
 import { JsonWell } from '../../paper/JsonWell';
 import { PaperPreview } from '../../paper/PaperPreview';
+import { useStudioTheme } from '../../studio/Studio';
 import { useAdoptDraft } from '../workshop/adoptDraft';
 import { EXAMPLES, EXAMPLE_ORDER, isExampleId } from './featured';
-import { useStudioTheme } from '../../studio/Studio';
 
 export function Examples() {
   const theme = useStudioTheme();
