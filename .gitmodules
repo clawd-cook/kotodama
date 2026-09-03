@@ -18,3 +18,15 @@
 	path = submodules/ant-design/ant-design
 	url = https://github.com/ant-design/ant-design.git
 	depth = 1
+[submodule "applications/fragment-clean"]
+	path = applications/fragment-clean
+	url = git@coding.jd.com:LT_H5/fragment-clean.git
+	depth = 1
+[submodule "applications/yy-modules"]
+	path = applications/yy-modules
+	url = git@coding.jd.com:webapp/yy-modules.git
+	depth = 1
+[submodule "applications/ruzhu"]
+	path = applications/ruzhu
+	url = git@coding.jd.com:daojiaH5/ruzhu.git
+	depth = 1
