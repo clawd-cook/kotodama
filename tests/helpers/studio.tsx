@@ -1,7 +1,8 @@
 import { EditorApp } from '@src/editor/EditorApp';
-import { render } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
+import type { UserEvent } from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router';
-import { vi } from 'vitest';
+import { expect, vi } from 'vitest';
 
 export function stubChatHealth(
   ok: boolean | { baseUrl?: string; model?: string; hasApiKey?: boolean } = true,
@@ -42,4 +43,13 @@ export function renderStudio(
       <EditorApp />
     </MemoryRouter>,
   );
+}
+
+export async function applyExamplePage(user: UserEvent) {
+  await user.click(await screen.findByRole('button', { name: '用这一页' }));
+  const dialog = screen.queryByRole('dialog');
+  if (dialog) {
+    await user.click(within(dialog).getByRole('button', { name: /换\s*上/ }));
+  }
+  expect(await screen.findByRole('heading', { name: '工坊' })).toBeTruthy();
 }

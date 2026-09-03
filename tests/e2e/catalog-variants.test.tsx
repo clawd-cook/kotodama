@@ -8,7 +8,7 @@ import {
 } from '@kotodama/antd-catalog';
 import { PaperPreview } from '@src/editor/PaperPreview';
 import { BASIC_CATALOG_ID as EditorCatalogId } from '@src/editor/types';
-import { ALLOWED_COMPONENTS } from '@src/editor/validate';
+import { CATALOG_PAGES } from '@src/studio/catalog/catalogPages';
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -91,10 +91,15 @@ describe('catalog barrel and helpers', () => {
 
 describe('catalog pages', () => {
   it('renders every catalog fixture page', async () => {
-    for (const name of ALLOWED_COMPONENTS) {
-      cleanup();
-      renderStudio(`/catalog/${name}`);
-      expect(await screen.findByRole('heading', { name })).toBeTruthy();
+    renderStudio('/catalog/Column');
+    expect(
+      await screen.findByRole('heading', { level: 1, name: 'Column' }),
+    ).toBeTruthy();
+    for (const name of Object.keys(CATALOG_PAGES)) {
+      fireEvent.click(screen.getByRole('link', { name }));
+      expect(
+        await screen.findByRole('heading', { level: 1, name }),
+      ).toBeTruthy();
     }
   });
 });

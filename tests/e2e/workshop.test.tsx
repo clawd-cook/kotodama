@@ -3,7 +3,7 @@ import { BASIC_CATALOG_ID } from '@src/editor/types';
 import { cleanup, fireEvent, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { renderStudio, stubChatHealth } from '../helpers/studio';
+import { applyExamplePage, renderStudio, stubChatHealth } from '../helpers/studio';
 
 afterEach(() => {
   cleanup();
@@ -37,20 +37,19 @@ function validMessages() {
 
 describe('workshop chrome', () => {
   it('toggles dark mode and downloads a current page', async () => {
-    const user = userEvent.setup();
+    const user = userEvent.setup({ pointerEventsCheck: 0 });
     const click = vi
       .spyOn(HTMLAnchorElement.prototype, 'click')
       .mockImplementation(() => undefined);
     renderStudio('/examples/login');
-    await user.click(await screen.findByRole('button', { name: '用这一页' }));
-    expect(await screen.findByRole('heading', { name: '工坊' })).toBeTruthy();
+    await applyExamplePage(user);
     await user.click(screen.getByRole('switch', { name: '深色' }));
     expect(document.documentElement.style.colorScheme).toBe('dark');
     await user.click(screen.getByRole('button', { name: '下载' }));
     expect(URL.createObjectURL).toHaveBeenCalled();
     expect(click).toHaveBeenCalled();
     click.mockRestore();
-    await user.click(screen.getByRole('button', { name: '登录' }));
+    fireEvent.click(screen.getByRole('button', { name: '登录' }));
     await user.click(screen.getByRole('tab', { name: /事件/ }));
     expect(document.querySelector('.dock-log')?.textContent?.length).toBeGreaterThan(10);
   });

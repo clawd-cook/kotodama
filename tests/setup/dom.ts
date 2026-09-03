@@ -1,4 +1,4 @@
-import { afterEach, vi } from 'vitest';
+import { afterEach, beforeEach, vi } from 'vitest';
 
 class MemoryStorage implements Storage {
   private store = new Map<string, string>();
@@ -82,8 +82,12 @@ Object.defineProperty(globalThis, 'IS_REACT_ACT_ENVIRONMENT', {
   value: true,
 });
 
+beforeEach(() => {
+  local.clear();
+  session.clear();
+});
+
 afterEach(() => {
   local.clear();
   session.clear();
-  document.body.innerHTML = '';
 });
