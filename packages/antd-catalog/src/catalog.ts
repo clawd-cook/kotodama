@@ -19,9 +19,9 @@ import {
   Row,
   TabsView,
 } from './layout';
+import { BASIC_CATALOG_ID } from './catalogId';
 
-export const BASIC_CATALOG_ID =
-  'https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json';
+export { BASIC_CATALOG_ID };
 
 const components: ReactComponentImplementation[] = [
   Text,

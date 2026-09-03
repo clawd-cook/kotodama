@@ -6,7 +6,7 @@ import {
   useMemo,
   useState,
 } from 'react';
-import type { LandingSubmit } from './landingSubmit';
+import type { LandingSubmit } from '../editor/chat/speech';
 
 type StudioSessionValue = {
   visitedWorkshop: boolean;

@@ -1,4 +1,4 @@
-import { landingSubmit, PROMPT_ITEMS } from '@src/studio/landingSubmit';
+import { landingSubmit, PROMPT_ITEMS } from '@src/editor/chat/speech';
 import { describe, expect, it } from 'vitest';
 
 describe('L landing submit', () => {

@@ -3,7 +3,7 @@ import { EditorProvider } from '@src/editor/EditorState';
 import { PaperPreview } from '@src/paper/PaperPreview';
 import { PreviewPane } from '@src/editor/Preview';
 import { saveDraft } from '@src/editor/storage';
-import { BASIC_CATALOG_ID } from '@src/editor/types';
+import { BASIC_CATALOG_ID } from '@kotodama/antd-catalog';
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 

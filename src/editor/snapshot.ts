@@ -1,9 +1,5 @@
-import {
-  type A2uiComponent,
-  type A2uiMessage,
-  BASIC_CATALOG_ID,
-  type Snapshot,
-} from './types';
+import { BASIC_CATALOG_ID } from '@kotodama/antd-catalog/catalog-id';
+import type { A2uiComponent, A2uiMessage, Snapshot } from './types';
 import { ALLOWED_COMPONENTS } from './validate';
 
 export const SURFACE_ID = 'main';

@@ -2,10 +2,11 @@ import { antdCatalog } from '@kotodama/antd-catalog';
 import { Button, Modal, message, Typography } from 'antd';
 import { Link, Navigate, useNavigate, useParams } from 'react-router';
 import { useEditor } from '../editor/EditorState';
-import { PaperPreview } from '../paper/PaperPreview';
 import { foldMessages } from '../editor/snapshot';
+import { isCurrentPage } from '../editor/storage';
+import { PaperPreview } from '../paper/PaperPreview';
 import type { ExampleId } from './examples';
-import { EXAMPLE_PAGES, shouldConfirmReplace } from './examples';
+import { EXAMPLE_PAGES } from './examples';
 import { JsonWell } from './JsonWell';
 import { useStudioSession } from './StudioSession';
 
@@ -89,7 +90,7 @@ export function ExampleDetailPage({ theme }: { theme: 'light' | 'dark' }) {
       bumpThread();
       navigate('/');
     };
-    if (shouldConfirmReplace(snapshot)) {
+    if (isCurrentPage(snapshot)) {
       Modal.confirm({
         title: '换上这一页？当前页会被盖掉。',
         okText: '换上',

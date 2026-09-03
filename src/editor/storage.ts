@@ -1,5 +1,6 @@
+import { BASIC_CATALOG_ID } from '@kotodama/antd-catalog/catalog-id';
 import { foldMessages, SURFACE_ID, toMessages } from './snapshot';
-import { BASIC_CATALOG_ID, type Snapshot } from './types';
+import type { Snapshot } from './types';
 import { validateSnapshot } from './validate';
 
 export function emptySnapshot(): Snapshot {

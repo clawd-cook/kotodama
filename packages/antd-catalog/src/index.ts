@@ -1,2 +1,3 @@
 export { ChildList } from './ChildList';
-export { antdCatalog, BASIC_CATALOG_ID, catalogComponents } from './catalog';
+export { antdCatalog, catalogComponents } from './catalog';
+export { BASIC_CATALOG_ID } from './catalogId';

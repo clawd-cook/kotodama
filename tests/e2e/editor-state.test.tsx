@@ -3,7 +3,7 @@ import { PALETTE } from '@src/editor/demo';
 import { EditorProvider, useEditor } from '@src/editor/EditorState';
 import { toMessages } from '@src/editor/snapshot';
 import { emptySnapshot } from '@src/editor/storage';
-import { BASIC_CATALOG_ID } from '@src/editor/types';
+import { BASIC_CATALOG_ID } from '@kotodama/antd-catalog';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';

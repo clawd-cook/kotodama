@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./catalog-id": "./src/catalogId.ts"
   },
   "peerDependencies": {
     "@a2ui/react": "^0.10.0",

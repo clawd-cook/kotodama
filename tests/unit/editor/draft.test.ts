@@ -1,7 +1,7 @@
 import { applyDocument } from '@src/editor/applyDocument';
-import login from '@src/editor/fixtures/login.json';
+import { BASIC_CATALOG_ID } from '@catalog/catalogId';
+import login from '@src/studio/examples/fixtures/login.json';
 import { emptySnapshot, isCurrentPage, parseDraft } from '@src/editor/storage';
-import { BASIC_CATALOG_ID } from '@src/editor/types';
 import { describe, expect, it } from 'vitest';
 
 function assertEmptyDraft(snapshot: ReturnType<typeof parseDraft>) {

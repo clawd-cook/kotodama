@@ -1,5 +1,5 @@
 import { toMessages } from '@src/editor/snapshot';
-import { BASIC_CATALOG_ID } from '@src/editor/types';
+import { BASIC_CATALOG_ID } from '@kotodama/antd-catalog';
 import { cleanup, fireEvent, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';

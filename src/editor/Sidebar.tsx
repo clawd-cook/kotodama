@@ -1,17 +1,13 @@
 import { Button, Space, Tabs, Tree, Typography } from 'antd';
 import type { DataNode } from 'antd/es/tree';
 import { ChatPanel } from './chat/ChatPanel';
+import { useSpeech } from './chat/speech';
 import { PALETTE } from './demo';
 import { useEditor } from './EditorState';
 import { buildTree, canInsertInto } from './tree';
 
-export function Sidebar({
-  resetCount,
-  theme,
-}: {
-  resetCount: number;
-  theme: 'light' | 'dark';
-}) {
+export function Sidebar({ theme }: { theme: 'light' | 'dark' }) {
+  const { resetCount } = useSpeech();
   return (
     <div className="sidebar sidebar-with-tabs">
       <Tabs

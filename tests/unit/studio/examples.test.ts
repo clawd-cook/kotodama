@@ -1,15 +1,14 @@
 import { applyDocument } from '@src/editor/applyDocument';
-import filteredList from '@src/editor/fixtures/filtered-list.json';
-import login from '@src/editor/fixtures/login.json';
-import settings from '@src/editor/fixtures/settings.json';
 import { foldMessages } from '@src/editor/snapshot';
-import { emptySnapshot } from '@src/editor/storage';
+import { emptySnapshot, isCurrentPage } from '@src/editor/storage';
 import type { A2uiMessage } from '@src/editor/types';
 import {
   EXAMPLE_PAGES,
   type ExampleId,
-  shouldConfirmReplace,
 } from '@src/studio/examples';
+import filteredList from '@src/studio/examples/fixtures/filtered-list.json';
+import login from '@src/studio/examples/fixtures/login.json';
+import settings from '@src/studio/examples/fixtures/settings.json';
 import { describe, expect, it } from 'vitest';
 
 const FIXTURES: Record<ExampleId, A2uiMessage[]> = {
@@ -68,7 +67,7 @@ describe('E featured examples', () => {
   });
 
   it('E-03 replacing a valid page requires confirmation', () => {
-    expect(shouldConfirmReplace(emptySnapshot())).toBe(false);
+    expect(isCurrentPage(emptySnapshot())).toBe(false);
     const applied = applyDocument(
       JSON.stringify(EXAMPLE_PAGES.login.messages),
       emptySnapshot(),
@@ -77,6 +76,6 @@ describe('E featured examples', () => {
     if (!applied.ok) {
       return;
     }
-    expect(shouldConfirmReplace(applied.snapshot)).toBe(true);
+    expect(isCurrentPage(applied.snapshot)).toBe(true);
   });
 });

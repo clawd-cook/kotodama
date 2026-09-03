@@ -1,5 +1,6 @@
+import { BASIC_CATALOG_ID } from '@kotodama/antd-catalog/catalog-id';
 import { SURFACE_ID } from './snapshot';
-import { type A2uiComponent, BASIC_CATALOG_ID, type Snapshot } from './types';
+import type { A2uiComponent, Snapshot } from './types';
 
 function text(
   id: string,

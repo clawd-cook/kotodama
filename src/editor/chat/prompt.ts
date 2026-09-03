@@ -1,5 +1,5 @@
+import { BASIC_CATALOG_ID } from '@kotodama/antd-catalog/catalog-id';
 import { SURFACE_ID } from '../snapshot';
-import { BASIC_CATALOG_ID } from '../types';
 import { ALLOWED_COMPONENTS } from '../validate';
 
 const COMPONENTS = ALLOWED_COMPONENTS.join(', ');

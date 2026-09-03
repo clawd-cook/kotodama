@@ -36,6 +36,10 @@ _Avoid_: 配置中心, 连接诊断
 一份合法界面 JSON 画出来的 Ant Design 页面。工坊、图鉴、案例里看到的是同一类东西。
 _Avoid_: canvas, surface, 预览器
 
+**说话**:
+工坊里生成页的对话。通道就绪、落地提示、线程计数从屋子注入，说话不回头读工作室。
+_Avoid_: ChatPanel 直接 import 工作室
+
 **稿**:
 工坊当前这一页的 Snapshot。空稿不是可下载的当前页。
 _Avoid_: document, draft file, 工程

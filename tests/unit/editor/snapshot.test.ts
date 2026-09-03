@@ -6,7 +6,7 @@ import {
   SURFACE_ID,
   toMessages,
 } from '@src/editor/snapshot';
-import { BASIC_CATALOG_ID } from '@src/editor/types';
+import { BASIC_CATALOG_ID } from '@catalog/catalogId';
 import { describe, expect, it } from 'vitest';
 import { BASIC_CATALOG } from '../../helpers/apply';
 

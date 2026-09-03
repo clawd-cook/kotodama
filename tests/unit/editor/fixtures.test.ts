@@ -1,9 +1,9 @@
 import { applyDocument } from '@src/editor/applyDocument';
 import { createDemoSnapshot } from '@src/editor/demo';
-import filteredList from '@src/editor/fixtures/filtered-list.json';
-import login from '@src/editor/fixtures/login.json';
 import loginOtp from '@src/editor/fixtures/login-otp.json';
-import settings from '@src/editor/fixtures/settings.json';
+import filteredList from '@src/studio/examples/fixtures/filtered-list.json';
+import login from '@src/studio/examples/fixtures/login.json';
+import settings from '@src/studio/examples/fixtures/settings.json';
 import { toMessages } from '@src/editor/snapshot';
 import { emptySnapshot } from '@src/editor/storage';
 import { resolveChannel } from '@src/studio/channel';

@@ -1,6 +1,6 @@
 import { BASIC_COMPONENTS } from '@a2ui/web_core/v0_9/basic_catalog';
+import { BASIC_CATALOG_ID } from '@kotodama/antd-catalog/catalog-id';
 import type { A2uiComponent, A2uiMessage, Snapshot } from './types';
-import { BASIC_CATALOG_ID } from './types';
 
 export const ALLOWED_COMPONENTS = [
   'Column',

@@ -3,10 +3,6 @@ import { useXChat, XRequest } from '@ant-design/x-sdk';
 import { Alert, Flex, Typography } from 'antd';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import { useChannel } from '../../studio/ChannelContext';
-import type { LandingSubmit } from '../../studio/landingSubmit';
-import { PROMPT_ITEMS } from '../../studio/landingSubmit';
-import { useStudioSession } from '../../studio/StudioSession';
 import type { ApplyResult } from '../applyDocument';
 import { applyDocument } from '../applyDocument';
 import { CHANNEL_UNREADY, STREAMING_PLACEHOLDER } from '../copy';
@@ -16,6 +12,11 @@ import { parseChatOutput } from './parseA2ui';
 import { presentAssistant } from './presentAssistant';
 import { buildSystemPrompt } from './prompt';
 import { EditorChatProvider, textOf } from './provider';
+import {
+  type LandingSubmit,
+  PROMPT_ITEMS,
+  useSpeech,
+} from './speech';
 
 const consumedLandingKeys = new Set<string>();
 
@@ -41,8 +42,8 @@ function landingToken(state: LandingSubmit): string {
 
 export function ChatPanel(_props: { theme: 'light' | 'dark' }) {
   const { snapshot, applyJson, logError, clearErrors } = useEditor();
-  const { resolved, override } = useChannel();
-  const { landing, clearLanding, resetCount } = useStudioSession();
+  const { ready, model, override, landing, clearLanding, resetCount } =
+    useSpeech();
   const location = useLocation();
   const navigate = useNavigate();
   const snapshotRef = useRef(snapshot);
@@ -88,7 +89,7 @@ export function ChatPanel(_props: { theme: 'light' | 'dark' }) {
             manual: true,
             params: {
               stream: true,
-              ...(resolved.model ? { model: resolved.model } : {}),
+              ...(model ? { model } : {}),
             },
           }),
         },
@@ -98,7 +99,7 @@ export function ChatPanel(_props: { theme: 'light' | 'dark' }) {
           ),
         () => overrideRef.current,
       ),
-    [resolved.model],
+    [model],
   );
 
   const { messages, onRequest, isRequesting, abort } = useXChat({
@@ -124,7 +125,7 @@ export function ChatPanel(_props: { theme: 'light' | 'dark' }) {
 
   const send = (text: string) => {
     const content = text.trim();
-    if (!content || isRequesting || !resolved.ready) {
+    if (!content || isRequesting || !ready) {
       return;
     }
     setInput('');
@@ -255,7 +256,7 @@ export function ChatPanel(_props: { theme: 'light' | 'dark' }) {
             })}
         />
       )}
-      {resolved.ready ? null : (
+      {ready ? null : (
         <Alert type="warning" showIcon message={CHANNEL_UNREADY} />
       )}
       <Sender
@@ -263,7 +264,7 @@ export function ChatPanel(_props: { theme: 'light' | 'dark' }) {
         placeholder="描述你想要的界面…"
         value={input}
         loading={isRequesting}
-        disabled={!resolved.ready}
+        disabled={!ready}
         onChange={(value) => setInput(value)}
         onSubmit={(value) => send(value)}
         onCancel={() => abort()}

@@ -1,4 +1,5 @@
 import App from '@src/App';
+import { useSpeech } from '@src/editor/chat/speech';
 import { ChannelProvider, useChannel } from '@src/studio/ChannelContext';
 import {
   StudioSessionProvider,
@@ -38,11 +39,18 @@ describe('session and channel hooks', () => {
       useStudioSession();
       return null;
     }
+    function SpeechProbe() {
+      useSpeech();
+      return null;
+    }
     expect(() => render(<ChannelProbe />)).toThrow(
       'useChannel must be used within ChannelProvider',
     );
     expect(() => render(<SessionProbe />)).toThrow(
       'useStudioSession must be used within StudioSessionProvider',
+    );
+    expect(() => render(<SpeechProbe />)).toThrow(
+      'useSpeech must be used within SpeechProvider',
     );
     spy.mockRestore();
   });

@@ -21,11 +21,9 @@ import {
 
 export function EditorShell({
   theme,
-  resetCount,
   sheetId,
 }: {
   theme: 'light' | 'dark';
-  resetCount: number;
   sheetId?: string;
 }) {
   const {
@@ -96,7 +94,7 @@ export function EditorShell({
           min={SPEECH_MIN}
           max={SPEECH_MAX}
         >
-          <Sidebar resetCount={resetCount} theme={theme} />
+          <Sidebar theme={theme} />
         </Splitter.Panel>
         <Splitter.Panel min={280}>
           <div className="editor-stage">

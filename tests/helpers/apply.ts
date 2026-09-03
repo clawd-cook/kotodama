@@ -1,8 +1,11 @@
+import { BASIC_CATALOG_ID as BASIC_CATALOG } from '@catalog/catalogId';
 import { applyDocument } from '@src/editor/applyDocument';
 import { createDemoSnapshot } from '@src/editor/demo';
 import { foldMessages, toMessages } from '@src/editor/snapshot';
 import { emptySnapshot } from '@src/editor/storage';
 import type { A2uiComponent, Snapshot } from '@src/editor/types';
+
+export { BASIC_CATALOG };
 
 export function applyFixture(doc: unknown, current = createDemoSnapshot()) {
   return applyDocument(JSON.stringify(doc), current);
@@ -45,9 +48,6 @@ export function rootColumn(children: string[] = []): Snapshot {
     ],
   };
 }
-
-export const BASIC_CATALOG =
-  'https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json';
 
 export function surfaceMessages(
   components: Record<string, unknown>[],

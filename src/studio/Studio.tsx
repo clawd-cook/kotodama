@@ -8,7 +8,7 @@ import { XProvider } from '@ant-design/x';
 import xZhCN from '@ant-design/x/locale/zh_CN';
 import { Divider, Layout, Menu, Space, Switch, theme as antdTheme } from 'antd';
 import antdZhCN from 'antd/locale/zh_CN';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   Link,
   Navigate,
@@ -17,6 +17,7 @@ import {
   useLocation,
   useNavigate,
 } from 'react-router';
+import { SpeechProvider } from '../editor/chat/speech';
 import { EditorShell } from '../editor/EditorShell';
 import { EditorProvider } from '../editor/EditorState';
 import { loadTheme, saveTheme } from '../editor/storage';
@@ -26,7 +27,7 @@ import {
 } from '../editor/WorkshopActions';
 import '../editor/editor.css';
 import { CatalogPage } from './CatalogPage';
-import { ChannelProvider } from './ChannelContext';
+import { ChannelProvider, useChannel } from './ChannelContext';
 import { ExampleDetailPage, ExamplesPage } from './ExamplesPage';
 import { SettingsPage } from './SettingsPage';
 import { StudioSessionProvider, useStudioSession } from './StudioSession';
@@ -120,7 +121,32 @@ function StudioHouse({
 }) {
   const location = useLocation();
   const navigate = useNavigate();
-  const { markVisitedWorkshop, resetCount, bumpThread } = useStudioSession();
+  const { resolved, override } = useChannel();
+  const {
+    markVisitedWorkshop,
+    resetCount,
+    bumpThread,
+    landing,
+    clearLanding,
+  } = useStudioSession();
+  const speech = useMemo(
+    () => ({
+      ready: resolved.ready,
+      model: resolved.model,
+      override,
+      landing,
+      clearLanding,
+      resetCount,
+    }),
+    [
+      clearLanding,
+      landing,
+      override,
+      resetCount,
+      resolved.model,
+      resolved.ready,
+    ],
+  );
   const room = currentRoom(location.pathname);
   const inWorkshop = room === 'create';
   const skip = skipLink(location.pathname);
@@ -198,11 +224,12 @@ function StudioHouse({
             hidden={!inWorkshop}
             {...(!inWorkshop ? { inert: true, 'aria-hidden': true } : {})}
           >
-            <EditorShell
-              theme={theme}
-              resetCount={resetCount}
-              sheetId={inWorkshop ? 'sheet' : undefined}
-            />
+            <SpeechProvider value={speech}>
+              <EditorShell
+                theme={theme}
+                sheetId={inWorkshop ? 'sheet' : undefined}
+              />
+            </SpeechProvider>
           </div>
           <Routes>
             <Route

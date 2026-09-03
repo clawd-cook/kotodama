@@ -1,6 +1,6 @@
 import { buildSystemPrompt } from '@src/editor/chat/prompt';
 import { ALLOWED_COMPONENTS } from '@src/editor/validate';
-import { BASIC_CATALOG_ID } from '@src/editor/types';
+import { BASIC_CATALOG_ID } from '@catalog/catalogId';
 import { describe, expect, it } from 'vitest';
 
 describe('buildSystemPrompt', () => {
