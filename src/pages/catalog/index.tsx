@@ -2,6 +2,7 @@ import { antdCatalog } from '@kotodama/antd-catalog';
 import { Menu, Table, Typography } from 'antd';
 import { Link, Navigate, useParams } from 'react-router';
 import { foldMessages } from '../../editor/snapshot';
+import { JsonWell } from '../../paper/JsonWell';
 import { PaperPreview } from '../../paper/PaperPreview';
 import {
   CATALOG_BLURBS,
@@ -10,7 +11,6 @@ import {
   isCatalogName,
 } from './catalogPages';
 import { catalogPropertyNames } from './catalogPropertyNames';
-import { JsonWell } from '../../paper/JsonWell';
 
 export function Catalog({ theme }: { theme: 'light' | 'dark' }) {
   const { component = 'Column' } = useParams();
