@@ -81,4 +81,12 @@ describe('tree helpers', () => {
     expect(collectSubtree(tree, 'title').has('title')).toBe(true);
     expect(collectSubtree(tree, 'title').size).toBe(1);
   });
+
+  it('renders a placeholder for missing ids and ignores unknown subtree nodes', () => {
+    const nodes = buildTree([
+      { id: 'root', component: 'Column', children: ['ghost'] },
+    ]);
+    expect(nodes[0]?.children).toEqual([{ id: 'ghost', type: '?', children: [] }]);
+    expect(collectSubtree(tree, 'missing').has('missing')).toBe(true);
+  });
 });

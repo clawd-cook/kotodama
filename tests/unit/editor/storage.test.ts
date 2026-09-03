@@ -116,4 +116,39 @@ describe('storage', () => {
   it('parseDraft rejects invalid JSON', () => {
     expect(parseDraft('not-json').components).toHaveLength(0);
   });
+
+  it('parseDraft folds message arrays and rejects invalid pages', () => {
+    expect(parseDraft(JSON.stringify([{ version: 'v0.9' }])).components).toHaveLength(
+      0,
+    );
+    expect(
+      parseDraft(
+        JSON.stringify({
+          surfaceId: 'main',
+          catalogId: 'x',
+          components: [{ id: 'root', component: 'Text' }],
+        }),
+      ).components,
+    ).toHaveLength(0);
+  });
+
+  it('returns an empty draft when localStorage throws', () => {
+    Object.defineProperty(globalThis, 'localStorage', {
+      configurable: true,
+      value: {
+        getItem() {
+          throw new Error('denied');
+        },
+      },
+    });
+    expect(loadDraft()).toEqual(emptySnapshot());
+  });
+
+  it('falls back when chrome storage is missing', () => {
+    Object.defineProperty(globalThis, 'localStorage', {
+      configurable: true,
+      value: memory,
+    });
+    expect(loadChromeLayout()).toEqual(DEFAULT_CHROME);
+  });
 });

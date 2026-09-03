@@ -70,4 +70,18 @@ describe('extractA2uiMessages', () => {
       '模型输出里没有解析到 A2UI JSON',
     );
   });
+
+  it('reads an envelope when called directly', () => {
+    expect(
+      extractA2uiMessages(
+        JSON.stringify({ summary: '好了', messages: [{ version: 'v0.9' }] }),
+      ),
+    ).toEqual([{ version: 'v0.9' }]);
+  });
+
+  it('skips JSONL lines that cannot be healed', () => {
+    expect(() => extractA2uiMessages('{not-json\nplain')).toThrow(
+      '模型输出里没有解析到 A2UI JSON',
+    );
+  });
 });

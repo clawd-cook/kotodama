@@ -1,4 +1,5 @@
 import {
+  childIdsOf,
   flattenComponent,
   foldMessages,
   SURFACE_ID,
@@ -85,6 +86,66 @@ describe('flattenComponent', () => {
       }),
     ).toMatchObject({ content: 'only' });
   });
+
+  it('reads a nested component.type map', () => {
+    expect(
+      flattenComponent({
+        id: 'title',
+        component: { type: 'Text', text: '你好', variant: 'body' },
+      }),
+    ).toMatchObject({ id: 'title', component: 'Text', text: '你好' });
+  });
+
+  it('picks a mapped type from extra keys when component is missing', () => {
+    expect(
+      flattenComponent({
+        id: 'title',
+        Text: { text: '你好', variant: 'body' },
+      }),
+    ).toMatchObject({ component: 'Text', text: '你好' });
+  });
+
+  it('unwraps explicitList children and componentId refs', () => {
+    expect(
+      flattenComponent({
+        id: 'root',
+        component: 'Column',
+        children: { explicitList: [{ componentId: 'a' }, 'b'] },
+      }),
+    ).toMatchObject({ children: ['a', 'b'] });
+  });
+
+  it('heals Card and Button children into child slots', () => {
+    expect(
+      flattenComponent({
+        id: 'card',
+        component: 'Card',
+        children: ['body'],
+      }),
+    ).toMatchObject({ child: 'body' });
+    expect(
+      flattenComponent({
+        id: 'go',
+        component: 'Button',
+        children: ['label'],
+      }),
+    ).toMatchObject({
+      child: 'label',
+      action: { event: { name: 'go' } },
+    });
+  });
+
+  it('keeps a Button functionCall action', () => {
+    expect(
+      flattenComponent({
+        id: 'go',
+        component: 'Button',
+        action: { functionCall: { name: 'submit' } },
+      }),
+    ).toMatchObject({
+      action: { functionCall: { name: 'submit' } },
+    });
+  });
 });
 
 describe('foldMessages', () => {
@@ -132,6 +193,111 @@ describe('foldMessages', () => {
   it('ignores non-object messages', () => {
     const snapshot = foldMessages([1, 'x', null, { version: 'v0.9' }]);
     expect(snapshot.components).toEqual([]);
+  });
+
+  it('creates a surface from updateComponents when createSurface is missing', () => {
+    const snapshot = foldMessages([
+      {
+        version: 'v0.9',
+        updateComponents: {
+          surfaceId: 'main',
+          components: [{ id: 'root', component: 'Text', text: 'hi' }],
+        },
+      },
+    ]);
+    expect(snapshot.components).toHaveLength(1);
+    expect(snapshot.catalogId).toBe(BASIC_CATALOG_ID);
+  });
+
+  it('drops a deleted surface and uses an empty catalog id fallback', () => {
+    const extra = foldMessages([
+      {
+        version: 'v0.9',
+        createSurface: {
+          surfaceId: 'main',
+          catalogId: BASIC_CATALOG,
+          sendDataModel: true,
+        },
+      },
+      {
+        version: 'v0.9',
+        createSurface: {
+          surfaceId: 'other',
+          catalogId: '',
+          sendDataModel: false,
+        },
+      },
+    ]);
+    expect(extra.surfaceId).toBe('other');
+    expect(extra.catalogId).toBe(BASIC_CATALOG_ID);
+    expect(extra.sendDataModel).toBe(false);
+
+    const deleted = foldMessages([
+      {
+        version: 'v0.9',
+        createSurface: {
+          surfaceId: 'main',
+          catalogId: BASIC_CATALOG,
+          sendDataModel: true,
+        },
+      },
+      {
+        version: 'v0.9',
+        updateComponents: {
+          surfaceId: 'main',
+          components: [{ id: 'root', component: 'Text', text: 'x' }],
+        },
+      },
+      {
+        version: 'v0.9',
+        deleteSurface: { surfaceId: 'main' },
+      },
+    ]);
+    expect(deleted.components).toEqual([]);
+  });
+
+  it('nests data model paths onto a non-object root', () => {
+    const snapshot = foldMessages([
+      {
+        version: 'v0.9',
+        updateDataModel: { surfaceId: 'main', path: '/a/b', value: 1 },
+      },
+      {
+        version: 'v0.9',
+        updateDataModel: { surfaceId: 'main', path: '/a/c', value: 2 },
+      },
+    ]);
+    expect(snapshot.dataModel).toEqual({ a: { b: 1, c: 2 } });
+  });
+
+  it('replaces array segments when nesting a data path', () => {
+    const snapshot = foldMessages([
+      {
+        version: 'v0.9',
+        updateDataModel: { surfaceId: 'main', path: '/', value: { a: [1] } },
+      },
+      {
+        version: 'v0.9',
+        updateDataModel: { surfaceId: 'main', path: '/a/b', value: 2 },
+      },
+    ]);
+    expect(snapshot.dataModel).toEqual({ a: { b: 2 } });
+  });
+});
+
+describe('childIdsOf', () => {
+  it('collects string, componentId, slots, and tab children', () => {
+    expect(
+      childIdsOf({
+        id: 'root',
+        component: 'Column',
+        children: ['a', { componentId: 'b' }, 1],
+        child: 'c',
+        trigger: 'd',
+        content: 'e',
+        tabs: [{ title: 'one', child: 'f' }, { title: 'two' }, null],
+      }),
+    ).toEqual(['a', 'b', 'c', 'd', 'e', 'f']);
   });
 });
 

@@ -139,4 +139,106 @@ describe('X chat proxy', () => {
     );
     expect(called).toBe(true);
   });
+
+  it('reads originalUrl, string chunks, and empty bodies', async () => {
+    const fetches: { url: string; body: string }[] = [];
+    const handle = createChatProxy(ENV, async (url, init) => {
+      fetches.push({ url: String(url), body: String(init?.body) });
+      return new Response('{}', { status: 201 });
+    });
+    const listeners: Record<string, Array<(chunk?: Uint8Array | string) => void>> = {
+      data: [],
+      end: [],
+      error: [],
+    };
+    const req = {
+      method: 'POST',
+      originalUrl: '/api/chat/completions?x=1',
+      on(event: string, listener: (...args: never[]) => void) {
+        listeners[event]?.push(listener as (chunk?: Uint8Array | string) => void);
+      },
+    };
+    queueMicrotask(() => {
+      for (const listener of listeners.data) {
+        listener('');
+      }
+      for (const listener of listeners.end) {
+        listener();
+      }
+    });
+    const result = await invoke(handle, req);
+    expect(result.status).toBe(201);
+    expect(JSON.parse(fetches[0]?.body ?? '{}').stream).toBe(true);
+  });
+
+  it('forwards stream false and defaults missing channel fields', async () => {
+    const fetches: { init?: RequestInit }[] = [];
+    const handle = createChatProxy(ENV, async (url, init) => {
+      fetches.push({ init });
+      return new Response('ok');
+    });
+    const result = await invoke(
+      handle,
+      postCompletions({
+        stream: false,
+        kotodamaChannel: 'nope',
+      }),
+    );
+    expect(result.status).toBe(200);
+    expect(result.headers['Content-Type']).toBe('application/json');
+    expect(JSON.parse(String(fetches[0]?.init?.body)).stream).toBe(false);
+  });
+
+  it('uses env fields when the body channel is partial', async () => {
+    const fetches: { url: string }[] = [];
+    const handle = createChatProxy(ENV, async (url) => {
+      fetches.push({ url: String(url) });
+      return new Response('{}', {
+        status: 200,
+        headers: { 'Content-Type': 'text/event-stream' },
+      });
+    });
+    const result = await invoke(
+      handle,
+      postCompletions({
+        kotodamaChannel: { baseUrl: 1, apiKey: 2, model: 3 },
+      }),
+    );
+    expect(fetches[0]?.url).toBe('https://env.example/v1/chat/completions');
+    expect(result.headers['Content-Type']).toBe('text/event-stream');
+  });
+
+  it('returns 400 when the request stream errors', async () => {
+    const listeners: Record<string, Array<(chunk?: unknown) => void>> = {
+      data: [],
+      end: [],
+      error: [],
+    };
+    const req = {
+      method: 'POST',
+      url: '/api/chat/completions',
+      on(event: string, listener: (...args: never[]) => void) {
+        listeners[event]?.push(listener as (chunk?: unknown) => void);
+      },
+    };
+    queueMicrotask(() => {
+      for (const listener of listeners.error) {
+        listener(new Error('boom'));
+      }
+    });
+    const result = await invoke(createChatProxy(ENV, async () => new Response('{}')), req);
+    expect(result.status).toBe(400);
+    expect(JSON.parse(result.body).error.message).toBe('boom');
+  });
+
+  it('health reports missing env keys', async () => {
+    const result = await invoke(
+      createChatProxy({}, async () => new Response('{}')),
+      getHealth(),
+    );
+    expect(JSON.parse(result.body)).toEqual({
+      ok: true,
+      env: { baseUrl: '', model: '', hasApiKey: false },
+    });
+  });
 });

@@ -75,4 +75,16 @@ describe('P chat present', () => {
   it('P-05 streaming placeholder is not protocol', () => {
     expect(STREAMING_PLACEHOLDER).toBe('正在写下这一页…');
   });
+
+  it('falls back when a successful apply cannot be re-parsed', () => {
+    const applied = applyDocument(
+      JSON.stringify(validMessages()),
+      createDemoSnapshot(),
+    );
+    expect(applied.ok).toBe(true);
+    if (!applied.ok) {
+      return;
+    }
+    expect(presentAssistant('不是 JSON', applied)).toBe('已更新界面。');
+  });
 });

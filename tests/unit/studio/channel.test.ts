@@ -149,4 +149,18 @@ describe('channel persistence', () => {
       { baseUrl: 'https://x' },
     );
   });
+
+  it('ignores junk stored under the channel key', () => {
+    Object.defineProperty(globalThis, 'localStorage', {
+      configurable: true,
+      value: memory,
+    });
+    memory.setItem('kotodama.channel:v1', '{');
+    expect(loadChannel()).toEqual(emptyChannel());
+    memory.setItem(
+      'kotodama.channel:v1',
+      JSON.stringify({ baseUrl: 1, apiKey: 2, model: 3 }),
+    );
+    expect(loadChannel()).toEqual(emptyChannel());
+  });
 });

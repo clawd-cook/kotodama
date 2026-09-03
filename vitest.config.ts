@@ -24,6 +24,12 @@ export default defineConfig({
       reporter: ['text', 'html'],
       include: ['src/**/*.{ts,tsx}', 'server/**/*.ts', 'packages/antd-catalog/src/**/*.{ts,tsx}'],
       exclude: ['src/index.tsx', 'src/env.d.ts'],
+      thresholds: {
+        statements: 90,
+        branches: 90,
+        functions: 90,
+        lines: 90,
+      },
     },
     projects: [
       {
