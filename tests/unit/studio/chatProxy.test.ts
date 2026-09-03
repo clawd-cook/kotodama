@@ -175,7 +175,11 @@ describe('X chat proxy', () => {
     const fetches: { init?: RequestInit }[] = [];
     const handle = createChatProxy(ENV, async (url, init) => {
       fetches.push({ init });
-      return new Response('ok');
+      return {
+        status: 200,
+        headers: { get: () => null },
+        text: async () => 'ok',
+      } as unknown as Response;
     });
     const result = await invoke(
       handle,

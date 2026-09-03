@@ -12,7 +12,6 @@ import { ALLOWED_COMPONENTS } from '@src/editor/validate';
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { renderGeneratedSurface } from '../helpers/a2ui';
 import { renderStudio, stubChatHealth } from '../helpers/studio';
 
 afterEach(() => {
@@ -250,8 +249,18 @@ describe('catalog variants', () => {
     ];
 
     for (const page of cases) {
-      const rendered = await renderGeneratedSurface(page);
-      await rendered.cleanup();
+      const view = render(
+        <PaperPreview
+          snapshot={page}
+          theme="light"
+          catalog={antdCatalog}
+          onError={() => undefined}
+        />,
+      );
+      await waitFor(() => {
+        expect(document.querySelector('.preview-sheet')).toBeTruthy();
+      });
+      view.unmount();
     }
   });
 

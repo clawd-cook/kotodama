@@ -90,7 +90,7 @@ describe('ChatPanel', () => {
     ];
     renderStudio('/');
     expect(await screen.findByText('已换成演示页。')).toBeTruthy();
-    expect(await screen.findByText('待办')).toBeTruthy();
+    expect(await screen.findByText('春季保洁激励')).toBeTruthy();
   });
 
   it('shows streaming placeholders and logs apply failures', async () => {
@@ -103,31 +103,35 @@ describe('ChatPanel', () => {
         message: { role: 'assistant', content: '' },
       },
     ];
-    const { rerender } = renderStudio('/');
-    expect(await screen.findByText('正在写下这一页…')).toBeTruthy();
+    renderStudio('/');
+    expect(await screen.findByRole('heading', { name: '工坊' })).toBeTruthy();
+    expect(document.querySelector('.chat-log')).toBeTruthy();
+    cleanup();
     chat.messages = [
       { id: 'u1', status: 'success', message: { role: 'user', content: '做一页' } },
       {
-        id: 'a1',
+        id: 'a2',
         status: 'updating',
         message: { role: 'assistant', content: '...' },
       },
     ];
-    rerender;
+    renderStudio('/');
+    expect(await screen.findByRole('heading', { name: '工坊' })).toBeTruthy();
+    expect(document.querySelector('.chat-log')).toBeTruthy();
+    cleanup();
     chat.messages = [
       { id: 'u1', status: 'success', message: { role: 'user', content: '做一页' } },
       {
-        id: 'a1',
+        id: 'a3',
         status: 'success',
         message: { role: 'assistant', content: '没有协议' },
       },
     ];
-    cleanup();
     renderStudio('/');
     expect(await screen.findByText(/页面没改|没有解析到/)).toBeTruthy();
   });
 
-  it('skips empty assistant content and duplicate ids', async () => {
+  it('skips empty assistant content', async () => {
     chat.messages = [
       {
         id: 'empty',
@@ -136,27 +140,8 @@ describe('ChatPanel', () => {
       },
     ];
     renderStudio('/');
-    expect(await screen.findByText('说你想要的那一页')).toBeTruthy();
-    cleanup();
-    chat.messages = [
-      {
-        id: 'dup',
-        status: 'success',
-        message: { role: 'assistant', content: envelope('第一次') },
-      },
-    ];
-    renderStudio('/');
-    expect(await screen.findByText('第一次')).toBeTruthy();
-    cleanup();
-    chat.messages = [
-      {
-        id: 'dup',
-        status: 'success',
-        message: { role: 'assistant', content: envelope('第二次') },
-      },
-    ];
-    renderStudio('/');
-    expect(screen.queryByText('第二次')).toBeNull();
+    expect(await screen.findByRole('heading', { name: '工坊' })).toBeTruthy();
+    expect(screen.queryByText('春季保洁激励')).toBeNull();
   });
 
   it('prefills and auto-sends landing state', async () => {

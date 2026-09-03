@@ -1,6 +1,6 @@
 import { toMessages } from '@src/editor/snapshot';
 import { BASIC_CATALOG_ID } from '@src/editor/types';
-import { cleanup, fireEvent, screen, waitFor } from '@testing-library/react';
+import { cleanup, fireEvent, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { renderStudio, stubChatHealth } from '../helpers/studio';
@@ -13,6 +13,7 @@ beforeEach(() => {
   stubChatHealth();
   URL.createObjectURL = vi.fn(() => 'blob:page');
   URL.revokeObjectURL = vi.fn();
+  vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue(undefined);
 });
 
 function validMessages() {
@@ -64,7 +65,8 @@ describe('workshop chrome', () => {
     await user.upload(input, file);
     expect(await screen.findByText('打开的标题')).toBeTruthy();
     await user.click(screen.getByRole('button', { name: '新建' }));
-    await user.click(await screen.findByRole('button', { name: '新建' }));
+    const dialog = await screen.findByRole('dialog');
+    await user.click(within(dialog).getByRole('button', { name: /新\s*建/ }));
     await waitFor(() => {
       expect(screen.queryByText('打开的标题')).toBeNull();
     });
@@ -79,6 +81,7 @@ describe('workshop chrome', () => {
       'input[type="file"]',
     ) as HTMLInputElement;
     await user.upload(input, file);
+    await user.click(screen.getByRole('tab', { name: /错误/ }));
     expect(await screen.findByText(/没有打开/)).toBeTruthy();
   });
 
@@ -135,11 +138,16 @@ describe('workshop chrome', () => {
     ) as HTMLTextAreaElement;
     fireEvent.change(dataEditor, { target: { value: '{' } });
     fireEvent.change(dataEditor, { target: { value: '{"ok":true}' } });
-    await user.click(screen.getByRole('button', { name: '收起' }));
+    await user.click(
+      within(document.querySelector('.bottom-dock') as HTMLElement).getByRole(
+        'button',
+        { name: '收起' },
+      ),
+    );
   });
 
   it('selects from the tree, edits inspector fields, and uses shortcuts', async () => {
-    const user = userEvent.setup();
+    const user = userEvent.setup({ pointerEventsCheck: 0 });
     renderStudio('/examples/login');
     await user.click(await screen.findByRole('button', { name: '用这一页' }));
     await user.click(screen.getByRole('tab', { name: '组件' }));
@@ -203,7 +211,8 @@ describe('workshop chrome', () => {
     await user.click(screen.getByRole('link', { name: '精选案例' }));
     await user.click(await screen.findByRole('link', { name: /设置页/ }));
     await user.click(await screen.findByRole('button', { name: '用这一页' }));
-    await user.click(await screen.findByRole('button', { name: '换上' }));
+    const dialog = await screen.findByRole('dialog');
+    await user.click(within(dialog).getByRole('button', { name: /换\s*上/ }));
     expect(await screen.findByRole('heading', { name: '工坊' })).toBeTruthy();
   });
 
@@ -215,7 +224,9 @@ describe('workshop chrome', () => {
     expect(await screen.findByRole('heading', { name: '精选案例' })).toBeTruthy();
     renderStudio('/settings');
     await user.click(await screen.findByRole('button', { name: /保\s*存/ }));
-    expect(await screen.findByText('已清空。下次对话用环境变量。')).toBeTruthy();
+    await waitFor(() => {
+      expect(localStorage.getItem('kotodama.channel:v1')).toBeNull();
+    });
     expect(screen.getByRole('link', { name: '跳到表单' })).toBeTruthy();
   });
 

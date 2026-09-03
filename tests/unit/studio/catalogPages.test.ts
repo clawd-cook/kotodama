@@ -25,3 +25,12 @@ describe('catalogPages', () => {
     expect(isCatalogName('')).toBe(false);
   });
 });
+
+describe('catalogPropertyNames', () => {
+  it('returns no properties for an unknown component', async () => {
+    const { catalogPropertyNames } = await import(
+      '@src/studio/catalog/catalogPropertyNames'
+    );
+    expect(catalogPropertyNames('Nope')).toEqual([]);
+  });
+});

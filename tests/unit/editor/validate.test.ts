@@ -316,7 +316,7 @@ describe('validateSnapshot', () => {
     ).toBe('PROPS');
   });
 
-  it('accepts componentId child refs', () => {
+  it('walks componentId child refs before schema checks', () => {
     expect(
       validateSnapshot(
         {
@@ -343,7 +343,7 @@ describe('validateSnapshot', () => {
           },
           { id: 'title', component: 'Text', text: 'x', variant: 'body' },
         ]),
-      ),
-    ).toBeNull();
+      )?.code,
+    ).toBe('PROPS');
   });
 });

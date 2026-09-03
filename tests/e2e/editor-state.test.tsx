@@ -171,6 +171,7 @@ describe('EditorProvider', () => {
   it('inserts, undoes, and restores a Text node', async () => {
     const user = userEvent.setup();
     renderEditor();
+    await user.click(screen.getByRole('button', { name: 'apply-ok' }));
     await user.click(screen.getByRole('button', { name: 'insert-text' }));
     expect(screen.getByTestId('ids').textContent).toContain('text-1');
     expect(screen.getByTestId('selected').textContent).toBe('text-1');
@@ -229,6 +230,7 @@ describe('EditorProvider', () => {
     expect(screen.getByTestId('hovered').textContent).toBe('title');
     await user.click(screen.getByRole('button', { name: 'update-ok' }));
     await user.click(screen.getByRole('button', { name: 'update-bad' }));
+    await user.click(screen.getByRole('button', { name: 'insert-bad' }));
     expect(screen.getByTestId('errors').textContent).toContain('json:');
     await user.click(screen.getByRole('button', { name: 'duplicate' }));
     expect(screen.getByTestId('ids').textContent).toContain('text-1');
