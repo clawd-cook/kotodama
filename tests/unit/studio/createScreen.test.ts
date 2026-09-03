@@ -1,8 +1,8 @@
+import { applyDocument } from '@src/editor/applyDocument';
+import login from '@src/editor/fixtures/login.json';
+import { emptySnapshot } from '@src/editor/storage';
+import { createScreen } from '@src/studio/createScreen';
 import { describe, expect, it } from 'vitest';
-import { applyDocument } from '../editor/applyDocument';
-import login from '../editor/fixtures/login.json';
-import { emptySnapshot } from '../editor/storage';
-import { createScreen } from './createScreen';
 
 describe('R create room', () => {
   it('R-01 create room is always the workshop', () => {

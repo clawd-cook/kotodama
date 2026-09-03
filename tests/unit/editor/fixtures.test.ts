@@ -1,43 +1,19 @@
+import { applyDocument } from '@src/editor/applyDocument';
+import { createDemoSnapshot } from '@src/editor/demo';
+import filteredList from '@src/editor/fixtures/filtered-list.json';
+import login from '@src/editor/fixtures/login.json';
+import loginOtp from '@src/editor/fixtures/login-otp.json';
+import settings from '@src/editor/fixtures/settings.json';
+import { toMessages } from '@src/editor/snapshot';
+import { emptySnapshot } from '@src/editor/storage';
+import { resolveChannel } from '@src/studio/channel';
 import { describe, expect, it } from 'vitest';
-import { resolveChannel } from '../studio/channel';
-import { applyDocument } from './applyDocument';
-import { createDemoSnapshot } from './demo';
-import filteredList from './fixtures/filtered-list.json';
-import login from './fixtures/login.json';
-import loginOtp from './fixtures/login-otp.json';
-import settings from './fixtures/settings.json';
-import { foldMessages, toMessages } from './snapshot';
-import { emptySnapshot } from './storage';
-import type { A2uiComponent, Snapshot } from './types';
-
-function applyFixture(doc: unknown) {
-  return applyDocument(JSON.stringify(doc), createDemoSnapshot());
-}
-
-function dataText(snapshot: Snapshot): string {
-  return JSON.stringify(snapshot.dataModel ?? {});
-}
-
-function componentsOf(snapshot: Snapshot): A2uiComponent[] {
-  return snapshot.components;
-}
-
-function roundTrip(doc: unknown) {
-  const result = applyFixture(doc);
-  expect(result.ok).toBe(true);
-  if (!result.ok) {
-    return result;
-  }
-  const folded = foldMessages(
-    JSON.parse(JSON.stringify(toMessages(result.snapshot))),
-  );
-  const again = applyDocument(
-    JSON.stringify(toMessages(folded)),
-    createDemoSnapshot(),
-  );
-  expect(again.ok).toBe(true);
-  return again;
-}
+import {
+  applyFixture,
+  componentsOf,
+  dataText,
+  roundTrip,
+} from '../../helpers/apply';
 
 describe('F golden fixtures', () => {
   it('F-01 login fixture is a valid page', () => {
@@ -189,5 +165,17 @@ describe('C fixture round-trip', () => {
     const text = JSON.stringify(toMessages(applied.snapshot));
     expect(text).not.toContain('test-key');
     expect(text).not.toContain('OPENAI_API_KEY');
+  });
+
+  it('applying onto demo replaces the demo title', () => {
+    const result = applyDocument(JSON.stringify(login), createDemoSnapshot());
+    expect(result.ok).toBe(true);
+    if (!result.ok) {
+      return;
+    }
+    expect((result.snapshot.dataModel as { title?: string }).title).toBe(
+      '登录',
+    );
+    expect(JSON.stringify(result.snapshot.dataModel)).not.toContain('任务管理');
   });
 });

@@ -60,12 +60,15 @@ importers:
       '@biomejs/cli-darwin-x64':
         specifier: 2.4.12
         version: 2.4.12
-      '@rsbuild/core':
-        specifier: 1.7.6
-        version: 1.7.6
-      '@rsbuild/plugin-react':
-        specifier: 1.4.6
-        version: 1.4.6(@rsbuild/core@1.7.6)(webpack-hot-middleware@2.26.1)
+      '@testing-library/dom':
+        specifier: 10.4.1
+        version: 10.4.1
+      '@testing-library/react':
+        specifier: 16.3.3
+        version: 16.3.3(@testing-library/dom@10.4.1)(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@testing-library/user-event':
+        specifier: 14.6.7
+        version: 14.6.7(@testing-library/dom@10.4.1)
       '@types/react':
         specifier: 19.2.18
         version: 19.2.18
@@ -78,6 +81,9 @@ importers:
       '@vitest/browser-preview':
         specifier: 4.1.11
         version: 4.1.11(bufferutil@4.1.0)(msw@2.15.0(@types/node@26.4.0)(typescript@7.0.2))(utf-8-validate@6.0.6)(vite@8.2.2)(vitest@4.1.11)
+      happy-dom:
+        specifier: 20.12.0
+        version: 20.12.0(bufferutil@4.1.0)(utf-8-validate@6.0.6)
       oxfmt:
         specifier: 0.65.0
         version: 0.65.0(svelte@5.56.10(@typescript-eslint/types@8.69.0))(vite-plus@0.3.0(07919d04fd313d2e39eee8d330f574de))
@@ -2504,16 +2510,6 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@rsbuild/core@1.7.6':
-    resolution: {integrity: sha1-G6ax98XfdrFCJpujxA6wDG2wwts=, tarball: http://registry.m.jd.com/@rsbuild/core/download/@rsbuild/core-1.7.6.tgz}
-    engines: {node: '>=18.12.0'}
-    hasBin: true
-
-  '@rsbuild/plugin-react@1.4.6':
-    resolution: {integrity: sha1-ad2p6YIZduR264ObpOtTFT56Lrk=, tarball: http://registry.m.jd.com/@rsbuild/plugin-react/download/@rsbuild/plugin-react-1.4.6.tgz}
-    peerDependencies:
-      '@rsbuild/core': ^1.0.0 || ^2.0.0-0
-
   '@rspack/binding-darwin-arm64@1.7.12':
     resolution: {integrity: sha1-5uEOf/FcIlTWy+kSWnR62ogKNPM=, tarball: http://registry.m.jd.com/@rspack/binding-darwin-arm64/download/@rspack/binding-darwin-arm64-1.7.12.tgz}
     cpu: [arm64]
@@ -2582,15 +2578,6 @@ packages:
   '@rspack/lite-tapable@1.1.0':
     resolution: {integrity: sha1-PP2v7tAQeOEWvU8ZG2hMi0hN5CU=, tarball: http://registry.m.jd.com/@rspack/lite-tapable/download/@rspack/lite-tapable-1.1.0.tgz}
 
-  '@rspack/lite-tapable@1.1.5':
-    resolution: {integrity: sha1-1xEB6J4B6gMtvuVZxgrnSy+GI1M=, tarball: http://registry.m.jd.com/@rspack/lite-tapable/download/@rspack/lite-tapable-1.1.5.tgz}
-
-  '@rspack/plugin-react-refresh@1.6.2':
-    resolution: {integrity: sha1-u1Cm49mSzBiNsTAtrNiZ/NaQ6/k=, tarball: http://registry.m.jd.com/@rspack/plugin-react-refresh/download/@rspack/plugin-react-refresh-1.6.2.tgz}
-    peerDependencies:
-      react-refresh: '>=0.10.0 <1.0.0'
-      webpack-hot-middleware: 2.x
-
   '@sideway/address@4.1.5':
     resolution: {integrity: sha1-S8FJoAdmI87ZnKggi6eA1lqZudU=, tarball: http://registry.m.jd.com/@sideway/address/download/@sideway/address-4.1.5.tgz}
 
@@ -2624,8 +2611,18 @@ packages:
     resolution: {integrity: sha1-1ET4qInppG6aO087iOD8s++2z5U=, tarball: http://registry.m.jd.com/@testing-library/dom/download/@testing-library/dom-10.4.1.tgz}
     engines: {node: '>=18'}
 
-  '@testing-library/user-event@14.6.6':
-    resolution: {integrity: sha1-7NVhT+Lbt2oXRKm1qW4wW4WRzqw=, tarball: http://registry.m.jd.com/@testing-library/user-event/download/@testing-library/user-event-14.6.6.tgz}
+  '@testing-library/react@16.3.3':
+    resolution: {integrity: sha1-QmkH53FvNwONq4qmnY8EWfnsJLI=, tarball: http://registry.m.jd.com/@testing-library/react/download/@testing-library/react-16.3.3.tgz}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@testing-library/dom': ^10.0.0
+      '@types/react': ^18.0.0 || ^19.0.0
+      '@types/react-dom': ^18.0.0 || ^19.0.0
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+
+  '@testing-library/user-event@14.6.7':
+    resolution: {integrity: sha1-xFPM/K/+0RDMeQSO0Y/MsPQiTzs=, tarball: http://registry.m.jd.com/@testing-library/user-event/download/@testing-library/user-event-14.6.7.tgz}
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
       '@testing-library/dom': '>=7.21.4'
@@ -3356,11 +3353,6 @@ packages:
 
   ansi-fragments@0.2.1:
     resolution: {integrity: sha1-JECcVsTMN4F8PXyqmdiWni3loF4=, tarball: http://registry.m.jd.com/ansi-fragments/download/ansi-fragments-0.2.1.tgz}
-
-  ansi-html-community@0.0.8:
-    resolution: {integrity: sha1-afvE1sy+OD+XNpNK40w/gpDxv0E=, tarball: http://registry.m.jd.com/ansi-html-community/download/ansi-html-community-0.0.8.tgz}
-    engines: {'0': node >= 0.8.0}
-    hasBin: true
 
   ansi-regex@4.1.1:
     resolution: {integrity: sha1-Fk2qyHqy1vbbOimHXi0XZlgtq+0=, tarball: http://registry.m.jd.com/ansi-regex/download/ansi-regex-4.1.1.tgz}
@@ -4885,9 +4877,6 @@ packages:
   html-encoding-sniffer@6.0.0:
     resolution: {integrity: sha1-+Nk5Czs0i1DU9hwW3S71wFmAqII=, tarball: http://registry.m.jd.com/html-encoding-sniffer/download/html-encoding-sniffer-6.0.0.tgz}
     engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0}
-
-  html-entities@2.6.0:
-    resolution: {integrity: sha1-fGTx6js2gYzK49P7SLaXQgjphPg=, tarball: http://registry.m.jd.com/html-entities/download/html-entities-2.6.0.tgz}
 
   html-escaper@2.0.2:
     resolution: {integrity: sha1-39YAJ9o2o238viNiYsAKWCJoFFM=, tarball: http://registry.m.jd.com/html-escaper/download/html-escaper-2.0.2.tgz}
@@ -6577,10 +6566,6 @@ packages:
     resolution: {integrity: sha1-ODPaAc4y2kcPH5NrnUd9pccCi/k=, tarball: http://registry.m.jd.com/react-refresh/download/react-refresh-0.14.2.tgz}
     engines: {node: '>=0.10.0'}
 
-  react-refresh@0.18.0:
-    resolution: {integrity: sha1-Lc6X9P6TKk2BQvoWMOR1wXKcgGI=, tarball: http://registry.m.jd.com/react-refresh/download/react-refresh-0.18.0.tgz}
-    engines: {node: '>=0.10.0'}
-
   react-router@8.3.1:
     resolution: {integrity: sha1-1wTKWlZOK8ic4FpTerV3V46Ue3s=, tarball: http://registry.m.jd.com/react-router/download/react-router-8.3.1.tgz}
     engines: {node: '>=22.22.0'}
@@ -7595,9 +7580,6 @@ packages:
   webidl-conversions@8.0.1:
     resolution: {integrity: sha1-Blflcf5vBvyxXKUO0f28tJXNFoY=, tarball: http://registry.m.jd.com/webidl-conversions/download/webidl-conversions-8.0.1.tgz}
     engines: {node: '>=20'}
-
-  webpack-hot-middleware@2.26.1:
-    resolution: {integrity: sha1-hyFPHj+fOsq5Jx/vnm7XtjfXGcA=, tarball: http://registry.m.jd.com/webpack-hot-middleware/download/webpack-hot-middleware-2.26.1.tgz}
 
   webpack-sources@3.5.1:
     resolution: {integrity: sha1-dsJBhIbcwCsqoGlMEEF2woWP6Eo=, tarball: http://registry.m.jd.com/webpack-sources/download/webpack-sources-3.5.1.tgz}
@@ -10278,22 +10260,6 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.63.1':
     optional: true
 
-  '@rsbuild/core@1.7.6':
-    dependencies:
-      '@rspack/core': 1.7.12(@swc/helpers@0.5.23)
-      '@rspack/lite-tapable': 1.1.5
-      '@swc/helpers': 0.5.23
-      core-js: 3.47.0
-      jiti: 2.7.0
-
-  '@rsbuild/plugin-react@1.4.6(@rsbuild/core@1.7.6)(webpack-hot-middleware@2.26.1)':
-    dependencies:
-      '@rsbuild/core': 1.7.6
-      '@rspack/plugin-react-refresh': 1.6.2(react-refresh@0.18.0)(webpack-hot-middleware@2.26.1)
-      react-refresh: 0.18.0
-    transitivePeerDependencies:
-      - webpack-hot-middleware
-
   '@rspack/binding-darwin-arm64@1.7.12':
     optional: true
 
@@ -10349,14 +10315,6 @@ snapshots:
 
   '@rspack/lite-tapable@1.1.0': {}
 
-  '@rspack/lite-tapable@1.1.5': {}
-
-  '@rspack/plugin-react-refresh@1.6.2(react-refresh@0.18.0)(webpack-hot-middleware@2.26.1)':
-    dependencies:
-      error-stack-parser: 2.1.4
-      react-refresh: 0.18.0
-      webpack-hot-middleware: 2.26.1
-
   '@sideway/address@4.1.5':
     dependencies:
       '@hapi/hoek': 9.3.0
@@ -10396,7 +10354,16 @@ snapshots:
       picocolors: 1.1.1
       pretty-format: 27.5.1
 
-  '@testing-library/user-event@14.6.6(@testing-library/dom@10.4.1)':
+  '@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+    dependencies:
+      '@babel/runtime': 7.29.7
+      '@testing-library/dom': 10.4.1
+      '@types/react': 19.2.18
+      '@types/react-dom': 19.2.5(@types/react@19.2.18)
+      react: 19.2.8
+      react-dom: 19.2.8(react@19.2.8)
+
+  '@testing-library/user-event@14.6.7(@testing-library/dom@10.4.1)':
     dependencies:
       '@testing-library/dom': 10.4.1
 
@@ -10854,7 +10821,7 @@ snapshots:
   '@vitest/browser-preview@4.1.11(bufferutil@4.1.0)(msw@2.15.0(@types/node@26.4.0)(typescript@7.0.2))(utf-8-validate@6.0.6)(vite@8.2.2)(vitest@4.1.11)':
     dependencies:
       '@testing-library/dom': 10.4.1
-      '@testing-library/user-event': 14.6.6(@testing-library/dom@10.4.1)
+      '@testing-library/user-event': 14.6.7(@testing-library/dom@10.4.1)
       '@vitest/browser': 4.1.11(bufferutil@4.1.0)(msw@2.15.0(@types/node@26.4.0)(typescript@7.0.2))(utf-8-validate@6.0.6)(vite@8.2.2)(vitest@4.1.11)
       vitest: 4.1.11(@edge-runtime/vm@5.0.0)(@opentelemetry/api@1.9.1)(@types/node@26.4.0)(@vitest/browser-playwright@4.1.11)(@vitest/browser-preview@4.1.11)(@vitest/browser-webdriverio@4.1.11)(@vitest/coverage-istanbul@4.1.11)(@vitest/coverage-v8@4.1.11)(@vitest/ui@4.1.11)(happy-dom@20.12.0(bufferutil@4.1.0)(utf-8-validate@6.0.6))(jsdom@30.0.1(@noble/hashes@2.4.0)(canvas@3.2.3))(msw@2.15.0(@types/node@26.4.0)(typescript@7.0.2))(vite@8.2.2)
     transitivePeerDependencies:
@@ -11254,8 +11221,6 @@ snapshots:
       colorette: 1.4.0
       slice-ansi: 2.1.0
       strip-ansi: 5.2.0
-
-  ansi-html-community@0.0.8: {}
 
   ansi-regex@4.1.1: {}
 
@@ -12965,8 +12930,6 @@ snapshots:
       '@exodus/bytes': 1.15.1(@noble/hashes@2.4.0)
     transitivePeerDependencies:
       - '@noble/hashes'
-
-  html-entities@2.6.0: {}
 
   html-escaper@2.0.2: {}
 
@@ -14981,8 +14944,6 @@ snapshots:
 
   react-refresh@0.14.2: {}
 
-  react-refresh@0.18.0: {}
-
   react-router@8.3.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
     dependencies:
       cookie-es: 3.1.1
@@ -16153,12 +16114,6 @@ snapshots:
       - utf-8-validate
 
   webidl-conversions@8.0.1: {}
-
-  webpack-hot-middleware@2.26.1:
-    dependencies:
-      ansi-html-community: 0.0.8
-      html-entities: 2.6.0
-      strip-ansi: 6.0.1
 
   webpack-sources@3.5.1: {}
 

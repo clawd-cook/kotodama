@@ -2,14 +2,17 @@ import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { BASIC_COMPONENTS } from '@a2ui/web_core/v0_9/basic_catalog';
+import { applyDocument } from '@src/editor/applyDocument';
+import { emptySnapshot } from '@src/editor/storage';
+import type { A2uiMessage } from '@src/editor/types';
+import { ALLOWED_COMPONENTS } from '@src/editor/validate';
+import { catalogPropertyNames } from '@src/studio/catalog/catalogPropertyNames';
 import { describe, expect, it } from 'vitest';
-import { applyDocument } from '../../editor/applyDocument';
-import { emptySnapshot } from '../../editor/storage';
-import type { A2uiMessage } from '../../editor/types';
-import { ALLOWED_COMPONENTS } from '../../editor/validate';
-import { catalogPropertyNames } from './catalogPropertyNames';
 
-const FIXTURE_DIR = join(dirname(fileURLToPath(import.meta.url)), 'fixtures');
+const FIXTURE_DIR = join(
+  dirname(fileURLToPath(import.meta.url)),
+  '../../../src/studio/catalog/fixtures',
+);
 const ALLOWED = new Set<string>(ALLOWED_COMPONENTS);
 const FORBIDDEN = ['id', 'component', 'placeholder', 'className'];
 

@@ -1,5 +1,6 @@
+import { createChatProxy } from '@server/chat-proxy';
 import { describe, expect, it } from 'vitest';
-import { createChatProxy } from '../../server/chat-proxy';
+import { getHealth, invoke, postCompletions } from '../../helpers/chat-proxy';
 
 const ENV = {
   OPENAI_BASE_URL: 'https://env.example',
@@ -8,50 +9,6 @@ const ENV = {
 };
 
 const CHANNEL_UNREADY = '通道没配好。去设置里填 Base URL、API Key 和模型名。';
-
-function postCompletions(body: unknown) {
-  const listeners: Record<string, Array<(chunk?: Uint8Array) => void>> = {
-    data: [],
-    end: [],
-    error: [],
-  };
-  const req = {
-    method: 'POST',
-    url: '/api/chat/completions',
-    headers: {},
-    on(event: string, listener: (...args: never[]) => void) {
-      listeners[event]?.push(listener as (chunk?: Uint8Array) => void);
-    },
-  };
-  queueMicrotask(() => {
-    const encoded = new TextEncoder().encode(JSON.stringify(body));
-    for (const listener of listeners.data) {
-      listener(encoded);
-    }
-    for (const listener of listeners.end) {
-      listener();
-    }
-  });
-  return req;
-}
-
-function invoke(
-  handle: ReturnType<typeof createChatProxy>,
-  req: object,
-): Promise<{ status: number; body: string }> {
-  return new Promise((resolve) => {
-    const res = {
-      statusCode: 0,
-      setHeader() {},
-      end(chunk?: string) {
-        resolve({ status: res.statusCode, body: chunk ?? '' });
-      },
-    };
-    handle(req, res, () => {
-      resolve({ status: res.statusCode, body: '' });
-    });
-  });
-}
 
 describe('X chat proxy', () => {
   it('X-01 proxy fetches upstream with the resolved channel', async () => {
@@ -80,7 +37,27 @@ describe('X chat proxy', () => {
     expect(headers.get('Authorization')).toBe('Bearer ui-key');
     const upstream = JSON.parse(String(fetches[0]?.init?.body));
     expect(upstream.model).toBe('ui-model');
+    expect(upstream.stream).toBe(true);
     expect(upstream).not.toHaveProperty('kotodamaChannel');
+  });
+
+  it('strips a trailing slash from the base URL', async () => {
+    const fetches: { url: string }[] = [];
+    const handle = createChatProxy(ENV, async (url) => {
+      fetches.push({ url: String(url) });
+      return new Response('{}');
+    });
+    await invoke(
+      handle,
+      postCompletions({
+        kotodamaChannel: {
+          baseUrl: 'https://ui.example/',
+          apiKey: 'ui-key',
+          model: 'ui-model',
+        },
+      }),
+    );
+    expect(fetches[0]?.url).toBe('https://ui.example/v1/chat/completions');
   });
 
   it('X-02 unready channel is 503 and does not fetch', async () => {
@@ -110,11 +87,7 @@ describe('X chat proxy', () => {
       },
       async () => new Response('{}'),
     );
-    const result = await invoke(handle, {
-      method: 'GET',
-      url: '/api/chat/health',
-      on() {},
-    });
+    const result = await invoke(handle, getHealth());
     const json = JSON.parse(result.body) as {
       ok?: boolean;
       apiKey?: unknown;
@@ -125,5 +98,45 @@ describe('X chat proxy', () => {
     expect(json).not.toHaveProperty('apiKey');
     expect(json.env).not.toHaveProperty('apiKey');
     expect(result.body).not.toContain('secret-key');
+  });
+
+  it('returns 400 for invalid JSON bodies', async () => {
+    const listeners: Record<string, Array<(chunk?: Uint8Array) => void>> = {
+      data: [],
+      end: [],
+      error: [],
+    };
+    const req = {
+      method: 'POST',
+      url: '/api/chat/completions',
+      on(event: string, listener: (...args: never[]) => void) {
+        listeners[event]?.push(listener as (chunk?: Uint8Array) => void);
+      },
+    };
+    queueMicrotask(() => {
+      const encoded = new TextEncoder().encode('{');
+      for (const listener of listeners.data) {
+        listener(encoded);
+      }
+      for (const listener of listeners.end) {
+        listener();
+      }
+    });
+    const result = await invoke(createChatProxy(ENV, async () => new Response('{}')), req);
+    expect(result.status).toBe(400);
+    expect(JSON.parse(result.body).error.message).toBeTruthy();
+  });
+
+  it('passes unrelated requests to next', async () => {
+    let called = false;
+    const handle = createChatProxy(ENV, async () => new Response('{}'));
+    handle(
+      { method: 'GET', url: '/other', on() {} },
+      { statusCode: 0, setHeader() {}, end() {} },
+      () => {
+        called = true;
+      },
+    );
+    expect(called).toBe(true);
   });
 });

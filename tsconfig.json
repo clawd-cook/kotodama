@@ -13,11 +13,17 @@
     "resolveJsonModule": true,
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": ["./src/*"],
+      "@server/*": ["./server/*"],
+      "@catalog/*": ["./packages/antd-catalog/src/*"]
+    },
 
     /* type checking */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true
   },
-  "include": ["src", "packages/antd-catalog/src"]
+  "include": ["src", "server", "packages/antd-catalog/src", "tests", "vitest.config.ts"]
 }

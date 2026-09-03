@@ -1,0 +1,3081 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`A2UI generated page models > snapshots generated content for catalog AudioPlayer > AudioPlayer-model 1`] = `
+{
+  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+  "components": [
+    {
+      "component": "AudioPlayer",
+      "id": "root",
+      "url": {
+        "path": "/url",
+      },
+    },
+  ],
+  "dataModel": {
+    "url": "https://example.com/clip.mp3",
+  },
+  "sendDataModel": true,
+  "surfaceId": "main",
+}
+`;
+
+exports[`A2UI generated page models > snapshots generated content for catalog Button > Button-model 1`] = `
+{
+  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+  "components": [
+    {
+      "action": {
+        "event": {
+          "name": "press",
+        },
+      },
+      "child": "label",
+      "component": "Button",
+      "id": "root",
+      "variant": "primary",
+    },
+    {
+      "component": "Text",
+      "id": "label",
+      "text": {
+        "path": "/label",
+      },
+      "variant": "body",
+    },
+  ],
+  "dataModel": {
+    "label": "确定",
+  },
+  "sendDataModel": true,
+  "surfaceId": "main",
+}
+`;
+
+exports[`A2UI generated page models > snapshots generated content for catalog Card > Card-model 1`] = `
+{
+  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+  "components": [
+    {
+      "child": "label",
+      "component": "Card",
+      "id": "root",
+    },
+    {
+      "component": "Text",
+      "id": "label",
+      "text": {
+        "path": "/label",
+      },
+      "variant": "body",
+    },
+  ],
+  "dataModel": {
+    "label": "卡片内容",
+  },
+  "sendDataModel": true,
+  "surfaceId": "main",
+}
+`;
+
+exports[`A2UI generated page models > snapshots generated content for catalog CheckBox > CheckBox-model 1`] = `
+{
+  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+  "components": [
+    {
+      "component": "CheckBox",
+      "id": "root",
+      "label": "开启",
+      "value": {
+        "path": "/on",
+      },
+    },
+  ],
+  "dataModel": {
+    "on": false,
+  },
+  "sendDataModel": true,
+  "surfaceId": "main",
+}
+`;
+
+exports[`A2UI generated page models > snapshots generated content for catalog ChoicePicker > ChoicePicker-model 1`] = `
+{
+  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+  "components": [
+    {
+      "component": "ChoicePicker",
+      "id": "root",
+      "label": "状态",
+      "options": [
+        {
+          "label": "全部",
+          "value": "all",
+        },
+        {
+          "label": "进行中",
+          "value": "open",
+        },
+      ],
+      "value": {
+        "path": "/filter",
+      },
+      "variant": "mutuallyExclusive",
+    },
+  ],
+  "dataModel": {
+    "filter": [
+      "all",
+    ],
+  },
+  "sendDataModel": true,
+  "surfaceId": "main",
+}
+`;
+
+exports[`A2UI generated page models > snapshots generated content for catalog Column > Column-model 1`] = `
+{
+  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+  "components": [
+    {
+      "align": "stretch",
+      "children": [
+        "label",
+      ],
+      "component": "Column",
+      "id": "root",
+      "justify": "start",
+    },
+    {
+      "component": "Text",
+      "id": "label",
+      "text": {
+        "path": "/label",
+      },
+      "variant": "body",
+    },
+  ],
+  "dataModel": {
+    "label": "从上到下排",
+  },
+  "sendDataModel": true,
+  "surfaceId": "main",
+}
+`;
+
+exports[`A2UI generated page models > snapshots generated content for catalog DateTimeInput > DateTimeInput-model 1`] = `
+{
+  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+  "components": [
+    {
+      "component": "DateTimeInput",
+      "enableDate": true,
+      "enableTime": false,
+      "id": "root",
+      "label": "日期",
+      "value": {
+        "path": "/when",
+      },
+    },
+  ],
+  "dataModel": {
+    "when": "",
+  },
+  "sendDataModel": true,
+  "surfaceId": "main",
+}
+`;
+
+exports[`A2UI generated page models > snapshots generated content for catalog Divider > Divider-model 1`] = `
+{
+  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+  "components": [
+    {
+      "axis": "horizontal",
+      "component": "Divider",
+      "id": "root",
+    },
+  ],
+  "dataModel": {},
+  "sendDataModel": true,
+  "surfaceId": "main",
+}
+`;
+
+exports[`A2UI generated page models > snapshots generated content for catalog Icon > Icon-model 1`] = `
+{
+  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+  "components": [
+    {
+      "component": "Icon",
+      "id": "root",
+      "name": "home",
+    },
+  ],
+  "dataModel": {},
+  "sendDataModel": true,
+  "surfaceId": "main",
+}
+`;
+
+exports[`A2UI generated page models > snapshots generated content for catalog Image > Image-model 1`] = `
+{
+  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+  "components": [
+    {
+      "component": "Image",
+      "id": "root",
+      "url": {
+        "path": "/url",
+      },
+    },
+  ],
+  "dataModel": {
+    "url": "https://example.com/image.png",
+  },
+  "sendDataModel": true,
+  "surfaceId": "main",
+}
+`;
+
+exports[`A2UI generated page models > snapshots generated content for catalog List > List-model 1`] = `
+{
+  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+  "components": [
+    {
+      "children": [
+        "item",
+      ],
+      "component": "List",
+      "direction": "vertical",
+      "id": "root",
+    },
+    {
+      "component": "Text",
+      "id": "item",
+      "text": {
+        "path": "/item",
+      },
+      "variant": "body",
+    },
+  ],
+  "dataModel": {
+    "item": "一项",
+  },
+  "sendDataModel": true,
+  "surfaceId": "main",
+}
+`;
+
+exports[`A2UI generated page models > snapshots generated content for catalog Modal > Modal-model 1`] = `
+{
+  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+  "components": [
+    {
+      "component": "Modal",
+      "content": "body",
+      "id": "root",
+      "trigger": "open",
+    },
+    {
+      "action": {
+        "event": {
+          "name": "open",
+        },
+      },
+      "child": "open_label",
+      "component": "Button",
+      "id": "open",
+      "variant": "default",
+    },
+    {
+      "component": "Text",
+      "id": "open_label",
+      "text": {
+        "path": "/openLabel",
+      },
+      "variant": "body",
+    },
+    {
+      "component": "Text",
+      "id": "body",
+      "text": {
+        "path": "/body",
+      },
+      "variant": "body",
+    },
+  ],
+  "dataModel": {
+    "body": "一层内容",
+    "openLabel": "打开",
+  },
+  "sendDataModel": true,
+  "surfaceId": "main",
+}
+`;
+
+exports[`A2UI generated page models > snapshots generated content for catalog Row > Row-model 1`] = `
+{
+  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+  "components": [
+    {
+      "align": "center",
+      "children": [
+        "label",
+      ],
+      "component": "Row",
+      "id": "root",
+      "justify": "start",
+    },
+    {
+      "component": "Text",
+      "id": "label",
+      "text": {
+        "path": "/label",
+      },
+      "variant": "body",
+    },
+  ],
+  "dataModel": {
+    "label": "从左到右排",
+  },
+  "sendDataModel": true,
+  "surfaceId": "main",
+}
+`;
+
+exports[`A2UI generated page models > snapshots generated content for catalog Slider > Slider-model 1`] = `
+{
+  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+  "components": [
+    {
+      "component": "Slider",
+      "id": "root",
+      "label": "数量",
+      "max": 10,
+      "value": {
+        "path": "/amount",
+      },
+    },
+  ],
+  "dataModel": {
+    "amount": 3,
+  },
+  "sendDataModel": true,
+  "surfaceId": "main",
+}
+`;
+
+exports[`A2UI generated page models > snapshots generated content for catalog Tabs > Tabs-model 1`] = `
+{
+  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+  "components": [
+    {
+      "component": "Tabs",
+      "id": "root",
+      "tabs": [
+        {
+          "child": "panel",
+          "title": "一",
+        },
+      ],
+    },
+    {
+      "component": "Text",
+      "id": "panel",
+      "text": {
+        "path": "/panel",
+      },
+      "variant": "body",
+    },
+  ],
+  "dataModel": {
+    "panel": "这一组",
+  },
+  "sendDataModel": true,
+  "surfaceId": "main",
+}
+`;
+
+exports[`A2UI generated page models > snapshots generated content for catalog Text > Text-model 1`] = `
+{
+  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+  "components": [
+    {
+      "component": "Text",
+      "id": "root",
+      "text": {
+        "path": "/label",
+      },
+      "variant": "body",
+    },
+  ],
+  "dataModel": {
+    "label": "一段文字",
+  },
+  "sendDataModel": true,
+  "surfaceId": "main",
+}
+`;
+
+exports[`A2UI generated page models > snapshots generated content for catalog TextField > TextField-model 1`] = `
+{
+  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+  "components": [
+    {
+      "component": "TextField",
+      "id": "root",
+      "label": "名称",
+      "value": {
+        "path": "/name",
+      },
+      "variant": "shortText",
+    },
+  ],
+  "dataModel": {
+    "name": "",
+  },
+  "sendDataModel": true,
+  "surfaceId": "main",
+}
+`;
+
+exports[`A2UI generated page models > snapshots generated content for catalog Video > Video-model 1`] = `
+{
+  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+  "components": [
+    {
+      "component": "Video",
+      "id": "root",
+      "url": {
+        "path": "/url",
+      },
+    },
+  ],
+  "dataModel": {
+    "url": "https://example.com/clip.mp4",
+  },
+  "sendDataModel": true,
+  "surfaceId": "main",
+}
+`;
+
+exports[`A2UI generated page models > snapshots generated content for example filtered-list > filtered-list-messages 1`] = `
+[
+  {
+    "createSurface": {
+      "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+      "sendDataModel": true,
+      "surfaceId": "main",
+    },
+    "version": "v0.9",
+  },
+  {
+    "updateComponents": {
+      "components": [
+        {
+          "align": "stretch",
+          "children": [
+            "title",
+            "filter",
+            "item_list",
+          ],
+          "component": "Column",
+          "id": "root",
+          "justify": "start",
+        },
+        {
+          "component": "Text",
+          "id": "title",
+          "text": {
+            "path": "/title",
+          },
+          "variant": "h3",
+        },
+        {
+          "component": "ChoicePicker",
+          "id": "filter",
+          "label": "状态",
+          "options": [
+            {
+              "label": "全部",
+              "value": "all",
+            },
+            {
+              "label": "进行中",
+              "value": "open",
+            },
+          ],
+          "value": {
+            "path": "/filter",
+          },
+          "variant": "mutuallyExclusive",
+        },
+        {
+          "children": [
+            "item_one",
+            "item_two",
+          ],
+          "component": "List",
+          "direction": "vertical",
+          "id": "item_list",
+        },
+        {
+          "component": "Text",
+          "id": "item_one",
+          "text": {
+            "path": "/itemOne",
+          },
+          "variant": "body",
+        },
+        {
+          "component": "Text",
+          "id": "item_two",
+          "text": {
+            "path": "/itemTwo",
+          },
+          "variant": "body",
+        },
+      ],
+      "surfaceId": "main",
+    },
+    "version": "v0.9",
+  },
+  {
+    "updateDataModel": {
+      "path": "/",
+      "surfaceId": "main",
+      "value": {
+        "filter": [
+          "all",
+        ],
+        "itemOne": "整理登录页",
+        "itemTwo": "核对设置项",
+        "title": "任务",
+      },
+    },
+    "version": "v0.9",
+  },
+]
+`;
+
+exports[`A2UI generated page models > snapshots generated content for example filtered-list > filtered-list-model 1`] = `
+{
+  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+  "components": [
+    {
+      "align": "stretch",
+      "children": [
+        "title",
+        "filter",
+        "item_list",
+      ],
+      "component": "Column",
+      "id": "root",
+      "justify": "start",
+    },
+    {
+      "component": "Text",
+      "id": "title",
+      "text": {
+        "path": "/title",
+      },
+      "variant": "h3",
+    },
+    {
+      "component": "ChoicePicker",
+      "id": "filter",
+      "label": "状态",
+      "options": [
+        {
+          "label": "全部",
+          "value": "all",
+        },
+        {
+          "label": "进行中",
+          "value": "open",
+        },
+      ],
+      "value": {
+        "path": "/filter",
+      },
+      "variant": "mutuallyExclusive",
+    },
+    {
+      "children": [
+        "item_one",
+        "item_two",
+      ],
+      "component": "List",
+      "direction": "vertical",
+      "id": "item_list",
+    },
+    {
+      "component": "Text",
+      "id": "item_one",
+      "text": {
+        "path": "/itemOne",
+      },
+      "variant": "body",
+    },
+    {
+      "component": "Text",
+      "id": "item_two",
+      "text": {
+        "path": "/itemTwo",
+      },
+      "variant": "body",
+    },
+  ],
+  "dataModel": {
+    "filter": [
+      "all",
+    ],
+    "itemOne": "整理登录页",
+    "itemTwo": "核对设置项",
+    "title": "任务",
+  },
+  "sendDataModel": true,
+  "surfaceId": "main",
+}
+`;
+
+exports[`A2UI generated page models > snapshots generated content for example login > login-messages 1`] = `
+[
+  {
+    "createSurface": {
+      "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+      "sendDataModel": true,
+      "surfaceId": "main",
+    },
+    "version": "v0.9",
+  },
+  {
+    "updateComponents": {
+      "components": [
+        {
+          "align": "stretch",
+          "children": [
+            "title",
+            "user_field",
+            "password_field",
+            "submit",
+          ],
+          "component": "Column",
+          "id": "root",
+          "justify": "start",
+        },
+        {
+          "component": "Text",
+          "id": "title",
+          "text": {
+            "path": "/title",
+          },
+          "variant": "h3",
+        },
+        {
+          "component": "TextField",
+          "id": "user_field",
+          "label": "账号",
+          "value": {
+            "path": "/username",
+          },
+          "variant": "shortText",
+        },
+        {
+          "component": "TextField",
+          "id": "password_field",
+          "label": "密码",
+          "value": {
+            "path": "/password",
+          },
+          "variant": "obscured",
+        },
+        {
+          "action": {
+            "event": {
+              "name": "login",
+            },
+          },
+          "child": "submit_label",
+          "component": "Button",
+          "id": "submit",
+          "variant": "primary",
+        },
+        {
+          "component": "Text",
+          "id": "submit_label",
+          "text": {
+            "path": "/submitLabel",
+          },
+        },
+      ],
+      "surfaceId": "main",
+    },
+    "version": "v0.9",
+  },
+  {
+    "updateDataModel": {
+      "path": "/",
+      "surfaceId": "main",
+      "value": {
+        "password": "",
+        "submitLabel": "登录",
+        "title": "登录",
+        "username": "",
+      },
+    },
+    "version": "v0.9",
+  },
+]
+`;
+
+exports[`A2UI generated page models > snapshots generated content for example login > login-model 1`] = `
+{
+  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+  "components": [
+    {
+      "align": "stretch",
+      "children": [
+        "title",
+        "user_field",
+        "password_field",
+        "submit",
+      ],
+      "component": "Column",
+      "id": "root",
+      "justify": "start",
+    },
+    {
+      "component": "Text",
+      "id": "title",
+      "text": {
+        "path": "/title",
+      },
+      "variant": "h3",
+    },
+    {
+      "component": "TextField",
+      "id": "user_field",
+      "label": "账号",
+      "value": {
+        "path": "/username",
+      },
+      "variant": "shortText",
+    },
+    {
+      "component": "TextField",
+      "id": "password_field",
+      "label": "密码",
+      "value": {
+        "path": "/password",
+      },
+      "variant": "obscured",
+    },
+    {
+      "action": {
+        "event": {
+          "name": "login",
+        },
+      },
+      "child": "submit_label",
+      "component": "Button",
+      "id": "submit",
+      "variant": "primary",
+    },
+    {
+      "component": "Text",
+      "id": "submit_label",
+      "text": {
+        "path": "/submitLabel",
+      },
+    },
+  ],
+  "dataModel": {
+    "password": "",
+    "submitLabel": "登录",
+    "title": "登录",
+    "username": "",
+  },
+  "sendDataModel": true,
+  "surfaceId": "main",
+}
+`;
+
+exports[`A2UI generated page models > snapshots generated content for example login-otp > login-otp-messages 1`] = `
+[
+  {
+    "createSurface": {
+      "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+      "sendDataModel": true,
+      "surfaceId": "main",
+    },
+    "version": "v0.9",
+  },
+  {
+    "updateComponents": {
+      "components": [
+        {
+          "align": "stretch",
+          "children": [
+            "title",
+            "user_field",
+            "password_field",
+            "otp_field",
+            "submit",
+          ],
+          "component": "Column",
+          "id": "root",
+          "justify": "start",
+        },
+        {
+          "component": "Text",
+          "id": "title",
+          "text": {
+            "path": "/title",
+          },
+          "variant": "h3",
+        },
+        {
+          "component": "TextField",
+          "id": "user_field",
+          "label": "账号",
+          "value": {
+            "path": "/username",
+          },
+          "variant": "shortText",
+        },
+        {
+          "component": "TextField",
+          "id": "password_field",
+          "label": "密码",
+          "value": {
+            "path": "/password",
+          },
+          "variant": "obscured",
+        },
+        {
+          "component": "TextField",
+          "id": "otp_field",
+          "label": "验证码",
+          "value": {
+            "path": "/otp",
+          },
+          "variant": "shortText",
+        },
+        {
+          "action": {
+            "event": {
+              "name": "login",
+            },
+          },
+          "child": "submit_label",
+          "component": "Button",
+          "id": "submit",
+          "variant": "primary",
+        },
+        {
+          "component": "Text",
+          "id": "submit_label",
+          "text": {
+            "path": "/submitLabel",
+          },
+        },
+      ],
+      "surfaceId": "main",
+    },
+    "version": "v0.9",
+  },
+  {
+    "updateDataModel": {
+      "path": "/",
+      "surfaceId": "main",
+      "value": {
+        "otp": "",
+        "password": "",
+        "submitLabel": "登录",
+        "title": "登录",
+        "username": "",
+      },
+    },
+    "version": "v0.9",
+  },
+]
+`;
+
+exports[`A2UI generated page models > snapshots generated content for example login-otp > login-otp-model 1`] = `
+{
+  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+  "components": [
+    {
+      "align": "stretch",
+      "children": [
+        "title",
+        "user_field",
+        "password_field",
+        "otp_field",
+        "submit",
+      ],
+      "component": "Column",
+      "id": "root",
+      "justify": "start",
+    },
+    {
+      "component": "Text",
+      "id": "title",
+      "text": {
+        "path": "/title",
+      },
+      "variant": "h3",
+    },
+    {
+      "component": "TextField",
+      "id": "user_field",
+      "label": "账号",
+      "value": {
+        "path": "/username",
+      },
+      "variant": "shortText",
+    },
+    {
+      "component": "TextField",
+      "id": "password_field",
+      "label": "密码",
+      "value": {
+        "path": "/password",
+      },
+      "variant": "obscured",
+    },
+    {
+      "component": "TextField",
+      "id": "otp_field",
+      "label": "验证码",
+      "value": {
+        "path": "/otp",
+      },
+      "variant": "shortText",
+    },
+    {
+      "action": {
+        "event": {
+          "name": "login",
+        },
+      },
+      "child": "submit_label",
+      "component": "Button",
+      "id": "submit",
+      "variant": "primary",
+    },
+    {
+      "component": "Text",
+      "id": "submit_label",
+      "text": {
+        "path": "/submitLabel",
+      },
+    },
+  ],
+  "dataModel": {
+    "otp": "",
+    "password": "",
+    "submitLabel": "登录",
+    "title": "登录",
+    "username": "",
+  },
+  "sendDataModel": true,
+  "surfaceId": "main",
+}
+`;
+
+exports[`A2UI generated page models > snapshots generated content for example settings > settings-messages 1`] = `
+[
+  {
+    "createSurface": {
+      "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+      "sendDataModel": true,
+      "surfaceId": "main",
+    },
+    "version": "v0.9",
+  },
+  {
+    "updateComponents": {
+      "components": [
+        {
+          "align": "stretch",
+          "children": [
+            "title",
+            "profile_card",
+            "notify_card",
+          ],
+          "component": "Column",
+          "id": "root",
+          "justify": "start",
+        },
+        {
+          "component": "Text",
+          "id": "title",
+          "text": {
+            "path": "/title",
+          },
+          "variant": "h3",
+        },
+        {
+          "child": "profile_body",
+          "component": "Card",
+          "id": "profile_card",
+        },
+        {
+          "align": "stretch",
+          "children": [
+            "display_name",
+            "email_field",
+          ],
+          "component": "Column",
+          "id": "profile_body",
+          "justify": "start",
+        },
+        {
+          "component": "TextField",
+          "id": "display_name",
+          "label": "显示名",
+          "value": {
+            "path": "/displayName",
+          },
+          "variant": "shortText",
+        },
+        {
+          "component": "TextField",
+          "id": "email_field",
+          "label": "邮箱",
+          "value": {
+            "path": "/email",
+          },
+          "variant": "shortText",
+        },
+        {
+          "child": "notify_body",
+          "component": "Card",
+          "id": "notify_card",
+        },
+        {
+          "align": "stretch",
+          "children": [
+            "notify_mail",
+            "notify_push",
+          ],
+          "component": "Column",
+          "id": "notify_body",
+          "justify": "start",
+        },
+        {
+          "component": "CheckBox",
+          "id": "notify_mail",
+          "label": "邮件通知",
+          "value": {
+            "path": "/notifyMail",
+          },
+        },
+        {
+          "component": "CheckBox",
+          "id": "notify_push",
+          "label": "推送通知",
+          "value": {
+            "path": "/notifyPush",
+          },
+        },
+      ],
+      "surfaceId": "main",
+    },
+    "version": "v0.9",
+  },
+  {
+    "updateDataModel": {
+      "path": "/",
+      "surfaceId": "main",
+      "value": {
+        "displayName": "",
+        "email": "",
+        "notifyMail": true,
+        "notifyPush": false,
+        "title": "设置",
+      },
+    },
+    "version": "v0.9",
+  },
+]
+`;
+
+exports[`A2UI generated page models > snapshots generated content for example settings > settings-model 1`] = `
+{
+  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+  "components": [
+    {
+      "align": "stretch",
+      "children": [
+        "title",
+        "profile_card",
+        "notify_card",
+      ],
+      "component": "Column",
+      "id": "root",
+      "justify": "start",
+    },
+    {
+      "component": "Text",
+      "id": "title",
+      "text": {
+        "path": "/title",
+      },
+      "variant": "h3",
+    },
+    {
+      "child": "profile_body",
+      "component": "Card",
+      "id": "profile_card",
+    },
+    {
+      "align": "stretch",
+      "children": [
+        "display_name",
+        "email_field",
+      ],
+      "component": "Column",
+      "id": "profile_body",
+      "justify": "start",
+    },
+    {
+      "component": "TextField",
+      "id": "display_name",
+      "label": "显示名",
+      "value": {
+        "path": "/displayName",
+      },
+      "variant": "shortText",
+    },
+    {
+      "component": "TextField",
+      "id": "email_field",
+      "label": "邮箱",
+      "value": {
+        "path": "/email",
+      },
+      "variant": "shortText",
+    },
+    {
+      "child": "notify_body",
+      "component": "Card",
+      "id": "notify_card",
+    },
+    {
+      "align": "stretch",
+      "children": [
+        "notify_mail",
+        "notify_push",
+      ],
+      "component": "Column",
+      "id": "notify_body",
+      "justify": "start",
+    },
+    {
+      "component": "CheckBox",
+      "id": "notify_mail",
+      "label": "邮件通知",
+      "value": {
+        "path": "/notifyMail",
+      },
+    },
+    {
+      "component": "CheckBox",
+      "id": "notify_push",
+      "label": "推送通知",
+      "value": {
+        "path": "/notifyPush",
+      },
+    },
+  ],
+  "dataModel": {
+    "displayName": "",
+    "email": "",
+    "notifyMail": true,
+    "notifyPush": false,
+    "title": "设置",
+  },
+  "sendDataModel": true,
+  "surfaceId": "main",
+}
+`;
+
+exports[`A2UI generated page models > snapshots the demo surface after generation > demo-messages 1`] = `
+[
+  {
+    "createSurface": {
+      "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+      "sendDataModel": true,
+      "surfaceId": "main",
+    },
+    "version": "v0.9",
+  },
+  {
+    "updateComponents": {
+      "components": [
+        {
+          "align": "stretch",
+          "children": [
+            "title",
+            "filter_card",
+            "status_tabs",
+          ],
+          "component": "Column",
+          "id": "root",
+          "justify": "start",
+        },
+        {
+          "component": "Text",
+          "id": "title",
+          "text": {
+            "path": "/title",
+          },
+          "variant": "h3",
+        },
+        {
+          "child": "filter_body",
+          "component": "Card",
+          "id": "filter_card",
+        },
+        {
+          "align": "stretch",
+          "children": [
+            "filter_row_1",
+            "filter_row_2",
+            "filter_actions",
+          ],
+          "component": "Column",
+          "id": "filter_body",
+          "justify": "start",
+        },
+        {
+          "align": "start",
+          "children": [
+            "task_name",
+            "reward_type",
+            "city",
+            "service_line",
+          ],
+          "component": "Row",
+          "id": "filter_row_1",
+          "justify": "start",
+        },
+        {
+          "component": "TextField",
+          "id": "task_name",
+          "label": "任务名称",
+          "value": {
+            "path": "/taskName",
+          },
+          "variant": "shortText",
+          "weight": 1,
+        },
+        {
+          "component": "ChoicePicker",
+          "id": "reward_type",
+          "label": "奖励类型",
+          "options": [
+            {
+              "label": "全部",
+              "value": "all",
+            },
+            {
+              "label": "满减",
+              "value": "minus",
+            },
+            {
+              "label": "折扣",
+              "value": "discount",
+            },
+          ],
+          "value": {
+            "path": "/rewardType",
+          },
+          "variant": "mutuallyExclusive",
+          "weight": 1,
+        },
+        {
+          "component": "TextField",
+          "id": "city",
+          "label": "城市",
+          "value": {
+            "path": "/city",
+          },
+          "variant": "shortText",
+          "weight": 1,
+        },
+        {
+          "component": "ChoicePicker",
+          "id": "service_line",
+          "label": "服务条线",
+          "options": [
+            {
+              "label": "全部",
+              "value": "all",
+            },
+            {
+              "label": "保洁",
+              "value": "clean",
+            },
+            {
+              "label": "维修",
+              "value": "repair",
+            },
+          ],
+          "value": {
+            "path": "/serviceLine",
+          },
+          "variant": "mutuallyExclusive",
+          "weight": 1,
+        },
+        {
+          "align": "start",
+          "children": [
+            "valid_from",
+            "biz_model",
+          ],
+          "component": "Row",
+          "id": "filter_row_2",
+          "justify": "start",
+        },
+        {
+          "component": "DateTimeInput",
+          "enableDate": true,
+          "enableTime": false,
+          "id": "valid_from",
+          "label": "任务有效时间",
+          "value": {
+            "path": "/validFrom",
+          },
+          "weight": 1,
+        },
+        {
+          "component": "ChoicePicker",
+          "id": "biz_model",
+          "label": "经营模式",
+          "options": [
+            {
+              "label": "全部",
+              "value": "all",
+            },
+            {
+              "label": "自营",
+              "value": "self",
+            },
+            {
+              "label": "加盟",
+              "value": "join",
+            },
+          ],
+          "value": {
+            "path": "/bizModel",
+          },
+          "variant": "mutuallyExclusive",
+          "weight": 1,
+        },
+        {
+          "align": "center",
+          "children": [
+            "reset",
+            "query",
+            "export",
+            "create",
+          ],
+          "component": "Row",
+          "id": "filter_actions",
+          "justify": "end",
+        },
+        {
+          "action": {
+            "event": {
+              "name": "reset",
+            },
+          },
+          "child": "reset_label",
+          "component": "Button",
+          "id": "reset",
+          "variant": "default",
+        },
+        {
+          "component": "Text",
+          "id": "reset_label",
+          "text": {
+            "path": "/resetLabel",
+          },
+          "variant": "body",
+        },
+        {
+          "action": {
+            "event": {
+              "name": "query",
+            },
+          },
+          "child": "query_label",
+          "component": "Button",
+          "id": "query",
+          "variant": "primary",
+        },
+        {
+          "component": "Text",
+          "id": "query_label",
+          "text": {
+            "path": "/queryLabel",
+          },
+          "variant": "body",
+        },
+        {
+          "action": {
+            "event": {
+              "name": "export",
+            },
+          },
+          "child": "export_label",
+          "component": "Button",
+          "id": "export",
+          "variant": "default",
+        },
+        {
+          "component": "Text",
+          "id": "export_label",
+          "text": {
+            "path": "/exportLabel",
+          },
+          "variant": "body",
+        },
+        {
+          "action": {
+            "event": {
+              "name": "create",
+            },
+          },
+          "child": "create_label",
+          "component": "Button",
+          "id": "create",
+          "variant": "primary",
+        },
+        {
+          "component": "Text",
+          "id": "create_label",
+          "text": {
+            "path": "/createLabel",
+          },
+          "variant": "body",
+        },
+        {
+          "component": "Tabs",
+          "id": "status_tabs",
+          "tabs": [
+            {
+              "child": "table_card",
+              "title": "审批中",
+            },
+            {
+              "child": "empty_pending",
+              "title": "待生效",
+            },
+            {
+              "child": "empty_active",
+              "title": "生效中",
+            },
+            {
+              "child": "empty_ended",
+              "title": "已结束",
+            },
+          ],
+        },
+        {
+          "child": "table_block",
+          "component": "Card",
+          "id": "table_card",
+        },
+        {
+          "align": "stretch",
+          "children": [
+            "table_head",
+            "table_rule",
+            "table_list",
+          ],
+          "component": "Column",
+          "id": "table_block",
+          "justify": "start",
+        },
+        {
+          "axis": "horizontal",
+          "component": "Divider",
+          "id": "table_rule",
+        },
+        {
+          "align": "center",
+          "children": [
+            "table_head_c0",
+            "table_head_c1",
+            "table_head_c2",
+            "table_head_c3",
+            "table_head_c4",
+            "table_head_c5",
+          ],
+          "component": "Row",
+          "id": "table_head",
+          "justify": "start",
+        },
+        {
+          "component": "Text",
+          "id": "table_head_c0",
+          "text": {
+            "path": "/colId",
+          },
+          "variant": "caption",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "table_head_c1",
+          "text": {
+            "path": "/colName",
+          },
+          "variant": "caption",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "table_head_c2",
+          "text": {
+            "path": "/colType",
+          },
+          "variant": "caption",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "table_head_c3",
+          "text": {
+            "path": "/colCity",
+          },
+          "variant": "caption",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "table_head_c4",
+          "text": {
+            "path": "/colTime",
+          },
+          "variant": "caption",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "table_head_c5",
+          "text": {
+            "path": "/colOps",
+          },
+          "variant": "caption",
+          "weight": 1,
+        },
+        {
+          "children": [
+            "row_1",
+            "row_2",
+          ],
+          "component": "List",
+          "direction": "vertical",
+          "id": "table_list",
+        },
+        {
+          "align": "center",
+          "children": [
+            "row_1_c0",
+            "row_1_c1",
+            "row_1_c2",
+            "row_1_c3",
+            "row_1_c4",
+            "row_1_ops",
+          ],
+          "component": "Row",
+          "id": "row_1",
+          "justify": "start",
+        },
+        {
+          "component": "Text",
+          "id": "row_1_c0",
+          "text": {
+            "path": "/r1Id",
+          },
+          "variant": "body",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "row_1_c1",
+          "text": {
+            "path": "/r1Name",
+          },
+          "variant": "body",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "row_1_c2",
+          "text": {
+            "path": "/r1Type",
+          },
+          "variant": "body",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "row_1_c3",
+          "text": {
+            "path": "/r1City",
+          },
+          "variant": "body",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "row_1_c4",
+          "text": {
+            "path": "/r1Time",
+          },
+          "variant": "body",
+          "weight": 1,
+        },
+        {
+          "align": "center",
+          "children": [
+            "r1_view",
+            "r1_copy",
+            "r1_log_modal",
+          ],
+          "component": "Row",
+          "id": "row_1_ops",
+          "justify": "start",
+          "weight": 1,
+        },
+        {
+          "action": {
+            "event": {
+              "name": "view",
+            },
+          },
+          "child": "r1_view_label",
+          "component": "Button",
+          "id": "r1_view",
+          "variant": "borderless",
+        },
+        {
+          "component": "Text",
+          "id": "r1_view_label",
+          "text": {
+            "path": "/viewLabel",
+          },
+          "variant": "body",
+        },
+        {
+          "action": {
+            "event": {
+              "name": "copy",
+            },
+          },
+          "child": "r1_copy_label",
+          "component": "Button",
+          "id": "r1_copy",
+          "variant": "borderless",
+        },
+        {
+          "component": "Text",
+          "id": "r1_copy_label",
+          "text": {
+            "path": "/copyLabel",
+          },
+          "variant": "body",
+        },
+        {
+          "component": "Modal",
+          "content": "log_body",
+          "id": "r1_log_modal",
+          "trigger": "r1_log",
+        },
+        {
+          "action": {
+            "event": {
+              "name": "openLog",
+            },
+          },
+          "child": "r1_log_label",
+          "component": "Button",
+          "id": "r1_log",
+          "variant": "borderless",
+        },
+        {
+          "component": "Text",
+          "id": "r1_log_label",
+          "text": {
+            "path": "/logLabel",
+          },
+          "variant": "body",
+        },
+        {
+          "align": "center",
+          "children": [
+            "row_2_c0",
+            "row_2_c1",
+            "row_2_c2",
+            "row_2_c3",
+            "row_2_c4",
+            "row_2_ops",
+          ],
+          "component": "Row",
+          "id": "row_2",
+          "justify": "start",
+        },
+        {
+          "component": "Text",
+          "id": "row_2_c0",
+          "text": {
+            "path": "/r2Id",
+          },
+          "variant": "body",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "row_2_c1",
+          "text": {
+            "path": "/r2Name",
+          },
+          "variant": "body",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "row_2_c2",
+          "text": {
+            "path": "/r2Type",
+          },
+          "variant": "body",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "row_2_c3",
+          "text": {
+            "path": "/r2City",
+          },
+          "variant": "body",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "row_2_c4",
+          "text": {
+            "path": "/r2Time",
+          },
+          "variant": "body",
+          "weight": 1,
+        },
+        {
+          "align": "center",
+          "children": [
+            "r2_view",
+            "r2_copy",
+            "r2_log_modal",
+          ],
+          "component": "Row",
+          "id": "row_2_ops",
+          "justify": "start",
+          "weight": 1,
+        },
+        {
+          "action": {
+            "event": {
+              "name": "view",
+            },
+          },
+          "child": "r2_view_label",
+          "component": "Button",
+          "id": "r2_view",
+          "variant": "borderless",
+        },
+        {
+          "component": "Text",
+          "id": "r2_view_label",
+          "text": {
+            "path": "/viewLabel",
+          },
+          "variant": "body",
+        },
+        {
+          "action": {
+            "event": {
+              "name": "copy",
+            },
+          },
+          "child": "r2_copy_label",
+          "component": "Button",
+          "id": "r2_copy",
+          "variant": "borderless",
+        },
+        {
+          "component": "Text",
+          "id": "r2_copy_label",
+          "text": {
+            "path": "/copyLabel",
+          },
+          "variant": "body",
+        },
+        {
+          "component": "Modal",
+          "content": "log_body",
+          "id": "r2_log_modal",
+          "trigger": "r2_log",
+        },
+        {
+          "action": {
+            "event": {
+              "name": "openLog",
+            },
+          },
+          "child": "r2_log_label",
+          "component": "Button",
+          "id": "r2_log",
+          "variant": "borderless",
+        },
+        {
+          "component": "Text",
+          "id": "r2_log_label",
+          "text": {
+            "path": "/logLabel",
+          },
+          "variant": "body",
+        },
+        {
+          "component": "Text",
+          "id": "empty_pending",
+          "text": {
+            "path": "/emptyPending",
+          },
+          "variant": "body",
+        },
+        {
+          "component": "Text",
+          "id": "empty_active",
+          "text": {
+            "path": "/emptyActive",
+          },
+          "variant": "body",
+        },
+        {
+          "component": "Text",
+          "id": "empty_ended",
+          "text": {
+            "path": "/emptyEnded",
+          },
+          "variant": "body",
+        },
+        {
+          "align": "stretch",
+          "children": [
+            "log_title",
+            "log_head",
+            "log_list",
+          ],
+          "component": "Column",
+          "id": "log_body",
+          "justify": "start",
+        },
+        {
+          "component": "Text",
+          "id": "log_title",
+          "text": {
+            "path": "/logTitle",
+          },
+          "variant": "h4",
+        },
+        {
+          "align": "center",
+          "children": [
+            "log_head_c0",
+            "log_head_c1",
+            "log_head_c2",
+            "log_head_c3",
+            "log_head_c4",
+          ],
+          "component": "Row",
+          "id": "log_head",
+          "justify": "start",
+        },
+        {
+          "component": "Text",
+          "id": "log_head_c0",
+          "text": {
+            "path": "/logColId",
+          },
+          "variant": "caption",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "log_head_c1",
+          "text": {
+            "path": "/logColAccount",
+          },
+          "variant": "caption",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "log_head_c2",
+          "text": {
+            "path": "/logColContent",
+          },
+          "variant": "caption",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "log_head_c3",
+          "text": {
+            "path": "/logColTime",
+          },
+          "variant": "caption",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "log_head_c4",
+          "text": {
+            "path": "/logColIp",
+          },
+          "variant": "caption",
+          "weight": 1,
+        },
+        {
+          "children": [
+            "log_1",
+            "log_2",
+          ],
+          "component": "List",
+          "direction": "vertical",
+          "id": "log_list",
+        },
+        {
+          "align": "center",
+          "children": [
+            "log_1_c0",
+            "log_1_c1",
+            "log_1_c2",
+            "log_1_c3",
+            "log_1_c4",
+          ],
+          "component": "Row",
+          "id": "log_1",
+          "justify": "start",
+        },
+        {
+          "component": "Text",
+          "id": "log_1_c0",
+          "text": {
+            "path": "/log1Id",
+          },
+          "variant": "body",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "log_1_c1",
+          "text": {
+            "path": "/log1Account",
+          },
+          "variant": "body",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "log_1_c2",
+          "text": {
+            "path": "/log1Content",
+          },
+          "variant": "body",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "log_1_c3",
+          "text": {
+            "path": "/log1Time",
+          },
+          "variant": "body",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "log_1_c4",
+          "text": {
+            "path": "/log1Ip",
+          },
+          "variant": "body",
+          "weight": 1,
+        },
+        {
+          "align": "center",
+          "children": [
+            "log_2_c0",
+            "log_2_c1",
+            "log_2_c2",
+            "log_2_c3",
+            "log_2_c4",
+          ],
+          "component": "Row",
+          "id": "log_2",
+          "justify": "start",
+        },
+        {
+          "component": "Text",
+          "id": "log_2_c0",
+          "text": {
+            "path": "/log2Id",
+          },
+          "variant": "body",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "log_2_c1",
+          "text": {
+            "path": "/log2Account",
+          },
+          "variant": "body",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "log_2_c2",
+          "text": {
+            "path": "/log2Content",
+          },
+          "variant": "body",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "log_2_c3",
+          "text": {
+            "path": "/log2Time",
+          },
+          "variant": "body",
+          "weight": 1,
+        },
+        {
+          "component": "Text",
+          "id": "log_2_c4",
+          "text": {
+            "path": "/log2Ip",
+          },
+          "variant": "body",
+          "weight": 1,
+        },
+      ],
+      "surfaceId": "main",
+    },
+    "version": "v0.9",
+  },
+  {
+    "updateDataModel": {
+      "path": "/",
+      "surfaceId": "main",
+      "value": {
+        "bizModel": [
+          "all",
+        ],
+        "city": "",
+        "colCity": "城市",
+        "colId": "任务编号",
+        "colName": "任务名称",
+        "colOps": "操作",
+        "colTime": "任务有效时间",
+        "colType": "奖励类型",
+        "copyLabel": "复制",
+        "createLabel": "新建任务",
+        "emptyActive": "暂无生效中任务。",
+        "emptyEnded": "暂无已结束任务。",
+        "emptyPending": "暂无待生效任务。",
+        "exportLabel": "导出",
+        "log1Account": "zhangkexing1",
+        "log1Content": "新建-提交审批（字段: 对内任务名称, 原值: null, 新值: 春季保洁激励）",
+        "log1Id": "7024612",
+        "log1Ip": "10.253.30.28",
+        "log1Time": "2026-09-02 15:56:25",
+        "log2Account": "heyongqi10",
+        "log2Content": "编辑（字段: 任务有效时间, 原值: 空, 新值: 2026-03-01 ~ 2026-06-30）",
+        "log2Id": "7024613",
+        "log2Ip": "10.253.42.247",
+        "log2Time": "2026-09-02 16:08:11",
+        "logColAccount": "操作账号",
+        "logColContent": "操作内容",
+        "logColId": "编号",
+        "logColIp": "IP",
+        "logColTime": "操作时间",
+        "logLabel": "操作日志",
+        "logTitle": "操作日志",
+        "queryLabel": "查询",
+        "r1City": "北京",
+        "r1Id": "T-117",
+        "r1Name": "春季保洁激励",
+        "r1Time": "2026-03-01 ~ 2026-06-30",
+        "r1Type": "满减",
+        "r2City": "上海",
+        "r2Id": "T-118",
+        "r2Name": "维修好评奖",
+        "r2Time": "2026-04-01 ~ 2026-09-30",
+        "r2Type": "折扣",
+        "resetLabel": "重置",
+        "rewardType": [
+          "all",
+        ],
+        "serviceLine": [
+          "all",
+        ],
+        "taskName": "",
+        "title": "任务管理",
+        "validFrom": "",
+        "viewLabel": "查看",
+      },
+    },
+    "version": "v0.9",
+  },
+]
+`;
+
+exports[`A2UI generated page models > snapshots the demo surface after generation > demo-model 1`] = `
+{
+  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
+  "components": [
+    {
+      "align": "stretch",
+      "children": [
+        "title",
+        "filter_card",
+        "status_tabs",
+      ],
+      "component": "Column",
+      "id": "root",
+      "justify": "start",
+    },
+    {
+      "component": "Text",
+      "id": "title",
+      "text": {
+        "path": "/title",
+      },
+      "variant": "h3",
+    },
+    {
+      "child": "filter_body",
+      "component": "Card",
+      "id": "filter_card",
+    },
+    {
+      "align": "stretch",
+      "children": [
+        "filter_row_1",
+        "filter_row_2",
+        "filter_actions",
+      ],
+      "component": "Column",
+      "id": "filter_body",
+      "justify": "start",
+    },
+    {
+      "align": "start",
+      "children": [
+        "task_name",
+        "reward_type",
+        "city",
+        "service_line",
+      ],
+      "component": "Row",
+      "id": "filter_row_1",
+      "justify": "start",
+    },
+    {
+      "component": "TextField",
+      "id": "task_name",
+      "label": "任务名称",
+      "value": {
+        "path": "/taskName",
+      },
+      "variant": "shortText",
+      "weight": 1,
+    },
+    {
+      "component": "ChoicePicker",
+      "id": "reward_type",
+      "label": "奖励类型",
+      "options": [
+        {
+          "label": "全部",
+          "value": "all",
+        },
+        {
+          "label": "满减",
+          "value": "minus",
+        },
+        {
+          "label": "折扣",
+          "value": "discount",
+        },
+      ],
+      "value": {
+        "path": "/rewardType",
+      },
+      "variant": "mutuallyExclusive",
+      "weight": 1,
+    },
+    {
+      "component": "TextField",
+      "id": "city",
+      "label": "城市",
+      "value": {
+        "path": "/city",
+      },
+      "variant": "shortText",
+      "weight": 1,
+    },
+    {
+      "component": "ChoicePicker",
+      "id": "service_line",
+      "label": "服务条线",
+      "options": [
+        {
+          "label": "全部",
+          "value": "all",
+        },
+        {
+          "label": "保洁",
+          "value": "clean",
+        },
+        {
+          "label": "维修",
+          "value": "repair",
+        },
+      ],
+      "value": {
+        "path": "/serviceLine",
+      },
+      "variant": "mutuallyExclusive",
+      "weight": 1,
+    },
+    {
+      "align": "start",
+      "children": [
+        "valid_from",
+        "biz_model",
+      ],
+      "component": "Row",
+      "id": "filter_row_2",
+      "justify": "start",
+    },
+    {
+      "component": "DateTimeInput",
+      "enableDate": true,
+      "enableTime": false,
+      "id": "valid_from",
+      "label": "任务有效时间",
+      "value": {
+        "path": "/validFrom",
+      },
+      "weight": 1,
+    },
+    {
+      "component": "ChoicePicker",
+      "id": "biz_model",
+      "label": "经营模式",
+      "options": [
+        {
+          "label": "全部",
+          "value": "all",
+        },
+        {
+          "label": "自营",
+          "value": "self",
+        },
+        {
+          "label": "加盟",
+          "value": "join",
+        },
+      ],
+      "value": {
+        "path": "/bizModel",
+      },
+      "variant": "mutuallyExclusive",
+      "weight": 1,
+    },
+    {
+      "align": "center",
+      "children": [
+        "reset",
+        "query",
+        "export",
+        "create",
+      ],
+      "component": "Row",
+      "id": "filter_actions",
+      "justify": "end",
+    },
+    {
+      "action": {
+        "event": {
+          "name": "reset",
+        },
+      },
+      "child": "reset_label",
+      "component": "Button",
+      "id": "reset",
+      "variant": "default",
+    },
+    {
+      "component": "Text",
+      "id": "reset_label",
+      "text": {
+        "path": "/resetLabel",
+      },
+      "variant": "body",
+    },
+    {
+      "action": {
+        "event": {
+          "name": "query",
+        },
+      },
+      "child": "query_label",
+      "component": "Button",
+      "id": "query",
+      "variant": "primary",
+    },
+    {
+      "component": "Text",
+      "id": "query_label",
+      "text": {
+        "path": "/queryLabel",
+      },
+      "variant": "body",
+    },
+    {
+      "action": {
+        "event": {
+          "name": "export",
+        },
+      },
+      "child": "export_label",
+      "component": "Button",
+      "id": "export",
+      "variant": "default",
+    },
+    {
+      "component": "Text",
+      "id": "export_label",
+      "text": {
+        "path": "/exportLabel",
+      },
+      "variant": "body",
+    },
+    {
+      "action": {
+        "event": {
+          "name": "create",
+        },
+      },
+      "child": "create_label",
+      "component": "Button",
+      "id": "create",
+      "variant": "primary",
+    },
+    {
+      "component": "Text",
+      "id": "create_label",
+      "text": {
+        "path": "/createLabel",
+      },
+      "variant": "body",
+    },
+    {
+      "component": "Tabs",
+      "id": "status_tabs",
+      "tabs": [
+        {
+          "child": "table_card",
+          "title": "审批中",
+        },
+        {
+          "child": "empty_pending",
+          "title": "待生效",
+        },
+        {
+          "child": "empty_active",
+          "title": "生效中",
+        },
+        {
+          "child": "empty_ended",
+          "title": "已结束",
+        },
+      ],
+    },
+    {
+      "child": "table_block",
+      "component": "Card",
+      "id": "table_card",
+    },
+    {
+      "align": "stretch",
+      "children": [
+        "table_head",
+        "table_rule",
+        "table_list",
+      ],
+      "component": "Column",
+      "id": "table_block",
+      "justify": "start",
+    },
+    {
+      "axis": "horizontal",
+      "component": "Divider",
+      "id": "table_rule",
+    },
+    {
+      "align": "center",
+      "children": [
+        "table_head_c0",
+        "table_head_c1",
+        "table_head_c2",
+        "table_head_c3",
+        "table_head_c4",
+        "table_head_c5",
+      ],
+      "component": "Row",
+      "id": "table_head",
+      "justify": "start",
+    },
+    {
+      "component": "Text",
+      "id": "table_head_c0",
+      "text": {
+        "path": "/colId",
+      },
+      "variant": "caption",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "table_head_c1",
+      "text": {
+        "path": "/colName",
+      },
+      "variant": "caption",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "table_head_c2",
+      "text": {
+        "path": "/colType",
+      },
+      "variant": "caption",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "table_head_c3",
+      "text": {
+        "path": "/colCity",
+      },
+      "variant": "caption",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "table_head_c4",
+      "text": {
+        "path": "/colTime",
+      },
+      "variant": "caption",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "table_head_c5",
+      "text": {
+        "path": "/colOps",
+      },
+      "variant": "caption",
+      "weight": 1,
+    },
+    {
+      "children": [
+        "row_1",
+        "row_2",
+      ],
+      "component": "List",
+      "direction": "vertical",
+      "id": "table_list",
+    },
+    {
+      "align": "center",
+      "children": [
+        "row_1_c0",
+        "row_1_c1",
+        "row_1_c2",
+        "row_1_c3",
+        "row_1_c4",
+        "row_1_ops",
+      ],
+      "component": "Row",
+      "id": "row_1",
+      "justify": "start",
+    },
+    {
+      "component": "Text",
+      "id": "row_1_c0",
+      "text": {
+        "path": "/r1Id",
+      },
+      "variant": "body",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "row_1_c1",
+      "text": {
+        "path": "/r1Name",
+      },
+      "variant": "body",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "row_1_c2",
+      "text": {
+        "path": "/r1Type",
+      },
+      "variant": "body",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "row_1_c3",
+      "text": {
+        "path": "/r1City",
+      },
+      "variant": "body",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "row_1_c4",
+      "text": {
+        "path": "/r1Time",
+      },
+      "variant": "body",
+      "weight": 1,
+    },
+    {
+      "align": "center",
+      "children": [
+        "r1_view",
+        "r1_copy",
+        "r1_log_modal",
+      ],
+      "component": "Row",
+      "id": "row_1_ops",
+      "justify": "start",
+      "weight": 1,
+    },
+    {
+      "action": {
+        "event": {
+          "name": "view",
+        },
+      },
+      "child": "r1_view_label",
+      "component": "Button",
+      "id": "r1_view",
+      "variant": "borderless",
+    },
+    {
+      "component": "Text",
+      "id": "r1_view_label",
+      "text": {
+        "path": "/viewLabel",
+      },
+      "variant": "body",
+    },
+    {
+      "action": {
+        "event": {
+          "name": "copy",
+        },
+      },
+      "child": "r1_copy_label",
+      "component": "Button",
+      "id": "r1_copy",
+      "variant": "borderless",
+    },
+    {
+      "component": "Text",
+      "id": "r1_copy_label",
+      "text": {
+        "path": "/copyLabel",
+      },
+      "variant": "body",
+    },
+    {
+      "component": "Modal",
+      "content": "log_body",
+      "id": "r1_log_modal",
+      "trigger": "r1_log",
+    },
+    {
+      "action": {
+        "event": {
+          "name": "openLog",
+        },
+      },
+      "child": "r1_log_label",
+      "component": "Button",
+      "id": "r1_log",
+      "variant": "borderless",
+    },
+    {
+      "component": "Text",
+      "id": "r1_log_label",
+      "text": {
+        "path": "/logLabel",
+      },
+      "variant": "body",
+    },
+    {
+      "align": "center",
+      "children": [
+        "row_2_c0",
+        "row_2_c1",
+        "row_2_c2",
+        "row_2_c3",
+        "row_2_c4",
+        "row_2_ops",
+      ],
+      "component": "Row",
+      "id": "row_2",
+      "justify": "start",
+    },
+    {
+      "component": "Text",
+      "id": "row_2_c0",
+      "text": {
+        "path": "/r2Id",
+      },
+      "variant": "body",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "row_2_c1",
+      "text": {
+        "path": "/r2Name",
+      },
+      "variant": "body",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "row_2_c2",
+      "text": {
+        "path": "/r2Type",
+      },
+      "variant": "body",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "row_2_c3",
+      "text": {
+        "path": "/r2City",
+      },
+      "variant": "body",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "row_2_c4",
+      "text": {
+        "path": "/r2Time",
+      },
+      "variant": "body",
+      "weight": 1,
+    },
+    {
+      "align": "center",
+      "children": [
+        "r2_view",
+        "r2_copy",
+        "r2_log_modal",
+      ],
+      "component": "Row",
+      "id": "row_2_ops",
+      "justify": "start",
+      "weight": 1,
+    },
+    {
+      "action": {
+        "event": {
+          "name": "view",
+        },
+      },
+      "child": "r2_view_label",
+      "component": "Button",
+      "id": "r2_view",
+      "variant": "borderless",
+    },
+    {
+      "component": "Text",
+      "id": "r2_view_label",
+      "text": {
+        "path": "/viewLabel",
+      },
+      "variant": "body",
+    },
+    {
+      "action": {
+        "event": {
+          "name": "copy",
+        },
+      },
+      "child": "r2_copy_label",
+      "component": "Button",
+      "id": "r2_copy",
+      "variant": "borderless",
+    },
+    {
+      "component": "Text",
+      "id": "r2_copy_label",
+      "text": {
+        "path": "/copyLabel",
+      },
+      "variant": "body",
+    },
+    {
+      "component": "Modal",
+      "content": "log_body",
+      "id": "r2_log_modal",
+      "trigger": "r2_log",
+    },
+    {
+      "action": {
+        "event": {
+          "name": "openLog",
+        },
+      },
+      "child": "r2_log_label",
+      "component": "Button",
+      "id": "r2_log",
+      "variant": "borderless",
+    },
+    {
+      "component": "Text",
+      "id": "r2_log_label",
+      "text": {
+        "path": "/logLabel",
+      },
+      "variant": "body",
+    },
+    {
+      "component": "Text",
+      "id": "empty_pending",
+      "text": {
+        "path": "/emptyPending",
+      },
+      "variant": "body",
+    },
+    {
+      "component": "Text",
+      "id": "empty_active",
+      "text": {
+        "path": "/emptyActive",
+      },
+      "variant": "body",
+    },
+    {
+      "component": "Text",
+      "id": "empty_ended",
+      "text": {
+        "path": "/emptyEnded",
+      },
+      "variant": "body",
+    },
+    {
+      "align": "stretch",
+      "children": [
+        "log_title",
+        "log_head",
+        "log_list",
+      ],
+      "component": "Column",
+      "id": "log_body",
+      "justify": "start",
+    },
+    {
+      "component": "Text",
+      "id": "log_title",
+      "text": {
+        "path": "/logTitle",
+      },
+      "variant": "h4",
+    },
+    {
+      "align": "center",
+      "children": [
+        "log_head_c0",
+        "log_head_c1",
+        "log_head_c2",
+        "log_head_c3",
+        "log_head_c4",
+      ],
+      "component": "Row",
+      "id": "log_head",
+      "justify": "start",
+    },
+    {
+      "component": "Text",
+      "id": "log_head_c0",
+      "text": {
+        "path": "/logColId",
+      },
+      "variant": "caption",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "log_head_c1",
+      "text": {
+        "path": "/logColAccount",
+      },
+      "variant": "caption",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "log_head_c2",
+      "text": {
+        "path": "/logColContent",
+      },
+      "variant": "caption",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "log_head_c3",
+      "text": {
+        "path": "/logColTime",
+      },
+      "variant": "caption",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "log_head_c4",
+      "text": {
+        "path": "/logColIp",
+      },
+      "variant": "caption",
+      "weight": 1,
+    },
+    {
+      "children": [
+        "log_1",
+        "log_2",
+      ],
+      "component": "List",
+      "direction": "vertical",
+      "id": "log_list",
+    },
+    {
+      "align": "center",
+      "children": [
+        "log_1_c0",
+        "log_1_c1",
+        "log_1_c2",
+        "log_1_c3",
+        "log_1_c4",
+      ],
+      "component": "Row",
+      "id": "log_1",
+      "justify": "start",
+    },
+    {
+      "component": "Text",
+      "id": "log_1_c0",
+      "text": {
+        "path": "/log1Id",
+      },
+      "variant": "body",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "log_1_c1",
+      "text": {
+        "path": "/log1Account",
+      },
+      "variant": "body",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "log_1_c2",
+      "text": {
+        "path": "/log1Content",
+      },
+      "variant": "body",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "log_1_c3",
+      "text": {
+        "path": "/log1Time",
+      },
+      "variant": "body",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "log_1_c4",
+      "text": {
+        "path": "/log1Ip",
+      },
+      "variant": "body",
+      "weight": 1,
+    },
+    {
+      "align": "center",
+      "children": [
+        "log_2_c0",
+        "log_2_c1",
+        "log_2_c2",
+        "log_2_c3",
+        "log_2_c4",
+      ],
+      "component": "Row",
+      "id": "log_2",
+      "justify": "start",
+    },
+    {
+      "component": "Text",
+      "id": "log_2_c0",
+      "text": {
+        "path": "/log2Id",
+      },
+      "variant": "body",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "log_2_c1",
+      "text": {
+        "path": "/log2Account",
+      },
+      "variant": "body",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "log_2_c2",
+      "text": {
+        "path": "/log2Content",
+      },
+      "variant": "body",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "log_2_c3",
+      "text": {
+        "path": "/log2Time",
+      },
+      "variant": "body",
+      "weight": 1,
+    },
+    {
+      "component": "Text",
+      "id": "log_2_c4",
+      "text": {
+        "path": "/log2Ip",
+      },
+      "variant": "body",
+      "weight": 1,
+    },
+  ],
+  "dataModel": {
+    "bizModel": [
+      "all",
+    ],
+    "city": "",
+    "colCity": "城市",
+    "colId": "任务编号",
+    "colName": "任务名称",
+    "colOps": "操作",
+    "colTime": "任务有效时间",
+    "colType": "奖励类型",
+    "copyLabel": "复制",
+    "createLabel": "新建任务",
+    "emptyActive": "暂无生效中任务。",
+    "emptyEnded": "暂无已结束任务。",
+    "emptyPending": "暂无待生效任务。",
+    "exportLabel": "导出",
+    "log1Account": "zhangkexing1",
+    "log1Content": "新建-提交审批（字段: 对内任务名称, 原值: null, 新值: 春季保洁激励）",
+    "log1Id": "7024612",
+    "log1Ip": "10.253.30.28",
+    "log1Time": "2026-09-02 15:56:25",
+    "log2Account": "heyongqi10",
+    "log2Content": "编辑（字段: 任务有效时间, 原值: 空, 新值: 2026-03-01 ~ 2026-06-30）",
+    "log2Id": "7024613",
+    "log2Ip": "10.253.42.247",
+    "log2Time": "2026-09-02 16:08:11",
+    "logColAccount": "操作账号",
+    "logColContent": "操作内容",
+    "logColId": "编号",
+    "logColIp": "IP",
+    "logColTime": "操作时间",
+    "logLabel": "操作日志",
+    "logTitle": "操作日志",
+    "queryLabel": "查询",
+    "r1City": "北京",
+    "r1Id": "T-117",
+    "r1Name": "春季保洁激励",
+    "r1Time": "2026-03-01 ~ 2026-06-30",
+    "r1Type": "满减",
+    "r2City": "上海",
+    "r2Id": "T-118",
+    "r2Name": "维修好评奖",
+    "r2Time": "2026-04-01 ~ 2026-09-30",
+    "r2Type": "折扣",
+    "resetLabel": "重置",
+    "rewardType": [
+      "all",
+    ],
+    "serviceLine": [
+      "all",
+    ],
+    "taskName": "",
+    "title": "任务管理",
+    "validFrom": "",
+    "viewLabel": "查看",
+  },
+  "sendDataModel": true,
+  "surfaceId": "main",
+}
+`;

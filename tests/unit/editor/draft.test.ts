@@ -1,8 +1,8 @@
+import { applyDocument } from '@src/editor/applyDocument';
+import login from '@src/editor/fixtures/login.json';
+import { emptySnapshot, isCurrentPage, parseDraft } from '@src/editor/storage';
+import { BASIC_CATALOG_ID } from '@src/editor/types';
 import { describe, expect, it } from 'vitest';
-import { applyDocument } from './applyDocument';
-import login from './fixtures/login.json';
-import { emptySnapshot, isCurrentPage, parseDraft } from './storage';
-import { BASIC_CATALOG_ID } from './types';
 
 function assertEmptyDraft(snapshot: ReturnType<typeof parseDraft>) {
   expect(snapshot.components).toHaveLength(0);
@@ -43,6 +43,12 @@ describe('D draft', () => {
       return;
     }
     const restored = parseDraft(JSON.stringify(applied.snapshot));
+    expect(isCurrentPage(restored)).toBe(true);
+    expect((restored.dataModel as { title?: string }).title).toBe('登录');
+  });
+
+  it('message-array drafts fold into a page', () => {
+    const restored = parseDraft(JSON.stringify(login));
     expect(isCurrentPage(restored)).toBe(true);
     expect((restored.dataModel as { title?: string }).title).toBe('登录');
   });

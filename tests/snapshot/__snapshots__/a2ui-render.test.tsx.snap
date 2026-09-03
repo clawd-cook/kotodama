@@ -1,0 +1,376 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`A2UI rendered generated content > renders catalog AudioPlayer generated content > AudioPlayer-text 1`] = `
+{
+  "media": [
+    {
+      "alt": null,
+      "role": null,
+      "src": "https://example.com/clip.mp3",
+      "tag": "audio",
+    },
+  ],
+  "tags": [
+    "audio",
+    "div",
+  ],
+  "text": "",
+}
+`;
+
+exports[`A2UI rendered generated content > renders catalog Button generated content > Button-text 1`] = `
+{
+  "media": [],
+  "tags": [
+    "button",
+    "span",
+  ],
+  "text": "确定",
+}
+`;
+
+exports[`A2UI rendered generated content > renders catalog Card generated content > Card-text 1`] = `
+{
+  "media": [],
+  "tags": [
+    "div",
+    "span",
+  ],
+  "text": "卡片内容",
+}
+`;
+
+exports[`A2UI rendered generated content > renders catalog CheckBox generated content > CheckBox-text 1`] = `
+{
+  "media": [],
+  "tags": [
+    "div",
+    "input",
+    "label",
+    "span",
+  ],
+  "text": "开启",
+}
+`;
+
+exports[`A2UI rendered generated content > renders catalog ChoicePicker generated content > ChoicePicker-text 1`] = `
+{
+  "media": [
+    {
+      "alt": null,
+      "role": null,
+      "src": null,
+      "tag": "svg",
+    },
+  ],
+  "tags": [
+    "div",
+    "input",
+    "label",
+    "path",
+    "span",
+    "svg",
+  ],
+  "text": "状态全部",
+}
+`;
+
+exports[`A2UI rendered generated content > renders catalog Column generated content > Column-text 1`] = `
+{
+  "media": [],
+  "tags": [
+    "div",
+    "span",
+  ],
+  "text": "从上到下排",
+}
+`;
+
+exports[`A2UI rendered generated content > renders catalog DateTimeInput generated content > DateTimeInput-text 1`] = `
+{
+  "media": [
+    {
+      "alt": null,
+      "role": null,
+      "src": null,
+      "tag": "svg",
+    },
+  ],
+  "tags": [
+    "div",
+    "input",
+    "label",
+    "path",
+    "span",
+    "svg",
+  ],
+  "text": "日期",
+}
+`;
+
+exports[`A2UI rendered generated content > renders catalog Divider generated content > Divider-text 1`] = `
+{
+  "media": [],
+  "tags": [
+    "div",
+  ],
+  "text": "",
+}
+`;
+
+exports[`A2UI rendered generated content > renders catalog Icon generated content > Icon-text 1`] = `
+{
+  "media": [
+    {
+      "alt": null,
+      "role": null,
+      "src": null,
+      "tag": "svg",
+    },
+  ],
+  "tags": [
+    "path",
+    "span",
+    "svg",
+  ],
+  "text": "",
+}
+`;
+
+exports[`A2UI rendered generated content > renders catalog Image generated content > Image-text 1`] = `
+{
+  "media": [
+    {
+      "alt": "",
+      "role": null,
+      "src": "https://example.com/image.png",
+      "tag": "img",
+    },
+  ],
+  "tags": [
+    "div",
+    "img",
+  ],
+  "text": "",
+}
+`;
+
+exports[`A2UI rendered generated content > renders catalog List generated content > List-text 1`] = `
+{
+  "media": [],
+  "tags": [
+    "div",
+    "li",
+    "span",
+    "ul",
+  ],
+  "text": "一项",
+}
+`;
+
+exports[`A2UI rendered generated content > renders catalog Modal generated content > Modal-text 1`] = `
+{
+  "media": [],
+  "tags": [
+    "button",
+    "span",
+  ],
+  "text": "打开",
+}
+`;
+
+exports[`A2UI rendered generated content > renders catalog Row generated content > Row-text 1`] = `
+{
+  "media": [],
+  "tags": [
+    "div",
+    "span",
+  ],
+  "text": "从左到右排",
+}
+`;
+
+exports[`A2UI rendered generated content > renders catalog Slider generated content > Slider-text 1`] = `
+{
+  "media": [],
+  "tags": [
+    "div",
+    "label",
+  ],
+  "text": "数量",
+}
+`;
+
+exports[`A2UI rendered generated content > renders catalog Tabs generated content > Tabs-text 1`] = `
+{
+  "media": [
+    {
+      "alt": null,
+      "role": null,
+      "src": null,
+      "tag": "svg",
+    },
+  ],
+  "tags": [
+    "button",
+    "div",
+    "path",
+    "span",
+    "svg",
+  ],
+  "text": "一这一组",
+}
+`;
+
+exports[`A2UI rendered generated content > renders catalog Text generated content > Text-text 1`] = `
+{
+  "media": [],
+  "tags": [
+    "span",
+  ],
+  "text": "一段文字",
+}
+`;
+
+exports[`A2UI rendered generated content > renders catalog TextField generated content > TextField-text 1`] = `
+{
+  "media": [],
+  "tags": [
+    "div",
+    "input",
+    "label",
+  ],
+  "text": "名称",
+}
+`;
+
+exports[`A2UI rendered generated content > renders catalog Video generated content > Video-text 1`] = `
+{
+  "media": [
+    {
+      "alt": null,
+      "role": null,
+      "src": "https://example.com/clip.mp4",
+      "tag": "video",
+    },
+  ],
+  "tags": [
+    "div",
+    "video",
+  ],
+  "text": "",
+}
+`;
+
+exports[`A2UI rendered generated content > renders demo copy onto the surface > demo-text 1`] = `
+{
+  "media": [
+    {
+      "alt": null,
+      "role": null,
+      "src": null,
+      "tag": "svg",
+    },
+    {
+      "alt": null,
+      "role": null,
+      "src": null,
+      "tag": "svg",
+    },
+    {
+      "alt": null,
+      "role": null,
+      "src": null,
+      "tag": "svg",
+    },
+    {
+      "alt": null,
+      "role": null,
+      "src": null,
+      "tag": "svg",
+    },
+    {
+      "alt": null,
+      "role": null,
+      "src": null,
+      "tag": "svg",
+    },
+  ],
+  "tags": [
+    "button",
+    "div",
+    "h3",
+    "input",
+    "label",
+    "li",
+    "path",
+    "span",
+    "svg",
+    "ul",
+  ],
+  "text": "任务管理任务名称奖励类型全部城市服务条线全部任务有效时间经营模式全部重置查询导出新建任务审批中待生效生效中已结束任务编号任务名称奖励类型城市任务有效时间操作T-117春季保洁激励满减北京2026-03-01 ~ 2026-06-30查看复制操作日志T-118维修好评奖折扣上海2026-04-01 ~ 2026-09-30查看复制操作日志",
+}
+`;
+
+exports[`A2UI rendered generated content > renders the filtered-list example > filtered-list-text 1`] = `
+{
+  "media": [
+    {
+      "alt": null,
+      "role": null,
+      "src": null,
+      "tag": "svg",
+    },
+  ],
+  "tags": [
+    "div",
+    "h3",
+    "input",
+    "label",
+    "li",
+    "path",
+    "span",
+    "svg",
+    "ul",
+  ],
+  "text": "任务状态全部整理登录页核对设置项",
+}
+`;
+
+exports[`A2UI rendered generated content > renders the login example > login-text 1`] = `
+{
+  "media": [
+    {
+      "alt": null,
+      "role": null,
+      "src": null,
+      "tag": "svg",
+    },
+  ],
+  "tags": [
+    "button",
+    "div",
+    "h3",
+    "input",
+    "label",
+    "path",
+    "span",
+    "svg",
+  ],
+  "text": "登录账号密码登录",
+}
+`;
+
+exports[`A2UI rendered generated content > renders the settings example > settings-text 1`] = `
+{
+  "media": [],
+  "tags": [
+    "div",
+    "h3",
+    "input",
+    "label",
+    "span",
+  ],
+  "text": "设置显示名邮箱邮件通知推送通知",
+}
+`;

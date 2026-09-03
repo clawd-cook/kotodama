@@ -1,8 +1,9 @@
+import { applyDocument } from '@src/editor/applyDocument';
+import { createDemoSnapshot } from '@src/editor/demo';
+import { foldMessages, toMessages } from '@src/editor/snapshot';
+import type { A2uiMessage, Snapshot } from '@src/editor/types';
 import { describe, expect, it } from 'vitest';
-import { applyDocument } from './applyDocument';
-import { createDemoSnapshot } from './demo';
-import { foldMessages, toMessages } from './snapshot';
-import type { A2uiMessage, Snapshot } from './types';
+import { BASIC_CATALOG, surfaceMessages } from '../../helpers/apply';
 
 const TITLE = '任务管理';
 const QUERY = '查询';
@@ -88,39 +89,11 @@ describe('W write gate', () => {
   it('W-03 missing root does not rename another node', () => {
     const current = currentPage();
     const result = applyDocument(
-      JSON.stringify([
-        {
-          version: 'v0.9',
-          createSurface: {
-            surfaceId: 'main',
-            catalogId:
-              'https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json',
-            sendDataModel: true,
-          },
-        },
-        {
-          version: 'v0.9',
-          updateComponents: {
-            surfaceId: 'main',
-            components: [
-              {
-                id: 'title',
-                component: 'Text',
-                text: '标题',
-                variant: 'h3',
-              },
-            ],
-          },
-        },
-        {
-          version: 'v0.9',
-          updateDataModel: {
-            surfaceId: 'main',
-            path: '/',
-            value: { title: '无根' },
-          },
-        },
-      ]),
+      JSON.stringify(
+        surfaceMessages([
+          { id: 'title', component: 'Text', text: '标题', variant: 'h3' },
+        ]),
+      ),
       current,
     );
     expect(result.ok).toBe(false);
@@ -191,8 +164,7 @@ describe('W write gate', () => {
       version: 'v0.9',
       createSurface: {
         surfaceId: 'other',
-        catalogId:
-          'https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json',
+        catalogId: BASIC_CATALOG,
         sendDataModel: true,
       },
     });
@@ -206,9 +178,30 @@ describe('W write gate', () => {
     const result = applyDocument('这不是 JSON', current);
     expect(result.ok).toBe(false);
     if (!result.ok) {
+      expect(result.code).toBe('PARSE');
       expect(/[\u4e00-\u9fff]/.test(result.message)).toBe(true);
     }
     assertUnchanged(current);
+  });
+
+  it('rejects a JSON object that is not a message array', () => {
+    const result = applyDocument(JSON.stringify({ title: '登录' }), currentPage());
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.code).toBe('PARSE');
+      expect(result.message).toContain('A2UI');
+    }
+  });
+
+  it('accepts an envelope with messages', () => {
+    const result = applyDocument(
+      JSON.stringify({
+        summary: '已更新',
+        messages: toMessages(createDemoSnapshot()),
+      }),
+      currentPage(),
+    );
+    expect(result.ok).toBe(true);
   });
 
   it('W-08 deleteSurface is rejected', () => {
@@ -239,15 +232,13 @@ describe('W write gate', () => {
   });
 
   it('W-10 nested A2UI component maps still become a page', () => {
-    const catalogId =
-      'https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json';
     const result = applyDocument(
       JSON.stringify([
         {
           version: 'v0.9',
           createSurface: {
             surfaceId: 'main',
-            catalogId,
+            catalogId: BASIC_CATALOG,
             sendDataModel: true,
           },
         },
@@ -318,62 +309,41 @@ describe('W write gate', () => {
   });
 
   it('W-11 Modal children become trigger and content', () => {
-    const catalogId =
-      'https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json';
     const result = applyDocument(
-      JSON.stringify([
-        {
-          version: 'v0.9',
-          createSurface: {
-            surfaceId: 'main',
-            catalogId,
-            sendDataModel: true,
-          },
-        },
-        {
-          version: 'v0.9',
-          updateComponents: {
-            surfaceId: 'main',
-            components: [
-              {
-                id: 'root',
-                component: 'Column',
-                children: ['row_modal'],
-              },
-              {
-                id: 'row_modal',
-                component: 'Modal',
-                children: ['open_btn', 'modal_body'],
-              },
-              {
-                id: 'open_btn',
-                component: 'Button',
-                children: ['btn_label'],
-                variant: 'default',
-              },
-              {
-                id: 'btn_label',
-                component: 'Text',
-                text: '查看序号',
-              },
-              {
-                id: 'modal_body',
-                component: 'Text',
-                text: { path: '/rowIndex' },
-                variant: 'body',
-              },
-            ],
-          },
-        },
-        {
-          version: 'v0.9',
-          updateDataModel: {
-            surfaceId: 'main',
-            path: '/',
-            value: { rowIndex: '1' },
-          },
-        },
-      ]),
+      JSON.stringify(
+        surfaceMessages(
+          [
+            {
+              id: 'root',
+              component: 'Column',
+              children: ['row_modal'],
+            },
+            {
+              id: 'row_modal',
+              component: 'Modal',
+              children: ['open_btn', 'modal_body'],
+            },
+            {
+              id: 'open_btn',
+              component: 'Button',
+              children: ['btn_label'],
+              variant: 'default',
+            },
+            {
+              id: 'btn_label',
+              component: 'Text',
+              text: '查看序号',
+            },
+            {
+              id: 'modal_body',
+              component: 'Text',
+              text: { path: '/rowIndex' },
+              variant: 'body',
+            },
+          ],
+          { rowIndex: '1' },
+        ),
+      ),
       currentPage(),
     );
     expect(result.ok).toBe(true);
@@ -396,43 +366,27 @@ describe('W write gate', () => {
   });
 
   it('W-12 Button without action gets the component id as event name', () => {
-    const catalogId =
-      'https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json';
     const result = applyDocument(
-      JSON.stringify([
-        {
-          version: 'v0.9',
-          createSurface: {
-            surfaceId: 'main',
-            catalogId,
-            sendDataModel: true,
+      JSON.stringify(
+        surfaceMessages([
+          {
+            id: 'root',
+            component: 'Column',
+            children: ['confirm'],
           },
-        },
-        {
-          version: 'v0.9',
-          updateComponents: {
-            surfaceId: 'main',
-            components: [
-              {
-                id: 'root',
-                component: 'Column',
-                children: ['confirm'],
-              },
-              {
-                id: 'confirm',
-                component: 'Button',
-                child: 'confirm_label',
-                variant: 'primary',
-              },
-              {
-                id: 'confirm_label',
-                component: 'Text',
-                text: '确认',
-              },
-            ],
+          {
+            id: 'confirm',
+            component: 'Button',
+            child: 'confirm_label',
+            variant: 'primary',
           },
-        },
-      ]),
+          {
+            id: 'confirm_label',
+            component: 'Text',
+            text: '确认',
+          },
+        ]),
+      ),
       currentPage(),
     );
     expect(result.ok).toBe(true);

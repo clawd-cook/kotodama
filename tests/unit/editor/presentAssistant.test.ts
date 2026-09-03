@@ -1,11 +1,11 @@
+import { applyDocument } from '@src/editor/applyDocument';
+import { STREAMING_PLACEHOLDER } from '@src/editor/copy';
+import { createDemoSnapshot } from '@src/editor/demo';
+import { toMessages } from '@src/editor/snapshot';
+import type { A2uiMessage } from '@src/editor/types';
+import { parseChatOutput } from '@src/editor/chat/parseA2ui';
+import { presentAssistant } from '@src/editor/chat/presentAssistant';
 import { describe, expect, it } from 'vitest';
-import { applyDocument } from '../applyDocument';
-import { STREAMING_PLACEHOLDER } from '../copy';
-import { createDemoSnapshot } from '../demo';
-import { toMessages } from '../snapshot';
-import type { A2uiMessage } from '../types';
-import { parseChatOutput } from './parseA2ui';
-import { presentAssistant } from './presentAssistant';
 
 function validMessages(): A2uiMessage[] {
   return toMessages(createDemoSnapshot());

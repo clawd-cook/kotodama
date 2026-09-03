@@ -1,5 +1,5 @@
+import { landingSubmit, PROMPT_ITEMS } from '@src/studio/landingSubmit';
 import { describe, expect, it } from 'vitest';
-import { landingSubmit, PROMPT_ITEMS } from './landingSubmit';
 
 describe('L landing submit', () => {
   it('L-01 ready auto-sends; not ready prefills', () => {

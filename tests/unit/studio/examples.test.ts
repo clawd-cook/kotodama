@@ -1,16 +1,16 @@
-import { describe, expect, it } from 'vitest';
-import { applyDocument } from '../editor/applyDocument';
-import filteredList from '../editor/fixtures/filtered-list.json';
-import login from '../editor/fixtures/login.json';
-import settings from '../editor/fixtures/settings.json';
-import { foldMessages } from '../editor/snapshot';
-import { emptySnapshot } from '../editor/storage';
-import type { A2uiMessage } from '../editor/types';
+import { applyDocument } from '@src/editor/applyDocument';
+import filteredList from '@src/editor/fixtures/filtered-list.json';
+import login from '@src/editor/fixtures/login.json';
+import settings from '@src/editor/fixtures/settings.json';
+import { foldMessages } from '@src/editor/snapshot';
+import { emptySnapshot } from '@src/editor/storage';
+import type { A2uiMessage } from '@src/editor/types';
 import {
   EXAMPLE_PAGES,
   type ExampleId,
   shouldConfirmReplace,
-} from './examples';
+} from '@src/studio/examples';
+import { describe, expect, it } from 'vitest';
 
 const FIXTURES: Record<ExampleId, A2uiMessage[]> = {
   login: login as A2uiMessage[],
