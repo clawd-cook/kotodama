@@ -326,6 +326,8 @@ describe('emptyDataModel', () => {
     expect(emptyDataModel()).toEqual({});
   });
 });
+
+describe('toMessages', () => {
   it('emits create, components, and data for a snapshot', () => {
     const messages = toMessages({
       surfaceId: 'main',

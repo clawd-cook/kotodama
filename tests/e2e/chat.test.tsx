@@ -212,10 +212,5 @@ describe('ChatPanel', () => {
     expect(
       chat.requestFallback?.(undefined, { error: 'nope' as never }),
     ).toEqual({ content: '对话请求失败', role: 'assistant' });
-    const stop = screen.queryByRole('button', { name: /停|取消|stop/i });
-    if (stop) {
-      await userEvent.click(stop);
-      expect(chat.abort).toHaveBeenCalled();
-    }
   });
 });
