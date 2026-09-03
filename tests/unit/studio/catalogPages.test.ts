@@ -3,7 +3,7 @@ import {
   CATALOG_GROUPS,
   CATALOG_PAGES,
   isCatalogName,
-} from '@src/studio/catalog/catalogPages';
+} from '@src/pages/catalog/catalogPages';
 import { ALLOWED_COMPONENTS } from '@src/editor/validate';
 import { describe, expect, it } from 'vitest';
 
@@ -29,7 +29,7 @@ describe('catalogPages', () => {
 describe('catalogPropertyNames', () => {
   it('returns no properties for an unknown component', async () => {
     const { catalogPropertyNames } = await import(
-      '@src/studio/catalog/catalogPropertyNames'
+      '@src/pages/catalog/catalogPropertyNames'
     );
     expect(catalogPropertyNames('Nope')).toEqual([]);
   });

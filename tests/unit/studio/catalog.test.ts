@@ -6,12 +6,12 @@ import { applyDocument } from '@src/editor/applyDocument';
 import { emptySnapshot } from '@src/editor/storage';
 import type { A2uiMessage } from '@src/editor/types';
 import { ALLOWED_COMPONENTS } from '@src/editor/validate';
-import { catalogPropertyNames } from '@src/studio/catalog/catalogPropertyNames';
+import { catalogPropertyNames } from '@src/pages/catalog/catalogPropertyNames';
 import { describe, expect, it } from 'vitest';
 
 const FIXTURE_DIR = join(
   dirname(fileURLToPath(import.meta.url)),
-  '../../../src/studio/catalog/fixtures',
+  '../../../src/pages/catalog/fixtures',
 );
 const ALLOWED = new Set<string>(ALLOWED_COMPONENTS);
 const FORBIDDEN = ['id', 'component', 'placeholder', 'className'];

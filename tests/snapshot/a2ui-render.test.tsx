@@ -1,8 +1,8 @@
 import { createDemoSnapshot } from '@src/editor/demo';
-import filteredList from '@src/studio/examples/fixtures/filtered-list.json';
-import login from '@src/studio/examples/fixtures/login.json';
-import settings from '@src/studio/examples/fixtures/settings.json';
-import { CATALOG_PAGES } from '@src/studio/catalog/catalogPages';
+import filteredList from '@src/pages/examples/fixtures/filtered-list.json';
+import login from '@src/pages/examples/fixtures/login.json';
+import settings from '@src/pages/examples/fixtures/settings.json';
+import { CATALOG_PAGES } from '@src/pages/catalog/catalogPages';
 import { afterEach, describe, expect, it } from 'vitest';
 import { mustApply, renderGeneratedSurface } from '../helpers/a2ui';
 

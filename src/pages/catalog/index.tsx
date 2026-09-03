@@ -8,9 +8,9 @@ import {
   CATALOG_GROUPS,
   CATALOG_PAGES,
   isCatalogName,
-} from '../../studio/catalog/catalogPages';
-import { catalogPropertyNames } from '../../studio/catalog/catalogPropertyNames';
-import { JsonWell } from '../../studio/JsonWell';
+} from './catalogPages';
+import { catalogPropertyNames } from './catalogPropertyNames';
+import { JsonWell } from '../../paper/JsonWell';
 
 export function Catalog({ theme }: { theme: 'light' | 'dark' }) {
   const { component = 'Column' } = useParams();

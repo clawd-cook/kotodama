@@ -7,7 +7,7 @@ import {
   ChildList as ExportedChildList,
 } from '@kotodama/antd-catalog';
 import { PaperPreview } from '@src/paper/PaperPreview';
-import { CATALOG_PAGES } from '@src/studio/catalog/catalogPages';
+import { CATALOG_PAGES } from '@src/pages/catalog/catalogPages';
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';

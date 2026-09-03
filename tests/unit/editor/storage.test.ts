@@ -1,7 +1,7 @@
 // @vitest-environment happy-dom
 
 import { applyDocument } from '@src/editor/applyDocument';
-import login from '@src/studio/examples/fixtures/login.json';
+import login from '@src/pages/examples/fixtures/login.json';
 import {
   DEFAULT_CHROME,
   emptySnapshot,

@@ -1,6 +1,6 @@
 import { applyDocument } from '@src/editor/applyDocument';
 import { BASIC_CATALOG_ID } from '@catalog/catalogId';
-import login from '@src/studio/examples/fixtures/login.json';
+import login from '@src/pages/examples/fixtures/login.json';
 import { emptySnapshot, isCurrentPage, parseDraft } from '@src/editor/storage';
 import { describe, expect, it } from 'vitest';
 

@@ -24,7 +24,7 @@ describe('catalogPropertyNames schema shapes', () => {
 
   it('invokes a function shape and falls back to an empty object', async () => {
     const { catalogPropertyNames: names } = await import(
-      '@src/studio/catalog/catalogPropertyNames'
+      '@src/pages/catalog/catalogPropertyNames'
     );
     expect(names('FnShape')).toEqual(['foo']);
     expect(names('Empty')).toEqual([]);
