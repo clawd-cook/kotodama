@@ -125,6 +125,7 @@ describe('workshop chrome', () => {
       target: { value: JSON.stringify(validMessages()) },
     });
     expect(await screen.findByText('打开的标题')).toBeTruthy();
+    fireEvent.click(screen.getAllByRole('button', { name: '源码编辑器置空' })[0]);
   });
 
   it('opens dock tabs, edits data, and shows errors', async () => {
@@ -192,6 +193,9 @@ describe('workshop chrome', () => {
     const canvas = document.querySelector('.preview-canvas') as HTMLElement;
     fireEvent.click(canvas);
     fireEvent.keyDown(canvas, { key: 'Escape' });
+    const selectedNode = screen.getByText(/Text\s+title/);
+    await user.click(selectedNode);
+    await user.click(selectedNode);
     window.dispatchEvent(
       new KeyboardEvent('keydown', { key: 'Delete', bubbles: true }),
     );
@@ -280,9 +284,19 @@ describe('workshop chrome', () => {
     fireEvent.change(fileInput, { target: { files: [] } });
     const bar = document.querySelector('.ant-splitter-bar');
     if (bar) {
-      fireEvent.mouseDown(bar);
-      fireEvent.mouseMove(bar, { clientX: 260 });
-      fireEvent.mouseUp(bar);
+      fireEvent.pointerDown(bar, { clientX: 120, clientY: 40, pointerId: 2 });
+      fireEvent.pointerMove(bar, { clientX: 200, clientY: 40, pointerId: 2 });
+      fireEvent.pointerUp(bar, { clientX: 200, clientY: 40, pointerId: 2 });
+      fireEvent.mouseDown(bar, { clientX: 120 });
+      fireEvent.mouseMove(document, { clientX: 200 });
+      fireEvent.mouseUp(document, { clientX: 200 });
+    }
+    for (const handle of document.querySelectorAll(
+      '[class*="splitter-bar"], [class*="splitter-handle"]',
+    )) {
+      fireEvent.pointerDown(handle, { clientX: 100, pointerId: 3 });
+      fireEvent.pointerMove(handle, { clientX: 160, pointerId: 3 });
+      fireEvent.pointerUp(handle, { clientX: 160, pointerId: 3 });
     }
   });
 });

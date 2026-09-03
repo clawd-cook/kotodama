@@ -63,6 +63,14 @@ describe('catalog barrel and helpers', () => {
       />,
     );
     expect(container.textContent).toBe('row:/items/0');
+    const { container: named } = render(
+      <ChildList
+        childList={['plain']}
+        context={{} as never}
+        buildChild={(id) => <span>{id}</span>}
+      />,
+    );
+    expect(named.textContent).toBe('plain');
   });
 
   it('shows a field error', () => {
@@ -72,6 +80,12 @@ describe('catalog barrel and helpers', () => {
       </Field>,
     );
     expect(screen.getByText('必填')).toBeTruthy();
+    const { container } = render(
+      <Field>
+        <input aria-label="无标签" />
+      </Field>,
+    );
+    expect(container.querySelector('.ant-form-item-label')).toBeNull();
   });
 });
 

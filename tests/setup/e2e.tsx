@@ -9,10 +9,17 @@ vi.mock('@monaco-editor/react', () => ({
     value?: string;
     onChange?: (value?: string) => void;
   }) => (
-    <textarea
-      aria-label="源码编辑器"
-      value={value}
-      onChange={(event) => onChange?.(event.target.value)}
-    />
+    <>
+      <textarea
+        aria-label="源码编辑器"
+        value={value}
+        onChange={(event) => onChange?.(event.target.value)}
+      />
+      <button
+        type="button"
+        aria-label="源码编辑器置空"
+        onClick={() => onChange?.(undefined)}
+      />
+    </>
   ),
 }));

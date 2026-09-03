@@ -1,6 +1,6 @@
 import { createDemoSnapshot } from '@src/editor/demo';
 import { toMessages } from '@src/editor/snapshot';
-import { cleanup, screen, waitFor } from '@testing-library/react';
+import { cleanup, fireEvent, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { renderStudio, stubChatHealth } from '../helpers/studio';
@@ -212,5 +212,8 @@ describe('ChatPanel', () => {
     expect(
       chat.requestFallback?.(undefined, { error: 'nope' as never }),
     ).toEqual({ content: '对话请求失败', role: 'assistant' });
+    for (const button of document.querySelectorAll('.chat-input button')) {
+      fireEvent.click(button);
+    }
   });
 });

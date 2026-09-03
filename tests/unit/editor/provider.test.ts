@@ -15,6 +15,8 @@ describe('textOf', () => {
     expect(textOf(undefined)).toBe('');
     expect(textOf(null as never)).toBe('');
     expect(textOf({} as never)).toBe('');
+    expect(textOf({ text: undefined })).toBe('');
+    expect(textOf({ text: null })).toBe('');
   });
 });
 
@@ -65,5 +67,22 @@ describe('EditorChatProvider', () => {
       {} as never,
     );
     expect(params).not.toHaveProperty('kotodamaChannel');
+  });
+
+  it('treats missing messages as an empty history', () => {
+    vi.spyOn(OpenAIChatProvider.prototype, 'transformParams').mockImplementation(
+      () => ({}) as never,
+    );
+    const provider = new EditorChatProvider(
+      {
+        request: XRequest('/api/chat/completions', { manual: true }),
+      },
+      () => 'SYSTEM',
+      () => undefined,
+    );
+    const params = provider.transformParams({} as never, {} as never);
+    expect(params.messages).toEqual([
+      { role: 'system', content: 'SYSTEM' },
+    ]);
   });
 });

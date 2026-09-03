@@ -225,6 +225,21 @@ describe('duplicateComponent', () => {
     );
   });
 
+  it('remaps Tabs children', () => {
+    const tabs = insertComponent(rootColumn(), 'Tabs', 'root');
+    const { snapshot, selectedId } = duplicateComponent(
+      tabs.snapshot,
+      tabs.selectedId,
+    );
+    const clone = snapshot.components.find((item) => item.id === selectedId);
+    expect((clone?.tabs as { child?: string }[])?.length).toBe(2);
+    expect(
+      (clone?.tabs as { child?: string }[])?.every((tab) =>
+        snapshot.components.some((item) => item.id === tab.child),
+      ),
+    ).toBe(true);
+  });
+
   it('appends a duplicated Card child onto root', () => {
     const card = insertComponent(rootColumn(), 'Card', 'root');
     const childId = String(

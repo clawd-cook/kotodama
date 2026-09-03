@@ -49,6 +49,15 @@ describe('buildTree', () => {
     const ids = JSON.stringify(buildTree(cyclic));
     expect((ids.match(/"id":"a"/g) ?? []).length).toBeLessThanOrEqual(1);
   });
+
+  it('stops walking when a descendant points back at an ancestor', () => {
+    const nodes = buildTree([
+      { id: 'root', component: 'Column', children: ['a'] },
+      { id: 'a', component: 'Column', children: ['b'] },
+      { id: 'b', component: 'Column', children: ['a'] },
+    ]);
+    expect(nodes[0]?.id).toBe('root');
+  });
 });
 
 describe('tree helpers', () => {
@@ -80,6 +89,15 @@ describe('tree helpers', () => {
     ]);
     expect(collectSubtree(tree, 'title').has('title')).toBe(true);
     expect(collectSubtree(tree, 'title').size).toBe(1);
+    expect(
+      collectSubtree(
+        [
+          { id: 'a', component: 'Column', children: ['b'] },
+          { id: 'b', component: 'Column', children: ['a'] },
+        ],
+        'a',
+      ).size,
+    ).toBe(2);
   });
 
   it('renders a placeholder for missing ids and ignores unknown subtree nodes', () => {
