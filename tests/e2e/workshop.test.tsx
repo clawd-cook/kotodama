@@ -152,7 +152,7 @@ describe('workshop chrome', () => {
   it('selects from the tree, edits inspector fields, and uses shortcuts', async () => {
     const user = userEvent.setup({ pointerEventsCheck: 0 });
     renderStudio('/examples/login');
-    await user.click(await screen.findByRole('button', { name: '用这一页' }));
+    await applyExamplePage(user);
     await user.click(screen.getByRole('tab', { name: '组件' }));
     await user.click(screen.getByText(/Text\s+title/));
     expect(await screen.findByText(/Text · title/)).toBeTruthy();
@@ -213,7 +213,7 @@ describe('workshop chrome', () => {
   it('confirms replacing the current page from another example', async () => {
     const user = userEvent.setup();
     renderStudio('/examples/login');
-    await user.click(await screen.findByRole('button', { name: '用这一页' }));
+    await applyExamplePage(user);
     await user.click(screen.getByRole('link', { name: '精选案例' }));
     await user.click(await screen.findByRole('link', { name: /设置页/ }));
     await user.click(await screen.findByRole('button', { name: '用这一页' }));
