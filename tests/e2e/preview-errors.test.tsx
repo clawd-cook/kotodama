@@ -1,9 +1,10 @@
+import { antdCatalog } from '@kotodama/antd-catalog';
+import { EditorProvider } from '@src/editor/EditorState';
+import { PaperPreview } from '@src/editor/PaperPreview';
 import { PreviewPane } from '@src/editor/Preview';
-import { EditorProvider, useEditor } from '@src/editor/EditorState';
-import { toMessages } from '@src/editor/snapshot';
+import { saveDraft } from '@src/editor/storage';
 import { BASIC_CATALOG_ID } from '@src/editor/types';
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 const processor = vi.hoisted(() => ({
@@ -55,62 +56,66 @@ function validPage() {
   };
 }
 
-function Harness() {
-  const editor = useEditor();
-  return (
-    <div>
-      <pre data-testid="errors">
-        {editor.errors.map((item) => `${item.source}:${item.message}`).join('|')}
-      </pre>
-      <button
-        type="button"
-        onClick={() => editor.applyJson(JSON.stringify(toMessages(validPage())))}
-      >
-        seed
-      </button>
-      <PreviewPane theme="light" />
-    </div>
-  );
-}
-
-async function seedPreview() {
-  const user = userEvent.setup();
-  render(
-    <EditorProvider>
-      <Harness />
-    </EditorProvider>,
-  );
-  await user.click(screen.getByRole('button', { name: 'seed' }));
-}
-
 describe('PreviewPane error routing', () => {
-  it('logs a missing surface as a protocol error', async () => {
+  it('treats a missing surface as a protocol error', async () => {
     processor.mode = 'empty';
-    await seedPreview();
+    saveDraft(validPage());
+    const onError = vi.fn();
+    render(
+      <PaperPreview
+        snapshot={validPage()}
+        theme="light"
+        catalog={antdCatalog}
+        onError={onError}
+      />,
+    );
     await waitFor(() => {
-      expect(screen.getByTestId('errors').textContent).toContain(
-        'protocol:没有可预览的页面',
-      );
+      expect(onError).toHaveBeenCalledWith('没有可预览的页面');
     });
+    render(
+      <EditorProvider>
+        <PreviewPane theme="light" />
+      </EditorProvider>,
+    );
+    expect(await screen.findAllByText('没有可预览的页面')).toHaveLength(2);
   });
 
-  it('logs a thrown Error as a preview error', async () => {
+  it('treats a thrown Error as a preview error', async () => {
     processor.mode = 'error';
-    await seedPreview();
+    saveDraft(validPage());
+    const onError = vi.fn();
+    render(
+      <PaperPreview
+        snapshot={validPage()}
+        theme="light"
+        catalog={antdCatalog}
+        onError={onError}
+      />,
+    );
     await waitFor(() => {
-      expect(screen.getByTestId('errors').textContent).toContain(
-        'preview:解析失败',
-      );
+      expect(onError).toHaveBeenCalledWith('解析失败');
     });
+    render(
+      <EditorProvider>
+        <PreviewPane theme="light" />
+      </EditorProvider>,
+    );
+    expect(await screen.findAllByText('没有可预览的页面')).toBeTruthy();
   });
 
   it('stringifies a non-Error throw', async () => {
     processor.mode = 'string';
-    await seedPreview();
+    const onError = vi.fn();
+    render(
+      <PaperPreview
+        snapshot={validPage()}
+        theme="light"
+        catalog={antdCatalog}
+        onError={onError}
+      />,
+    );
     await waitFor(() => {
-      expect(screen.getByTestId('errors').textContent).toContain(
-        'preview:broken',
-      );
+      expect(onError).toHaveBeenCalledWith('broken');
     });
   });
 });
