@@ -217,8 +217,7 @@ describe('workshop chrome', () => {
     await user.click(screen.getByRole('link', { name: '精选案例' }));
     await user.click(await screen.findByRole('link', { name: /设置页/ }));
     await user.click(await screen.findByRole('button', { name: '用这一页' }));
-    const dialog = await screen.findByRole('dialog');
-    await user.click(within(dialog).getByRole('button', { name: /换\s*上/ }));
+    await user.click(await screen.findByRole('button', { name: /换\s*上/ }));
     expect(await screen.findByRole('heading', { name: '工坊' })).toBeTruthy();
   });
 
