@@ -72,6 +72,9 @@ importers:
       '@types/react-dom':
         specifier: 19.2.5
         version: 19.2.5(@types/react@19.2.18)
+      '@vitejs/plugin-react':
+        specifier: 6.1.1
+        version: 6.1.1(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7)(@babel/plugin-transform-runtime@7.29.7(@babel/core@7.29.7))(@babel/runtime@8.0.0)(rolldown@1.2.6)(vite@8.2.2))(babel-plugin-react-compiler@1.0.0)(oxc-transform-react@0.145.0)(vite@8.2.2)
       '@vitest/browser-preview':
         specifier: 4.1.11
         version: 4.1.11(bufferutil@4.1.0)(msw@2.15.0(@types/node@26.4.0)(typescript@7.0.2))(utf-8-validate@6.0.6)(vite@8.2.2)(vitest@4.1.11)
@@ -1279,6 +1282,128 @@ packages:
   '@oxc-project/types@0.147.0':
     resolution: {integrity: sha1-US5DGWBT20qZko41sodUmjImJos=, tarball: http://registry.m.jd.com/@oxc-project/types/download/@oxc-project/types-0.147.0.tgz}
 
+  '@oxc-transform-react/binding-android-arm-eabi@0.145.0':
+    resolution: {integrity: sha1-lVtg42+lZqjSnYtT7vnCa03vqVA=, tarball: http://registry.m.jd.com/@oxc-transform-react/binding-android-arm-eabi/download/@oxc-transform-react/binding-android-arm-eabi-0.145.0.tgz}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm]
+    os: [android]
+
+  '@oxc-transform-react/binding-android-arm64@0.145.0':
+    resolution: {integrity: sha1-iUbF8uFqbpPo7EcJ2rlJOXao0us=, tarball: http://registry.m.jd.com/@oxc-transform-react/binding-android-arm64/download/@oxc-transform-react/binding-android-arm64-0.145.0.tgz}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [android]
+
+  '@oxc-transform-react/binding-darwin-arm64@0.145.0':
+    resolution: {integrity: sha1-nT9ly2zqQgct8pfN+YHTSOiyeR4=, tarball: http://registry.m.jd.com/@oxc-transform-react/binding-darwin-arm64/download/@oxc-transform-react/binding-darwin-arm64-0.145.0.tgz}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@oxc-transform-react/binding-darwin-x64@0.145.0':
+    resolution: {integrity: sha1-K8ZW4yRwUcrrKdX7yEIB9I+cEYU=, tarball: http://registry.m.jd.com/@oxc-transform-react/binding-darwin-x64/download/@oxc-transform-react/binding-darwin-x64-0.145.0.tgz}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [darwin]
+
+  '@oxc-transform-react/binding-freebsd-x64@0.145.0':
+    resolution: {integrity: sha1-JCaVErCsHoUo9D/CuJYvtNSLNwA=, tarball: http://registry.m.jd.com/@oxc-transform-react/binding-freebsd-x64/download/@oxc-transform-react/binding-freebsd-x64-0.145.0.tgz}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [freebsd]
+
+  '@oxc-transform-react/binding-linux-arm-gnueabihf@0.145.0':
+    resolution: {integrity: sha1-Vk60RxjTfDXDa1vbORzxtItZKzU=, tarball: http://registry.m.jd.com/@oxc-transform-react/binding-linux-arm-gnueabihf/download/@oxc-transform-react/binding-linux-arm-gnueabihf-0.145.0.tgz}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm]
+    os: [linux]
+
+  '@oxc-transform-react/binding-linux-arm-musleabihf@0.145.0':
+    resolution: {integrity: sha1-rmlCtnQt4xfJoBjK07d0P9pKgDo=, tarball: http://registry.m.jd.com/@oxc-transform-react/binding-linux-arm-musleabihf/download/@oxc-transform-react/binding-linux-arm-musleabihf-0.145.0.tgz}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm]
+    os: [linux]
+
+  '@oxc-transform-react/binding-linux-arm64-gnu@0.145.0':
+    resolution: {integrity: sha1-YyhbD1+YIPZfGm3/XBXxlr7xonk=, tarball: http://registry.m.jd.com/@oxc-transform-react/binding-linux-arm64-gnu/download/@oxc-transform-react/binding-linux-arm64-gnu-0.145.0.tgz}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
+  '@oxc-transform-react/binding-linux-arm64-musl@0.145.0':
+    resolution: {integrity: sha1-nfiahz5YgvmguaFwrr+aVBsbVM8=, tarball: http://registry.m.jd.com/@oxc-transform-react/binding-linux-arm64-musl/download/@oxc-transform-react/binding-linux-arm64-musl-0.145.0.tgz}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
+
+  '@oxc-transform-react/binding-linux-ppc64-gnu@0.145.0':
+    resolution: {integrity: sha1-cuoboG3NRD4YdMkZu4+ST0X7+ug=, tarball: http://registry.m.jd.com/@oxc-transform-react/binding-linux-ppc64-gnu/download/@oxc-transform-react/binding-linux-ppc64-gnu-0.145.0.tgz}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [ppc64]
+    os: [linux]
+    libc: [glibc]
+
+  '@oxc-transform-react/binding-linux-riscv64-gnu@0.145.0':
+    resolution: {integrity: sha1-zs3D2CfJKkEXWf/Fc+4IPGzQA/g=, tarball: http://registry.m.jd.com/@oxc-transform-react/binding-linux-riscv64-gnu/download/@oxc-transform-react/binding-linux-riscv64-gnu-0.145.0.tgz}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [riscv64]
+    os: [linux]
+    libc: [glibc]
+
+  '@oxc-transform-react/binding-linux-riscv64-musl@0.145.0':
+    resolution: {integrity: sha1-vckNbOG9S6Yi8zbTWKsTSUKZ244=, tarball: http://registry.m.jd.com/@oxc-transform-react/binding-linux-riscv64-musl/download/@oxc-transform-react/binding-linux-riscv64-musl-0.145.0.tgz}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [riscv64]
+    os: [linux]
+    libc: [musl]
+
+  '@oxc-transform-react/binding-linux-s390x-gnu@0.145.0':
+    resolution: {integrity: sha1-XMjZarxj2GxwUOFbwUt7EYTIMxo=, tarball: http://registry.m.jd.com/@oxc-transform-react/binding-linux-s390x-gnu/download/@oxc-transform-react/binding-linux-s390x-gnu-0.145.0.tgz}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [s390x]
+    os: [linux]
+    libc: [glibc]
+
+  '@oxc-transform-react/binding-linux-x64-gnu@0.145.0':
+    resolution: {integrity: sha1-V1jO7G32Cf1NbftGpsxbEp5ZF1s=, tarball: http://registry.m.jd.com/@oxc-transform-react/binding-linux-x64-gnu/download/@oxc-transform-react/binding-linux-x64-gnu-0.145.0.tgz}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
+  '@oxc-transform-react/binding-linux-x64-musl@0.145.0':
+    resolution: {integrity: sha1-Lb7bk+whsrPhVFnCfLr/iWo6xKU=, tarball: http://registry.m.jd.com/@oxc-transform-react/binding-linux-x64-musl/download/@oxc-transform-react/binding-linux-x64-musl-0.145.0.tgz}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+
+  '@oxc-transform-react/binding-openharmony-arm64@0.145.0':
+    resolution: {integrity: sha1-/j8/1OvCEKxTWmZFcr2TRtANyA4=, tarball: http://registry.m.jd.com/@oxc-transform-react/binding-openharmony-arm64/download/@oxc-transform-react/binding-openharmony-arm64-0.145.0.tgz}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [openharmony]
+
+  '@oxc-transform-react/binding-win32-arm64-msvc@0.145.0':
+    resolution: {integrity: sha1-TF5Dr9mObDXK0fHY9REgCki8VH0=, tarball: http://registry.m.jd.com/@oxc-transform-react/binding-win32-arm64-msvc/download/@oxc-transform-react/binding-win32-arm64-msvc-0.145.0.tgz}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [win32]
+
+  '@oxc-transform-react/binding-win32-ia32-msvc@0.145.0':
+    resolution: {integrity: sha1-Y1cuVC8L3NSFsus1tkVeGahOKuI=, tarball: http://registry.m.jd.com/@oxc-transform-react/binding-win32-ia32-msvc/download/@oxc-transform-react/binding-win32-ia32-msvc-0.145.0.tgz}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [ia32]
+    os: [win32]
+
+  '@oxc-transform-react/binding-win32-x64-msvc@0.145.0':
+    resolution: {integrity: sha1-zGGeD8BYAU0pGH3t1oC3NjFnvHo=, tarball: http://registry.m.jd.com/@oxc-transform-react/binding-win32-x64-msvc/download/@oxc-transform-react/binding-win32-x64-msvc-0.145.0.tgz}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [win32]
+
   '@oxfmt/binding-darwin-arm64@0.64.0':
     resolution: {integrity: sha1-1VsaXV2X1Mzejkvntj4G5OVvLRM=, tarball: http://registry.m.jd.com/@oxfmt/binding-darwin-arm64/download/@oxfmt/binding-darwin-arm64-0.64.0.tgz}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -2228,6 +2353,16 @@ packages:
   '@rolldown/debug@1.2.6':
     resolution: {integrity: sha1-rLMn+NMjfJ/KmP3QIl8xQVt78Jk=, tarball: http://registry.m.jd.com/@rolldown/debug/download/@rolldown/debug-1.2.6.tgz}
 
+  '@rolldown/plugin-babel@0.2.3':
+    resolution: {integrity: sha1-lPLIlyhRYKqxp8/oJ8vKG3Iz5PQ=, tarball: http://registry.m.jd.com/@rolldown/plugin-babel/download/@rolldown/plugin-babel-0.2.3.tgz}
+    engines: {node: '>=22.12.0 || ^24.0.0'}
+    peerDependencies:
+      '@babel/core': ^7.29.0 || ^8.0.0-rc.1
+      '@babel/plugin-transform-runtime': ^7.29.0 || ^8.0.0-rc.1
+      '@babel/runtime': ^7.27.0 || ^8.0.0-rc.1
+      rolldown: ^1.0.0-rc.5
+      vite: ^8.0.0
+
   '@rolldown/pluginutils@1.0.1':
     resolution: {integrity: sha1-4/zuCT+7XOdl4a0Ij/TeKIn2+b4=, tarball: http://registry.m.jd.com/@rolldown/pluginutils/download/@rolldown/pluginutils-1.0.1.tgz}
 
@@ -2869,6 +3004,15 @@ packages:
       '@vitejs/devtools-vitest': ^0.5.2
       vite: '*'
 
+  '@vitejs/plugin-react@6.1.1':
+    resolution: {integrity: sha1-R/oaL5VuiOr3eOv2Xdzo4rNll+c=, tarball: http://registry.m.jd.com/@vitejs/plugin-react/download/@vitejs/plugin-react-6.1.1.tgz}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    peerDependencies:
+      '@rolldown/plugin-babel': ^0.1.7 || ^0.2.0
+      babel-plugin-react-compiler: ^1.0.0
+      oxc-transform-react: ^0.145.0
+      vite: ^8.0.0
+
   '@vitest/browser-playwright@4.1.11':
     resolution: {integrity: sha1-pJ+o9x01KGRSF4dqeQ/JqbLLu4Q=, tarball: http://registry.m.jd.com/@vitest/browser-playwright/download/@vitest/browser-playwright-4.1.11.tgz}
     peerDependencies:
@@ -3358,6 +3502,9 @@ packages:
     resolution: {integrity: sha1-imv9XdVCOTYrPQbOR6xSstlddyE=, tarball: http://registry.m.jd.com/babel-plugin-polyfill-regenerator/download/babel-plugin-polyfill-regenerator-0.6.8.tgz}
     peerDependencies:
       '@babel/core': ^7.4.0 || ^8.0.0-0 <8.0.0
+
+  babel-plugin-react-compiler@1.0.0:
+    resolution: {integrity: sha1-vfc2CiOk1ev8oJAlXaOJPv0HQl8=, tarball: http://registry.m.jd.com/babel-plugin-react-compiler/download/babel-plugin-react-compiler-1.0.0.tgz}
 
   babel-plugin-syntax-hermes-parser@0.36.0:
     resolution: {integrity: sha1-UeQp8y8jsZfEd6IFJXmKepdwnIA=, tarball: http://registry.m.jd.com/babel-plugin-syntax-hermes-parser/download/babel-plugin-syntax-hermes-parser-0.36.0.tgz}
@@ -5821,6 +5968,10 @@ packages:
 
   outvariant@1.4.3:
     resolution: {integrity: sha1-Ihwb/Ak+j+xwdUl+d5n9v0PRSHM=, tarball: http://registry.m.jd.com/outvariant/download/outvariant-1.4.3.tgz}
+
+  oxc-transform-react@0.145.0:
+    resolution: {integrity: sha1-jmtZk1TZmUWLqGQ8CMASfYbxfHw=, tarball: http://registry.m.jd.com/oxc-transform-react/download/oxc-transform-react-0.145.0.tgz}
+    engines: {node: ^20.19.0 || >=22.12.0}
 
   oxfmt@0.64.0:
     resolution: {integrity: sha1-ZmpRSM33OFAHzUbjXo/4+U7P2Ws=, tarball: http://registry.m.jd.com/oxfmt/download/oxfmt-0.64.0.tgz}
@@ -9005,6 +9156,63 @@ snapshots:
 
   '@oxc-project/types@0.147.0': {}
 
+  '@oxc-transform-react/binding-android-arm-eabi@0.145.0':
+    optional: true
+
+  '@oxc-transform-react/binding-android-arm64@0.145.0':
+    optional: true
+
+  '@oxc-transform-react/binding-darwin-arm64@0.145.0':
+    optional: true
+
+  '@oxc-transform-react/binding-darwin-x64@0.145.0':
+    optional: true
+
+  '@oxc-transform-react/binding-freebsd-x64@0.145.0':
+    optional: true
+
+  '@oxc-transform-react/binding-linux-arm-gnueabihf@0.145.0':
+    optional: true
+
+  '@oxc-transform-react/binding-linux-arm-musleabihf@0.145.0':
+    optional: true
+
+  '@oxc-transform-react/binding-linux-arm64-gnu@0.145.0':
+    optional: true
+
+  '@oxc-transform-react/binding-linux-arm64-musl@0.145.0':
+    optional: true
+
+  '@oxc-transform-react/binding-linux-ppc64-gnu@0.145.0':
+    optional: true
+
+  '@oxc-transform-react/binding-linux-riscv64-gnu@0.145.0':
+    optional: true
+
+  '@oxc-transform-react/binding-linux-riscv64-musl@0.145.0':
+    optional: true
+
+  '@oxc-transform-react/binding-linux-s390x-gnu@0.145.0':
+    optional: true
+
+  '@oxc-transform-react/binding-linux-x64-gnu@0.145.0':
+    optional: true
+
+  '@oxc-transform-react/binding-linux-x64-musl@0.145.0':
+    optional: true
+
+  '@oxc-transform-react/binding-openharmony-arm64@0.145.0':
+    optional: true
+
+  '@oxc-transform-react/binding-win32-arm64-msvc@0.145.0':
+    optional: true
+
+  '@oxc-transform-react/binding-win32-ia32-msvc@0.145.0':
+    optional: true
+
+  '@oxc-transform-react/binding-win32-x64-msvc@0.145.0':
+    optional: true
+
   '@oxfmt/binding-darwin-arm64@0.64.0':
     optional: true
 
@@ -9984,6 +10192,15 @@ snapshots:
 
   '@rolldown/debug@1.2.6': {}
 
+  '@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7)(@babel/plugin-transform-runtime@7.29.7(@babel/core@7.29.7))(@babel/runtime@8.0.0)(rolldown@1.2.6)(vite@8.2.2)':
+    dependencies:
+      '@babel/core': 7.29.7
+      '@babel/plugin-transform-runtime': 7.29.7(@babel/core@7.29.7)
+      '@babel/runtime': 8.0.0
+      picomatch: 4.0.7
+      rolldown: 1.2.6
+      vite: 8.2.2(@types/node@26.4.0)(@vitejs/devtools@0.5.2)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.0(supports-color@8.1.1))(sass-embedded@1.103.1)(sass@1.103.1)(stylus@0.64.0)(sugarss@5.0.1(postcss@8.5.26))(terser@5.51.1)(tsx@4.23.13)(yaml@2.9.0)
+
   '@rolldown/pluginutils@1.0.1': {}
 
   '@rollup/rollup-android-arm-eabi@4.63.1':
@@ -10612,6 +10829,14 @@ snapshots:
       - crossws
       - ocache
       - srvx
+
+  '@vitejs/plugin-react@6.1.1(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7)(@babel/plugin-transform-runtime@7.29.7(@babel/core@7.29.7))(@babel/runtime@8.0.0)(rolldown@1.2.6)(vite@8.2.2))(babel-plugin-react-compiler@1.0.0)(oxc-transform-react@0.145.0)(vite@8.2.2)':
+    dependencies:
+      '@rolldown/plugin-babel': 0.2.3(@babel/core@7.29.7)(@babel/plugin-transform-runtime@7.29.7(@babel/core@7.29.7))(@babel/runtime@8.0.0)(rolldown@1.2.6)(vite@8.2.2)
+      '@rolldown/pluginutils': 1.0.1
+      babel-plugin-react-compiler: 1.0.0
+      oxc-transform-react: 0.145.0
+      vite: 8.2.2(@types/node@26.4.0)(@vitejs/devtools@0.5.2)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.0(supports-color@8.1.1))(sass-embedded@1.103.1)(sass@1.103.1)(stylus@0.64.0)(sugarss@5.0.1(postcss@8.5.26))(terser@5.51.1)(tsx@4.23.13)(yaml@2.9.0)
 
   '@vitest/browser-playwright@4.1.11(bufferutil@4.1.0)(msw@2.15.0(@types/node@26.4.0)(typescript@7.0.2))(playwright@1.62.1)(utf-8-validate@6.0.6)(vite@8.2.2)(vitest@4.1.11)':
     dependencies:
@@ -11283,6 +11508,10 @@ snapshots:
     dependencies:
       '@babel/core': 7.29.7
       '@babel/helper-define-polyfill-provider': 0.6.8(@babel/core@7.29.7)
+
+  babel-plugin-react-compiler@1.0.0:
+    dependencies:
+      '@babel/types': 7.29.8
 
   babel-plugin-syntax-hermes-parser@0.36.0:
     dependencies:
@@ -13920,6 +14149,28 @@ snapshots:
   outdent@0.5.0: {}
 
   outvariant@1.4.3: {}
+
+  oxc-transform-react@0.145.0:
+    optionalDependencies:
+      '@oxc-transform-react/binding-android-arm-eabi': 0.145.0
+      '@oxc-transform-react/binding-android-arm64': 0.145.0
+      '@oxc-transform-react/binding-darwin-arm64': 0.145.0
+      '@oxc-transform-react/binding-darwin-x64': 0.145.0
+      '@oxc-transform-react/binding-freebsd-x64': 0.145.0
+      '@oxc-transform-react/binding-linux-arm-gnueabihf': 0.145.0
+      '@oxc-transform-react/binding-linux-arm-musleabihf': 0.145.0
+      '@oxc-transform-react/binding-linux-arm64-gnu': 0.145.0
+      '@oxc-transform-react/binding-linux-arm64-musl': 0.145.0
+      '@oxc-transform-react/binding-linux-ppc64-gnu': 0.145.0
+      '@oxc-transform-react/binding-linux-riscv64-gnu': 0.145.0
+      '@oxc-transform-react/binding-linux-riscv64-musl': 0.145.0
+      '@oxc-transform-react/binding-linux-s390x-gnu': 0.145.0
+      '@oxc-transform-react/binding-linux-x64-gnu': 0.145.0
+      '@oxc-transform-react/binding-linux-x64-musl': 0.145.0
+      '@oxc-transform-react/binding-openharmony-arm64': 0.145.0
+      '@oxc-transform-react/binding-win32-arm64-msvc': 0.145.0
+      '@oxc-transform-react/binding-win32-ia32-msvc': 0.145.0
+      '@oxc-transform-react/binding-win32-x64-msvc': 0.145.0
 
   oxfmt@0.64.0(svelte@5.56.10(@typescript-eslint/types@8.69.0))(vite-plus@0.3.0(07919d04fd313d2e39eee8d330f574de)):
     dependencies:
