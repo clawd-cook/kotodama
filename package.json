@@ -26,10 +26,12 @@
     "@ant-design/x-sdk": "2.9.0",
     "@kotodama/antd-catalog": "workspace:*",
     "@monaco-editor/react": "4.7.0",
+    "@reduxjs/toolkit": "2.12.0",
     "antd": "6.6.1",
     "dayjs": "1.11.13",
     "react": "19.2.8",
     "react-dom": "19.2.8",
+    "react-redux": "9.3.0",
     "react-router": "8.3.1",
     "zod": "4.5.4"
   },

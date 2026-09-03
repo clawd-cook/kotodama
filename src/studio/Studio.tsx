@@ -9,7 +9,7 @@ import xZhCN from '@ant-design/x/locale/zh_CN';
 import { Divider, Layout, Menu, Space, Switch, theme as antdTheme } from 'antd';
 import antdZhCN from 'antd/locale/zh_CN';
 import { type ComponentType, useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router';
+import { Link, Outlet, useLocation, useNavigate, useOutletContext } from 'react-router';
 import { EditorProvider } from '../editor/EditorState';
 import { loadTheme, saveTheme } from '../editor/storage';
 import {
@@ -18,7 +18,6 @@ import {
 } from '../editor/WorkshopActions';
 import '../editor/editor.css';
 import { ChannelProvider } from './ChannelContext';
-import { RoomRoutes } from './RoomRoutes';
 import { type Room, ROOMS, createRoom, roomByPath } from './rooms';
 import { StudioSessionProvider, useStudioSession } from './StudioSession';
 import './studio.css';
@@ -29,6 +28,12 @@ const ROOM_ICONS = {
   examples: FileTextOutlined,
   settings: SettingOutlined,
 } satisfies Record<Room['key'], ComponentType>;
+
+type StudioTheme = { theme: 'light' | 'dark' };
+
+export function useStudioTheme() {
+  return useOutletContext<StudioTheme>().theme;
+}
 
 export function Studio() {
   const [theme, setTheme] = useState<'light' | 'dark'>(loadTheme);
@@ -147,7 +152,7 @@ function StudioHouse({
           />
         </nav>
         <div className="studio-desk">
-          <RoomRoutes theme={theme} />
+          <Outlet context={{ theme } satisfies StudioTheme} />
         </div>
       </div>
     </Layout>
