@@ -7,9 +7,10 @@ import {
 } from '@a2ui/web_core/v0_9';
 import { theme as antdTheme, ConfigProvider, Empty, message } from 'antd';
 import { useEffect, useRef, useState } from 'react';
-import { actionToastText } from './copy';
-import { toMessages } from './snapshot';
-import type { Snapshot } from './types';
+import { actionToastText } from '../editor/copy';
+import { toMessages } from '../editor/snapshot';
+import type { Snapshot } from '../editor/types';
+import './paper.css';
 
 export function PaperPreview({
   snapshot,

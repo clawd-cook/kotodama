@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useEditor } from './EditorState';
-import { PaperPreview } from './PaperPreview';
+import { PaperPreview } from '../paper/PaperPreview';
 import { editorCatalog, SelectionProvider } from './wrapCatalog';
 
 export function PreviewPane({

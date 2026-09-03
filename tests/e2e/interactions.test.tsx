@@ -1,6 +1,6 @@
 import { antdCatalog } from '@kotodama/antd-catalog';
 import { insertComponent } from '@src/editor/ops';
-import { PaperPreview } from '@src/editor/PaperPreview';
+import { PaperPreview } from '@src/paper/PaperPreview';
 import { emptySnapshot } from '@src/editor/storage';
 import { editorCatalog } from '@src/editor/wrapCatalog';
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';

@@ -6,7 +6,7 @@ import {
   catalogComponents,
   ChildList as ExportedChildList,
 } from '@kotodama/antd-catalog';
-import { PaperPreview } from '@src/editor/PaperPreview';
+import { PaperPreview } from '@src/paper/PaperPreview';
 import { BASIC_CATALOG_ID as EditorCatalogId } from '@src/editor/types';
 import { CATALOG_PAGES } from '@src/studio/catalog/catalogPages';
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';

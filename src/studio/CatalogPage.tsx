@@ -1,7 +1,7 @@
 import { antdCatalog } from '@kotodama/antd-catalog';
 import { Menu, Table, Typography } from 'antd';
 import { Link, Navigate, useParams } from 'react-router';
-import { PaperPreview } from '../editor/PaperPreview';
+import { PaperPreview } from '../paper/PaperPreview';
 import { foldMessages } from '../editor/snapshot';
 import {
   CATALOG_BLURBS,

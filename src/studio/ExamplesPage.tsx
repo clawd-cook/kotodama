@@ -2,7 +2,7 @@ import { antdCatalog } from '@kotodama/antd-catalog';
 import { Button, Modal, message, Typography } from 'antd';
 import { Link, Navigate, useNavigate, useParams } from 'react-router';
 import { useEditor } from '../editor/EditorState';
-import { PaperPreview } from '../editor/PaperPreview';
+import { PaperPreview } from '../paper/PaperPreview';
 import { foldMessages } from '../editor/snapshot';
 import type { ExampleId } from './examples';
 import { EXAMPLE_PAGES, shouldConfirmReplace } from './examples';
