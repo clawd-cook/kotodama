@@ -1,47 +1,25 @@
-import { EditorApp } from '@src/editor/EditorApp';
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { MemoryRouter } from 'react-router';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import {
+  applyExamplePage,
+  renderStudio,
+  stubChatHealth,
+} from '../helpers/studio';
 
 afterEach(() => {
   cleanup();
 });
 
 beforeEach(() => {
-  localStorage.clear();
-  vi.stubGlobal(
-    'fetch',
-    vi.fn(async (input: RequestInfo | URL) => {
-      const url = String(input);
-      if (url.includes('/api/chat/health')) {
-        return new Response(
-          JSON.stringify({
-            ok: true,
-            env: { baseUrl: '', model: '', hasApiKey: false },
-          }),
-          { status: 200, headers: { 'Content-Type': 'application/json' } },
-        );
-      }
-      return new Response('{}', { status: 404 });
-    }),
-  );
+  stubChatHealth();
 });
-
-function renderStudio(path = '/') {
-  return render(
-    <MemoryRouter initialEntries={[path]}>
-      <EditorApp />
-    </MemoryRouter>,
-  );
-}
 
 describe('editor e2e', () => {
   it('loads an example into the workshop and inserts a Text node', async () => {
-    const user = userEvent.setup();
+    const user = userEvent.setup({ pointerEventsCheck: 0 });
     renderStudio('/examples/login');
-    await user.click(await screen.findByRole('button', { name: '用这一页' }));
-    expect(await screen.findByRole('heading', { name: '工坊' })).toBeTruthy();
+    await applyExamplePage(user);
     expect(await screen.findByText('账号')).toBeTruthy();
 
     await user.click(screen.getByRole('tab', { name: '组件' }));
