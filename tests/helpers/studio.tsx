@@ -47,7 +47,9 @@ export function renderStudio(
 
 export async function applyExamplePage(user: UserEvent) {
   await user.click(await screen.findByRole('button', { name: '用这一页' }));
-  const dialog = await screen.findByRole('dialog').catch(() => null);
+  const dialog = await screen
+    .findByRole('dialog', { timeout: 100 })
+    .catch(() => null);
   if (dialog) {
     await user.click(within(dialog).getByRole('button', { name: /换\s*上/ }));
   }

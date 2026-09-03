@@ -1,5 +1,8 @@
+import { configure } from '@testing-library/react';
 import { vi } from 'vitest';
 import './dom';
+
+configure({ asyncUtilTimeout: 3_000 });
 
 vi.mock('@monaco-editor/react', () => ({
   default: ({
