@@ -1,5 +1,5 @@
 import { EditorApp } from '@src/editor/EditorApp';
-import { render, screen, within } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import type { UserEvent } from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router';
 import { expect, vi } from 'vitest';
@@ -47,11 +47,11 @@ export function renderStudio(
 
 export async function applyExamplePage(user: UserEvent) {
   await user.click(await screen.findByRole('button', { name: '用这一页' }));
-  const dialog = await screen
-    .findByRole('dialog', { timeout: 100 })
+  const replace = await screen
+    .findByRole('button', { name: /换\s*上/, timeout: 150 })
     .catch(() => null);
-  if (dialog) {
-    await user.click(within(dialog).getByRole('button', { name: /换\s*上/ }));
+  if (replace) {
+    await user.click(replace);
   }
   expect(await screen.findByRole('heading', { name: '工坊' })).toBeTruthy();
 }

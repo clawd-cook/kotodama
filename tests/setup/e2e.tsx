@@ -1,8 +1,14 @@
 import { configure } from '@testing-library/react';
-import { vi } from 'vitest';
+import { message, Modal } from 'antd';
+import { afterEach, vi } from 'vitest';
 import './dom';
 
 configure({ asyncUtilTimeout: 3_000 });
+
+afterEach(() => {
+  Modal.destroyAll();
+  message.destroy();
+});
 
 vi.mock('@monaco-editor/react', () => ({
   default: ({

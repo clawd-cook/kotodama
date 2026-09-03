@@ -84,7 +84,7 @@ describe('workshop chrome', () => {
     ) as HTMLInputElement;
     await user.upload(input, file);
     await user.click(screen.getByRole('tab', { name: /错误/ }));
-    expect(await screen.findByText(/没有打开/)).toBeTruthy();
+    expect(await screen.findAllByText(/没有打开/)).not.toHaveLength(0);
   });
 
   it('copies, collapses, and reopens the source pane', async () => {
