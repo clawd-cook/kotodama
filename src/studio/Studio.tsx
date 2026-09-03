@@ -4,17 +4,11 @@ import {
   FileTextOutlined,
   SettingOutlined,
 } from '@ant-design/icons';
-import {
-  Button,
-  Divider,
-  Layout,
-  Menu,
-  Modal,
-  message,
-  Space,
-  Switch,
-} from 'antd';
-import { useRef } from 'react';
+import { XProvider } from '@ant-design/x';
+import xZhCN from '@ant-design/x/locale/zh_CN';
+import { Divider, Layout, Menu, Space, Switch, theme as antdTheme } from 'antd';
+import antdZhCN from 'antd/locale/zh_CN';
+import { useEffect, useState } from 'react';
 import {
   Link,
   Navigate,
@@ -24,12 +18,15 @@ import {
   useNavigate,
 } from 'react-router';
 import { EditorShell } from '../editor/EditorShell';
-import { useEditor } from '../editor/EditorState';
-import { toMessages } from '../editor/snapshot';
-import { isCurrentPage, saveTheme } from '../editor/storage';
+import { EditorProvider } from '../editor/EditorState';
+import { loadTheme, saveTheme } from '../editor/storage';
+import {
+  WorkshopFileActions,
+  WorkshopHistoryActions,
+} from '../editor/WorkshopActions';
+import '../editor/editor.css';
 import { CatalogPage } from './CatalogPage';
 import { ChannelProvider } from './ChannelContext';
-import { createScreen } from './createScreen';
 import { ExampleDetailPage, ExamplesPage } from './ExamplesPage';
 import { SettingsPage } from './SettingsPage';
 import { StudioSessionProvider, useStudioSession } from './StudioSession';
@@ -62,7 +59,7 @@ const RAIL = [
   },
 ] as const;
 
-function roomKey(pathname: string): string {
+function currentRoom(pathname: string): (typeof RAIL)[number]['key'] {
   if (pathname.startsWith('/catalog')) {
     return 'catalog';
   }
@@ -82,19 +79,35 @@ function skipLink(pathname: string): { href: string; label: string } {
   return { href: '#sheet', label: '跳到纸页' };
 }
 
-export function StudioShell({
-  theme,
-  onThemeChange,
-}: {
-  theme: 'light' | 'dark';
-  onThemeChange: (theme: 'light' | 'dark') => void;
-}) {
+export function Studio() {
+  const [theme, setTheme] = useState<'light' | 'dark'>(loadTheme);
+
+  useEffect(() => {
+    document.documentElement.style.colorScheme = theme;
+  }, [theme]);
+
   return (
-    <ChannelProvider>
-      <StudioSessionProvider>
-        <StudioHouse theme={theme} onThemeChange={onThemeChange} />
-      </StudioSessionProvider>
-    </ChannelProvider>
+    <XProvider
+      locale={{ ...antdZhCN, ...xZhCN }}
+      theme={{
+        algorithm:
+          theme === 'dark'
+            ? antdTheme.darkAlgorithm
+            : antdTheme.defaultAlgorithm,
+        token: {
+          colorPrimary: '#1677FF',
+          colorBgLayout: theme === 'dark' ? '#121212' : '#E6EAEF',
+        },
+      }}
+    >
+      <EditorProvider>
+        <ChannelProvider>
+          <StudioSessionProvider>
+            <StudioHouse theme={theme} onThemeChange={setTheme} />
+          </StudioSessionProvider>
+        </ChannelProvider>
+      </EditorProvider>
+    </XProvider>
   );
 }
 
@@ -107,41 +120,10 @@ function StudioHouse({
 }) {
   const location = useLocation();
   const navigate = useNavigate();
-  const { snapshot, undo, redo, reset, canUndo, canRedo, openJson } =
-    useEditor();
-  const { visitedWorkshop, markVisitedWorkshop, resetCount, bumpThread } =
-    useStudioSession();
-  const fileRef = useRef<HTMLInputElement>(null);
-  const screen = createScreen({ snapshot, visitedWorkshop });
-  const onCreate = location.pathname === '/';
-  const showWorkshop = onCreate && screen === 'workshop';
+  const { markVisitedWorkshop, resetCount, bumpThread } = useStudioSession();
+  const room = currentRoom(location.pathname);
+  const inWorkshop = room === 'create';
   const skip = skipLink(location.pathname);
-  const current = isCurrentPage(snapshot);
-
-  const download = () => {
-    const text = JSON.stringify(toMessages(snapshot), null, 2);
-    const blob = new Blob([text], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'kotodama.json';
-    link.click();
-    URL.revokeObjectURL(url);
-    void message.success('已下载 kotodama.json。');
-  };
-
-  const confirmReset = () => {
-    Modal.confirm({
-      title: '新建这一页？当前页会清掉。说话也会从头开始。',
-      okText: '新建',
-      cancelText: '留下',
-      onOk: () => {
-        reset();
-        markVisitedWorkshop();
-        bumpThread();
-      },
-    });
-  };
 
   return (
     <Layout className="editor-root" data-theme={theme}>
@@ -161,47 +143,14 @@ function StudioHouse({
           </Link>
         </span>
         <Space size={4} split={<Divider type="vertical" />}>
-          {showWorkshop ? (
-            <Space size={0}>
-              <Button
-                type="text"
-                size="small"
-                onClick={() => fileRef.current?.click()}
-              >
-                打开
-              </Button>
-              <Button
-                type="text"
-                size="small"
-                onClick={download}
-                disabled={!current}
-              >
-                下载
-              </Button>
-            </Space>
-          ) : null}
-          {showWorkshop ? (
-            <Space size={0}>
-              <Button
-                type="text"
-                size="small"
-                onClick={undo}
-                disabled={!canUndo}
-              >
-                撤销
-              </Button>
-              <Button
-                type="text"
-                size="small"
-                onClick={redo}
-                disabled={!canRedo}
-              >
-                重做
-              </Button>
-              <Button type="text" size="small" onClick={confirmReset}>
-                新建
-              </Button>
-            </Space>
+          {inWorkshop ? <WorkshopFileActions /> : null}
+          {inWorkshop ? (
+            <WorkshopHistoryActions
+              onAfterReset={() => {
+                markVisitedWorkshop();
+                bumpThread();
+              }}
+            />
           ) : null}
           <span className="editor-theme">
             深色
@@ -217,31 +166,12 @@ function StudioHouse({
             />
           </span>
         </Space>
-        <input
-          ref={fileRef}
-          type="file"
-          accept="application/json,.json"
-          hidden
-          aria-label="打开 JSON"
-          onChange={async (event) => {
-            const file = event.target.files?.[0];
-            event.target.value = '';
-            if (!file) {
-              return;
-            }
-            const text = await file.text();
-            const error = openJson(text);
-            if (error) {
-              void message.error(error);
-            }
-          }}
-        />
       </Layout.Header>
       <div className="studio-house">
         <nav className="studio-rail" aria-label="工作室">
           <Menu
             mode="inline"
-            selectedKeys={[roomKey(location.pathname)]}
+            selectedKeys={[room]}
             onClick={({ key }) => {
               const item = RAIL.find((entry) => entry.key === key);
               if (item) {
@@ -254,9 +184,7 @@ function StudioHouse({
               label: (
                 <Link
                   to={item.path}
-                  aria-current={
-                    roomKey(location.pathname) === item.key ? 'page' : undefined
-                  }
+                  aria-current={room === item.key ? 'page' : undefined}
                 >
                   {item.label}
                 </Link>
@@ -265,19 +193,17 @@ function StudioHouse({
           />
         </nav>
         <div className="studio-desk">
-          {screen === 'workshop' || visitedWorkshop || current ? (
-            <div
-              className="studio-workshop"
-              hidden={!showWorkshop}
-              {...(!showWorkshop ? { inert: true, 'aria-hidden': true } : {})}
-            >
-              <EditorShell
-                theme={theme}
-                resetCount={resetCount}
-                sheetId={showWorkshop ? 'sheet' : undefined}
-              />
-            </div>
-          ) : null}
+          <div
+            className="studio-workshop"
+            hidden={!inWorkshop}
+            {...(!inWorkshop ? { inert: true, 'aria-hidden': true } : {})}
+          >
+            <EditorShell
+              theme={theme}
+              resetCount={resetCount}
+              sheetId={inWorkshop ? 'sheet' : undefined}
+            />
+          </div>
           <Routes>
             <Route
               path="/catalog"

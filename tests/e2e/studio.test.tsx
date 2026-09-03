@@ -1,39 +1,15 @@
-import { EditorApp } from '@src/editor/EditorApp';
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { MemoryRouter } from 'react-router';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { renderStudio, stubChatHealth } from '../helpers/studio';
 
 afterEach(() => {
   cleanup();
 });
 
 beforeEach(() => {
-  vi.stubGlobal(
-    'fetch',
-    vi.fn(async (input: RequestInfo | URL) => {
-      const url = String(input);
-      if (url.includes('/api/chat/health')) {
-        return new Response(
-          JSON.stringify({
-            ok: true,
-            env: { baseUrl: '', model: '', hasApiKey: false },
-          }),
-          { status: 200, headers: { 'Content-Type': 'application/json' } },
-        );
-      }
-      return new Response('{}', { status: 404 });
-    }),
-  );
+  stubChatHealth();
 });
-
-function renderStudio(path = '/') {
-  return render(
-    <MemoryRouter initialEntries={[path]}>
-      <EditorApp />
-    </MemoryRouter>,
-  );
-}
 
 describe('studio shell e2e', () => {
   it('opens the workshop with chat prompts and a channel warning', async () => {

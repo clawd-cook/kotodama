@@ -1,9 +1,9 @@
 import { BrowserRouter } from 'react-router';
-import { EditorApp } from './editor/EditorApp';
+import { Studio } from './studio/Studio';
 
 const App = () => (
   <BrowserRouter>
-    <EditorApp />
+    <Studio />
   </BrowserRouter>
 );
 

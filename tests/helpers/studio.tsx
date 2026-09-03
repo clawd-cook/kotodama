@@ -1,4 +1,4 @@
-import { EditorApp } from '@src/editor/EditorApp';
+import { Studio } from '@src/studio/Studio';
 import { render, screen } from '@testing-library/react';
 import type { UserEvent } from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router';
@@ -40,7 +40,7 @@ export function renderStudio(
 ) {
   return render(
     <MemoryRouter initialEntries={[path]}>
-      <EditorApp />
+      <Studio />
     </MemoryRouter>,
   );
 }
