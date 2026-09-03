@@ -8,12 +8,12 @@ import { Sidebar } from './Sidebar';
 import { SourcePane, SourceStrip } from './SourcePane';
 import {
   loadChromeLayout,
-  saveChromeLayout,
   SOURCE_MAX,
   SOURCE_MIN,
   SOURCE_STRIP,
   SPEECH_MAX,
   SPEECH_MIN,
+  saveChromeLayout,
   TRACE_MAX,
   TRACE_MIN,
   TRACE_STRIP,

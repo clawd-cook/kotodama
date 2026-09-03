@@ -98,7 +98,7 @@ export function ChatPanel(_props: { theme: 'light' | 'dark' }) {
           ),
         () => overrideRef.current,
       ),
-    [resetCount, resolved.model],
+    [resolved.model],
   );
 
   const { messages, onRequest, isRequesting, abort } = useXChat({
