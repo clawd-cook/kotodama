@@ -56,10 +56,6 @@
   min-width: 0;
 }
 
-.studio-workshop[hidden] {
-  display: none;
-}
-
 .studio-workshop .editor-body {
   flex: 1;
 }

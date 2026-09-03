@@ -8,7 +8,7 @@ import { XProvider } from '@ant-design/x';
 import xZhCN from '@ant-design/x/locale/zh_CN';
 import { Divider, Layout, Menu, Space, Switch, theme as antdTheme } from 'antd';
 import antdZhCN from 'antd/locale/zh_CN';
-import { type ComponentType, useEffect, useMemo, useState } from 'react';
+import { type ComponentType, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { EditorProvider } from '../editor/EditorState';
 import { loadTheme, saveTheme } from '../editor/storage';
@@ -17,10 +17,9 @@ import {
   WorkshopHistoryActions,
 } from '../editor/WorkshopActions';
 import '../editor/editor.css';
-import { Workshop } from '../pages/workshop';
-import { ChannelProvider, useChannel } from './ChannelContext';
+import { ChannelProvider } from './ChannelContext';
 import { RoomRoutes } from './RoomRoutes';
-import { type Room, ROOMS, keepAliveRoom, roomByPath } from './rooms';
+import { type Room, ROOMS, createRoom, roomByPath } from './rooms';
 import { StudioSessionProvider, useStudioSession } from './StudioSession';
 import './studio.css';
 
@@ -72,34 +71,9 @@ function StudioHouse({
 }) {
   const location = useLocation();
   const navigate = useNavigate();
-  const { resolved, override } = useChannel();
-  const {
-    markVisitedWorkshop,
-    resetCount,
-    bumpThread,
-    landing,
-    clearLanding,
-  } = useStudioSession();
-  const speech = useMemo(
-    () => ({
-      ready: resolved.ready,
-      model: resolved.model,
-      override,
-      landing,
-      clearLanding,
-      resetCount,
-    }),
-    [
-      clearLanding,
-      landing,
-      override,
-      resetCount,
-      resolved.model,
-      resolved.ready,
-    ],
-  );
+  const { markVisitedWorkshop, bumpThread } = useStudioSession();
   const room = roomByPath(location.pathname);
-  const workshop = keepAliveRoom();
+  const workshop = createRoom();
   const inWorkshop = room.key === workshop.key;
 
   return (
@@ -173,7 +147,6 @@ function StudioHouse({
           />
         </nav>
         <div className="studio-desk">
-          <Workshop theme={theme} active={inWorkshop} speech={speech} />
           <RoomRoutes theme={theme} />
         </div>
       </div>

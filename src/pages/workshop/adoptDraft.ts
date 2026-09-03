@@ -3,14 +3,14 @@ import { useCallback } from 'react';
 import { useNavigate } from 'react-router';
 import { useEditor } from '../../editor/EditorState';
 import { isCurrentPage } from '../../editor/storage';
-import { keepAliveRoom } from '../../studio/rooms';
+import { createRoom } from '../../studio/rooms';
 import { useStudioSession } from '../../studio/StudioSession';
 
 export function useAdoptDraft() {
   const { snapshot, loadPage } = useEditor();
   const { markVisitedWorkshop, bumpThread } = useStudioSession();
   const navigate = useNavigate();
-  const workshop = keepAliveRoom();
+  const workshop = createRoom();
 
   return useCallback(
     (messages: unknown) => {

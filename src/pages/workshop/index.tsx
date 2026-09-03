@@ -1,23 +1,35 @@
-import { SpeechProvider, type SpeechValue } from '../../editor/chat/speech';
+import { useMemo } from 'react';
+import { SpeechProvider } from '../../editor/chat/speech';
 import { EditorShell } from '../../editor/EditorShell';
+import { useChannel } from '../../studio/ChannelContext';
+import { useStudioSession } from '../../studio/StudioSession';
 
-export function Workshop({
-  theme,
-  active,
-  speech,
-}: {
-  theme: 'light' | 'dark';
-  active: boolean;
-  speech: SpeechValue;
-}) {
+export function Workshop({ theme }: { theme: 'light' | 'dark' }) {
+  const { resolved, override } = useChannel();
+  const { resetCount, landing, clearLanding } = useStudioSession();
+  const speech = useMemo(
+    () => ({
+      ready: resolved.ready,
+      model: resolved.model,
+      override,
+      landing,
+      clearLanding,
+      resetCount,
+    }),
+    [
+      clearLanding,
+      landing,
+      override,
+      resetCount,
+      resolved.model,
+      resolved.ready,
+    ],
+  );
+
   return (
-    <div
-      className="studio-workshop"
-      hidden={!active}
-      {...(!active ? { inert: true, 'aria-hidden': true } : {})}
-    >
+    <div className="studio-workshop">
       <SpeechProvider value={speech}>
-        <EditorShell theme={theme} sheetId={active ? 'sheet' : undefined} />
+        <EditorShell theme={theme} sheetId="sheet" />
       </SpeechProvider>
     </div>
   );

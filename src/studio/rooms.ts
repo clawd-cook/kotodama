@@ -7,7 +7,6 @@ export const ROOMS = [
     path: '/',
     label: '开始创建',
     skip: SHEET_SKIP,
-    keepAlive: true,
   },
   {
     key: 'catalog',
@@ -30,25 +29,20 @@ export const ROOMS = [
 ] as const;
 
 export type Room = (typeof ROOMS)[number];
-export type RoutedRoom = Exclude<Room, { keepAlive: true }>;
 
-export function isRoutedRoom(room: Room): room is RoutedRoom {
-  return !('keepAlive' in room && room.keepAlive);
-}
-
-export function keepAliveRoom(): Room {
-  const room = ROOMS.find((entry) => 'keepAlive' in entry && entry.keepAlive);
+export function createRoom(): Room {
+  const room = ROOMS.find((entry) => entry.key === 'create');
   if (!room) {
-    throw new Error('工作室 needs a keep-alive 工坊');
+    throw new Error('工作室 needs 开始创建');
   }
   return room;
 }
 
 export function roomByPath(pathname: string): Room {
-  const workshop = keepAliveRoom();
+  const workshop = createRoom();
   let match: Room = workshop;
   for (const room of ROOMS) {
-    if ('keepAlive' in room && room.keepAlive) {
+    if (room.key === workshop.key) {
       continue;
     }
     if (

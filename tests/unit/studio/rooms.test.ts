@@ -1,11 +1,10 @@
-import { isRoutedRoom, keepAliveRoom, ROOMS, roomByPath } from '@src/studio/rooms';
+import { createRoom, ROOMS, roomByPath } from '@src/studio/rooms';
 import { describe, expect, it } from 'vitest';
 
 describe('roomByPath', () => {
-  it('returns the keep-alive 工坊 for / and unknown paths', () => {
-    const workshop = keepAliveRoom();
+  it('returns 开始创建 for / and unknown paths', () => {
+    const workshop = createRoom();
     expect(workshop.path).toBe('/');
-    expect(workshop.keepAlive).toBe(true);
     expect(roomByPath('/')).toBe(workshop);
     expect(roomByPath('/nope')).toBe(workshop);
     expect(roomByPath('/cataloguing')).toBe(workshop);
@@ -35,14 +34,13 @@ describe('roomByPath', () => {
     });
   });
 
-  it('lists four 房间 and one keep-alive 工坊', () => {
+  it('lists four 房间', () => {
     expect(ROOMS.map((room) => room.key)).toEqual([
       'create',
       'catalog',
       'examples',
       'settings',
     ]);
-    expect(ROOMS.filter(isRoutedRoom)).toHaveLength(3);
-    expect(isRoutedRoom(keepAliveRoom())).toBe(false);
+    expect(createRoom().key).toBe('create');
   });
 });
