@@ -82,6 +82,46 @@ Object.defineProperty(globalThis, 'IS_REACT_ACT_ENVIRONMENT', {
   value: true,
 });
 
+const VIEW = { width: 1440, height: 900 };
+
+function stubBox(box: { width: number; height: number }): DOMRect {
+  return {
+    x: 0,
+    y: 0,
+    top: 0,
+    left: 0,
+    right: box.width,
+    bottom: box.height,
+    width: box.width,
+    height: box.height,
+    toJSON() {
+      return this;
+    },
+  } as DOMRect;
+}
+
+for (const key of ['offsetWidth', 'clientWidth'] as const) {
+  Object.defineProperty(HTMLElement.prototype, key, {
+    configurable: true,
+    get() {
+      return VIEW.width;
+    },
+  });
+}
+
+for (const key of ['offsetHeight', 'clientHeight'] as const) {
+  Object.defineProperty(HTMLElement.prototype, key, {
+    configurable: true,
+    get() {
+      return VIEW.height;
+    },
+  });
+}
+
+HTMLElement.prototype.getBoundingClientRect = function getBoundingClientRect() {
+  return stubBox(VIEW);
+};
+
 beforeEach(() => {
   local.clear();
   session.clear();

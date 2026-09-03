@@ -190,11 +190,11 @@ describe('catalog variants', () => {
           variant: 'multipleSelection',
           options: [
             { label: 'A', value: 'a' },
-            { value: 'b' },
+            { label: 'B', value: 'b' },
           ],
-          value: ['a'],
+          value: { path: '/picked' },
         },
-      ]),
+      ], { picked: ['a'] }),
       snapshot([
         {
           id: 'root',

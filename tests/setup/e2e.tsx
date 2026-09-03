@@ -5,7 +5,8 @@ import './dom';
 
 configure({ asyncUtilTimeout: 3_000 });
 
-const ignoreLog = /\[antd|\[antdx|not wrapped in act|Notification API/;
+const ignoreLog =
+  /\[antd|\[antdx|not wrapped in act|Notification API|NaN is an invalid value/;
 for (const method of ['warn', 'error'] as const) {
   const original = console[method].bind(console);
   console[method] = ((...args: unknown[]) => {

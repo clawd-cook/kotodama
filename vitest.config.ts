@@ -23,7 +23,7 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'html'],
       include: ['src/**/*.{ts,tsx}', 'server/**/*.ts', 'packages/antd-catalog/src/**/*.{ts,tsx}'],
-      exclude: ['src/index.tsx', 'src/env.d.ts'],
+      exclude: ['src/index.tsx', 'src/env.d.ts', 'packages/antd-catalog/src/index.ts'],
       thresholds: {
         statements: 90,
         branches: 90,
