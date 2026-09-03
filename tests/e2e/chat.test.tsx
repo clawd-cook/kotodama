@@ -34,7 +34,7 @@ vi.mock('@ant-design/x-sdk', async (importOriginal) => {
       options.requestPlaceholder?.();
       chat.requestFallback = options.requestFallback;
       return {
-        messages: chat.messages,
+        messages: [...chat.messages],
         onRequest: chat.onRequest,
         isRequesting: chat.isRequesting,
         abort: chat.abort,
