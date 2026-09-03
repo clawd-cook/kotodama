@@ -1,13 +1,13 @@
 import { Button, Form, Input, message, Typography } from 'antd';
 import { useState } from 'react';
-import { useChannel } from './ChannelContext';
-import type { ChannelFields } from './channel';
+import type { ChannelFields } from '../../studio/channel';
+import { useChannel } from '../../studio/ChannelContext';
 
 function sourceLabel(uiValue: string): string {
   return uiValue.trim() === '' ? '当前用环境变量' : '当前用界面';
 }
 
-export function SettingsPage() {
+export function Settings() {
   const { ui, save } = useChannel();
   const [fields, setFields] = useState<ChannelFields>(ui);
 

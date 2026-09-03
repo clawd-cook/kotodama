@@ -1,14 +1,14 @@
 import { antdCatalog } from '@kotodama/antd-catalog';
 import { Button, Modal, message, Typography } from 'antd';
 import { Link, Navigate, useNavigate, useParams } from 'react-router';
-import { useEditor } from '../editor/EditorState';
-import { foldMessages } from '../editor/snapshot';
-import { isCurrentPage } from '../editor/storage';
-import { PaperPreview } from '../paper/PaperPreview';
-import type { ExampleId } from './examples';
-import { EXAMPLE_PAGES } from './examples';
-import { JsonWell } from './JsonWell';
-import { useStudioSession } from './StudioSession';
+import { useEditor } from '../../editor/EditorState';
+import { foldMessages } from '../../editor/snapshot';
+import { isCurrentPage } from '../../editor/storage';
+import { PaperPreview } from '../../paper/PaperPreview';
+import type { ExampleId } from '../../studio/examples';
+import { EXAMPLE_PAGES } from '../../studio/examples';
+import { JsonWell } from '../../studio/JsonWell';
+import { useStudioSession } from '../../studio/StudioSession';
 
 const EXAMPLE_CARDS: {
   id: ExampleId;
@@ -28,7 +28,7 @@ function isExampleId(id: string): id is ExampleId {
   return id === 'login' || id === 'settings' || id === 'filtered-list';
 }
 
-export function ExamplesPage({ theme }: { theme: 'light' | 'dark' }) {
+export function Examples({ theme }: { theme: 'light' | 'dark' }) {
   return (
     <main className="examples-list" id="sheet">
       <h1 className="studio-title">精选案例</h1>
@@ -60,7 +60,7 @@ export function ExamplesPage({ theme }: { theme: 'light' | 'dark' }) {
   );
 }
 
-export function ExampleDetailPage({ theme }: { theme: 'light' | 'dark' }) {
+export function ExampleDetail({ theme }: { theme: 'light' | 'dark' }) {
   const { id = '' } = useParams();
   const navigate = useNavigate();
   const { snapshot, loadPage } = useEditor();

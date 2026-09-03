@@ -17,8 +17,6 @@ import {
   useLocation,
   useNavigate,
 } from 'react-router';
-import { SpeechProvider } from '../editor/chat/speech';
-import { EditorShell } from '../editor/EditorShell';
 import { EditorProvider } from '../editor/EditorState';
 import { loadTheme, saveTheme } from '../editor/storage';
 import {
@@ -26,10 +24,11 @@ import {
   WorkshopHistoryActions,
 } from '../editor/WorkshopActions';
 import '../editor/editor.css';
-import { CatalogPage } from './CatalogPage';
+import { Catalog } from '../pages/catalog';
+import { ExampleDetail, Examples } from '../pages/examples';
+import { Settings } from '../pages/settings';
+import { Workshop } from '../pages/workshop';
 import { ChannelProvider, useChannel } from './ChannelContext';
-import { ExampleDetailPage, ExamplesPage } from './ExamplesPage';
-import { SettingsPage } from './SettingsPage';
 import { StudioSessionProvider, useStudioSession } from './StudioSession';
 import './studio.css';
 
@@ -219,18 +218,7 @@ function StudioHouse({
           />
         </nav>
         <div className="studio-desk">
-          <div
-            className="studio-workshop"
-            hidden={!inWorkshop}
-            {...(!inWorkshop ? { inert: true, 'aria-hidden': true } : {})}
-          >
-            <SpeechProvider value={speech}>
-              <EditorShell
-                theme={theme}
-                sheetId={inWorkshop ? 'sheet' : undefined}
-              />
-            </SpeechProvider>
-          </div>
+          <Workshop theme={theme} active={inWorkshop} speech={speech} />
           <Routes>
             <Route
               path="/catalog"
@@ -238,14 +226,14 @@ function StudioHouse({
             />
             <Route
               path="/catalog/:component"
-              element={<CatalogPage theme={theme} />}
+              element={<Catalog theme={theme} />}
             />
-            <Route path="/examples" element={<ExamplesPage theme={theme} />} />
+            <Route path="/examples" element={<Examples theme={theme} />} />
             <Route
               path="/examples/:id"
-              element={<ExampleDetailPage theme={theme} />}
+              element={<ExampleDetail theme={theme} />}
             />
-            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="/" element={null} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
