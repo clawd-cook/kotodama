@@ -1,7 +1,7 @@
-import { Studio } from '@src/studio/Studio';
+import { routes } from '@src/routes/router';
 import { render, screen } from '@testing-library/react';
 import type { UserEvent } from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router';
+import { createMemoryRouter, RouterProvider } from 'react-router';
 import { expect, vi } from 'vitest';
 
 export function stubChatHealth(
@@ -38,11 +38,10 @@ export function renderStudio(
     | string
     | { pathname: string; search?: string; hash?: string; state?: unknown } = '/',
 ) {
-  return render(
-    <MemoryRouter initialEntries={[path]}>
-      <Studio />
-    </MemoryRouter>,
-  );
+  const router = createMemoryRouter(routes, {
+    initialEntries: [path],
+  });
+  return render(<RouterProvider router={router} />);
 }
 
 export async function applyExamplePage(user: UserEvent) {

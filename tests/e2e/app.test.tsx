@@ -15,7 +15,7 @@ afterEach(() => {
 });
 
 describe('App shell', () => {
-  it('renders through BrowserRouter', async () => {
+  it('renders the 工坊', async () => {
     stubChatHealth();
     render(<App />);
     expect(await screen.findByRole('heading', { name: '工坊' })).toBeTruthy();

@@ -11,8 +11,10 @@ import {
   isCatalogName,
 } from './catalogPages';
 import { catalogPropertyNames } from './catalogPropertyNames';
+import { useStudioTheme } from '../../studio/Studio';
 
-export function Catalog({ theme }: { theme: 'light' | 'dark' }) {
+export function Catalog() {
+  const theme = useStudioTheme();
   const { component = 'Column' } = useParams();
 
   if (!isCatalogName(component)) {

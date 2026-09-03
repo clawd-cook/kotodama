@@ -6,8 +6,10 @@ import { JsonWell } from '../../paper/JsonWell';
 import { PaperPreview } from '../../paper/PaperPreview';
 import { useAdoptDraft } from '../workshop/adoptDraft';
 import { EXAMPLES, EXAMPLE_ORDER, isExampleId } from './featured';
+import { useStudioTheme } from '../../studio/Studio';
 
-export function Examples({ theme }: { theme: 'light' | 'dark' }) {
+export function Examples() {
+  const theme = useStudioTheme();
   return (
     <main className="examples-list" id="sheet">
       <h1 className="studio-title">精选案例</h1>
@@ -40,7 +42,8 @@ export function Examples({ theme }: { theme: 'light' | 'dark' }) {
   );
 }
 
-export function ExampleDetail({ theme }: { theme: 'light' | 'dark' }) {
+export function ExampleDetail() {
+  const theme = useStudioTheme();
   const { id = '' } = useParams();
   const adoptDraft = useAdoptDraft();
 

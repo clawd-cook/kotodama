@@ -2,9 +2,11 @@ import { useMemo } from 'react';
 import { SpeechProvider } from '../../editor/chat/speech';
 import { EditorShell } from '../../editor/EditorShell';
 import { useChannel } from '../../studio/ChannelContext';
+import { useStudioTheme } from '../../studio/Studio';
 import { useStudioSession } from '../../studio/StudioSession';
 
-export function Workshop({ theme }: { theme: 'light' | 'dark' }) {
+export function Workshop() {
+  const theme = useStudioTheme();
   const { resolved, override } = useChannel();
   const { resetCount, landing, clearLanding } = useStudioSession();
   const speech = useMemo(
