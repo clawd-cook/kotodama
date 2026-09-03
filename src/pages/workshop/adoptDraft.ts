@@ -3,14 +3,10 @@ import { useCallback } from 'react';
 import { useNavigate } from 'react-router';
 import { useEditor } from '../../editor/EditorState';
 import { isCurrentPage } from '../../editor/storage';
-import { createRoom } from '../../studio/rooms';
-import { useStudioSession } from '../../studio/StudioSession';
 
 export function useAdoptDraft() {
-  const { snapshot, loadPage } = useEditor();
-  const { markVisitedWorkshop, bumpThread } = useStudioSession();
+  const { snapshot, loadPage, bumpThread } = useEditor();
   const navigate = useNavigate();
-  const workshop = createRoom();
 
   return useCallback(
     (messages: unknown) => {
@@ -20,9 +16,8 @@ export function useAdoptDraft() {
           void message.error(error);
           return;
         }
-        markVisitedWorkshop();
         bumpThread();
-        navigate(workshop.path);
+        navigate('/');
       };
 
       if (isCurrentPage(snapshot)) {
@@ -36,13 +31,6 @@ export function useAdoptDraft() {
       }
       apply();
     },
-    [
-      bumpThread,
-      loadPage,
-      markVisitedWorkshop,
-      navigate,
-      snapshot,
-      workshop.path,
-    ],
+    [bumpThread, loadPage, navigate, snapshot],
   );
 }

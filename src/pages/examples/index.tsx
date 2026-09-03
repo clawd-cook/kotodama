@@ -4,12 +4,12 @@ import { Link, Navigate, useParams } from 'react-router';
 import { foldMessages } from '../../editor/snapshot';
 import { JsonWell } from '../../paper/JsonWell';
 import { PaperPreview } from '../../paper/PaperPreview';
-import { useStudioTheme } from '../../studio/Studio';
+import { useLayoutTheme } from '../../layout/theme';
 import { useAdoptDraft } from '../workshop/adoptDraft';
 import { EXAMPLES, EXAMPLE_ORDER, isExampleId } from './featured';
 
 export function Examples() {
-  const theme = useStudioTheme();
+  const theme = useLayoutTheme();
   return (
     <main className="examples-list" id="sheet">
       <h1 className="studio-title">精选案例</h1>
@@ -43,7 +43,7 @@ export function Examples() {
 }
 
 export function ExampleDetail() {
-  const theme = useStudioTheme();
+  const theme = useLayoutTheme();
   const { id = '' } = useParams();
   const adoptDraft = useAdoptDraft();
 

@@ -20,10 +20,7 @@ import {
 
 const consumedLandingKeys = new Set<string>();
 
-function landingOf(
-  nav: unknown,
-  session: LandingSubmit | null,
-): LandingSubmit | null {
+function landingOf(nav: unknown): LandingSubmit | null {
   if (
     nav &&
     typeof nav === 'object' &&
@@ -31,7 +28,7 @@ function landingOf(
   ) {
     return nav as LandingSubmit;
   }
-  return session;
+  return null;
 }
 
 function landingToken(state: LandingSubmit): string {
@@ -42,8 +39,7 @@ function landingToken(state: LandingSubmit): string {
 
 export function ChatPanel(_props: { theme: 'light' | 'dark' }) {
   const { snapshot, applyJson, logError, clearErrors } = useEditor();
-  const { ready, model, override, landing, clearLanding, resetCount } =
-    useSpeech();
+  const { ready, model, override, resetCount } = useSpeech();
   const location = useLocation();
   const navigate = useNavigate();
   const snapshotRef = useRef(snapshot);
@@ -60,7 +56,7 @@ export function ChatPanel(_props: { theme: 'light' | 'dark' }) {
   const appliedIds = useRef(new Set<string>());
   const [presented, setPresented] = useState<Record<string, string>>({});
   const [input, setInput] = useState(() => {
-    const state = landingOf(location.state, landing);
+    const state = landingOf(location.state);
     return (state && 'prefill' in state ? state.prefill : '') ?? '';
   });
 
@@ -135,7 +131,7 @@ export function ChatPanel(_props: { theme: 'light' | 'dark' }) {
   };
 
   useEffect(() => {
-    const state = landingOf(location.state, landing);
+    const state = landingOf(location.state);
     if (!state || (!('autoSend' in state) && !('prefill' in state))) {
       return;
     }
@@ -147,7 +143,6 @@ export function ChatPanel(_props: { theme: 'light' | 'dark' }) {
     if ('prefill' in state && state.prefill) {
       setInput(state.prefill);
     }
-    clearLanding();
     navigate('.', { replace: true, state: null });
     if ('autoSend' in state) {
       const content = state.autoSend.trim();
@@ -157,7 +152,7 @@ export function ChatPanel(_props: { theme: 'light' | 'dark' }) {
         });
       }
     }
-  }, [clearLanding, landing, location.state, navigate]);
+  }, [location.state, navigate]);
 
   useEffect(() => {
     const last = messages[messages.length - 1];

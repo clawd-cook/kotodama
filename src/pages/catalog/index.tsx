@@ -4,7 +4,7 @@ import { Link, Navigate, useParams } from 'react-router';
 import { foldMessages } from '../../editor/snapshot';
 import { JsonWell } from '../../paper/JsonWell';
 import { PaperPreview } from '../../paper/PaperPreview';
-import { useStudioTheme } from '../../studio/Studio';
+import { useLayoutTheme } from '../../layout/theme';
 import {
   CATALOG_BLURBS,
   CATALOG_GROUPS,
@@ -14,7 +14,7 @@ import {
 import { catalogPropertyNames } from './catalogPropertyNames';
 
 export function Catalog() {
-  const theme = useStudioTheme();
+  const theme = useLayoutTheme();
   const { component = 'Column' } = useParams();
 
   if (!isCatalogName(component)) {

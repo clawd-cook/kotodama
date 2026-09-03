@@ -44,6 +44,8 @@ type EditorContextValue = {
   undo: () => void;
   redo: () => void;
   reset: () => void;
+  threadKey: number;
+  bumpThread: () => void;
   logEvent: (action: unknown) => void;
   logError: (message: string, source: EditorError['source']) => void;
   clearErrors: (source?: EditorError['source']) => void;
@@ -68,6 +70,10 @@ export function EditorProvider({ children }: { children: ReactNode }) {
   const [jsonError, setJsonError] = useState<string | null>(null);
   const [past, setPast] = useState<Snapshot[]>([]);
   const [future, setFuture] = useState<Snapshot[]>([]);
+  const [threadKey, setThreadKey] = useState(0);
+  const bumpThread = useCallback(() => {
+    setThreadKey((count) => count + 1);
+  }, []);
 
   useEffect(() => {
     saveDraft(snapshot);
@@ -252,7 +258,8 @@ export function EditorProvider({ children }: { children: ReactNode }) {
     setSelectedId(null);
     setEvents([]);
     setErrors([]);
-  }, [commit]);
+    bumpThread();
+  }, [bumpThread, commit]);
 
   const logEvent = useCallback((action: unknown) => {
     setEvents((current) =>
@@ -303,6 +310,8 @@ export function EditorProvider({ children }: { children: ReactNode }) {
       undo,
       redo,
       reset,
+      threadKey,
+      bumpThread,
       logEvent,
       logError,
       clearErrors,
@@ -310,6 +319,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
     }),
     [
       applyJson,
+      bumpThread,
       openJson,
       loadPage,
       clearErrors,
@@ -331,6 +341,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
       setDataModel,
       snapshot,
       syncDataModelFromPreview,
+      threadKey,
       undo,
       updateSelectedProps,
     ],

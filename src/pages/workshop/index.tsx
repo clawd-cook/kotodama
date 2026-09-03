@@ -1,31 +1,22 @@
 import { useMemo } from 'react';
 import { SpeechProvider } from '../../editor/chat/speech';
+import { useEditor } from '../../editor/EditorState';
 import { EditorShell } from '../../editor/EditorShell';
+import { useLayoutTheme } from '../../layout/theme';
 import { useChannel } from '../../studio/ChannelContext';
-import { useStudioTheme } from '../../studio/Studio';
-import { useStudioSession } from '../../studio/StudioSession';
 
 export function Workshop() {
-  const theme = useStudioTheme();
+  const theme = useLayoutTheme();
   const { resolved, override } = useChannel();
-  const { resetCount, landing, clearLanding } = useStudioSession();
+  const { threadKey } = useEditor();
   const speech = useMemo(
     () => ({
       ready: resolved.ready,
       model: resolved.model,
       override,
-      landing,
-      clearLanding,
-      resetCount,
+      resetCount: threadKey,
     }),
-    [
-      clearLanding,
-      landing,
-      override,
-      resetCount,
-      resolved.model,
-      resolved.ready,
-    ],
+    [override, resolved.model, resolved.ready, threadKey],
   );
 
   return (

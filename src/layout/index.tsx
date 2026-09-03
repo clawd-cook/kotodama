@@ -9,7 +9,7 @@ import xZhCN from '@ant-design/x/locale/zh_CN';
 import { Divider, Layout, Menu, Space, Switch, theme as antdTheme } from 'antd';
 import antdZhCN from 'antd/locale/zh_CN';
 import { type ComponentType, useEffect, useState } from 'react';
-import { Link, Outlet, useLocation, useNavigate, useOutletContext } from 'react-router';
+import { Link, Outlet, useNavigate } from 'react-router';
 import { EditorProvider } from '../editor/EditorState';
 import { loadTheme, saveTheme } from '../editor/storage';
 import {
@@ -17,26 +17,20 @@ import {
   WorkshopHistoryActions,
 } from '../editor/WorkshopActions';
 import '../editor/editor.css';
-import { ChannelProvider } from './ChannelContext';
-import { type Room, ROOMS, createRoom, roomByPath } from './rooms';
-import { StudioSessionProvider, useStudioSession } from './StudioSession';
-import './studio.css';
+import { ChannelProvider } from '../studio/ChannelContext';
+import './layout.css';
+import { NAV_ITEMS, type NavKey, useActiveNav } from './nav';
+import { type ColorScheme, LayoutThemeProvider } from './theme';
 
-const ROOM_ICONS = {
+const NAV_ICONS = {
   create: EditOutlined,
   catalog: AppstoreOutlined,
   examples: FileTextOutlined,
   settings: SettingOutlined,
-} satisfies Record<Room['key'], ComponentType>;
+} satisfies Record<NavKey, ComponentType>;
 
-type StudioTheme = { theme: 'light' | 'dark' };
-
-export function useStudioTheme() {
-  return useOutletContext<StudioTheme>().theme;
-}
-
-export function Studio() {
-  const [theme, setTheme] = useState<'light' | 'dark'>(loadTheme);
+export function AppLayout() {
+  const [theme, setTheme] = useState<ColorScheme>(loadTheme);
 
   useEffect(() => {
     document.documentElement.style.colorScheme = theme;
@@ -56,41 +50,38 @@ export function Studio() {
         },
       }}
     >
-      <EditorProvider>
-        <ChannelProvider>
-          <StudioSessionProvider>
-            <StudioHouse theme={theme} onThemeChange={setTheme} />
-          </StudioSessionProvider>
-        </ChannelProvider>
-      </EditorProvider>
+      <LayoutThemeProvider theme={theme}>
+        <EditorProvider>
+          <ChannelProvider>
+            <LayoutShell theme={theme} onThemeChange={setTheme} />
+          </ChannelProvider>
+        </EditorProvider>
+      </LayoutThemeProvider>
     </XProvider>
   );
 }
 
-function StudioHouse({
+function LayoutShell({
   theme,
   onThemeChange,
 }: {
-  theme: 'light' | 'dark';
-  onThemeChange: (theme: 'light' | 'dark') => void;
+  theme: ColorScheme;
+  onThemeChange: (theme: ColorScheme) => void;
 }) {
-  const location = useLocation();
   const navigate = useNavigate();
-  const { markVisitedWorkshop, bumpThread } = useStudioSession();
-  const room = roomByPath(location.pathname);
-  const workshop = createRoom();
-  const inWorkshop = room.key === workshop.key;
+  const nav = useActiveNav();
+  const inWorkshop = nav.navKey === 'create';
 
   return (
     <Layout className="editor-root" data-theme={theme}>
-      <a className="skip-link" href={room.skip.href}>
-        {room.skip.label}
+      <a className="skip-link" href={nav.skip.href}>
+        {nav.skip.label}
       </a>
       <Layout.Header className="editor-header">
         <span className="editor-mark">
           <span className="editor-seal" aria-hidden />
           <Link
-            to={workshop.path}
+            to="/"
             className="editor-wordmark"
             translate="no"
             aria-label="言灵，返回开始创建"
@@ -100,14 +91,7 @@ function StudioHouse({
         </span>
         <Space size={4} split={<Divider type="vertical" />}>
           {inWorkshop ? <WorkshopFileActions /> : null}
-          {inWorkshop ? (
-            <WorkshopHistoryActions
-              onAfterReset={() => {
-                markVisitedWorkshop();
-                bumpThread();
-              }}
-            />
-          ) : null}
+          {inWorkshop ? <WorkshopHistoryActions /> : null}
           <span className="editor-theme">
             深色
             <Switch
@@ -127,22 +111,22 @@ function StudioHouse({
         <nav className="studio-rail" aria-label="工作室">
           <Menu
             mode="inline"
-            selectedKeys={[room.key]}
+            selectedKeys={[nav.navKey]}
             onClick={({ key }) => {
-              const item = ROOMS.find((entry) => entry.key === key);
+              const item = NAV_ITEMS.find((entry) => entry.key === key);
               if (item) {
                 navigate(item.path);
               }
             }}
-            items={ROOMS.map((item) => {
-              const RailIcon = ROOM_ICONS[item.key];
+            items={NAV_ITEMS.map((item) => {
+              const RailIcon = NAV_ICONS[item.key];
               return {
                 key: item.key,
                 icon: <RailIcon aria-hidden />,
                 label: (
                   <Link
                     to={item.path}
-                    aria-current={room.key === item.key ? 'page' : undefined}
+                    aria-current={nav.navKey === item.key ? 'page' : undefined}
                   >
                     {item.label}
                   </Link>
@@ -152,7 +136,7 @@ function StudioHouse({
           />
         </nav>
         <div className="studio-desk">
-          <Outlet context={{ theme } satisfies StudioTheme} />
+          <Outlet />
         </div>
       </div>
     </Layout>

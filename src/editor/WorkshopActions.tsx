@@ -52,11 +52,7 @@ export function WorkshopFileActions() {
   );
 }
 
-export function WorkshopHistoryActions({
-  onAfterReset,
-}: {
-  onAfterReset: () => void;
-}) {
+export function WorkshopHistoryActions() {
   const { undo, redo, reset, canUndo, canRedo } = useEditor();
 
   const confirmReset = () => {
@@ -66,7 +62,6 @@ export function WorkshopHistoryActions({
       cancelText: '留下',
       onOk: () => {
         reset();
-        onAfterReset();
       },
     });
   };

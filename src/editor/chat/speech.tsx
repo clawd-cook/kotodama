@@ -22,8 +22,6 @@ export type SpeechValue = {
   ready: boolean;
   model: string;
   override: SpeechChannelOverride | undefined;
-  landing: LandingSubmit | null;
-  clearLanding: () => void;
   resetCount: number;
 };
 
