@@ -156,7 +156,7 @@ export const ModalView = createComponentImplementation(
           width={720}
           styles={{ body: { maxHeight: '60vh', overflow: 'auto' } }}
         >
-          {/* biome-ignore lint/a11y/noStaticElementInteractions: content buttons close the overlay */}
+          {/* biome-ignore lint/a11y/useKeyWithClickEvents lint/a11y/noStaticElementInteractions: content buttons close the overlay */}
           <div
             onClick={(event) => {
               const target = event.target;

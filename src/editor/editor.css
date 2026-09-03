@@ -155,10 +155,6 @@ body,
   overflow: hidden;
 }
 
-.editor-preview .preview-canvas {
-  height: 100%;
-}
-
 .inspector-drawer {
   z-index: 30;
   pointer-events: none;

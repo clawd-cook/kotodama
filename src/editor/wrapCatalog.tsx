@@ -47,23 +47,37 @@ function wrapImpl(
     const selected = selectedId === id;
     const hovered = hoveredId === id && !selected;
     const className = `a2ui-selectable${selected ? ' is-selected' : ''}${hovered ? ' is-hovered' : ''}`;
-    const onClick = (event: MouseEvent<HTMLDivElement>) => {
-      const closest = (event.target as HTMLElement).closest('.a2ui-selectable');
-      if (closest !== event.currentTarget) {
+    const selectIfTarget = (
+      target: EventTarget | null,
+      current: EventTarget,
+    ) => {
+      const closest = (target as HTMLElement).closest('.a2ui-selectable');
+      if (closest !== current) {
         return;
       }
       onSelect(id);
+    };
+    const onClick = (event: MouseEvent<HTMLDivElement>) => {
+      selectIfTarget(event.target, event.currentTarget);
     };
     const onMouseOver = (event: MouseEvent<HTMLDivElement>) => {
       event.stopPropagation();
       onHover(id);
     };
     return (
+      // biome-ignore lint/a11y/noStaticElementInteractions: editor selection chrome wraps possibly interactive catalog children
       <div
         data-a2ui-id={id}
         className={className}
         onClick={onClick}
+        onKeyDown={(event) => {
+          if (event.key !== 'Enter' && event.key !== ' ') {
+            return;
+          }
+          selectIfTarget(event.target, event.currentTarget);
+        }}
         onMouseOver={onMouseOver}
+        onFocus={() => onHover(id)}
       >
         <Inner {...props} />
       </div>

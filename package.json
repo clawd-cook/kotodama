@@ -37,6 +37,7 @@
     "@types/react-dom": "19.2.5",
     "@vitest/browser-preview": "4.1.11",
     "typescript": "7.0.2",
+    "vite-plus": "0.3.0",
     "vitest": "4.1.11"
   }
 }
