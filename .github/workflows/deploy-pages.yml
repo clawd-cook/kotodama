@@ -12,4 +12,4 @@ permissions:
 
 jobs:
   deploy-site:
-    uses: clawd-cook/workflows/.github/workflows/deploy-pages.yml@main
+    uses: clawd-cook/workflows/.github/workflows/deploy-pages.yml@da5da395aad07541153b2d0da859a7f8ac183b2e
